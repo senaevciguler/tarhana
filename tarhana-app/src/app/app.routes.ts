@@ -10,4 +10,5 @@ export const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'story', component: StoryComponent },
   { path: 'health', component: HealthComponent },
+  { path: '**', redirectTo: 'recipes' },
 ];
