@@ -5,10 +5,9 @@ import { StoryComponent } from './pages/story/story';
 import { HealthComponent } from './pages/health/health';
 
 export const routes: Routes = [
+  { path: 'story', component: StoryComponent, pathMatch: 'full' },
+  { path: 'health', component: HealthComponent, pathMatch: 'full' },
+  { path: 'recipes', component: RecipesComponent, pathMatch: 'full' },
+  { path: 'shop', component: ShopComponent, pathMatch: 'full' },
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
-  { path: 'recipes', component: RecipesComponent },
-  { path: 'shop', component: ShopComponent },
-  { path: 'story', component: StoryComponent },
-  { path: 'health', component: HealthComponent },
-  { path: '**', redirectTo: 'recipes' },
 ];
