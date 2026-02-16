@@ -9,27 +9,30 @@
     <div class="hidden md:flex items-center gap-8 font-medium">
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
-        routerLink="/shop"
+        [routerLink]="['/shop']"
         routerLinkActive="text-primary font-bold"
         [routerLinkActiveOptions]="{ exact: true }"
         >Shop</a
       >
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
-        routerLink="/recipes"
+        [routerLink]="['/recipes']"
         routerLinkActive="text-primary font-bold"
+        [routerLinkActiveOptions]="{ exact: true }"
         >Recipes</a
       >
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
-        routerLink="/story"
+        [routerLink]="['/story']"
         routerLinkActive="text-primary font-bold"
+        [routerLinkActiveOptions]="{ exact: true }"
         >Our Story</a
       >
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
-        routerLink="/health"
+        [routerLink]="['/health']"
         routerLinkActive="text-primary font-bold"
+        [routerLinkActiveOptions]="{ exact: true }"
         >Health</a
       >
     </div>

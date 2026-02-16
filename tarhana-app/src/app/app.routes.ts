@@ -10,4 +10,5 @@ export const routes: Routes = [
   { path: 'recipes', component: RecipesComponent, pathMatch: 'full' },
   { path: 'shop', component: ShopComponent, pathMatch: 'full' },
   { path: '', redirectTo: 'recipes', pathMatch: 'full' },
+  { path: '**', redirectTo: 'recipes' }
 ];
