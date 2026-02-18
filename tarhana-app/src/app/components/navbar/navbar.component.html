@@ -9,10 +9,10 @@
     <div class="hidden md:flex items-center gap-8 font-medium">
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
-        routerLink="/shop"
+        routerLink="/products"
         routerLinkActive="text-primary font-bold"
         [routerLinkActiveOptions]="{ exact: true }"
-        >Shop</a
+        >Products</a
       >
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
@@ -34,16 +34,6 @@
       >
     </div>
     <div class="flex items-center gap-4">
-      <app-dark-mode-toggle></app-dark-mode-toggle>
-      <button class="p-2 hover:bg-primary/10 rounded-full transition-colors dark:text-white">
-        <span class="material-icons">search</span>
-      </button>
-      <button
-        class="bg-primary text-white px-5 py-2 rounded-lg font-bold hover:opacity-90 transition-opacity"
-        routerLink="/shop"
-      >
-        Buy Now
-      </button>
     </div>
   </div>
 </nav>
