@@ -21,8 +21,8 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display "Home Page Working"', () => {
+  it('should display the main headline', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Home Page Working');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Traditional Turkish Tarhana — Now Crafted in Sweden');
   });
 });
