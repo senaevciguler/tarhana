@@ -3,9 +3,9 @@ import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 
 @Component({
-  selector: 'app-shop',
+  selector: 'app-products',
   standalone: true,
   imports: [NavbarComponent, FooterComponent],
-  templateUrl: './shop.component.html',
+  templateUrl: './products.component.html',
 })
-export class ShopComponent {}
+export class ProductsComponent {}
