@@ -1,11 +1,11 @@
 <nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
   <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-    <div class="flex items-center gap-2">
+    <a class="flex items-center gap-2 cursor-pointer" routerLink="/">
       <div class="w-10 h-10 bg-primary rounded flex items-center justify-center text-white">
         <span class="material-icons">grain</span>
       </div>
       <span class="font-display font-bold text-xl tracking-tight dark:text-white">MODERN TARHANA</span>
-    </div>
+    </a>
     <div class="hidden md:flex items-center gap-8 font-medium">
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
@@ -20,8 +20,18 @@
         routerLinkActive="text-primary font-bold"
         >Recipes</a
       >
-      <a class="hover:text-primary transition-colors dark:text-stone-300 dark:hover:text-primary" href="#">Our Story</a>
-      <a class="hover:text-primary transition-colors dark:text-stone-300 dark:hover:text-primary" href="#">Health</a>
+      <a
+        class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
+        routerLink="/story"
+        routerLinkActive="text-primary font-bold"
+        >Our Story</a
+      >
+      <a
+        class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
+        routerLink="/health"
+        routerLinkActive="text-primary font-bold"
+        >Health</a
+      >
     </div>
     <div class="flex items-center gap-4">
       <app-dark-mode-toggle></app-dark-mode-toggle>

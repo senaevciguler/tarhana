@@ -2,14 +2,14 @@
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
       <div class="col-span-1 md:col-span-1">
-        <div class="flex items-center gap-2 mb-6">
+        <a class="flex items-center gap-2 mb-6 cursor-pointer" routerLink="/">
           <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">
             <span class="material-icons text-sm">grain</span>
           </div>
           <span class="font-display font-bold text-lg tracking-tight dark:text-white"
             >MODERN TARHANA</span
           >
-        </div>
+        </a>
         <p class="text-stone-500 dark:text-stone-400 text-sm leading-relaxed">
           Born in Anatolia, crafted in Stockholm. Bringing the ancient wisdom of fermentation to the
           modern Swedish kitchen.
@@ -18,12 +18,12 @@
       <div>
         <h5 class="font-bold mb-6 dark:text-white">Explore</h5>
         <ul class="space-y-4 text-sm text-stone-500 dark:text-stone-400">
-          <li><a class="hover:text-primary transition-colors" href="#">All Products</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">Wholesale</a></li>
+          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/shop">All Products</a></li>
+          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/recipes">Recipes</a></li>
           <li>
-            <a class="hover:text-primary transition-colors" href="#">Our Fermentation Process</a>
+            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/story">Our Story</a>
           </li>
-          <li><a class="hover:text-primary transition-colors" href="#">Sustainability</a></li>
+          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/health">Health & Nutrition</a></li>
         </ul>
       </div>
       <div>
