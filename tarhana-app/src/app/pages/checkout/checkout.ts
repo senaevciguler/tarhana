@@ -4,9 +4,9 @@ import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-checkout',
   standalone: true,
   imports: [NavbarComponent, FooterComponent, RouterLink],
-  templateUrl: './products.component.html',
+  templateUrl: './checkout.component.html',
 })
-export class ProductsComponent {}
+export class CheckoutComponent {}
