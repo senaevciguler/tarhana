@@ -1,171 +1,164 @@
 <app-navbar></app-navbar>
 
-<div class="bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300">
-  <!-- 1. HERO SECTION -->
-  <section class="relative h-[70vh] flex items-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img
-        src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2070&auto=format&fit=crop"
-        alt="Scandinavian Kitchen"
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-stone-900/40"></div>
-    </div>
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-4xl">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-          From My Grandmother’s Kitchen to Modern Swedish Homes
-        </h1>
-        <p class="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl">
-          A centuries-old tradition, rediscovered through motherhood and reimagined for today’s conscious lifestyle.
-        </p>
-      </div>
+<div class="bg-background-light dark:bg-background-dark text-stone-900 dark:text-stone-100 min-h-screen">
+  <!-- Hero Section -->
+  <section class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
+      style="background-image: url('https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=2070&auto=format&fit=crop')"
+      role="img"
+      aria-label="A warm bowl of soup on a minimal wooden table in a Scandinavian kitchen"
+    ></div>
+    <div class="absolute inset-0 bg-stone-900/20"></div>
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+      <span class="block text-white/90 text-sm tracking-[0.3em] uppercase mb-4 animate-fade-in"
+        >Our Journey</span
+      >
+      <h1
+        class="text-5xl md:text-7xl font-light text-white mb-6 tracking-tight animate-slide-up"
+      >
+        Bridging Two Worlds
+      </h1>
+      <p class="text-xl text-white/90 font-light max-w-2xl mx-auto leading-relaxed animate-fade-in">
+        The story of Tarhana—from a grandmother's kitchen in Anatolia to the minimal tables of
+        Scandinavia.
+      </p>
     </div>
   </section>
 
-  <!-- 2. PERSONAL BEGINNING -->
-  <section class="py-24 container mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div class="space-y-6">
-        <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          I grew up watching my grandmother prepare tarhana with patience and care. It wasn’t just soup — it was a ritual. Yogurt, grains and vegetables slowly fermented, then dried under the sun to nourish our family throughout the year.
-        </p>
-        <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          It was simple food. Honest food. The kind that warms you from the inside out.
-        </p>
+  <!-- Section 1: The Beginning -->
+  <section class="py-24 px-4">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div class="space-y-8">
+        <h2 class="text-3xl font-light tracking-tight text-primary">A Grandmother's Legacy</h2>
+        <div class="space-y-6 text-lg text-stone-600 dark:text-stone-400 font-light leading-relaxed">
+          <p>
+            It began in a sun-drenched kitchen, where the scent of fermenting grains and yogurt
+            filled the air. My grandmother didn't just make soup; she crafted a lifeline of
+            nutrition that would last through the harshest winters.
+          </p>
+          <p>
+            The process was a rhythmic dance of patience—mixing, fermenting, drying, and crumbling by
+            hand. It was the original "slow food," born from necessity and perfected through love.
+          </p>
+        </div>
       </div>
-      <div class="rounded-3xl overflow-hidden shadow-2xl">
+      <div class="relative aspect-square rounded-2xl overflow-hidden shadow-2xl group">
         <img
-          src="https://images.unsplash.com/photo-1590540179852-2110a54f813a?q=80&w=2070&auto=format&fit=crop"
-          alt="Traditional Preparation"
-          class="w-full h-full object-cover aspect-[4/3]"
+          src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?q=80&w=2070&auto=format&fit=crop"
+          alt="Hands mixing natural fermented ingredients for Tarhana"
+          class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
         />
+        <div class="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors"></div>
       </div>
     </div>
   </section>
 
-  <!-- 3. REDISCOVERING TARHANA THROUGH MOTHERHOOD -->
-  <section class="py-24 bg-white dark:bg-stone-900/50 transition-colors duration-300">
-    <div class="container mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <div class="order-2 md:order-1 rounded-3xl overflow-hidden shadow-2xl">
+  <!-- Section 2: Motherhood & Modern Life -->
+  <section class="py-24 bg-stone-50 dark:bg-stone-900/50 px-4">
+    <div class="max-w-4xl mx-auto text-center space-y-12">
+      <h2 class="text-3xl font-light tracking-tight">The Search for Nourishment</h2>
+      <p class="text-xl text-stone-600 dark:text-stone-400 font-light leading-relaxed">
+        Years later, as a mother in Sweden, I found myself searching for that same authentic
+        nourishment. I wanted my children to have the clean, probiotic-rich foundation I grew up
+        with, but in a way that fit our modern, fast-paced Nordic lifestyle.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
+        <div
+          class="p-8 bg-white dark:bg-stone-800 rounded-xl shadow-sm border border-stone-100 dark:border-stone-700"
+        >
+          <span class="material-icons text-primary mb-4" aria-hidden="true">spa</span>
+          <h3 class="font-medium mb-2">Authentic</h3>
+          <p class="text-sm text-stone-500">Traditional fermentation methods preserved.</p>
+        </div>
+        <div
+          class="p-8 bg-white dark:bg-stone-800 rounded-xl shadow-sm border border-stone-100 dark:border-stone-700"
+        >
+          <span class="material-icons text-primary mb-4" aria-hidden="true">favorite</span>
+          <h3 class="font-medium mb-2">Clean</h3>
+          <p class="text-sm text-stone-500">Only natural, organic ingredients. No additives.</p>
+        </div>
+        <div
+          class="p-8 bg-white dark:bg-stone-800 rounded-xl shadow-sm border border-stone-100 dark:border-stone-700"
+        >
+          <span class="material-icons text-primary mb-4" aria-hidden="true">bolt</span>
+          <h3 class="font-medium mb-2">Practical</h3>
+          <p class="text-sm text-stone-500">Nutritious meals ready in minutes, not hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Bridging Tradition -->
+  <section class="py-24 px-4">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div class="order-2 md:order-1 relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl group">
+        <img
+          src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2070&auto=format&fit=crop"
+          alt="Minimal Scandinavian kitchen interior with natural light"
+          class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+        />
+        <div class="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors"></div>
+      </div>
+      <div class="order-1 md:order-2 space-y-8">
+        <h2 class="text-3xl font-light tracking-tight">Bridging Tradition and Modern Nordic Life</h2>
+        <div class="space-y-6 text-lg text-stone-600 dark:text-stone-400 font-light leading-relaxed">
+          <p>
+            Tarhana is our bridge. It combines the ancient wisdom of fermentation with the clean
+            minimalism of Scandinavian design. It is complex in flavor yet simple in preparation.
+          </p>
+          <p>
+            We've taken the core of this tradition and refined it for the health-conscious Swedish
+            family. It's more than just a product; it's a piece of heritage, re-imagined for today.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Textures & Process -->
+  <section class="py-24 bg-stone-100 dark:bg-stone-900 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="relative rounded-2xl overflow-hidden shadow-lg h-96">
           <img
-            src="https://images.unsplash.com/photo-1544126592-807daa2b565b?q=80&w=2070&auto=format&fit=crop"
-            alt="Mother and Child"
-            class="w-full h-full object-cover aspect-[4/3]"
+            src="https://images.unsplash.com/photo-1506368249639-73a05d6f6488?q=80&w=2070&auto=format&fit=crop"
+            alt="Natural organic grains and textures used in Tarhana"
+            class="object-cover w-full h-full"
           />
         </div>
-        <div class="order-1 md:order-2 space-y-6">
-          <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">Rediscovering Tarhana Through Motherhood</h2>
-          <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            Years later, when my daughter began her journey with solid foods, I found myself returning to tarhana.
-          </p>
-          <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            During short trips or busy weeks, all I needed was this simple powder in my bag. Just water, a few minutes of simmering — and I had a warm, nourishing meal I could truly trust.
-          </p>
-          <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            It felt different from ready-made alternatives. It was real. Balanced. Made from ingredients I understood.
+        <div class="space-y-6">
+          <h2 class="text-3xl font-light tracking-tight italic">"Fermentation is a conversation between time and nature."</h2>
+          <p class="text-lg text-stone-600 dark:text-stone-400 font-light">
+            We honor this conversation by never rushing. Our Tarhana undergoes a long, natural
+            fermentation process that develops its signature tangy profile and boosts its nutritional
+            availability.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. BRIDGING TRADITION & MODERN NORDIC LIFE -->
-  <section class="py-24 container mx-auto px-6 text-center max-w-4xl">
-    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-8">Bridging Tradition and Modern Nordic Life</h2>
-    <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300 mb-6">
-      Living in Sweden, I realized that tarhana fits naturally into the Nordic way of eating: clean ingredients, slow processes, and respect for simplicity.
-    </p>
-    <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-      Modern Tarhana was born from this connection — bringing ancient fermentation wisdom into modern Swedish kitchens.
-    </p>
-  </section>
-
-  <!-- 5. VALUES SECTION -->
-  <section class="py-24 bg-stone-100 dark:bg-stone-900 transition-colors duration-300">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-16 text-center">What We Believe In</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-        <!-- Value 1 -->
-        <div class="space-y-4">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-            <span class="material-icons text-primary" aria-hidden="true">timer</span>
-          </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Slow Over Fast</h3>
-          <p class="text-stone-600 dark:text-stone-400">
-            We believe nourishment takes time. Our tarhana is fermented for 21 days — never rushed.
-          </p>
-        </div>
-        <!-- Value 2 -->
-        <div class="space-y-4">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-            <span class="material-icons text-primary" aria-hidden="true">eco</span>
-          </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Clean & Transparent</h3>
-          <p class="text-stone-600 dark:text-stone-400">
-            Organic Swedish grains. Real yogurt. No preservatives. Nothing unnecessary.
-          </p>
-        </div>
-        <!-- Value 3 -->
-        <div class="space-y-4">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-            <span class="material-icons text-primary" aria-hidden="true">family_restroom</span>
-          </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Family-Friendly Food</h3>
-          <p class="text-stone-600 dark:text-stone-400">
-            Gentle, comforting and suitable for all ages — from toddlers to grandparents.
-          </p>
-        </div>
-        <!-- Value 4 -->
-        <div class="space-y-4">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-            <span class="material-icons text-primary" aria-hidden="true">verified</span>
-          </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Practical Without Compromise</h3>
-          <p class="text-stone-600 dark:text-stone-400">
-            Easy to carry. Easy to prepare. Easy to trust.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. MORE THAN SOUP -->
-  <section class="py-24 container mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div class="space-y-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">More Than Soup</h2>
-        <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          Whether you're a busy parent, an active professional, or simply someone who values natural food, tarhana offers something rare — comfort and function in one bowl.
-        </p>
-        <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          A fermented, plant-based protein source that supports a balanced lifestyle without sacrificing taste.
-        </p>
-      </div>
-      <div class="rounded-3xl overflow-hidden shadow-2xl">
+  <!-- Final Statement -->
+  <section class="py-32 px-4 text-center">
+    <div class="max-w-3xl mx-auto space-y-8">
+      <div class="w-20 h-px bg-primary mx-auto"></div>
+      <p class="text-2xl md:text-3xl font-light leading-relaxed text-stone-800 dark:text-stone-200">
+        We invite you to bring this warmth into your home. A taste of tradition, a touch of Nordic
+        clarity, and a commitment to pure, simple nourishment.
+      </p>
+      <div class="pt-12">
         <img
-          src="https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=2070&auto=format&fit=crop"
-          alt="Steaming Bowl of Tarhana"
-          class="w-full h-full object-cover aspect-[4/3]"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. CLOSING STATEMENT -->
-  <section class="py-32 container mx-auto px-6 text-center">
-    <div class="max-w-3xl mx-auto space-y-12">
-      <h2 class="text-4xl md:text-5xl font-light italic text-stone-900 dark:text-white leading-tight">
-        "For us, tarhana is not just food. It is memory, care, and simplicity — shared around the table."
-      </h2>
-      <div class="pt-8">
-        <a
-          routerLink="/products"
-          class="inline-block bg-primary text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-red-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+          src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=1000&auto=format&fit=crop"
+          alt="Authentic kitchen moment"
+          class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-white shadow-xl mb-8 grayscale hover:grayscale-0 transition-all duration-500"
         >
-          Explore Our Blends
-        </a>
+        <button
+          routerLink="/products"
+          class="px-10 py-4 bg-primary text-white hover:bg-red-700 transition-all rounded-full text-sm tracking-widest uppercase"
+        >
+          Explore Our Products
+        </button>
       </div>
     </div>
   </section>
