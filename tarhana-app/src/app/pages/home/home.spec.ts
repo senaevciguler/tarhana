@@ -27,4 +27,11 @@ describe('HomeComponent', () => {
       'Traditional Tarhana — Now Crafted in Sweden',
     );
   });
+
+  it('should display the Not only soup section', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const headings = Array.from(compiled.querySelectorAll('h2'));
+    const hasNotOnlySoup = headings.some((h) => h.textContent?.includes('Not only soup!'));
+    expect(hasNotOnlySoup).toBeTrue();
+  });
 });

@@ -51,7 +51,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl">history</span>
+          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">history</span>
         </div>
         <h3 class="text-xl font-bold mb-4 dark:text-white">Traditional Fermented Soup</h3>
         <p class="text-stone-600 dark:text-stone-400">Fermented for 21 days to develop natural tanginess and depth of flavor.</p>
@@ -59,7 +59,7 @@
 
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl">eco</span>
+          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">eco</span>
         </div>
         <h3 class="text-xl font-bold mb-4 dark:text-white">Clean & Natural</h3>
         <p class="text-stone-600 dark:text-stone-400">Made with organic Swedish grains and real yogurt. No additives, no preservatives.</p>
@@ -67,7 +67,7 @@
 
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl">timer</span>
+          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">timer</span>
         </div>
         <h3 class="text-xl font-bold mb-4 dark:text-white">Ready in Minutes</h3>
         <p class="text-stone-600 dark:text-stone-400">A warm, nourishing meal in just 5–10 minutes.</p>
@@ -86,7 +86,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/5 dark:bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-          <span class="material-icons text-primary text-3xl">soup_kitchen</span>
+          <span class="material-icons text-primary text-3xl" aria-hidden="true">soup_kitchen</span>
         </div>
         <p class="text-stone-700 dark:text-stone-300 font-medium px-4">
           1. Add 2 tablespoons of tarhana to 250ml water
@@ -95,7 +95,7 @@
 
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/5 dark:bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-          <span class="material-icons text-primary text-3xl">timer</span>
+          <span class="material-icons text-primary text-3xl" aria-hidden="true">timer</span>
         </div>
         <p class="text-stone-700 dark:text-stone-300 font-medium px-4">
           2. Stir and simmer for 5–10 minutes
@@ -104,7 +104,7 @@
 
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/5 dark:bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-          <span class="material-icons text-primary text-3xl">restaurant</span>
+          <span class="material-icons text-primary text-3xl" aria-hidden="true">restaurant</span>
         </div>
         <p class="text-stone-700 dark:text-stone-300 font-medium px-4">
           3. Add olive oil or toppings if desired
@@ -129,6 +129,90 @@
         Mildly tangy, savory and comforting. Similar to sourdough depth, with a creamy texture when
         cooked.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- Not Only Soup Section -->
+<section class="py-24 bg-white dark:bg-stone-900 transition-colors duration-300">
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl mx-auto text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">Not only soup!</h2>
+      <p class="text-lg text-stone-600 dark:text-stone-400 leading-relaxed max-w-2xl mx-auto">
+        Tarhana is an incredibly versatile pantry staple. From traditional bowls to modern kitchen
+        hacks, discover how to use it in your daily cooking.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Use Case 1 -->
+      <div
+        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
+      >
+        <div
+          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
+        >
+          <span class="material-icons text-primary text-3xl" aria-hidden="true">soup_kitchen</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">Soup Base</h3>
+        <p class="text-stone-600 dark:text-stone-400 text-sm">
+          The classic, comforting bowl of warmth.
+        </p>
+      </div>
+
+      <!-- Use Case 2 -->
+      <div
+        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
+      >
+        <div
+          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
+        >
+          <span class="material-icons text-primary text-3xl" aria-hidden="true">restaurant</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">Sauce Thickener</h3>
+        <p class="text-stone-600 dark:text-stone-400 text-sm">
+          Add body and umami to stews and sauces.
+        </p>
+      </div>
+
+      <!-- Use Case 3 -->
+      <div
+        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
+      >
+        <div
+          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
+        >
+          <span class="material-icons text-primary text-3xl" aria-hidden="true">rice_bowl</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">Savory Bowls</h3>
+        <p class="text-stone-600 dark:text-stone-400 text-sm">
+          Elevate grain bowls with a savory sprinkle.
+        </p>
+      </div>
+
+      <!-- Use Case 4 -->
+      <div
+        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
+      >
+        <div
+          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
+        >
+          <span class="material-icons text-primary text-3xl" aria-hidden="true">timer</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">Quick Meal</h3>
+        <p class="text-stone-600 dark:text-stone-400 text-sm">
+          A nourishing, probiotic meal in minutes.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-16 text-center">
+      <a
+        routerLink="/recipes"
+        class="inline-block bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-all"
+      >
+        Explore Recipes
+      </a>
     </div>
   </div>
 </section>
@@ -217,7 +301,7 @@
         class="inline-flex items-center gap-2 text-stone-900 dark:text-white font-bold text-xl hover:text-primary transition-colors border-b-2 border-primary/30 hover:border-primary pb-2"
       >
         View All Products
-        <span class="material-icons">arrow_forward</span>
+        <span class="material-icons" aria-hidden="true">arrow_forward</span>
       </a>
     </div>
   </div>
