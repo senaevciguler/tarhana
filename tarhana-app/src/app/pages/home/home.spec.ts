@@ -23,6 +23,8 @@ describe('HomeComponent', () => {
 
   it('should display the main headline', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Traditional Turkish Tarhana — Now Crafted in Sweden');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Traditional Tarhana — Now Crafted in Sweden',
+    );
   });
 });
