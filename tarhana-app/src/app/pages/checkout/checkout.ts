@@ -10,6 +10,7 @@ import {
   FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-checkout',
@@ -21,6 +22,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    TranslatePipe,
   ],
   templateUrl: './checkout.component.html',
 })
@@ -166,11 +168,16 @@ export class CheckoutComponent implements OnInit {
 
   getPaymentMethodLabel(method: string): string {
     switch (method) {
-      case 'apple': return 'Apple Pay';
-      case 'swish': return 'Swish';
-      case 'card': return 'Card Payment';
-      case 'klarna': return 'Klarna';
-      default: return method;
+      case 'apple':
+        return 'CHECKOUT.APPLE_PAY';
+      case 'swish':
+        return 'CHECKOUT.SWISH';
+      case 'card':
+        return 'CHECKOUT.CARD';
+      case 'klarna':
+        return 'CHECKOUT.KLARNA';
+      default:
+        return method;
     }
   }
 }

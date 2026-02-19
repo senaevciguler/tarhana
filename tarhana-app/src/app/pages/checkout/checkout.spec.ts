@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckoutComponent } from './checkout';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -9,9 +11,8 @@ describe('CheckoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CheckoutComponent],
-      providers: [provideRouter([])]
-    })
-    .compileComponents();
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CheckoutComponent);
     component = fixture.componentInstance;
@@ -22,8 +23,8 @@ describe('CheckoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render title "Checkout"', () => {
+  it('should render title', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Checkout');
+    expect(compiled.querySelector('h1')?.textContent).toContain('CHECKOUT.TITLE');
   });
 });

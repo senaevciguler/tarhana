@@ -12,28 +12,45 @@
         routerLink="/products"
         routerLinkActive="text-primary font-bold"
         [routerLinkActiveOptions]="{ exact: true }"
-        >Products</a
+        >{{ 'NAVBAR.PRODUCTS' | translate }}</a
       >
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
         routerLink="/recipes"
         routerLinkActive="text-primary font-bold"
-        >Recipes</a
+        >{{ 'NAVBAR.RECIPES' | translate }}</a
       >
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
         routerLink="/story"
         routerLinkActive="text-primary font-bold"
-        >Our Story</a
+        >{{ 'NAVBAR.STORY' | translate }}</a
       >
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
         routerLink="/health"
         routerLinkActive="text-primary font-bold"
-        >Health</a
+        >{{ 'NAVBAR.HEALTH' | translate }}</a
       >
     </div>
     <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 text-sm font-bold dark:text-stone-300">
+        <button
+          (click)="switchLanguage('sv')"
+          [class.text-primary]="currentLang() === 'sv'"
+          class="hover:text-primary transition-colors"
+        >
+          SV
+        </button>
+        <span class="text-stone-300">|</span>
+        <button
+          (click)="switchLanguage('en')"
+          [class.text-primary]="currentLang() === 'en'"
+          class="hover:text-primary transition-colors"
+        >
+          EN
+        </button>
+      </div>
     </div>
   </div>
 </nav>

@@ -14,10 +14,10 @@
     <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl">
         <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-          From My Grandmother’s Kitchen to Modern Swedish Homes
+          {{ 'STORY.HERO_TITLE' | translate }}
         </h1>
         <p class="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl">
-          A centuries-old tradition, rediscovered through motherhood and reimagined for today’s conscious lifestyle.
+          {{ 'STORY.HERO_SUBTITLE' | translate }}
         </p>
       </div>
     </div>
@@ -28,10 +28,10 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
       <div class="space-y-6">
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          I grew up watching my grandmother prepare tarhana with patience and care. It wasn’t just soup — it was a ritual. Yogurt, grains and vegetables slowly fermented, then dried under the sun to nourish our family throughout the year.
+          {{ 'STORY.PERSONAL_P1' | translate }}
         </p>
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          It was simple food. Honest food. The kind that warms you from the inside out.
+          {{ 'STORY.PERSONAL_P2' | translate }}
         </p>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-2xl">
@@ -56,15 +56,15 @@
           />
         </div>
         <div class="order-1 md:order-2 space-y-6">
-          <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">Rediscovering Tarhana Through Motherhood</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">{{ 'STORY.MOTHERHOOD_TITLE' | translate }}</h2>
           <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            Years later, when my daughter began her journey with solid foods, I found myself returning to tarhana.
+            {{ 'STORY.MOTHERHOOD_P1' | translate }}
           </p>
           <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            During short trips or busy weeks, all I needed was this simple powder in my bag. Just water, a few minutes of simmering — and I had a warm, nourishing meal I could truly trust.
+            {{ 'STORY.MOTHERHOOD_P2' | translate }}
           </p>
           <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            It felt different from ready-made alternatives. It was real. Balanced. Made from ingredients I understood.
+            {{ 'STORY.MOTHERHOOD_P3' | translate }}
           </p>
         </div>
       </div>
@@ -73,28 +73,28 @@
 
   <!-- 4. BRIDGING TRADITION & MODERN NORDIC LIFE -->
   <section class="py-24 container mx-auto px-6 text-center max-w-4xl">
-    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-8">Bridging Tradition and Modern Nordic Life</h2>
+    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-8">{{ 'STORY.BRIDGING_TITLE' | translate }}</h2>
     <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300 mb-6">
-      Living in Sweden, I realized that tarhana fits naturally into the Nordic way of eating: clean ingredients, slow processes, and respect for simplicity.
+      {{ 'STORY.BRIDGING_P1' | translate }}
     </p>
     <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-      Modern Tarhana was born from this connection — bringing ancient fermentation wisdom into modern Swedish kitchens.
+      {{ 'STORY.BRIDGING_P2' | translate }}
     </p>
   </section>
 
   <!-- 5. VALUES SECTION -->
   <section class="py-24 bg-stone-100 dark:bg-stone-900 transition-colors duration-300">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-16 text-center">What We Believe In</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-16 text-center">{{ 'STORY.BELIEFS_TITLE' | translate }}</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         <!-- Value 1 -->
         <div class="space-y-4">
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">timer</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Slow Over Fast</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE1_TITLE' | translate }}</h3>
           <p class="text-stone-600 dark:text-stone-400">
-            We believe nourishment takes time. Our tarhana is fermented for 21 days — never rushed.
+            {{ 'STORY.VALUE1_DESC' | translate }}
           </p>
         </div>
         <!-- Value 2 -->
@@ -102,9 +102,9 @@
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">eco</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Clean & Transparent</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE2_TITLE' | translate }}</h3>
           <p class="text-stone-600 dark:text-stone-400">
-            Organic Swedish grains. Real yogurt. No preservatives. Nothing unnecessary.
+            {{ 'STORY.VALUE2_DESC' | translate }}
           </p>
         </div>
         <!-- Value 3 -->
@@ -112,9 +112,9 @@
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">family_restroom</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Family-Friendly Food</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE3_TITLE' | translate }}</h3>
           <p class="text-stone-600 dark:text-stone-400">
-            Gentle, comforting and suitable for all ages — from toddlers to grandparents.
+            {{ 'STORY.VALUE3_DESC' | translate }}
           </p>
         </div>
         <!-- Value 4 -->
@@ -122,9 +122,9 @@
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">verified</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">Practical Without Compromise</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE4_TITLE' | translate }}</h3>
           <p class="text-stone-600 dark:text-stone-400">
-            Easy to carry. Easy to prepare. Easy to trust.
+            {{ 'STORY.VALUE4_DESC' | translate }}
           </p>
         </div>
       </div>
@@ -135,12 +135,12 @@
   <section class="py-24 container mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
       <div class="space-y-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">More Than Soup</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">{{ 'STORY.MORE_TITLE' | translate }}</h2>
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          Whether you're a busy parent, an active professional, or simply someone who values natural food, tarhana offers something rare — comfort and function in one bowl.
+          {{ 'STORY.MORE_P1' | translate }}
         </p>
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          A fermented, plant-based protein source that supports a balanced lifestyle without sacrificing taste.
+          {{ 'STORY.MORE_P2' | translate }}
         </p>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-2xl">
@@ -157,14 +157,14 @@
   <section class="py-32 container mx-auto px-6 text-center">
     <div class="max-w-3xl mx-auto space-y-12">
       <h2 class="text-4xl md:text-5xl font-light italic text-stone-900 dark:text-white leading-tight">
-        "For us, tarhana is not just food. It is memory, care, and simplicity — shared around the table."
+        {{ 'STORY.CLOSING' | translate }}
       </h2>
       <div class="pt-8">
         <a
           routerLink="/products"
           class="inline-block bg-primary text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-red-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
         >
-          Explore Our Blends
+          {{ 'STORY.EXPLORE' | translate }}
         </a>
       </div>
     </div>
