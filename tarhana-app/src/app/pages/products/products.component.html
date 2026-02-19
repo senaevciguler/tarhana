@@ -1,11 +1,15 @@
 <app-navbar></app-navbar>
-<div class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
+<div
+  class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300"
+>
   <main class="py-16">
     <!-- Product Grid -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         <!-- Product Card 1 -->
-        <div class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm">
+        <div
+          class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm"
+        >
           <div class="relative aspect-square mb-6 flex items-center justify-center">
             <img
               alt="Classic Tarhana pouch"
@@ -15,21 +19,25 @@
           </div>
           <div class="flex flex-col flex-grow">
             <div class="flex justify-between items-start mb-2">
-              <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ 'PRODUCTS_PAGE.CLASSIC_TITLE' | translate }}</h3>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+                {{ 'HOME.PRODUCTS.CLASSIC' | translate }}
+              </h3>
               <span class="text-xl font-bold text-primary">129 kr</span>
             </div>
-            <p class="text-sm text-slate-500 mb-6">{{ 'PRODUCTS_PAGE.CLASSIC_DESC' | translate }}</p>
+            <p class="text-sm text-slate-500 mb-6">{{ 'HOME.PRODUCTS.CLASSIC_DESC' | translate }}</p>
             <button
               routerLink="/checkout"
               class="mt-auto w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2"
             >
               <span class="material-icons text-lg">shopping_cart</span>
-              {{ 'PRODUCTS_PAGE.BUY' | translate }}
+              {{ 'HOME.PRODUCTS.BUY' | translate }}
             </button>
           </div>
         </div>
         <!-- Product Card 2 -->
-        <div class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm">
+        <div
+          class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm"
+        >
           <div class="relative aspect-square mb-6 flex items-center justify-center">
             <img
               alt="Spicy Tarhana pouch"
@@ -39,21 +47,25 @@
           </div>
           <div class="flex flex-col flex-grow">
             <div class="flex justify-between items-start mb-2">
-              <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ 'PRODUCTS_PAGE.SPICY_TITLE' | translate }}</h3>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+                {{ 'HOME.PRODUCTS.SPICY' | translate }}
+              </h3>
               <span class="text-xl font-bold text-primary">135 kr</span>
             </div>
-            <p class="text-sm text-slate-500 mb-6">{{ 'PRODUCTS_PAGE.SPICY_DESC' | translate }}</p>
+            <p class="text-sm text-slate-500 mb-6">{{ 'HOME.PRODUCTS.SPICY_DESC' | translate }}</p>
             <button
               routerLink="/checkout"
               class="mt-auto w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2"
             >
               <span class="material-icons text-lg">shopping_cart</span>
-              {{ 'PRODUCTS_PAGE.BUY' | translate }}
+              {{ 'HOME.PRODUCTS.BUY' | translate }}
             </button>
           </div>
         </div>
         <!-- Product Card 3 -->
-        <div class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm">
+        <div
+          class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm"
+        >
           <div class="relative aspect-square mb-6 flex items-center justify-center">
             <img
               alt="Whole Grain Tarhana pouch"
@@ -63,16 +75,20 @@
           </div>
           <div class="flex flex-col flex-grow">
             <div class="flex justify-between items-start mb-2">
-              <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ 'PRODUCTS_PAGE.WHOLE_GRAIN_TITLE' | translate }}</h3>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+                {{ 'HOME.PRODUCTS.WHOLE_GRAIN' | translate }}
+              </h3>
               <span class="text-xl font-bold text-primary">149 kr</span>
             </div>
-            <p class="text-sm text-slate-500 mb-6">{{ 'PRODUCTS_PAGE.WHOLE_GRAIN_DESC' | translate }}</p>
+            <p class="text-sm text-slate-500 mb-6">
+              {{ 'HOME.PRODUCTS.WHOLE_GRAIN_DESC' | translate }}
+            </p>
             <button
               routerLink="/checkout"
               class="mt-auto w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2"
             >
               <span class="material-icons text-lg">shopping_cart</span>
-              {{ 'PRODUCTS_PAGE.BUY' | translate }}
+              {{ 'HOME.PRODUCTS.BUY' | translate }}
             </button>
           </div>
         </div>

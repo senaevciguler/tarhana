@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -27,6 +27,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
   templateUrl: './checkout.component.html',
 })
 export class CheckoutComponent implements OnInit {
+  private fb = inject(FormBuilder);
   checkoutForm!: FormGroup;
   orderPlaced = false;
   orderReference = '';
@@ -43,8 +44,6 @@ export class CheckoutComponent implements OnInit {
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk',
   };
-
-  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.initForm();
@@ -68,7 +67,7 @@ export class CheckoutComponent implements OnInit {
       payment: this.fb.group({
         method: ['card'],
         card: this.fb.group({
-          cardNumber: ['', [Validators.pattern('^[0-9]{16}$')]],
+          cardNumber: ['', [Validators.pattern('^[0-9 ]{16,19}$')]],
           expiry: ['', [Validators.pattern('^(0[1-9]|1[0-2])\\/([0-9]{2})$')]],
           cvc: ['', [Validators.pattern('^[0-9]{3,4}$')]],
           nameOnCard: [''],
@@ -79,42 +78,9 @@ export class CheckoutComponent implements OnInit {
       }),
     });
 
-    // Handle payment method changes for validation
     this.checkoutForm.get('payment.method')?.valueChanges.subscribe((method) => {
       this.selectedPaymentMethod = method;
-      this.updatePaymentValidators(method);
     });
-  }
-
-  updatePaymentValidators(method: string) {
-    const cardGroup = this.checkoutForm.get('payment.card') as FormGroup;
-    const swishGroup = this.checkoutForm.get('payment.swish') as FormGroup;
-
-    if (method === 'card') {
-      cardGroup.get('cardNumber')?.setValidators([Validators.required, Validators.pattern('^[0-9 ]{16,19}$')]);
-      cardGroup.get('expiry')?.setValidators([Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\\/([0-9]{2})$')]);
-      cardGroup.get('cvc')?.setValidators([Validators.required, Validators.pattern('^[0-9]{3,4}$')]);
-      cardGroup.get('nameOnCard')?.setValidators([Validators.required]);
-      swishGroup.get('phone')?.clearValidators();
-    } else if (method === 'swish') {
-      swishGroup.get('phone')?.setValidators([Validators.required, Validators.pattern('^[0-9\\+\\-\\s]{8,15}$')]);
-      cardGroup.get('cardNumber')?.clearValidators();
-      cardGroup.get('expiry')?.clearValidators();
-      cardGroup.get('cvc')?.clearValidators();
-      cardGroup.get('nameOnCard')?.clearValidators();
-    } else {
-      cardGroup.get('cardNumber')?.clearValidators();
-      cardGroup.get('expiry')?.clearValidators();
-      cardGroup.get('cvc')?.clearValidators();
-      cardGroup.get('nameOnCard')?.clearValidators();
-      swishGroup.get('phone')?.clearValidators();
-    }
-
-    cardGroup.get('cardNumber')?.updateValueAndValidity();
-    cardGroup.get('expiry')?.updateValueAndValidity();
-    cardGroup.get('cvc')?.updateValueAndValidity();
-    cardGroup.get('nameOnCard')?.updateValueAndValidity();
-    swishGroup.get('phone')?.updateValueAndValidity();
   }
 
   incrementQuantity() {
@@ -149,7 +115,7 @@ export class CheckoutComponent implements OnInit {
 
   placeOrder() {
     if (this.checkoutForm.valid) {
-      this.orderReference = 'TRH-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+      this.orderReference = 'TRH-' + Math.random().toString(36).substring(2, 9).toUpperCase();
       this.orderPlaced = true;
       window.scrollTo(0, 0);
     } else {
@@ -159,9 +125,10 @@ export class CheckoutComponent implements OnInit {
 
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
-      control.markAsTouched();
-      if ((control as any).controls) {
-        this.markFormGroupTouched(control as FormGroup);
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      } else {
+        control.markAsTouched();
       }
     });
   }
@@ -169,13 +136,13 @@ export class CheckoutComponent implements OnInit {
   getPaymentMethodLabel(method: string): string {
     switch (method) {
       case 'apple':
-        return 'CHECKOUT.APPLE_PAY';
+        return 'Apple Pay';
       case 'swish':
-        return 'CHECKOUT.SWISH';
+        return 'Swish';
       case 'card':
-        return 'CHECKOUT.CARD';
+        return 'Card Payment';
       case 'klarna':
-        return 'CHECKOUT.KLARNA';
+        return 'Klarna';
       default:
         return method;
     }

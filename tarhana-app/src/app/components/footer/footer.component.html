@@ -11,31 +11,61 @@
           >
         </a>
         <p class="text-stone-500 dark:text-stone-400 text-sm leading-relaxed">
-          {{ 'FOOTER.TAGLINE' | translate }}
+          {{ 'FOOTER.BIO' | translate }}
         </p>
       </div>
       <div>
-        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER.EXPLORE' | translate }}</h5>
+        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER.EXPLORE.TITLE' | translate }}</h5>
         <ul class="space-y-4 text-sm text-stone-500 dark:text-stone-400">
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/products">{{ 'FOOTER.PRODUCTS' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/recipes">{{ 'FOOTER.RECIPES' | translate }}</a></li>
           <li>
-            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/story">{{ 'FOOTER.STORY' | translate }}</a>
+            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/products">
+              {{ 'NAV.SHOP' | translate }}
+            </a>
           </li>
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/health">{{ 'FOOTER.HEALTH' | translate }}</a></li>
+          <li>
+            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/recipes">
+              {{ 'NAV.RECIPES' | translate }}
+            </a>
+          </li>
+          <li>
+            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/story">
+              {{ 'NAV.STORY' | translate }}
+            </a>
+          </li>
+          <li>
+            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/health">
+              {{ 'NAV.HEALTH' | translate }}
+            </a>
+          </li>
         </ul>
       </div>
       <div>
-        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER.SUPPORT' | translate }}</h5>
+        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER.SUPPORT.TITLE' | translate }}</h5>
         <ul class="space-y-4 text-sm text-stone-500 dark:text-stone-400">
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER.CONTACT' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER.SHIPPING' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER.FAQ' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER.STORES' | translate }}</a></li>
+          <li>
+            <a class="hover:text-primary transition-colors" href="#">{{
+              'FOOTER.SUPPORT.CONTACT' | translate
+            }}</a>
+          </li>
+          <li>
+            <a class="hover:text-primary transition-colors" href="#">{{
+              'FOOTER.SUPPORT.SHIPPING' | translate
+            }}</a>
+          </li>
+          <li>
+            <a class="hover:text-primary transition-colors" href="#">{{
+              'FOOTER.SUPPORT.FAQ' | translate
+            }}</a>
+          </li>
+          <li>
+            <a class="hover:text-primary transition-colors" href="#">{{
+              'FOOTER.SUPPORT.LOCATOR' | translate
+            }}</a>
+          </li>
         </ul>
       </div>
       <div>
-        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER.SOCIAL' | translate }}</h5>
+        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER.SOCIAL.TITLE' | translate }}</h5>
         <div class="flex gap-4">
           <a
             class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"
@@ -61,10 +91,14 @@
     <div
       class="mt-16 pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone-400 font-medium"
     >
-      <p>{{ 'FOOTER.COPYRIGHT' | translate }}</p>
+      <p>© 2024 Modern Tarhana AB. Organic Certified SE-EKO-01.</p>
       <div class="flex gap-6">
-        <a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER.PRIVACY' | translate }}</a>
-        <a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER.TERMS' | translate }}</a>
+        <a class="hover:text-primary transition-colors" href="#">{{
+          'FOOTER.LEGAL.PRIVACY' | translate
+        }}</a>
+        <a class="hover:text-primary transition-colors" href="#">{{
+          'FOOTER.LEGAL.TERMS' | translate
+        }}</a>
       </div>
     </div>
   </div>

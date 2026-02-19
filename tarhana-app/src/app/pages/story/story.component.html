@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 
-<div class="bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300">
+<div
+  class="bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300"
+>
   <!-- 1. HERO SECTION -->
   <section class="relative h-[70vh] flex items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
@@ -14,10 +16,10 @@
     <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-4xl">
         <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-          {{ 'STORY.HERO_TITLE' | translate }}
+          {{ 'STORY.HERO.TITLE' | translate }}
         </h1>
         <p class="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl">
-          {{ 'STORY.HERO_SUBTITLE' | translate }}
+          {{ 'STORY.HERO.SUBTITLE' | translate }}
         </p>
       </div>
     </div>
@@ -28,10 +30,10 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
       <div class="space-y-6">
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          {{ 'STORY.PERSONAL_P1' | translate }}
+          {{ 'STORY.BEGINNING.PARA1' | translate }}
         </p>
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          {{ 'STORY.PERSONAL_P2' | translate }}
+          {{ 'STORY.BEGINNING.PARA2' | translate }}
         </p>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-2xl">
@@ -56,15 +58,17 @@
           />
         </div>
         <div class="order-1 md:order-2 space-y-6">
-          <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">{{ 'STORY.MOTHERHOOD_TITLE' | translate }}</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">
+            {{ 'STORY.MOTHERHOOD.TITLE' | translate }}
+          </h2>
           <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            {{ 'STORY.MOTHERHOOD_P1' | translate }}
+            {{ 'STORY.MOTHERHOOD.PARA1' | translate }}
           </p>
           <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            {{ 'STORY.MOTHERHOOD_P2' | translate }}
+            {{ 'STORY.MOTHERHOOD.PARA2' | translate }}
           </p>
           <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-            {{ 'STORY.MOTHERHOOD_P3' | translate }}
+            {{ 'STORY.MOTHERHOOD.PARA3' | translate }}
           </p>
         </div>
       </div>
@@ -73,28 +77,34 @@
 
   <!-- 4. BRIDGING TRADITION & MODERN NORDIC LIFE -->
   <section class="py-24 container mx-auto px-6 text-center max-w-4xl">
-    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-8">{{ 'STORY.BRIDGING_TITLE' | translate }}</h2>
+    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-8">
+      {{ 'STORY.BRIDGING.TITLE' | translate }}
+    </h2>
     <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300 mb-6">
-      {{ 'STORY.BRIDGING_P1' | translate }}
+      {{ 'STORY.BRIDGING.PARA1' | translate }}
     </p>
     <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-      {{ 'STORY.BRIDGING_P2' | translate }}
+      {{ 'STORY.BRIDGING.PARA2' | translate }}
     </p>
   </section>
 
   <!-- 5. VALUES SECTION -->
   <section class="py-24 bg-stone-100 dark:bg-stone-900 transition-colors duration-300">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-16 text-center">{{ 'STORY.BELIEFS_TITLE' | translate }}</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-16 text-center">
+        {{ 'STORY.VALUES.TITLE' | translate }}
+      </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         <!-- Value 1 -->
         <div class="space-y-4">
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">timer</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE1_TITLE' | translate }}</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">
+            {{ 'STORY.VALUES.SLOW.TITLE' | translate }}
+          </h3>
           <p class="text-stone-600 dark:text-stone-400">
-            {{ 'STORY.VALUE1_DESC' | translate }}
+            {{ 'STORY.VALUES.SLOW.DESC' | translate }}
           </p>
         </div>
         <!-- Value 2 -->
@@ -102,9 +112,11 @@
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">eco</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE2_TITLE' | translate }}</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">
+            {{ 'STORY.VALUES.CLEAN.TITLE' | translate }}
+          </h3>
           <p class="text-stone-600 dark:text-stone-400">
-            {{ 'STORY.VALUE2_DESC' | translate }}
+            {{ 'STORY.VALUES.CLEAN.DESC' | translate }}
           </p>
         </div>
         <!-- Value 3 -->
@@ -112,9 +124,11 @@
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">family_restroom</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE3_TITLE' | translate }}</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">
+            {{ 'STORY.VALUES.FAMILY.TITLE' | translate }}
+          </h3>
           <p class="text-stone-600 dark:text-stone-400">
-            {{ 'STORY.VALUE3_DESC' | translate }}
+            {{ 'STORY.VALUES.FAMILY.DESC' | translate }}
           </p>
         </div>
         <!-- Value 4 -->
@@ -122,9 +136,11 @@
           <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <span class="material-icons text-primary" aria-hidden="true">verified</span>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 dark:text-white">{{ 'STORY.VALUE4_TITLE' | translate }}</h3>
+          <h3 class="text-xl font-bold text-stone-900 dark:text-white">
+            {{ 'STORY.VALUES.PRACTICAL.TITLE' | translate }}
+          </h3>
           <p class="text-stone-600 dark:text-stone-400">
-            {{ 'STORY.VALUE4_DESC' | translate }}
+            {{ 'STORY.VALUES.PRACTICAL.DESC' | translate }}
           </p>
         </div>
       </div>
@@ -135,12 +151,14 @@
   <section class="py-24 container mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
       <div class="space-y-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">{{ 'STORY.MORE_TITLE' | translate }}</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-stone-900 dark:text-white mb-6">
+          {{ 'STORY.MORE.TITLE' | translate }}
+        </h2>
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          {{ 'STORY.MORE_P1' | translate }}
+          {{ 'STORY.MORE.PARA1' | translate }}
         </p>
         <p class="text-lg md:text-xl leading-relaxed text-stone-700 dark:text-stone-300">
-          {{ 'STORY.MORE_P2' | translate }}
+          {{ 'STORY.MORE.PARA2' | translate }}
         </p>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-2xl">
@@ -156,15 +174,17 @@
   <!-- 7. CLOSING STATEMENT -->
   <section class="py-32 container mx-auto px-6 text-center">
     <div class="max-w-3xl mx-auto space-y-12">
-      <h2 class="text-4xl md:text-5xl font-light italic text-stone-900 dark:text-white leading-tight">
-        {{ 'STORY.CLOSING' | translate }}
+      <h2
+        class="text-4xl md:text-5xl font-light italic text-stone-900 dark:text-white leading-tight"
+      >
+        "{{ 'STORY.CLOSING.QUOTE' | translate }}"
       </h2>
       <div class="pt-8">
         <a
           routerLink="/products"
           class="inline-block bg-primary text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-red-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
         >
-          {{ 'STORY.EXPLORE' | translate }}
+          {{ 'STORY.CLOSING.BUTTON' | translate }}
         </a>
       </div>
     </div>

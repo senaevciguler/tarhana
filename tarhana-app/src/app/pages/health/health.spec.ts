@@ -16,7 +16,7 @@ describe('HealthComponent', () => {
 
     fixture = TestBed.createComponent(HealthComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
-<div class="bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300">
+<div
+  class="bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300"
+>
   <main class="max-w-7xl mx-auto px-6 py-12">
     <!-- Featured Hero Section -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
@@ -13,8 +15,9 @@
         <div class="absolute bottom-6 left-6">
           <span
             class="bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest"
-            >{{ 'RECIPES.FEATURED' | translate }}</span
           >
+            {{ 'RECIPES.FEATURED' | translate }}
+          </span>
         </div>
       </div>
       <div class="lg:col-span-5 space-y-6">
@@ -33,7 +36,7 @@
         <div class="flex items-center gap-6 py-4 dark:text-stone-300">
           <div class="flex items-center gap-2">
             <span class="material-icons text-primary/60">schedule</span>
-            <span class="font-medium">{{ 'RECIPES.TIME_20' | translate }}</span>
+            <span class="font-medium">20 Mins</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="material-icons text-primary/60">bar_chart</span>
@@ -52,22 +55,22 @@
     <div class="flex flex-wrap items-center justify-between gap-6 mb-12">
       <div class="flex gap-3 overflow-x-auto pb-2">
         <button class="bg-primary text-white px-6 py-2 rounded-full font-bold whitespace-nowrap">
-          {{ 'RECIPES.ALL' | translate }}
+          {{ 'RECIPES.FILTERS.ALL' | translate }}
         </button>
         <button
           class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
         >
-          {{ 'RECIPES.QUICK' | translate }}
+          {{ 'RECIPES.FILTERS.QUICK' | translate }}
         </button>
         <button
           class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
         >
-          {{ 'RECIPES.SNACKS' | translate }}
+          {{ 'RECIPES.FILTERS.SNACKS' | translate }}
         </button>
         <button
           class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
         >
-          {{ 'RECIPES.VEGAN' | translate }}
+          {{ 'RECIPES.FILTERS.VEGAN' | translate }}
         </button>
       </div>
       <div class="flex items-center gap-2 text-stone-500 dark:text-stone-400 font-medium">
@@ -92,26 +95,31 @@
               <div
                 class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
               >
-                <span class="material-icons text-[14px] text-primary">bolt</span> 15 {{ 'RECIPES.MINS' | translate }}
+                <span class="material-icons text-[14px] text-primary">bolt</span> 15 MINS
               </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES.PASTA_TITLE' | translate }}
+              <h3
+                class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white"
+              >
+                {{ 'RECIPES.CARDS.PASTA.TITLE' | translate }}
               </h3>
               <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES.PASTA_DESC' | translate }}
+                {{ 'RECIPES.CARDS.PASTA.DESC' | translate }}
               </p>
               <div class="flex items-center justify-between mt-auto">
                 <div class="flex items-center gap-1 text-primary">
                   <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES.EASY' | translate }}</span>
+                  <span class="text-xs font-bold uppercase tracking-wider">{{
+                    'RECIPES.EASY' | translate
+                  }}</span>
                 </div>
                 <a
                   class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES.SHOP_BASE' | translate }}</a
+                  routerLink="/products"
                 >
+                  {{ 'RECIPES.SHOP_BASE' | translate }}
+                </a>
               </div>
             </div>
           </div>
@@ -128,26 +136,31 @@
               <div
                 class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
               >
-                <span class="material-icons text-[14px] text-primary">timer</span> 45 {{ 'RECIPES.MINS' | translate }}
+                <span class="material-icons text-[14px] text-primary">timer</span> 45 MINS
               </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES.CRACKERS_TITLE' | translate }}
+              <h3
+                class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white"
+              >
+                {{ 'RECIPES.CARDS.CRACKERS.TITLE' | translate }}
               </h3>
               <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES.CRACKERS_DESC' | translate }}
+                {{ 'RECIPES.CARDS.CRACKERS.DESC' | translate }}
               </p>
               <div class="flex items-center justify-between mt-auto">
                 <div class="flex items-center gap-1 text-primary">
                   <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES.MEDIUM' | translate }}</span>
+                  <span class="text-xs font-bold uppercase tracking-wider">{{
+                    'RECIPES.MEDIUM' | translate
+                  }}</span>
                 </div>
                 <a
                   class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES.SHOP_BASE' | translate }}</a
+                  routerLink="/products"
                 >
+                  {{ 'RECIPES.SHOP_BASE' | translate }}
+                </a>
               </div>
             </div>
           </div>
@@ -164,26 +177,31 @@
               <div
                 class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
               >
-                <span class="material-icons text-[14px] text-primary">bolt</span> 10 {{ 'RECIPES.MINS' | translate }}
+                <span class="material-icons text-[14px] text-primary">bolt</span> 10 MINS
               </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES.DIP_TITLE' | translate }}
+              <h3
+                class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white"
+              >
+                {{ 'RECIPES.CARDS.DIP.TITLE' | translate }}
               </h3>
               <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES.DIP_DESC' | translate }}
+                {{ 'RECIPES.CARDS.DIP.DESC' | translate }}
               </p>
               <div class="flex items-center justify-between mt-auto">
                 <div class="flex items-center gap-1 text-primary">
                   <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES.SUPER_EASY' | translate }}</span>
+                  <span class="text-xs font-bold uppercase tracking-wider">{{
+                    'RECIPES.SUPER_EASY' | translate
+                  }}</span>
                 </div>
                 <a
                   class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES.SHOP_BASE' | translate }}</a
+                  routerLink="/products"
                 >
+                  {{ 'RECIPES.SHOP_BASE' | translate }}
+                </a>
               </div>
             </div>
           </div>
@@ -200,26 +218,31 @@
               <div
                 class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
               >
-                <span class="material-icons text-[14px] text-primary">bolt</span> 5 {{ 'RECIPES.MINS' | translate }}
+                <span class="material-icons text-[14px] text-primary">bolt</span> 5 MINS
               </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES.CRUMBLE_TITLE' | translate }}
+              <h3
+                class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white"
+              >
+                {{ 'RECIPES.CARDS.CRUMBLE.TITLE' | translate }}
               </h3>
               <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES.CRUMBLE_DESC' | translate }}
+                {{ 'RECIPES.CARDS.CRUMBLE.DESC' | translate }}
               </p>
               <div class="flex items-center justify-between mt-auto">
                 <div class="flex items-center gap-1 text-primary">
                   <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES.EASY' | translate }}</span>
+                  <span class="text-xs font-bold uppercase tracking-wider">{{
+                    'RECIPES.EASY' | translate
+                  }}</span>
                 </div>
                 <a
                   class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES.SHOP_BASE' | translate }}</a
+                  routerLink="/products"
                 >
+                  {{ 'RECIPES.SHOP_BASE' | translate }}
+                </a>
               </div>
             </div>
           </div>
@@ -232,66 +255,51 @@
           <div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-8 border border-primary/10">
             <div class="flex items-center gap-2 text-primary font-bold mb-6">
               <span class="material-icons">biotech</span>
-              <span class="uppercase tracking-widest text-sm">{{ 'RECIPES.LAB.TITLE' | translate }}</span>
+              <span class="uppercase tracking-widest text-sm">{{ 'RECIPES.SIDEBAR.LAB' | translate }}</span>
             </div>
-            <h4 class="text-2xl font-bold mb-4 dark:text-white">{{ 'RECIPES.LAB.WHY' | translate }}</h4>
+            <h4 class="text-2xl font-bold mb-4 dark:text-white">
+              {{ 'RECIPES.SIDEBAR.WHY' | translate }}
+            </h4>
             <ul class="space-y-4 text-sm font-medium dark:text-stone-300">
               <li class="flex gap-3">
                 <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES.LAB.PROBIOTICS' | translate }}</span>
+                <span>{{ 'RECIPES.SIDEBAR.CHECK1' | translate }}</span>
               </li>
               <li class="flex gap-3">
                 <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES.LAB.FERMENTED' | translate }}</span>
+                <span>{{ 'RECIPES.SIDEBAR.CHECK2' | translate }}</span>
               </li>
               <li class="flex gap-3">
                 <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES.LAB.PROTEIN' | translate }}</span>
+                <span>{{ 'RECIPES.SIDEBAR.CHECK3' | translate }}</span>
               </li>
               <li class="flex gap-3">
                 <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES.LAB.CLEAN' | translate }}</span>
+                <span>{{ 'RECIPES.SIDEBAR.CHECK4' | translate }}</span>
               </li>
             </ul>
           </div>
           <!-- Newsletter -->
           <div class="bg-stone-900 text-white rounded-xl p-8 overflow-hidden relative">
             <div class="relative z-10">
-              <h4 class="text-xl font-bold mb-2">{{ 'RECIPES.NEWSLETTER.TITLE' | translate }}</h4>
+              <h4 class="text-xl font-bold mb-2">{{ 'RECIPES.SIDEBAR.NEWS.TITLE' | translate }}</h4>
               <p class="text-stone-400 text-sm mb-6">
-                {{ 'RECIPES.NEWSLETTER.SUBTITLE' | translate }}
+                {{ 'RECIPES.SIDEBAR.NEWS.DESC' | translate }}
               </p>
               <input
                 class="w-full bg-stone-800 border-stone-700 rounded-lg py-3 px-4 text-sm mb-3 focus:ring-primary focus:border-primary"
-                [placeholder]="'RECIPES.NEWSLETTER.EMAIL' | translate"
+                [placeholder]="'RECIPES.SIDEBAR.NEWS.PLACEHOLDER' | translate"
                 type="email"
               />
               <button
                 class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity"
               >
-                {{ 'RECIPES.NEWSLETTER.SUBSCRIBE' | translate }}
+                {{ 'RECIPES.SIDEBAR.NEWS.BUTTON' | translate }}
               </button>
             </div>
             <div
               class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"
             ></div>
-          </div>
-          <!-- Instagram Feed Placeholder -->
-          <div class="grid grid-cols-2 gap-2">
-            <div class="aspect-square bg-stone-200 dark:bg-stone-800 rounded overflow-hidden">
-              <img
-                alt="Food photography detail"
-                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmDmwRDOghMA9jWSk6JBuqHR0FPu-4b-VPjX81S824aZ49uzTN0EFkf6N_wDM70uftT4T5zADwkQ4UmtW03i75Sgp2SH6Wm5IajXP7BDJQr-pl6-eZsrt7ofF3MEPcXdj04DI4eE-mPFScg5qOaGiJIuoZi_FnrY4cf1mmi5CHNMSAssEFnTkmknsQyb0ODZHCmzEejIE-VBW36azm_4s6ZQv29Vuf40SHXXm-nxcKFBq_EapLdwF8o7jQ7UtNGPYpY4QaxNjuxFo"
-              />
-            </div>
-            <div class="aspect-square bg-stone-200 dark:bg-stone-800 rounded overflow-hidden">
-              <img
-                alt="Rustic ingredients on wood"
-                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuARG4awBtlA8xRSu0ULowai0m3n6XEoVNk7bMSGlm3hvFUuEtQMJCo9n-KzjvzPEzQ55ZFD2TMXNfEjuEy0py8ngxSL2mIKlrM1-WWrugH2t5-TG_8nMoriF_Lxy6fmfmYWq2B5JlhTEnfstUYBqjBGb5BS4_UeADB8mfCsptc2z7lVmcETKgp14ZA1BKXtNK-c9sYw59-ens9khU0CZhcxzl5xjLic2D3nzchhMW-htPXc9iHiutXZWEOsTrturTeRaxJW8gfyXR0"
-              />
-            </div>
           </div>
         </div>
       </aside>

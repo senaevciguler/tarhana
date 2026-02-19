@@ -1,56 +1,87 @@
-<nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<nav
+  class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 transition-colors duration-300"
+>
   <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
     <a class="flex items-center gap-2 cursor-pointer" routerLink="/">
       <div class="w-10 h-10 bg-primary rounded flex items-center justify-center text-white">
         <span class="material-icons">grain</span>
       </div>
-      <span class="font-display font-bold text-xl tracking-tight dark:text-white">MODERN TARHANA</span>
+      <span class="font-display font-bold text-xl tracking-tight dark:text-white"
+        >MODERN TARHANA</span
+      >
     </a>
+
     <div class="hidden md:flex items-center gap-8 font-medium">
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
         routerLink="/products"
         routerLinkActive="text-primary font-bold"
         [routerLinkActiveOptions]="{ exact: true }"
-        >{{ 'NAVBAR.PRODUCTS' | translate }}</a
       >
+        {{ 'NAV.SHOP' | translate }}
+      </a>
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
         routerLink="/recipes"
         routerLinkActive="text-primary font-bold"
-        >{{ 'NAVBAR.RECIPES' | translate }}</a
       >
+        {{ 'NAV.RECIPES' | translate }}
+      </a>
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
         routerLink="/story"
         routerLinkActive="text-primary font-bold"
-        >{{ 'NAVBAR.STORY' | translate }}</a
       >
+        {{ 'NAV.STORY' | translate }}
+      </a>
       <a
         class="hover:text-primary transition-colors cursor-pointer dark:text-stone-300 dark:hover:text-primary"
         routerLink="/health"
         routerLinkActive="text-primary font-bold"
-        >{{ 'NAVBAR.HEALTH' | translate }}</a
       >
+        {{ 'NAV.HEALTH' | translate }}
+      </a>
     </div>
-    <div class="flex items-center gap-4">
-      <div class="flex items-center gap-2 text-sm font-bold dark:text-stone-300">
+
+    <div class="flex items-center gap-6">
+      <!-- Language Switcher -->
+      <div class="flex items-center gap-1 text-sm font-bold tracking-tight">
         <button
           (click)="switchLanguage('sv')"
-          [class.text-primary]="currentLang() === 'sv'"
-          class="hover:text-primary transition-colors"
+          class="transition-colors hover:text-primary"
+          [class.text-primary]="getCurrentLang() === 'sv'"
+          [class.text-stone-400]="getCurrentLang() !== 'sv'"
         >
           SV
         </button>
-        <span class="text-stone-300">|</span>
+        <span class="text-stone-300 dark:text-stone-600">|</span>
         <button
           (click)="switchLanguage('en')"
-          [class.text-primary]="currentLang() === 'en'"
-          class="hover:text-primary transition-colors"
+          class="transition-colors hover:text-primary"
+          [class.text-primary]="getCurrentLang() === 'en'"
+          [class.text-stone-400]="getCurrentLang() !== 'en'"
         >
           EN
         </button>
       </div>
+
+      <button
+        class="p-2 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors dark:text-white"
+      >
+        <span class="material-icons">search</span>
+      </button>
+
+      <a
+        routerLink="/checkout"
+        class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-red-700 transition-all flex items-center gap-2"
+      >
+        {{ 'NAV.BUY' | translate }}
+        <div class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center text-[10px]">
+          1
+        </div>
+      </a>
+
+      <app-dark-mode-toggle></app-dark-mode-toggle>
     </div>
   </div>
 </nav>
