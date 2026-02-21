@@ -3,7 +3,7 @@
 <div class="bg-background-light dark:bg-background-dark min-h-screen text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
   <main class="max-w-7xl mx-auto px-4 py-8 md:py-16">
     <div *ngIf="!orderPlaced">
-      <h1 class="text-3xl md:text-4xl font-bold mb-8 md:mb-12">Checkout</h1>
+      <h1 class="text-3xl md:text-4xl font-bold mb-8 md:mb-12">{{ 'CHECKOUT_TITLE' | translate }}</h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
         <!-- Left Side: Forms -->
@@ -13,29 +13,29 @@
             <section formGroupName="customer" class="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 dark:border-slate-800">
               <div class="flex items-center gap-3 mb-6">
                 <span class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold">1</span>
-                <h2 class="text-xl font-bold">Customer Information</h2>
+                <h2 class="text-xl font-bold">{{ 'CHECKOUT_STEP1' | translate }}</h2>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
-                  <label for="fullName" class="block text-sm font-semibold mb-2">Full Name</label>
+                  <label for="fullName" class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_FULL_NAME' | translate }}</label>
                   <input id="fullName" type="text" formControlName="fullName" placeholder="John Doe"
                     [class.border-red-500]="checkoutForm.get('customer.fullName')?.touched && checkoutForm.get('customer.fullName')?.invalid"
                     class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all">
-                  <p *ngIf="checkoutForm.get('customer.fullName')?.touched && checkoutForm.get('customer.fullName')?.invalid" class="text-red-500 text-xs mt-1">Full name is required (min 3 chars)</p>
+                  <p *ngIf="checkoutForm.get('customer.fullName')?.touched && checkoutForm.get('customer.fullName')?.invalid" class="text-red-500 text-xs mt-1">{{ 'CHECKOUT_ERR_FULL_NAME' | translate }}</p>
                 </div>
                 <div>
-                  <label for="email" class="block text-sm font-semibold mb-2">Email Address</label>
+                  <label for="email" class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_EMAIL' | translate }}</label>
                   <input id="email" type="email" formControlName="email" placeholder="john@example.com"
                     [class.border-red-500]="checkoutForm.get('customer.email')?.touched && checkoutForm.get('customer.email')?.invalid"
                     class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all">
-                  <p *ngIf="checkoutForm.get('customer.email')?.touched && checkoutForm.get('customer.email')?.invalid" class="text-red-500 text-xs mt-1">Valid email is required</p>
+                  <p *ngIf="checkoutForm.get('customer.email')?.touched && checkoutForm.get('customer.email')?.invalid" class="text-red-500 text-xs mt-1">{{ 'CHECKOUT_ERR_EMAIL' | translate }}</p>
                 </div>
                 <div>
-                  <label for="phone" class="block text-sm font-semibold mb-2">Phone Number</label>
+                  <label for="phone" class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_PHONE' | translate }}</label>
                   <input id="phone" type="tel" formControlName="phone" placeholder="070 123 45 67"
                     [class.border-red-500]="checkoutForm.get('customer.phone')?.touched && checkoutForm.get('customer.phone')?.invalid"
                     class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all">
-                  <p *ngIf="checkoutForm.get('customer.phone')?.touched && checkoutForm.get('customer.phone')?.invalid" class="text-red-500 text-xs mt-1">Phone number is required</p>
+                  <p *ngIf="checkoutForm.get('customer.phone')?.touched && checkoutForm.get('customer.phone')?.invalid" class="text-red-500 text-xs mt-1">{{ 'CHECKOUT_ERR_PHONE' | translate }}</p>
                 </div>
               </div>
             </section>
@@ -44,7 +44,7 @@
             <section formGroupName="shipping" class="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 dark:border-slate-800">
               <div class="flex items-center gap-3 mb-6">
                 <span class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold">2</span>
-                <h2 class="text-xl font-bold">Shipping Details</h2>
+                <h2 class="text-xl font-bold">{{ 'CHECKOUT_STEP2' | translate }}</h2>
               </div>
 
               <!-- Delivery Method Selector -->
@@ -53,49 +53,49 @@
                   <input type="radio" formControlName="deliveryMethod" value="home" class="peer sr-only">
                   <div class="p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 peer-checked:border-primary peer-checked:bg-primary/[0.03] transition-all flex flex-col items-center gap-2">
                     <span class="material-icons text-primary">local_shipping</span>
-                    <span class="text-sm font-bold">Home Delivery</span>
+                    <span class="text-sm font-bold">{{ 'CHECKOUT_DELIVERY_HOME' | translate }}</span>
                   </div>
                 </label>
                 <label class="relative cursor-pointer">
                   <input type="radio" formControlName="deliveryMethod" value="pickup" class="peer sr-only">
                   <div class="p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800 peer-checked:border-primary peer-checked:bg-primary/[0.03] transition-all flex flex-col items-center gap-2">
                     <span class="material-icons text-primary">store</span>
-                    <span class="text-sm font-bold">Pickup Point</span>
+                    <span class="text-sm font-bold">{{ 'CHECKOUT_DELIVERY_PICKUP' | translate }}</span>
                   </div>
                 </label>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="md:col-span-2">
-                  <label for="address" class="block text-sm font-semibold mb-2">Street Address</label>
-                  <input id="address" type="text" formControlName="address" placeholder="Storgatan 1"
+                  <label for="address" class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_STREET' | translate }}</label>
+                  <input id="address" type="text" formControlName="address" [placeholder]="'CHECKOUT_STREET_PLACEHOLDER' | translate"
                     [class.border-red-500]="checkoutForm.get('shipping.address')?.touched && checkoutForm.get('shipping.address')?.invalid"
                     class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all">
                 </div>
                 <div>
-                  <label for="postalCode" class="block text-sm font-semibold mb-2">Postal Code</label>
-                  <input id="postalCode" type="text" formControlName="postalCode" placeholder="123 45"
+                  <label for="postalCode" class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_POSTAL' | translate }}</label>
+                  <input id="postalCode" type="text" formControlName="postalCode" [placeholder]="'CHECKOUT_POSTAL_PLACEHOLDER' | translate"
                     [class.border-red-500]="checkoutForm.get('shipping.postalCode')?.touched && checkoutForm.get('shipping.postalCode')?.invalid"
                     class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all">
                 </div>
                 <div>
-                  <label for="city" class="block text-sm font-semibold mb-2">City</label>
-                  <input id="city" type="text" formControlName="city" placeholder="Stockholm"
+                  <label for="city" class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_CITY' | translate }}</label>
+                  <input id="city" type="text" formControlName="city" [placeholder]="'CHECKOUT_CITY_PLACEHOLDER' | translate"
                     [class.border-red-500]="checkoutForm.get('shipping.city')?.touched && checkoutForm.get('shipping.city')?.invalid"
                     class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all">
                 </div>
                 <div class="md:col-span-2">
-                  <label for="country" class="block text-sm font-semibold mb-2">Country</label>
+                  <label for="country" class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_COUNTRY' | translate }}</label>
                   <select id="country" formControlName="country" class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all">
-                    <option value="Sweden">Sweden</option>
-                    <option value="Norway">Norway</option>
-                    <option value="Denmark">Denmark</option>
-                    <option value="Finland">Finland</option>
+                    <option value="Sweden">{{ 'CHECKOUT_COUNTRY_SWEDEN' | translate }}</option>
+                    <option value="Norway">{{ 'CHECKOUT_COUNTRY_NORWAY' | translate }}</option>
+                    <option value="Denmark">{{ 'CHECKOUT_COUNTRY_DENMARK' | translate }}</option>
+                    <option value="Finland">{{ 'CHECKOUT_COUNTRY_FINLAND' | translate }}</option>
                   </select>
                 </div>
                 <div class="md:col-span-2">
-                  <label class="block text-sm font-semibold mb-2">Delivery Notes (Optional)</label>
-                  <textarea formControlName="deliveryNotes" rows="2" placeholder="Gate code, floor, etc." class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all"></textarea>
+                  <label class="block text-sm font-semibold mb-2">{{ 'CHECKOUT_DELIVERY_NOTES' | translate }}</label>
+                  <textarea formControlName="deliveryNotes" rows="2" [placeholder]="'CHECKOUT_DELIVERY_NOTES_PLACEHOLDER' | translate" class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all"></textarea>
                 </div>
               </div>
             </section>
@@ -104,7 +104,7 @@
             <section formGroupName="payment" class="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 dark:border-slate-800">
               <div class="flex items-center gap-3 mb-6">
                 <span class="w-8 h-8 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold">3</span>
-                <h2 class="text-xl font-bold">Payment Method</h2>
+                <h2 class="text-xl font-bold">{{ 'CHECKOUT_STEP3' | translate }}</h2>
               </div>
 
               <div class="space-y-4">
@@ -117,7 +117,7 @@
                       <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" class="h-5 invert">
                       </div>
-                      <span class="font-bold text-sm">Apple Pay</span>
+                      <span class="font-bold text-sm">{{ 'CHECKOUT_PAYMENT_APPLE' | translate }}</span>
                     </div>
                     <div class="w-5 h-5 rounded-full border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center" [class.border-primary]="selectedPaymentMethod === 'apple'">
                       <div *ngIf="selectedPaymentMethod === 'apple'" class="w-2.5 h-2.5 bg-primary rounded-full"></div>
@@ -126,9 +126,9 @@
                   <div *ngIf="selectedPaymentMethod === 'apple'" class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
                     <button type="button" class="w-full bg-black text-white py-3 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
                       <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" class="h-5 invert">
-                      Pay
+                      {{ 'CHECKOUT_PAY_BTN' | translate | uppercase }}
                     </button>
-                    <p class="text-[10px] text-center text-slate-400 mt-2">Apple Pay will be available at launch.</p>
+                    <p class="text-[10px] text-center text-slate-400 mt-2">{{ 'CHECKOUT_APPLE_NOTE' | translate }}</p>
                   </div>
                 </div>
 
@@ -141,7 +141,7 @@
                       <div class="w-10 h-10 bg-[#2D2D2D] rounded-lg flex items-center justify-center overflow-hidden">
                         <span class="text-[10px] text-white font-bold uppercase tracking-tighter">Swish</span>
                       </div>
-                      <span class="font-bold text-sm">Swish</span>
+                      <span class="font-bold text-sm">{{ 'CHECKOUT_PAYMENT_SWISH' | translate }}</span>
                     </div>
                     <div class="w-5 h-5 rounded-full border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center" [class.border-primary]="selectedPaymentMethod === 'swish'">
                       <div *ngIf="selectedPaymentMethod === 'swish'" class="w-2.5 h-2.5 bg-primary rounded-full"></div>
@@ -149,7 +149,7 @@
                   </div>
                   <div *ngIf="selectedPaymentMethod === 'swish'" formGroupName="swish" class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 space-y-4">
                     <div>
-                      <label for="swishPhone" class="block text-xs font-semibold mb-1">Phone Number</label>
+                      <label for="swishPhone" class="block text-xs font-semibold mb-1">{{ 'CHECKOUT_SWISH_PHONE' | translate }}</label>
                       <input id="swishPhone" type="tel" formControlName="phone" placeholder="07XXXXXXXX" class="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm">
                     </div>
                     <div class="flex gap-4 items-center">
@@ -157,8 +157,8 @@
                          <span class="material-icons text-slate-300">qr_code_2</span>
                       </div>
                       <div class="flex-grow space-y-1">
-                        <p class="text-xs font-bold">Order Ref: <span class="text-primary">TRH-MOCK</span></p>
-                        <p class="text-[10px] text-slate-500 italic">Swish confirmation will be handled at launch.</p>
+                        <p class="text-xs font-bold">{{ 'CHECKOUT_ORDER_REF' | translate }}: <span class="text-primary">TRH-MOCK</span></p>
+                        <p class="text-[10px] text-slate-500 italic">{{ 'CHECKOUT_SWISH_NOTE' | translate }}</p>
                       </div>
                     </div>
                   </div>
@@ -174,7 +174,7 @@
                         <span class="material-icons text-slate-600 dark:text-slate-400">credit_card</span>
                       </div>
                       <div>
-                        <span class="font-bold text-sm">Credit / Debit Card</span>
+                        <span class="font-bold text-sm">{{ 'CHECKOUT_PAYMENT_CARD' | translate }}</span>
                         <div class="flex gap-1 mt-0.5">
                           <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-2 opacity-50 grayscale dark:invert">
                           <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-2 opacity-50 grayscale dark:invert">
@@ -187,19 +187,19 @@
                   </div>
                   <div *ngIf="selectedPaymentMethod === 'card'" formGroupName="card" class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-3">
                     <div class="col-span-2">
-                      <label for="cardNumber" class="block text-xs font-semibold mb-1">Card Number</label>
+                      <label for="cardNumber" class="block text-xs font-semibold mb-1">{{ 'CHECKOUT_CARD_NUMBER' | translate }}</label>
                       <input id="cardNumber" type="text" formControlName="cardNumber" placeholder="0000 0000 0000 0000" class="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm">
                     </div>
                     <div>
-                      <label for="expiry" class="block text-xs font-semibold mb-1">Expiry Date</label>
+                      <label for="expiry" class="block text-xs font-semibold mb-1">{{ 'CHECKOUT_CARD_EXPIRY' | translate }}</label>
                       <input id="expiry" type="text" formControlName="expiry" placeholder="MM/YY" class="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm">
                     </div>
                     <div>
-                      <label for="cvc" class="block text-xs font-semibold mb-1">CVC</label>
+                      <label for="cvc" class="block text-xs font-semibold mb-1">{{ 'CHECKOUT_CARD_CVC' | translate }}</label>
                       <input id="cvc" type="text" formControlName="cvc" placeholder="123" class="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm">
                     </div>
                     <div class="col-span-2">
-                      <label for="nameOnCard" class="block text-xs font-semibold mb-1">Name on Card</label>
+                      <label for="nameOnCard" class="block text-xs font-semibold mb-1">{{ 'CHECKOUT_CARD_NAME' | translate }}</label>
                       <input id="nameOnCard" type="text" formControlName="nameOnCard" placeholder="JOHN DOE" class="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm">
                     </div>
                   </div>
@@ -214,17 +214,17 @@
                       <div class="w-10 h-10 bg-[#FFB3C7] rounded-lg flex items-center justify-center">
                         <span class="text-[8px] font-black text-black">Klarna.</span>
                       </div>
-                      <span class="font-bold text-sm">Klarna</span>
+                      <span class="font-bold text-sm">{{ 'CHECKOUT_PAYMENT_KLARNA' | translate }}</span>
                     </div>
                     <div class="w-5 h-5 rounded-full border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center" [class.border-primary]="selectedPaymentMethod === 'klarna'">
                       <div *ngIf="selectedPaymentMethod === 'klarna'" class="w-2.5 h-2.5 bg-primary rounded-full"></div>
                     </div>
                   </div>
                   <div *ngIf="selectedPaymentMethod === 'klarna'" class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-                    <p class="text-xs text-slate-600 dark:text-slate-400">Pay later or split your payment with Klarna.</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">{{ 'CHECKOUT_KLARNA_DESC' | translate }}</p>
                     <div class="mt-3 flex items-center gap-2">
-                      <div class="px-2 py-1 bg-[#FFB3C7] rounded text-[8px] font-bold text-black uppercase">Klarna Placeholder</div>
-                      <p class="text-[10px] text-slate-500 italic">No real Klarna integration (UI only).</p>
+                      <div class="px-2 py-1 bg-[#FFB3C7] rounded text-[8px] font-bold text-black uppercase">{{ 'CHECKOUT_KLARNA_PLACEHOLDER' | translate }}</div>
+                      <p class="text-[10px] text-slate-500 italic">{{ 'CHECKOUT_KLARNA_HINT' | translate }}</p>
                     </div>
                   </div>
                 </div>
@@ -233,7 +233,7 @@
 
             <button type="submit" class="w-full py-5 bg-primary text-white rounded-xl font-bold hover:bg-red-700 transition-all text-xl shadow-lg shadow-primary/25 flex items-center justify-center gap-2">
               <span class="material-icons">lock</span>
-              Place Order ({{ total }} kr)
+              {{ 'CHECKOUT_PAY_BTN' | translate }} ({{ total }} kr)
             </button>
           </form>
         </div>
@@ -242,19 +242,19 @@
         <div class="lg:col-span-5">
           <div class="sticky top-24 space-y-6">
             <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm p-6 md:p-8 border border-slate-100 dark:border-slate-800">
-              <h2 class="text-xl font-bold mb-6">Order Summary</h2>
+              <h2 class="text-xl font-bold mb-6">{{ 'CHECKOUT_ORDER_SUMMARY' | translate }}</h2>
 
               <!-- Product Item -->
               <div class="flex gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
                 <div class="w-20 h-20 bg-slate-50 dark:bg-zinc-800 rounded-xl flex-shrink-0 p-2 border border-slate-100 dark:border-slate-700">
-                  <img [src]="product.image" [alt]="product.name" class="w-full h-full object-contain">
+                  <img [src]="product.image" [alt]="product.nameKey | translate" class="w-full h-full object-contain">
                 </div>
                 <div class="flex-grow">
                   <div class="flex justify-between items-start mb-1">
-                    <h3 class="font-bold text-slate-900 dark:text-white">{{ product.name }}</h3>
+                    <h3 class="font-bold text-slate-900 dark:text-white">{{ product.nameKey | translate }}</h3>
                     <p class="font-bold">{{ pricePerItem }} kr</p>
                   </div>
-                  <p class="text-xs text-slate-500 mb-3">{{ product.variant }}</p>
+                  <p class="text-xs text-slate-500 mb-3">{{ product.variantKey | translate }}</p>
 
                   <!-- Quantity Selector -->
                   <div class="flex items-center gap-3">
@@ -274,15 +274,15 @@
               <!-- Price Breakdown -->
               <div class="py-6 space-y-3">
                 <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                  <span>Subtotal</span>
+                  <span>{{ 'CHECKOUT_SUBTOTAL' | translate }}</span>
                   <span>{{ subtotal }} kr</span>
                 </div>
                 <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                  <span>Shipping</span>
+                  <span>{{ 'CHECKOUT_SHIPPING' | translate }}</span>
                   <span>{{ shippingCost }} kr</span>
                 </div>
                 <div *ngIf="discount > 0" class="flex justify-between text-green-600 dark:text-green-400">
-                  <span>Discount</span>
+                  <span>{{ 'CHECKOUT_DISCOUNT' | translate }}</span>
                   <span>-{{ discount }} kr</span>
                 </div>
               </div>
@@ -290,19 +290,19 @@
               <!-- Promo Code -->
               <div class="pb-6">
                 <div class="flex gap-2">
-                  <input type="text" [(ngModel)]="promoCode" placeholder="Promo code" class="flex-grow px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm">
-                  <button (click)="applyPromoCode()" type="button" class="px-4 py-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity">Apply</button>
+                  <input type="text" [(ngModel)]="promoCode" [placeholder]="'CHECKOUT_PROMO_PLACEHOLDER' | translate" class="flex-grow px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm">
+                  <button (click)="applyPromoCode()" type="button" class="px-4 py-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity">{{ 'CHECKOUT_PROMO_APPLY' | translate }}</button>
                 </div>
-                <p class="text-[10px] text-slate-400 mt-2 italic">Try "TARHANA20" for 20 kr off</p>
+                <p class="text-[10px] text-slate-400 mt-2 italic">{{ 'CHECKOUT_PROMO_HINT' | translate }}</p>
               </div>
 
               <!-- Total -->
               <div class="pt-6 border-t border-slate-100 dark:border-slate-800">
                 <div class="flex justify-between items-center">
-                  <span class="text-xl font-bold">Total</span>
+                  <span class="text-xl font-bold">{{ 'CHECKOUT_TOTAL' | translate }}</span>
                   <div class="text-right">
                     <span class="text-2xl font-bold text-primary">{{ total }} kr</span>
-                    <p class="text-[10px] text-slate-400">Including VAT</p>
+                    <p class="text-[10px] text-slate-400">{{ 'CHECKOUT_VAT_INCL' | translate }}</p>
                   </div>
                 </div>
               </div>
@@ -325,23 +325,23 @@
         <span class="material-icons text-5xl">check_circle</span>
       </div>
 
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Thank you!</h1>
-      <p class="text-xl text-slate-600 dark:text-slate-400 mb-8">Your order has been received and is being processed.</p>
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ 'CHECKOUT_CONFIRM_TITLE' | translate }}</h1>
+      <p class="text-xl text-slate-600 dark:text-slate-400 mb-8">{{ 'CHECKOUT_CONFIRM_DESC' | translate }}</p>
 
       <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm p-8 border border-slate-100 dark:border-slate-800 text-left mb-12">
-        <h2 class="text-lg font-bold mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">Order Details</h2>
+        <h2 class="text-lg font-bold mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">{{ 'CHECKOUT_ORDER_DETAILS' | translate }}</h2>
 
         <div class="space-y-4">
           <div class="flex justify-between">
-            <span class="text-slate-500">Order Reference</span>
+            <span class="text-slate-500">{{ 'CHECKOUT_ORDER_REF' | translate }}</span>
             <span class="font-bold text-primary">{{ orderReference }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">Payment Method</span>
+            <span class="text-slate-500">{{ 'CHECKOUT_STEP3' | translate }}</span>
             <span class="font-bold">{{ getPaymentMethodLabel(selectedPaymentMethod) }}</span>
           </div>
           <div class="flex justify-between border-t border-slate-100 dark:border-slate-800 pt-4">
-            <span class="text-slate-500 font-bold">Total Paid</span>
+            <span class="text-slate-500 font-bold">{{ 'CHECKOUT_TOTAL_PAID' | translate }}</span>
             <span class="font-bold text-xl">{{ total }} kr</span>
           </div>
         </div>
@@ -349,10 +349,10 @@
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a routerLink="/products" class="px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-primary/20">
-          Back to Products
+          {{ 'CHECKOUT_BACK_PRODUCTS' | translate }}
         </a>
         <a routerLink="/" class="px-8 py-4 bg-slate-100 dark:bg-zinc-800 text-slate-900 dark:text-white rounded-xl font-bold hover:bg-slate-200 dark:hover:bg-zinc-700 transition-all">
-          Go to Home
+          {{ 'CHECKOUT_BACK_HOME' | translate }}
         </a>
       </div>
     </div>

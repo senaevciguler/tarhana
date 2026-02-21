@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckoutComponent } from './checkout';
 import { provideRouter } from '@angular/router';
+import { LanguageService } from '../../services/language.service';
+import { signal } from '@angular/core';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -9,7 +11,22 @@ describe('CheckoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CheckoutComponent],
-      providers: [provideRouter([])]
+      providers: [
+        provideRouter([]),
+        {
+          provide: LanguageService,
+          useValue: {
+            translate: (key: string) => {
+              const mockTranslations: Record<string, string> = {
+                'CHECKOUT_TITLE': 'Checkout'
+              };
+              return mockTranslations[key] || key;
+            },
+            language: signal('EN'),
+            setLanguage: () => Promise.resolve()
+          }
+        }
+      ]
     })
     .compileComponents();
 

@@ -10,6 +10,9 @@ import {
   FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+import { LanguageService } from '../../services/language.service';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-checkout',
@@ -21,10 +24,12 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    TranslatePipe,
   ],
   templateUrl: './checkout.component.html',
 })
 export class CheckoutComponent implements OnInit {
+  langService = inject(LanguageService);
   checkoutForm!: FormGroup;
   orderPlaced = false;
   orderReference = '';
@@ -36,8 +41,8 @@ export class CheckoutComponent implements OnInit {
   discount = 0;
 
   product = {
-    name: 'The Classic Tarhana',
-    variant: 'Original / 500g',
+    nameKey: 'HOME_PRODUCTS_CLASSIC_TITLE',
+    variantKey: 'CHECKOUT_VARIANT_ORIGINAL',
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk',
   };
@@ -166,10 +171,10 @@ export class CheckoutComponent implements OnInit {
 
   getPaymentMethodLabel(method: string): string {
     switch (method) {
-      case 'apple': return 'Apple Pay';
-      case 'swish': return 'Swish';
-      case 'card': return 'Card Payment';
-      case 'klarna': return 'Klarna';
+      case 'apple': return this.langService.translate('CHECKOUT_PAYMENT_APPLE');
+      case 'swish': return this.langService.translate('CHECKOUT_PAYMENT_SWISH');
+      case 'card': return this.langService.translate('CHECKOUT_PAYMENT_CARD');
+      case 'klarna': return this.langService.translate('CHECKOUT_PAYMENT_KLARNA');
       default: return method;
     }
   }

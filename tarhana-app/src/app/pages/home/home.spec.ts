@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home';
 import { provideRouter } from '@angular/router';
+import { LanguageService } from '../../services/language.service';
+import { signal } from '@angular/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -9,7 +11,23 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HomeComponent],
-      providers: [provideRouter([])]
+      providers: [
+        provideRouter([]),
+        {
+          provide: LanguageService,
+          useValue: {
+            translate: (key: string) => {
+              const mockTranslations: Record<string, string> = {
+                'HOME_HERO_TITLE': 'Traditional Tarhana — Now Crafted in Sweden',
+                'HOME_VERSATILE_TITLE': 'Not only soup!'
+              };
+              return mockTranslations[key] || key;
+            },
+            language: signal('EN'),
+            setLanguage: () => Promise.resolve()
+          }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
