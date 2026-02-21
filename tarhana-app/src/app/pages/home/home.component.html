@@ -4,7 +4,7 @@
   <div class="absolute inset-0 z-0">
     <img
       src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5-2ayecpbe09k2Uly6QQT6AgIaSIKqBCn3IfZrvVWGXccIRBEnzPL55HSD0Tyx0n_g_2Xo8zyQG6gdT_2u0dPBGgh5qvzhdnm_RA083Dzd4umscuS2GYbTDEU8b4i73M-lqoV9SK-qT7RgXV5klf4Y60F-G89CaZbXk5WWhbeswiTGjQNPI6rorFGlZv1NHxhRTWxy_Iq4a0aZo51Ct5UoQfVfKmwR7S9r0BWdztkOzRFG0R01voPepR_Dy-jCd3AjEwnIkUKIr8"
-      alt="Traditional Tarhana Soup"
+      [alt]="'ALT_TRAD_SOUP' | translate"
       class="w-full h-full object-cover"
     />
     <div class="absolute inset-0 bg-black/40"></div>
@@ -13,24 +13,23 @@
   <div class="container mx-auto px-6 relative z-10 text-white">
     <div class="max-w-3xl">
       <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-        Traditional Tarhana — Now Crafted in Sweden
+        {{ 'HOME_HERO_TITLE' | translate }}
       </h1>
       <p class="text-xl md:text-2xl mb-10 opacity-90 leading-relaxed">
-        A nourishing, probiotic-rich meal made with organic Swedish ingredients. Ready in minutes,
-        loved for generations.
+        {{ 'HOME_HERO_SUBTITLE' | translate }}
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
         <a
           routerLink="/products"
           class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-all text-center"
         >
-          Shop Products
+          {{ 'HOME_HERO_SHOP' | translate }}
         </a>
         <a
           href="#what-is-tarhana"
           class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/30 transition-all text-center"
         >
-          Discover Tarhana
+          {{ 'HOME_HERO_DISCOVER' | translate }}
         </a>
       </div>
     </div>
@@ -41,10 +40,9 @@
 <section id="what-is-tarhana" class="py-24 bg-background-light dark:bg-background-dark transition-colors duration-300">
   <div class="container mx-auto px-6">
     <div class="max-w-4xl mx-auto text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">What is Tarhana?</h2>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HOME_WHAT_IS_TITLE' | translate }}</h2>
       <p class="text-lg text-stone-600 dark:text-stone-400 leading-relaxed">
-        Tarhana is a fermented blend of yogurt, whole grains and vegetables, dried and crushed into a nourishing soup base.
-        Just add water, simmer for a few minutes, and enjoy a naturally probiotic, savory meal.
+        {{ 'HOME_WHAT_IS_DESC' | translate }}
       </p>
     </div>
 
@@ -53,24 +51,24 @@
         <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
           <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">history</span>
         </div>
-        <h3 class="text-xl font-bold mb-4 dark:text-white">Traditional Fermented Soup</h3>
-        <p class="text-stone-600 dark:text-stone-400">Fermented for 21 days to develop natural tanginess and depth of flavor.</p>
+        <h3 class="text-xl font-bold mb-4 dark:text-white">{{ 'HOME_WHAT_IS_TRAD_TITLE' | translate }}</h3>
+        <p class="text-stone-600 dark:text-stone-400">{{ 'HOME_WHAT_IS_TRAD_DESC' | translate }}</p>
       </div>
 
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
           <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">eco</span>
         </div>
-        <h3 class="text-xl font-bold mb-4 dark:text-white">Clean & Natural</h3>
-        <p class="text-stone-600 dark:text-stone-400">Made with organic Swedish grains and real yogurt. No additives, no preservatives.</p>
+        <h3 class="text-xl font-bold mb-4 dark:text-white">{{ 'HOME_WHAT_IS_CLEAN_TITLE' | translate }}</h3>
+        <p class="text-stone-600 dark:text-stone-400">{{ 'HOME_WHAT_IS_CLEAN_DESC' | translate }}</p>
       </div>
 
       <div class="text-center group">
         <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
           <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">timer</span>
         </div>
-        <h3 class="text-xl font-bold mb-4 dark:text-white">Ready in Minutes</h3>
-        <p class="text-stone-600 dark:text-stone-400">A warm, nourishing meal in just 5–10 minutes.</p>
+        <h3 class="text-xl font-bold mb-4 dark:text-white">{{ 'HOME_WHAT_IS_READY_TITLE' | translate }}</h3>
+        <p class="text-stone-600 dark:text-stone-400">{{ 'HOME_WHAT_IS_READY_DESC' | translate }}</p>
       </div>
     </div>
   </div>
@@ -80,7 +78,7 @@
 <section class="py-24 bg-white dark:bg-stone-900 transition-colors duration-300">
   <div class="container mx-auto px-6">
     <div class="max-w-4xl mx-auto text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">How to Prepare</h2>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HOME_PREPARE_TITLE' | translate }}</h2>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -89,7 +87,7 @@
           <span class="material-icons text-primary text-3xl" aria-hidden="true">soup_kitchen</span>
         </div>
         <p class="text-stone-700 dark:text-stone-300 font-medium px-4">
-          1. Add 2 tablespoons of tarhana to 250ml water
+          {{ 'HOME_PREPARE_STEP1' | translate }}
         </p>
       </div>
 
@@ -98,7 +96,7 @@
           <span class="material-icons text-primary text-3xl" aria-hidden="true">timer</span>
         </div>
         <p class="text-stone-700 dark:text-stone-300 font-medium px-4">
-          2. Stir and simmer for 5–10 minutes
+          {{ 'HOME_PREPARE_STEP2' | translate }}
         </p>
       </div>
 
@@ -107,14 +105,14 @@
           <span class="material-icons text-primary text-3xl" aria-hidden="true">restaurant</span>
         </div>
         <p class="text-stone-700 dark:text-stone-300 font-medium px-4">
-          3. Add olive oil or toppings if desired
+          {{ 'HOME_PREPARE_STEP3' | translate }}
         </p>
       </div>
     </div>
 
     <div class="mt-16 text-center">
       <p class="text-stone-500 dark:text-stone-400 italic">
-        "Also delicious with vegetable broth or plant-based yogurt."
+        "{{ 'HOME_PREPARE_NOTE' | translate }}"
       </p>
     </div>
   </div>
@@ -124,10 +122,9 @@
 <section class="py-24 bg-background-light dark:bg-background-dark transition-colors duration-300">
   <div class="container mx-auto px-6">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-8 text-stone-900 dark:text-white">What does it taste like?</h2>
+      <h2 class="text-4xl font-bold mb-8 text-stone-900 dark:text-white">{{ 'HOME_TASTE_TITLE' | translate }}</h2>
       <p class="text-xl text-stone-600 dark:text-stone-400 leading-relaxed">
-        Mildly tangy, savory and comforting. Similar to sourdough depth, with a creamy texture when
-        cooked.
+        {{ 'HOME_TASTE_DESC' | translate }}
       </p>
     </div>
   </div>
@@ -137,10 +134,9 @@
 <section class="py-24 bg-white dark:bg-stone-900 transition-colors duration-300">
   <div class="container mx-auto px-6">
     <div class="max-w-4xl mx-auto text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">Not only soup!</h2>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HOME_VERSATILE_TITLE' | translate }}</h2>
       <p class="text-lg text-stone-600 dark:text-stone-400 leading-relaxed max-w-2xl mx-auto">
-        Tarhana is an incredibly versatile pantry staple. From traditional bowls to modern kitchen
-        hacks, discover how to use it in your daily cooking.
+        {{ 'HOME_VERSATILE_DESC' | translate }}
       </p>
     </div>
 
@@ -154,9 +150,9 @@
         >
           <span class="material-icons text-primary text-3xl" aria-hidden="true">soup_kitchen</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">Soup Base</h3>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_SOUP_TITLE' | translate }}</h3>
         <p class="text-stone-600 dark:text-stone-400 text-sm">
-          The classic, comforting bowl of warmth.
+          {{ 'HOME_VERSATILE_SOUP_DESC' | translate }}
         </p>
       </div>
 
@@ -169,9 +165,9 @@
         >
           <span class="material-icons text-primary text-3xl" aria-hidden="true">restaurant</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">Sauce Thickener</h3>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_SAUCE_TITLE' | translate }}</h3>
         <p class="text-stone-600 dark:text-stone-400 text-sm">
-          Add body and umami to stews and sauces.
+          {{ 'HOME_VERSATILE_SAUCE_DESC' | translate }}
         </p>
       </div>
 
@@ -184,9 +180,9 @@
         >
           <span class="material-icons text-primary text-3xl" aria-hidden="true">rice_bowl</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">Savory Bowls</h3>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_BOWLS_TITLE' | translate }}</h3>
         <p class="text-stone-600 dark:text-stone-400 text-sm">
-          Elevate grain bowls with a savory sprinkle.
+          {{ 'HOME_VERSATILE_BOWLS_DESC' | translate }}
         </p>
       </div>
 
@@ -199,9 +195,9 @@
         >
           <span class="material-icons text-primary text-3xl" aria-hidden="true">timer</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">Quick Meal</h3>
+        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_QUICK_TITLE' | translate }}</h3>
         <p class="text-stone-600 dark:text-stone-400 text-sm">
-          A nourishing, probiotic meal in minutes.
+          {{ 'HOME_VERSATILE_QUICK_DESC' | translate }}
         </p>
       </div>
     </div>
@@ -211,7 +207,7 @@
         routerLink="/recipes"
         class="inline-block bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-all"
       >
-        Explore Recipes
+        {{ 'HOME_VERSATILE_EXPLORE' | translate }}
       </a>
     </div>
   </div>
@@ -221,9 +217,9 @@
 <section class="py-24 bg-white dark:bg-stone-900 transition-colors duration-300">
   <div class="container mx-auto px-6">
     <div class="max-w-4xl mx-auto text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">Our Products</h2>
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HOME_PRODUCTS_TITLE' | translate }}</h2>
       <p class="text-lg text-stone-600 dark:text-stone-400">
-        Choose your favorite blend and start your tarhana journey today.
+        {{ 'HOME_PRODUCTS_DESC' | translate }}
       </p>
     </div>
 
@@ -233,19 +229,19 @@
         <div class="aspect-square mb-8 flex items-center justify-center">
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk"
-            alt="Classic Tarhana"
+            [alt]="'ALT_CLASSIC' | translate"
             class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
           />
         </div>
-        <h3 class="text-2xl font-bold mb-2 text-stone-900 dark:text-white">The Classic</h3>
-        <p class="text-stone-500 dark:text-stone-400 mb-6">Traditional Anatolian fermented mix.</p>
+        <h3 class="text-2xl font-bold mb-2 text-stone-900 dark:text-white">{{ 'HOME_PRODUCTS_CLASSIC_TITLE' | translate }}</h3>
+        <p class="text-stone-500 dark:text-stone-400 mb-6">{{ 'HOME_PRODUCTS_CLASSIC_DESC' | translate }}</p>
         <div class="flex items-center justify-between">
           <span class="text-2xl font-bold text-primary">129 kr</span>
           <button
             routerLink="/checkout"
             class="bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
           >
-            Buy Now
+            {{ 'HOME_PRODUCTS_BUY' | translate }}
           </button>
         </div>
       </div>
@@ -255,19 +251,19 @@
         <div class="aspect-square mb-8 flex items-center justify-center">
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUWCV9FKFaXAHe4AEdy-tBE42DC2Lz6Mfw0LWh6MqYbDRVU7H4ed0rsC3NJCKGg2wUSYOvarCgwcIi6tPKGdaZ_veChl5pnxyljUIonEaRtsbD9h1EJG3I2i68kjGM9OppUyKRYShfBXvM-uskJM85W6GM_qQLjPdvV_apJReoAuxLAkQhB7fm8JhnrAk3U5gCq54f7B1lBX5ipvuAz1o1WhBEAdx_GhmQsHKa6MFmOsAx8tN0ipogC9I_bT3PLG-TiIZAVLeu7Qo"
-            alt="Spicy Tarhana"
+            [alt]="'ALT_SPICY' | translate"
             class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
           />
         </div>
-        <h3 class="text-2xl font-bold mb-2 text-stone-900 dark:text-white">Spicy Kick</h3>
-        <p class="text-stone-500 dark:text-stone-400 mb-6">Infused with Urfa Biber & chili.</p>
+        <h3 class="text-2xl font-bold mb-2 text-stone-900 dark:text-white">{{ 'HOME_PRODUCTS_SPICY_TITLE' | translate }}</h3>
+        <p class="text-stone-500 dark:text-stone-400 mb-6">{{ 'HOME_PRODUCTS_SPICY_DESC' | translate }}</p>
         <div class="flex items-center justify-between">
           <span class="text-2xl font-bold text-primary">135 kr</span>
           <button
             routerLink="/checkout"
             class="bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
           >
-            Buy Now
+            {{ 'HOME_PRODUCTS_BUY' | translate }}
           </button>
         </div>
       </div>
@@ -277,19 +273,19 @@
         <div class="aspect-square mb-8 flex items-center justify-center">
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC11LoM7AZrMOSq5O69PWP24hs1J3Rt9kFOOxdFRC7FlhHOaf3M1rKhY9oz3qgXqbq6ca6Dgm5_Xef4CCtwjY4zZnXxeWLaeAA24FzKupGBbZgdZfpo_3CSzhXRrvAhx8VF6QEM03Y0vZnuhrr8oR7RxpA4w2LiSa-mAtyO4TGZcKU70XEXKv2ExoEu4avT8nUfNWGJ8GGkglKvC7HxWr3xkazfni-jhBFua-4Yha3ESuxZlR1SrsoragK-pBa_kYyCrcR2g-BoJtQ"
-            alt="Whole Grain Tarhana"
+            [alt]="'ALT_WHOLE' | translate"
             class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
           />
         </div>
-        <h3 class="text-2xl font-bold mb-2 text-stone-900 dark:text-white">Whole Grain</h3>
-        <p class="text-stone-500 dark:text-stone-400 mb-6">High fiber Swedish organic grains.</p>
+        <h3 class="text-2xl font-bold mb-2 text-stone-900 dark:text-white">{{ 'HOME_PRODUCTS_WHOLE_TITLE' | translate }}</h3>
+        <p class="text-stone-500 dark:text-stone-400 mb-6">{{ 'HOME_PRODUCTS_WHOLE_DESC' | translate }}</p>
         <div class="flex items-center justify-between">
           <span class="text-2xl font-bold text-primary">149 kr</span>
           <button
             routerLink="/checkout"
             class="bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
           >
-            Buy Now
+            {{ 'HOME_PRODUCTS_BUY' | translate }}
           </button>
         </div>
       </div>
@@ -300,7 +296,7 @@
         routerLink="/products"
         class="inline-flex items-center gap-2 text-stone-900 dark:text-white font-bold text-xl hover:text-primary transition-colors border-b-2 border-primary/30 hover:border-primary pb-2"
       >
-        View All Products
+        {{ 'HOME_PRODUCTS_VIEW_ALL' | translate }}
         <span class="material-icons" aria-hidden="true">arrow_forward</span>
       </a>
     </div>

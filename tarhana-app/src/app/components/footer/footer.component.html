@@ -11,32 +11,31 @@
           >
         </a>
         <p class="text-stone-500 dark:text-stone-400 text-sm leading-relaxed">
-          Born in Anatolia, crafted in Stockholm. Bringing the ancient wisdom of fermentation to the
-          modern Swedish kitchen.
+          {{ 'FOOTER_TAGLINE' | translate }}
         </p>
       </div>
       <div>
-        <h5 class="font-bold mb-6 dark:text-white">Explore</h5>
+        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER_EXPLORE' | translate }}</h5>
         <ul class="space-y-4 text-sm text-stone-500 dark:text-stone-400">
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/products">Products</a></li>
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/recipes">Recipes</a></li>
+          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/products">{{ 'NAV_PRODUCTS' | translate }}</a></li>
+          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/recipes">{{ 'NAV_RECIPES' | translate }}</a></li>
           <li>
-            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/story">Our Story</a>
+            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/story">{{ 'NAV_STORY' | translate }}</a>
           </li>
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/health">Health & Nutrition</a></li>
+          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/health">{{ 'FOOTER_HEALTH' | translate }}</a></li>
         </ul>
       </div>
       <div>
-        <h5 class="font-bold mb-6 dark:text-white">Support</h5>
+        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER_SUPPORT' | translate }}</h5>
         <ul class="space-y-4 text-sm text-stone-500 dark:text-stone-400">
-          <li><a class="hover:text-primary transition-colors" href="#">Contact Us</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">Shipping & Returns</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">Store Locator</a></li>
+          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_CONTACT' | translate }}</a></li>
+          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_SHIPPING' | translate }}</a></li>
+          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_FAQ' | translate }}</a></li>
+          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_LOCATOR' | translate }}</a></li>
         </ul>
       </div>
       <div>
-        <h5 class="font-bold mb-6 dark:text-white">Social</h5>
+        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER_SOCIAL' | translate }}</h5>
         <div class="flex gap-4">
           <a
             class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"
@@ -62,10 +61,10 @@
     <div
       class="mt-16 pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone-400 font-medium"
     >
-      <p>© 2024 Modern Tarhana AB. Organic Certified SE-EKO-01.</p>
+      <p>{{ 'FOOTER_COPYRIGHT' | translate }}</p>
       <div class="flex gap-6">
-        <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
-        <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+        <a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_PRIVACY' | translate }}</a>
+        <a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_TERMS' | translate }}</a>
       </div>
     </div>
   </div>
