@@ -8,40 +8,37 @@
       [alt]="'ALT_TRAD_SOUP' | translate"
       class="w-full h-full object-cover scale-105 animate-fade-in"
     />
-    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
   </div>
 
   <div class="container mx-auto px-6 relative z-10 text-white">
     <div class="max-w-4xl">
-      <h1 class="text-5xl md:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up">
+      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] animate-slide-up tracking-tight">
         {{ 'HOME_HERO_TITLE' | translate }}
-        <span class="block text-2xl md:text-4xl font-light text-white/80 mt-4 tracking-wide">
+        <span class="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-white/90 mt-6 tracking-wide italic">
           {{ 'HOME_HERO_TITLE_SUPPORT' | translate }}
         </span>
       </h1>
 
-      <div
-        class="w-24 h-1 bg-primary my-8 animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
-      ></div>
-
       <p
-        class="text-xl md:text-2xl mb-12 text-white/90 font-light leading-relaxed max-w-2xl animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
+        class="text-lg md:text-xl lg:text-2xl mb-12 text-white/80 font-light leading-relaxed max-w-2xl animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
       >
         {{ 'HOME_HERO_SUBTITLE' | translate }}
       </p>
 
       <div
-        class="flex flex-col sm:flex-row gap-5 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
+        class="flex flex-col sm:flex-row gap-6 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
       >
         <a
           routerLink="/products"
-          class="bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-red-700 transition-all text-center shadow-xl hover:scale-105"
+          class="bg-primary text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-red-700 transition-all text-center shadow-lg hover:shadow-primary/20 hover:-translate-y-1 active:scale-95"
         >
           {{ 'HOME_HERO_SHOP' | translate }}
         </a>
         <a
           href="#what-is-tarhana"
-          class="bg-white/10 backdrop-blur-lg text-white border border-white/20 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all text-center hover:scale-105"
+          class="bg-white/10 backdrop-blur-md text-white border border-white/30 px-12 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all text-center hover:-translate-y-1 active:scale-95"
         >
           {{ 'HOME_HERO_DISCOVER' | translate }}
         </a>
@@ -50,7 +47,7 @@
   </div>
 
   <!-- Scroll Indicator -->
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40 hidden md:block">
     <span class="material-icons text-white text-3xl">expand_more</span>
   </div>
 </section>
