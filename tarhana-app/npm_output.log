@@ -6,105 +6,13 @@ Component HMR has been enabled, see https://angular.dev/hmr for more info.
 ❯ Building...
 ✔ Building...
 Initial chunk files | Names         |  Raw size
-main.js             | main          | 238.73 kB |
-styles.css          | styles        |  41.71 kB |
+main.js             | main          | 242.51 kB |
+styles.css          | styles        |  44.03 kB |
 
-                    | Initial total | 280.44 kB
+                    | Initial total | 286.54 kB
 
-Application bundle generation complete. [3.201 seconds]
+Application bundle generation complete. [3.529 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
   ➜  Local:   http://localhost:4200/
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names         |  Raw size
-main.js             | main          | 238.73 kB |
-styles.css          | styles        |  41.71 kB |
-
-                    | Initial total | 280.44 kB
-
-Application bundle generation complete. [0.011 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names         |  Raw size
-main.js             | main          | 238.73 kB |
-styles.css          | styles        |  41.71 kB |
-
-                    | Initial total | 280.44 kB
-
-Application bundle generation complete. [0.006 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names |  Raw size
-main.js             | main  | 239.12 kB |
-
-Application bundle generation complete. [1.241 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names |  Raw size
-main.js             | main  | 239.80 kB |
-
-Application bundle generation complete. [0.873 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names |  Raw size
-main.js             | main  | 240.28 kB |
-
-Application bundle generation complete. [0.257 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names |  Raw size
-main.js             | main  | 241.46 kB |
-
-Application bundle generation complete. [0.307 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names |  Raw size
-main.js             | main  | 241.97 kB |
-
-Application bundle generation complete. [0.254 seconds]
-
-Component update sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names         |  Raw size
-main.js             | main          | 241.97 kB |
-styles.css          | styles        |  41.71 kB |
-
-                    | Initial total | 283.68 kB
-
-Application bundle generation complete. [0.007 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names         |  Raw size
-main.js             | main          | 241.97 kB |
-styles.css          | styles        |  41.71 kB |
-
-                    | Initial total | 283.68 kB
-
-Application bundle generation complete. [0.005 seconds]
-
-Page reload sent to client(s).
-❯ Changes detected. Rebuilding...
-✔ Changes detected. Rebuilding...
-Initial chunk files | Names |  Raw size
-main.js             | main  | 242.06 kB |
-
-Application bundle generation complete. [0.258 seconds]
-
-Component update sent to client(s).
