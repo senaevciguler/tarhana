@@ -19,7 +19,7 @@ describe('HomeComponent', () => {
             translate: (key: string) => {
               const mockTranslations: Record<string, string> = {
                 'HOME_HERO_TITLE': 'Traditional Tarhana — Now Crafted in Sweden',
-                'HOME_VERSATILE_TITLE': 'Not only soup!'
+                'HOME_VERSATILE_TITLE': 'More than soup',
               };
               return mockTranslations[key] || key;
             },
@@ -46,10 +46,10 @@ describe('HomeComponent', () => {
     );
   });
 
-  it('should display the Not only soup section', () => {
+  it('should display the More than soup section', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const headings = Array.from(compiled.querySelectorAll('h2'));
-    const hasNotOnlySoup = headings.some((h) => h.textContent?.includes('Not only soup!'));
-    expect(hasNotOnlySoup).toBeTrue();
+    const hasMoreThanSoup = headings.some((h) => h.textContent?.includes('More than soup'));
+    expect(hasMoreThanSoup).toBeTrue();
   });
 });
