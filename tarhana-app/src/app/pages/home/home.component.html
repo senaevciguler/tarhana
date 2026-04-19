@@ -1,38 +1,57 @@
 <app-navbar></app-navbar>
 <!-- Hero Section -->
-<section class="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
+<section class="relative h-[90vh] min-h-[700px] flex items-center overflow-hidden">
+  <!-- Background with Subtle Animation -->
   <div class="absolute inset-0 z-0">
     <img
       src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5-2ayecpbe09k2Uly6QQT6AgIaSIKqBCn3IfZrvVWGXccIRBEnzPL55HSD0Tyx0n_g_2Xo8zyQG6gdT_2u0dPBGgh5qvzhdnm_RA083Dzd4umscuS2GYbTDEU8b4i73M-lqoV9SK-qT7RgXV5klf4Y60F-G89CaZbXk5WWhbeswiTGjQNPI6rorFGlZv1NHxhRTWxy_Iq4a0aZo51Ct5UoQfVfKmwR7S9r0BWdztkOzRFG0R01voPepR_Dy-jCd3AjEwnIkUKIr8"
       [alt]="'ALT_TRAD_SOUP' | translate"
-      class="w-full h-full object-cover"
+      class="w-full h-full object-cover scale-105 animate-fade-in"
     />
-    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
   </div>
 
   <div class="container mx-auto px-6 relative z-10 text-white">
-    <div class="max-w-3xl">
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+    <div class="max-w-4xl">
+      <h1 class="text-5xl md:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up">
         {{ 'HOME_HERO_TITLE' | translate }}
+        <span class="block text-2xl md:text-4xl font-light text-white/80 mt-4 tracking-wide">
+          {{ 'HOME_HERO_TITLE_SUPPORT' | translate }}
+        </span>
       </h1>
-      <p class="text-xl md:text-2xl mb-10 opacity-90 leading-relaxed">
+
+      <div
+        class="w-24 h-1 bg-primary my-8 animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
+      ></div>
+
+      <p
+        class="text-xl md:text-2xl mb-12 text-white/90 font-light leading-relaxed max-w-2xl animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
+      >
         {{ 'HOME_HERO_SUBTITLE' | translate }}
       </p>
-      <div class="flex flex-col sm:flex-row gap-4">
+
+      <div
+        class="flex flex-col sm:flex-row gap-5 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
+      >
         <a
           routerLink="/products"
-          class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-all text-center"
+          class="bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-red-700 transition-all text-center shadow-xl hover:scale-105"
         >
           {{ 'HOME_HERO_SHOP' | translate }}
         </a>
         <a
           href="#what-is-tarhana"
-          class="bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/30 transition-all text-center"
+          class="bg-white/10 backdrop-blur-lg text-white border border-white/20 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all text-center hover:scale-105"
         >
           {{ 'HOME_HERO_DISCOVER' | translate }}
         </a>
       </div>
     </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
+    <span class="material-icons text-white text-3xl">expand_more</span>
   </div>
 </section>
 
