@@ -56,38 +56,35 @@
 </section>
 
 <!-- What is Tarhana Section -->
-<section id="what-is-tarhana" class="py-24 bg-background-light dark:bg-background-dark transition-colors duration-300">
+<section id="what-is-tarhana" class="py-32 bg-white dark:bg-stone-900 transition-colors duration-300">
   <div class="container mx-auto px-6">
-    <div class="max-w-4xl mx-auto text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HOME_WHAT_IS_TITLE' | translate }}</h2>
-      <p class="text-lg text-stone-600 dark:text-stone-400 leading-relaxed">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-stone-900 dark:text-white">
+        {{ 'HOME_WHAT_IS_TITLE' | translate }}
+      </h2>
+      <p class="text-xl md:text-2xl font-light text-stone-600 dark:text-stone-400 leading-relaxed mb-16">
         {{ 'HOME_WHAT_IS_DESC' | translate }}
       </p>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-      <div class="text-center group">
-        <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">history</span>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+        <div class="flex items-center gap-3">
+          <div class="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true"></div>
+          <span class="text-lg font-medium text-stone-900 dark:text-white tracking-wide">
+            {{ 'HOME_WHAT_IS_POINT1' | translate }}
+          </span>
         </div>
-        <h3 class="text-xl font-bold mb-4 dark:text-white">{{ 'HOME_WHAT_IS_TRAD_TITLE' | translate }}</h3>
-        <p class="text-stone-600 dark:text-stone-400">{{ 'HOME_WHAT_IS_TRAD_DESC' | translate }}</p>
-      </div>
-
-      <div class="text-center group">
-        <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">eco</span>
+        <div class="flex items-center gap-3">
+          <div class="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true"></div>
+          <span class="text-lg font-medium text-stone-900 dark:text-white tracking-wide">
+            {{ 'HOME_WHAT_IS_POINT2' | translate }}
+          </span>
         </div>
-        <h3 class="text-xl font-bold mb-4 dark:text-white">{{ 'HOME_WHAT_IS_CLEAN_TITLE' | translate }}</h3>
-        <p class="text-stone-600 dark:text-stone-400">{{ 'HOME_WHAT_IS_CLEAN_DESC' | translate }}</p>
-      </div>
-
-      <div class="text-center group">
-        <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-colors">
-          <span class="material-icons text-primary group-hover:text-white transition-colors text-3xl" aria-hidden="true">timer</span>
+        <div class="flex items-center gap-3">
+          <div class="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true"></div>
+          <span class="text-lg font-medium text-stone-900 dark:text-white tracking-wide">
+            {{ 'HOME_WHAT_IS_POINT3' | translate }}
+          </span>
         </div>
-        <h3 class="text-xl font-bold mb-4 dark:text-white">{{ 'HOME_WHAT_IS_READY_TITLE' | translate }}</h3>
-        <p class="text-stone-600 dark:text-stone-400">{{ 'HOME_WHAT_IS_READY_DESC' | translate }}</p>
       </div>
     </div>
   </div>
