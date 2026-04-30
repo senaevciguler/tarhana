@@ -1,55 +1,103 @@
 <app-navbar></app-navbar>
 <div class="bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300">
   <main class="max-w-7xl mx-auto px-6 py-12">
-    <section class="max-w-4xl mx-auto py-12">
-      <div class="text-center mb-16">
-        <h1 class="text-5xl font-bold leading-tight text-stone-900 dark:text-white mb-6">{{ 'HEALTH_TITLE' | translate }}</h1>
-        <p class="text-xl text-stone-600 dark:text-stone-400">
-          {{ 'HEALTH_SUBTITLE' | translate }}
-        </p>
+    <!-- Hero Section -->
+    <section class="max-w-4xl mx-auto py-12 md:py-24 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold leading-tight text-stone-900 dark:text-white mb-8">
+        {{ 'HEALTH_TITLE' | translate }}
+      </h1>
+      <p class="text-xl md:text-2xl text-stone-600 dark:text-stone-400 font-light leading-relaxed">
+        {{ 'HEALTH_SUBTITLE' | translate }}
+      </p>
+    </section>
+
+    <!-- Section 1: What's inside -->
+    <section class="max-w-5xl mx-auto py-16 border-t border-stone-100 dark:border-stone-800">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HEALTH_INSIDE_TITLE' | translate }}</h2>
+          <p class="text-lg text-stone-600 dark:text-stone-400 leading-relaxed mb-8">
+            {{ 'HEALTH_INSIDE_COPY' | translate }}
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-stone-100 dark:bg-stone-900 rounded-full text-sm font-medium border border-stone-200 dark:border-stone-800">
+              {{ 'HEALTH_INGREDIENT_YOGURT' | translate }}
+            </span>
+            <span class="px-4 py-2 bg-stone-100 dark:bg-stone-900 rounded-full text-sm font-medium border border-stone-200 dark:border-stone-800">
+              {{ 'HEALTH_INGREDIENT_GRAINS' | translate }}
+            </span>
+            <span class="px-4 py-2 bg-stone-100 dark:bg-stone-900 rounded-full text-sm font-medium border border-stone-200 dark:border-stone-800">
+              {{ 'HEALTH_INGREDIENT_TOMATO' | translate }}
+            </span>
+            <span class="px-4 py-2 bg-stone-100 dark:bg-stone-900 rounded-full text-sm font-medium border border-stone-200 dark:border-stone-800">
+              {{ 'HEALTH_INGREDIENT_PEPPER' | translate }}
+            </span>
+            <span class="px-4 py-2 bg-stone-100 dark:bg-stone-900 rounded-full text-sm font-medium border border-stone-200 dark:border-stone-800">
+              {{ 'HEALTH_INGREDIENT_CHICKPEAS' | translate }}
+            </span>
+            <span class="px-4 py-2 bg-stone-100 dark:bg-stone-900 rounded-full text-sm font-medium border border-stone-200 dark:border-stone-800">
+              {{ 'HEALTH_INGREDIENT_MINT' | translate }}
+            </span>
+            <span class="px-4 py-2 bg-stone-100 dark:bg-stone-900 rounded-full text-sm font-medium border border-stone-200 dark:border-stone-800">
+              {{ 'HEALTH_INGREDIENT_THYME' | translate }}
+            </span>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1598449426314-8b02525e89b3?auto=format&fit=crop&q=80&w=1200"
+               [alt]="'ALT_RUSTIC_INGREDIENTS' | translate"
+               class="w-full h-96 object-cover">
+        </div>
       </div>
+    </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        <div class="bg-white dark:bg-stone-900 p-8 rounded-2xl shadow-sm border border-stone-100 dark:border-stone-800">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
-            <span class="material-icons">biotech</span>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 dark:text-white">{{ 'HEALTH_PROB_TITLE' | translate }}</h3>
-          <p class="text-stone-600 dark:text-stone-400 leading-relaxed">
-            {{ 'HEALTH_PROB_DESC' | translate }}
-          </p>
+    <!-- Section 2: Why fermentation matters -->
+    <section class="max-w-4xl mx-auto py-24 text-center">
+      <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-8">
+        <span class="material-icons" aria-hidden="true">restaurant</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HEALTH_WHY_FERM_TITLE' | translate }}</h2>
+      <p class="text-xl text-stone-600 dark:text-stone-400 font-light leading-relaxed max-w-2xl mx-auto">
+        {{ 'HEALTH_WHY_FERM_COPY' | translate }}
+      </p>
+    </section>
+
+    <!-- Section 3: Simple by design -->
+    <section class="max-w-6xl mx-auto py-24 border-y border-stone-100 dark:border-stone-800">
+      <h2 class="text-3xl font-bold mb-12 text-center text-stone-900 dark:text-white">{{ 'HEALTH_SIMPLE_TITLE' | translate }}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="p-8 rounded-2xl bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800 shadow-sm">
+          <span class="material-icons text-primary mb-4" aria-hidden="true">clean_hands</span>
+          <h3 class="text-xl font-bold mb-3 dark:text-white">{{ 'HEALTH_SIMPLE_CARD1_TITLE' | translate }}</h3>
+          <p class="text-stone-600 dark:text-stone-400">{{ 'HEALTH_SIMPLE_CARD1_TEXT' | translate }}</p>
         </div>
-
-        <div class="bg-white dark:bg-stone-900 p-8 rounded-2xl shadow-sm border border-stone-100 dark:border-stone-800">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
-            <span class="material-icons">fitness_center</span>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 dark:text-white">{{ 'HEALTH_PROT_TITLE' | translate }}</h3>
-          <p class="text-stone-600 dark:text-stone-400 leading-relaxed">
-            {{ 'HEALTH_PROT_DESC' | translate }}
-          </p>
+        <div class="p-8 rounded-2xl bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800 shadow-sm">
+          <span class="material-icons text-primary mb-4" aria-hidden="true">inventory_2</span>
+          <h3 class="text-xl font-bold mb-3 dark:text-white">{{ 'HEALTH_SIMPLE_CARD2_TITLE' | translate }}</h3>
+          <p class="text-stone-600 dark:text-stone-400">{{ 'HEALTH_SIMPLE_CARD2_TEXT' | translate }}</p>
         </div>
-
-        <div class="bg-white dark:bg-stone-900 p-8 rounded-2xl shadow-sm border border-stone-100 dark:border-stone-800">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
-            <span class="material-icons">eco</span>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 dark:text-white">{{ 'HEALTH_CLEAN_TITLE' | translate }}</h3>
-          <p class="text-stone-600 dark:text-stone-400 leading-relaxed">
-            {{ 'HEALTH_CLEAN_DESC' | translate }}
-          </p>
+        <div class="p-8 rounded-2xl bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800 shadow-sm">
+          <span class="material-icons text-primary mb-4" aria-hidden="true">auto_awesome</span>
+          <h3 class="text-xl font-bold mb-3 dark:text-white">{{ 'HEALTH_SIMPLE_CARD3_TITLE' | translate }}</h3>
+          <p class="text-stone-600 dark:text-stone-400">{{ 'HEALTH_SIMPLE_CARD3_TEXT' | translate }}</p>
         </div>
-
-        <div class="bg-white dark:bg-stone-900 p-8 rounded-2xl shadow-sm border border-stone-100 dark:border-stone-800">
-          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
-            <span class="material-icons">history</span>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 dark:text-white">{{ 'HEALTH_SLOW_TITLE' | translate }}</h3>
-          <p class="text-stone-600 dark:text-stone-400 leading-relaxed">
-            {{ 'HEALTH_SLOW_DESC' | translate }}
-          </p>
+        <div class="p-8 rounded-2xl bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800 shadow-sm">
+          <span class="material-icons text-primary mb-4" aria-hidden="true">timer</span>
+          <h3 class="text-xl font-bold mb-3 dark:text-white">{{ 'HEALTH_SIMPLE_CARD4_TITLE' | translate }}</h3>
+          <p class="text-stone-600 dark:text-stone-400">{{ 'HEALTH_SIMPLE_CARD4_TEXT' | translate }}</p>
         </div>
       </div>
+    </section>
+
+    <!-- Section 4: Nutrition information -->
+    <section class="max-w-3xl mx-auto py-24 text-center">
+      <h2 class="text-3xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HEALTH_NUTRITION_TITLE' | translate }}</h2>
+      <p class="text-lg text-stone-600 dark:text-stone-400 mb-4">
+        {{ 'HEALTH_NUTRITION_COPY' | translate }}
+      </p>
+      <p class="text-sm text-stone-500 dark:text-stone-500 italic">
+        {{ 'HEALTH_NUTRITION_NOTE' | translate }}
+      </p>
     </section>
   </main>
 </div>
