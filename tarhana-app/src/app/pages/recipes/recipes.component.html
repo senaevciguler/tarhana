@@ -7,7 +7,7 @@
         <img
           [alt]="'ALT_TRAD_SOUP' | translate"
           class="w-full h-full object-cover"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5-2ayecpbe09k2Uly6QQT6AgIaSIKqBCn3IfZrvVWGXccIRBEnzPL55HSD0Tyx0n_g_2Xo8zyQG6gdT_2u0dPBGgh5qvzhdnm_RA083Dzd4umscuS2GYbTDEU8b4i73M-lqoV9SK-qT7RgXV5klf4Y60F-G89CaZbXk5WWhbeswiTGjQNPI6rorFGlZv1NHxhRTWxy_Iq4a0aZo51Ct5UoQfVfKmwR7S9r0BWdztkOzRFG0R01voPepR_Dy-jCd3AjEwnIkUKIr8"
+          src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=1200"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
         <div class="absolute bottom-6 left-6">
@@ -21,7 +21,7 @@
         <div
           class="flex items-center gap-2 text-primary font-bold tracking-widest text-sm uppercase"
         >
-          <span class="material-icons text-sm">auto_awesome</span>
+          <span class="material-icons text-sm">restaurant</span>
           {{ 'RECIPES_FUSION_TAG' | translate }}
         </div>
         <h1 class="text-5xl font-bold leading-tight text-stone-900 dark:text-white">
@@ -33,7 +33,7 @@
         <div class="flex items-center gap-6 py-4 dark:text-stone-300">
           <div class="flex items-center gap-2">
             <span class="material-icons text-primary/60">schedule</span>
-            <span class="font-medium">{{ 'RECIPES_TIME_20' | translate }}</span>
+            <span class="font-medium">{{ 'RECIPES_TIME_10' | translate }}</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="material-icons text-primary/60">bar_chart</span>
@@ -48,6 +48,7 @@
         </button>
       </div>
     </section>
+
     <!-- Filters -->
     <div class="flex flex-wrap items-center justify-between gap-6 mb-12">
       <div class="flex gap-3 overflow-x-auto pb-2">
@@ -57,17 +58,17 @@
         <button
           class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
         >
+          {{ 'RECIPES_FILTER_SOUPS' | translate }}
+        </button>
+        <button
+          class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
+        >
           {{ 'RECIPES_FILTER_QUICK' | translate }}
         </button>
         <button
           class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
         >
-          {{ 'RECIPES_FILTER_SNACKS' | translate }}
-        </button>
-        <button
-          class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
-        >
-          {{ 'RECIPES_FILTER_VEGAN' | translate }}
+          {{ 'RECIPES_FILTER_SAUCES_BOWLS' | translate }}
         </button>
       </div>
       <div class="flex items-center gap-2 text-stone-500 dark:text-stone-400 font-medium">
@@ -75,227 +76,177 @@
         <span>{{ 'RECIPES_SORT_BY' | translate }}</span>
       </div>
     </div>
-    <div class="flex flex-col lg:flex-row gap-12">
-      <!-- Recipe Grid -->
-      <div class="lg:w-3/4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Card 1 -->
+
+    <!-- Recipe Grid (Full Width) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+      <!-- Card 1: Classic Tarhana Soup -->
+      <div
+        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
+      >
+        <div class="h-48 overflow-hidden relative">
+          <img
+            [alt]="'RECIPES_CARD1_TITLE' | translate"
+            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=600"
+          />
           <div
-            class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
+            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
           >
-            <div class="h-64 overflow-hidden relative">
-              <img
-                [alt]="'ALT_PASTA_SAUCE' | translate"
-                class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh2D2y6nO8BGcOh50AjcYYu6L2Qo5lU6ztEKarEIfxksQFtUUwcKHPhrJ-vATgg_n6qKiC-4TgpMuwErKOZCngG_OCSF1LfN3oL-xznWnd5CE_p73pYXSDiTjAJPy73Csl8sv3AZt0FYecK0liQms5gTZ4ohUejf6ipqKvim5NVcUQIZ78pihkfqdhE6pqVyzd-KcS3GF71XRVt2BlnmitSTV6EeXmL8jF-Khtz4XIcB5OocG5fN8p-PcwTgIktyJRLFM0aPGcWrY"
-              />
-              <div
-                class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-              >
-                <span class="material-icons text-[14px] text-primary">bolt</span> 15 MINS
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES_CARD1_TITLE' | translate }}
-              </h3>
-              <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES_CARD1_DESC' | translate }}
-              </p>
-              <div class="flex items-center justify-between mt-auto">
-                <div class="flex items-center gap-1 text-primary">
-                  <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
-                </div>
-                <a
-                  class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES_SHOP_BASE' | translate }}</a
-                >
-              </div>
-            </div>
+            <span class="material-icons text-[14px] text-primary">bolt</span>
+            {{ 'RECIPES_TIME_10' | translate }}
           </div>
-          <!-- Card 2 -->
-          <div
-            class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
-          >
-            <div class="h-64 overflow-hidden relative">
-              <img
-                [alt]="'ALT_CRACKERS' | translate"
-                class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8dMsJSP0quu_piRFxc0jxKkA4ZO3cKaohnBObq6Amptw1F5rLZRhUWBbOmSTGyG32eRbH5NfOiQIlvO6hI0qW0FKJo4UvAfxiV8QFK4cpyd1gNiAOlA1EK22JIF5uA6dUeXy1Yw75LsIT8zqP7XcRzTBMl2VCoZxrlyysOHCVv5Lq41Id_podzRM5AehQV8gea4WfN9AkUwvRAhPFDu__m1T2hQJfz3VJakEiK6HHQ7O919PHzRCEGc05T0pnrfMwkLuEc_5RFAI"
-              />
-              <div
-                class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-              >
-                <span class="material-icons text-[14px] text-primary">timer</span> 45 MINS
-              </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
+            {{ 'RECIPES_CARD1_TITLE' | translate }}
+          </h3>
+          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
+            {{ 'RECIPES_CARD1_DESC' | translate }}
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+            <div class="flex items-center gap-1 text-primary">
+              <span class="material-icons text-sm">signal_cellular_alt</span>
+              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
             </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES_CARD2_TITLE' | translate }}
-              </h3>
-              <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES_CARD2_DESC' | translate }}
-              </p>
-              <div class="flex items-center justify-between mt-auto">
-                <div class="flex items-center gap-1 text-primary">
-                  <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_MEDIUM' | translate }}</span>
-                </div>
-                <a
-                  class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES_SHOP_BASE' | translate }}</a
-                >
-              </div>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div
-            class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
-          >
-            <div class="h-64 overflow-hidden relative">
-              <img
-                [alt]="'ALT_DIP' | translate"
-                class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG2Ffcu9uSeXrnVGWe3XRUPrkLHMQCTDEzvoK6SlJAKxVsfre14XpW0K1Ri6Cq39FLw38rkMRgpTgVY1mIpCjzp2n00CvIffNrkZv673ssZM44iZaE593XB33t5J9Eb73kgb1IVYfcIVrbWd8j-Lh0kgNSNaddTZkn-wxLkB5GStTyStVrkHSteRLUJVYxO3z3uVznEvc_d-Zipdx2aznqbqZGKA-ZZmAelrRCR8Vl119tcsAUG1uvheOFYQmBbV66Xwp9UI7L35Q"
-              />
-              <div
-                class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-              >
-                <span class="material-icons text-[14px] text-primary">bolt</span> 10 MINS
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES_CARD3_TITLE' | translate }}
-              </h3>
-              <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES_CARD3_DESC' | translate }}
-              </p>
-              <div class="flex items-center justify-between mt-auto">
-                <div class="flex items-center gap-1 text-primary">
-                  <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_SUPER_EASY' | translate }}</span>
-                </div>
-                <a
-                  class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES_SHOP_BASE' | translate }}</a
-                >
-              </div>
-            </div>
-          </div>
-          <!-- Card 4 -->
-          <div
-            class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
-          >
-            <div class="h-64 overflow-hidden relative">
-              <img
-                [alt]="'ALT_SALAD_TOPPING' | translate"
-                class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuASoieUY8iVvh16RZH7aZkmmu8u6UtAr1IcrkYg57uOT4syy0NT9IucQGcs-bL9AGFOWCjvZ7UOVmljyaquTIzAu9Ij9lIfl1ZYcTbdURJiRYmBPiAIzx3B0NE1k5Jt8R9jzoHBgvSOqCBthmheX6U_sRUnEN894TVG7XkQcAIcFEpoShGjutb5lqQSOYuE3LxMUgtoBbCJL8N1k-EVZuGK4l0nEOVWUjpq5V54CjC5T-4vE4x9zqcBhnF3tltJ0EqxEnjJLAHy5Nw"
-              />
-              <div
-                class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-              >
-                <span class="material-icons text-[14px] text-primary">bolt</span> 5 MINS
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-                {{ 'RECIPES_CARD4_TITLE' | translate }}
-              </h3>
-              <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-                {{ 'RECIPES_CARD4_DESC' | translate }}
-              </p>
-              <div class="flex items-center justify-between mt-auto">
-                <div class="flex items-center gap-1 text-primary">
-                  <span class="material-icons text-sm">signal_cellular_alt</span>
-                  <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
-                </div>
-                <a
-                  class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-                  href="#"
-                  >{{ 'RECIPES_SHOP_BASE' | translate }}</a
-                >
-              </div>
-            </div>
+            <a
+              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
+              href="#"
+              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
+            >
           </div>
         </div>
       </div>
-      <!-- Sidebar -->
-      <aside class="lg:w-1/4">
-        <div class="sticky top-32 space-y-8">
-          <!-- The Fermentation Lab -->
-          <div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-8 border border-primary/10">
-            <div class="flex items-center gap-2 text-primary font-bold mb-6">
-              <span class="material-icons">biotech</span>
-              <span class="uppercase tracking-widest text-sm">{{ 'RECIPES_LAB_TAG' | translate }}</span>
-            </div>
-            <h4 class="text-2xl font-bold mb-4 dark:text-white">{{ 'RECIPES_LAB_TITLE' | translate }}</h4>
-            <ul class="space-y-4 text-sm font-medium dark:text-stone-300">
-              <li class="flex gap-3">
-                <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES_LAB_POINT1' | translate }}</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES_LAB_POINT2' | translate }}</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES_LAB_POINT3' | translate }}</span>
-              </li>
-              <li class="flex gap-3">
-                <span class="material-icons text-primary text-sm mt-1">check_circle</span>
-                <span>{{ 'RECIPES_LAB_POINT4' | translate }}</span>
-              </li>
-            </ul>
-          </div>
-          <!-- Newsletter -->
-          <div class="bg-stone-900 text-white rounded-xl p-8 overflow-hidden relative">
-            <div class="relative z-10">
-              <h4 class="text-xl font-bold mb-2">{{ 'RECIPES_NEWS_TITLE' | translate }}</h4>
-              <p class="text-stone-400 text-sm mb-6">
-                {{ 'RECIPES_NEWS_DESC' | translate }}
-              </p>
-              <input
-                class="w-full bg-stone-800 border-stone-700 rounded-lg py-3 px-4 text-sm mb-3 focus:ring-primary focus:border-primary"
-                [placeholder]="'RECIPES_NEWS_PLACEHOLDER' | translate"
-                type="email"
-              />
-              <button
-                class="w-full bg-primary text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity"
-              >
-                {{ 'RECIPES_NEWS_SUB' | translate }}
-              </button>
-            </div>
-            <div
-              class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"
-            ></div>
-          </div>
-          <!-- Instagram Feed Placeholder -->
-          <div class="grid grid-cols-2 gap-2">
-            <div class="aspect-square bg-stone-200 dark:bg-stone-800 rounded overflow-hidden">
-              <img
-                [alt]="'ALT_FOOD_PHOTO' | translate"
-                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmDmwRDOghMA9jWSk6JBuqHR0FPu-4b-VPjX81S824aZ49uzTN0EFkf6N_wDM70uftT4T5zADwkQ4UmtW03i75Sgp2SH6Wm5IajXP7BDJQr-pl6-eZsrt7ofF3MEPcXdj04DI4eE-mPFScg5qOaGiJIuoZi_FnrY4cf1mmi5CHNMSAssEFnTkmknsQyb0ODZHCmzEejIE-VBW36azm_4s6ZQv29Vuf40SHXXm-nxcKFBq_EapLdwF8o7jQ7UtNGPYpY4QaxNjuxFo"
-              />
-            </div>
-            <div class="aspect-square bg-stone-200 dark:bg-stone-800 rounded overflow-hidden">
-              <img
-                [alt]="'ALT_RUSTIC_INGREDIENTS' | translate"
-                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all cursor-pointer"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuARG4awBtlA8xRSu0ULowai0m3n6XEoVNk7bMSGlm3hvFUuEtQMJCo9n-KzjvzPEzQ55ZFD2TMXNfEjuEy0py8ngxSL2mIKlrM1-WWrugH2t5-TG_8nMoriF_Lxy6fmfmYWq2B5JlhTEnfstUYBqjBGb5BS4_UeADB8mfCsptc2z7lVmcETKgp14ZA1BKXtNK-c9sYw59-ens9khU0CZhcxzl5xjLic2D3nzchhMW-htPXc9iHiutXZWEOsTrturTeRaxJW8gfyXR0"
-              />
-            </div>
+
+      <!-- Card 2: Creamy Tarhana Soup -->
+      <div
+        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
+      >
+        <div class="h-48 overflow-hidden relative">
+          <img
+            [alt]="'RECIPES_CARD2_TITLE' | translate"
+            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            src="https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&q=80&w=600"
+          />
+          <div
+            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
+          >
+            <span class="material-icons text-[14px] text-primary">bolt</span>
+            {{ 'RECIPES_TIME_10' | translate }}
           </div>
         </div>
-      </aside>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
+            {{ 'RECIPES_CARD2_TITLE' | translate }}
+          </h3>
+          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
+            {{ 'RECIPES_CARD2_DESC' | translate }}
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+            <div class="flex items-center gap-1 text-primary">
+              <span class="material-icons text-sm">signal_cellular_alt</span>
+              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
+            </div>
+            <a
+              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
+              href="#"
+              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Vegetable Broth Tarhana -->
+      <div
+        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
+      >
+        <div class="h-48 overflow-hidden relative">
+          <img
+            [alt]="'RECIPES_CARD3_TITLE' | translate"
+            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=600"
+          />
+          <div
+            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
+          >
+            <span class="material-icons text-[14px] text-primary">timer</span>
+            {{ 'RECIPES_TIME_15' | translate }}
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
+            {{ 'RECIPES_CARD3_TITLE' | translate }}
+          </h3>
+          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
+            {{ 'RECIPES_CARD3_DESC' | translate }}
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+            <div class="flex items-center gap-1 text-primary">
+              <span class="material-icons text-sm">signal_cellular_alt</span>
+              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
+            </div>
+            <a
+              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
+              href="#"
+              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Tarhana Sauce Base -->
+      <div
+        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
+      >
+        <div class="h-48 overflow-hidden relative">
+          <img
+            [alt]="'RECIPES_CARD4_TITLE' | translate"
+            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&q=80&w=600"
+          />
+          <div
+            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
+          >
+            <span class="material-icons text-[14px] text-primary">timer</span>
+            {{ 'RECIPES_TIME_15' | translate }}
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
+            {{ 'RECIPES_CARD4_TITLE' | translate }}
+          </h3>
+          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
+            {{ 'RECIPES_CARD4_DESC' | translate }}
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+            <div class="flex items-center gap-1 text-primary">
+              <span class="material-icons text-sm">signal_cellular_alt</span>
+              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
+            </div>
+            <a
+              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
+              href="#"
+              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Bottom CTA Section -->
+    <section class="bg-stone-100 dark:bg-stone-900 rounded-2xl p-12 text-center max-w-4xl mx-auto border border-stone-200 dark:border-stone-800">
+      <h2 class="text-3xl font-bold mb-4 text-stone-900 dark:text-white">
+        {{ 'RECIPES_CTA_TITLE' | translate }}
+      </h2>
+      <p class="text-lg text-stone-600 dark:text-stone-400 mb-8 max-w-2xl mx-auto">
+        {{ 'RECIPES_CTA_TEXT' | translate }}
+      </p>
+      <a
+        routerLink="/products"
+        class="inline-block bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all"
+      >
+        {{ 'RECIPES_CTA_BUTTON' | translate }}
+      </a>
+    </section>
   </main>
 </div>
 <app-footer></app-footer>
