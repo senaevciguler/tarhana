@@ -1,83 +1,150 @@
 <app-navbar></app-navbar>
-<div class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
-  <main class="py-16">
+
+<div class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300 min-h-screen">
+  <main class="py-16 lg:py-24">
+    <!-- Header & Intro -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 lg:mb-24">
+      <h1 class="text-4xl lg:text-5xl font-light mb-6">{{ 'PRODUCTS_TITLE' | translate }}</h1>
+      <p class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 font-light max-w-2xl mx-auto">
+        {{ 'PRODUCTS_INTRO' | translate }}
+      </p>
+    </section>
+
     <!-- Product Grid -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Product Card 1 -->
-        <div class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm">
-          <div class="relative aspect-square mb-6 flex items-center justify-center">
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 lg:mb-32">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Product Card 1: Original -->
+        <div class="group flex flex-col bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all p-8 border border-slate-100 dark:border-zinc-800">
+          <div class="relative aspect-square mb-8 flex items-center justify-center bg-slate-50 dark:bg-zinc-800/50 rounded-xl">
             <img
-              [alt]="'ALT_CLASSIC_POUCH' | translate"
-              class="product-image w-full h-full object-contain transition-transform duration-500"
+              [alt]="'ALT_ORIGINAL_POUCH' | translate"
+              class="w-3/4 h-3/4 object-contain transition-transform duration-500 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk"
             />
           </div>
           <div class="flex flex-col flex-grow">
-            <div class="flex justify-between items-start mb-2">
-              <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ 'HOME_PRODUCTS_CLASSIC_TITLE' | translate }}</h3>
-              <span class="text-xl font-bold text-primary">129 kr</span>
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{{ 'PRODUCT_ORIGINAL_TITLE' | translate }}</h3>
+              <span class="text-2xl font-bold text-primary">{{ 'PRODUCT_PRICE_ORIGINAL' | translate }}</span>
             </div>
-            <p class="text-sm text-slate-500 mb-6">{{ 'HOME_PRODUCTS_CLASSIC_DESC' | translate }}</p>
+
+            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light">
+              {{ 'PRODUCT_ORIGINAL_DESC' | translate }}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">{{ 'PRODUCT_BADGE_FERMENTED' | translate }}</span>
+              <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">{{ 'PRODUCT_BADGE_READY' | translate }}</span>
+              <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">{{ 'PRODUCT_BADGE_NO_ADDITIVES' | translate }}</span>
+            </div>
+
+            <div class="space-y-2 mb-8 text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-zinc-800 pt-6">
+              <p>{{ 'PRODUCT_DETAIL_WEIGHT' | translate }}</p>
+              <p>{{ 'PRODUCT_DETAIL_VARIANT_WITH_SALT' | translate }}</p>
+            </div>
+
             <button
               routerLink="/checkout"
-              class="mt-auto w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2"
+              class="mt-auto w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
             >
               <span class="material-icons text-lg">shopping_cart</span>
-              {{ 'HOME_PRODUCTS_BUY' | translate }}
+              {{ 'PRODUCT_ADD_TO_CART' | translate }}
             </button>
           </div>
         </div>
-        <!-- Product Card 2 -->
-        <div class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm">
-          <div class="relative aspect-square mb-6 flex items-center justify-center">
+
+        <!-- Product Card 2: Unsalted -->
+        <div class="group flex flex-col bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all p-8 border border-slate-100 dark:border-zinc-800">
+          <div class="relative aspect-square mb-8 flex items-center justify-center bg-slate-50 dark:bg-zinc-800/50 rounded-xl">
             <img
-              [alt]="'ALT_SPICY_POUCH' | translate"
-              class="product-image w-full h-full object-contain transition-transform duration-500"
+              [alt]="'ALT_UNSALTED_POUCH' | translate"
+              class="w-3/4 h-3/4 object-contain transition-transform duration-500 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUWCV9FKFaXAHe4AEdy-tBE42DC2Lz6Mfw0LWh6MqYbDRVU7H4ed0rsC3NJCKGg2wUSYOvarCgwcIi6tPKGdaZ_veChl5pnxyljUIonEaRtsbD9h1EJG3I2i68kjGM9OppUyKRYShfBXvM-uskJM85W6GM_qQLjPdvV_apJReoAuxLAkQhB7fm8JhnrAk3U5gCq54f7B1lBX5ipvuAz1o1WhBEAdx_GhmQsHKa6MFmOsAx8tN0ipogC9I_bT3PLG-TiIZAVLeu7Qo"
             />
           </div>
           <div class="flex flex-col flex-grow">
-            <div class="flex justify-between items-start mb-2">
-              <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ 'HOME_PRODUCTS_SPICY_TITLE' | translate }}</h3>
-              <span class="text-xl font-bold text-primary">135 kr</span>
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{{ 'PRODUCT_UNSALTED_TITLE' | translate }}</h3>
+              <span class="text-2xl font-bold text-primary">{{ 'PRODUCT_PRICE_UNSALTED' | translate }}</span>
             </div>
-            <p class="text-sm text-slate-500 mb-6">{{ 'HOME_PRODUCTS_SPICY_DESC' | translate }}</p>
+
+            <p class="text-slate-600 dark:text-slate-400 mb-6 font-light">
+              {{ 'PRODUCT_UNSALTED_DESC' | translate }}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+              <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">{{ 'PRODUCT_BADGE_NO_SALT' | translate }}</span>
+              <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">{{ 'PRODUCT_BADGE_FERMENTED' | translate }}</span>
+              <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">{{ 'PRODUCT_BADGE_READY' | translate }}</span>
+            </div>
+
+            <div class="space-y-2 mb-8 text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-zinc-800 pt-6">
+              <p>{{ 'PRODUCT_DETAIL_WEIGHT' | translate }}</p>
+              <p>{{ 'PRODUCT_DETAIL_VARIANT_NO_SALT' | translate }}</p>
+            </div>
+
             <button
               routerLink="/checkout"
-              class="mt-auto w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2"
+              class="mt-auto w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
             >
               <span class="material-icons text-lg">shopping_cart</span>
-              {{ 'HOME_PRODUCTS_BUY' | translate }}
-            </button>
-          </div>
-        </div>
-        <!-- Product Card 3 -->
-        <div class="group flex flex-col product-card bg-white dark:bg-zinc-900 rounded-xl overflow-hidden p-6 shadow-sm">
-          <div class="relative aspect-square mb-6 flex items-center justify-center">
-            <img
-              [alt]="'ALT_WHOLE_POUCH' | translate"
-              class="product-image w-full h-full object-contain transition-transform duration-500"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC11LoM7AZrMOSq5O69PWP24hs1J3Rt9kFOOxdFRC7FlhHOaf3M1rKhY9oz3qgXqbq6ca6Dgm5_Xef4CCtwjY4zZnXxeWLaeAA24FzKupGBbZgdZfpo_3CSzhXRrvAhx8VF6QEM03Y0vZnuhrr8oR7RxpA4w2LiSa-mAtyO4TGZcKU70XEXKv2ExoEu4avT8nUfNWGJ8GGkglKvC7HxWr3xkazfni-jhBFua-4Yha3ESuxZlR1SrsoragK-pBa_kYyCrcR2g-BoJtQ"
-            />
-          </div>
-          <div class="flex flex-col flex-grow">
-            <div class="flex justify-between items-start mb-2">
-              <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ 'HOME_PRODUCTS_WHOLE_TITLE' | translate }}</h3>
-              <span class="text-xl font-bold text-primary">149 kr</span>
-            </div>
-            <p class="text-sm text-slate-500 mb-6">{{ 'HOME_PRODUCTS_WHOLE_DESC' | translate }}</p>
-            <button
-              routerLink="/checkout"
-              class="mt-auto w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2"
-            >
-              <span class="material-icons text-lg">shopping_cart</span>
-              {{ 'HOME_PRODUCTS_BUY' | translate }}
+              {{ 'PRODUCT_ADD_TO_CART' | translate }}
             </button>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Information Sections -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+      <!-- Comparison -->
+      <div class="text-center">
+        <h2 class="text-3xl font-light mb-12">{{ 'PRODUCTS_CHOOSE_TITLE' | translate }}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+          <div class="p-8 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-100 dark:border-zinc-800">
+            <h4 class="font-bold mb-4 text-primary">{{ 'PRODUCTS_CHOOSE_ORIGINAL_TITLE' | translate }}</h4>
+            <p class="text-slate-600 dark:text-slate-400 font-light">{{ 'PRODUCTS_CHOOSE_ORIGINAL_DESC' | translate }}</p>
+          </div>
+          <div class="p-8 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-100 dark:border-zinc-800">
+            <h4 class="font-bold mb-4 text-primary">{{ 'PRODUCTS_CHOOSE_UNSALTED_TITLE' | translate }}</h4>
+            <p class="text-slate-600 dark:text-slate-400 font-light">{{ 'PRODUCTS_CHOOSE_UNSALTED_DESC' | translate }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to prepare -->
+      <div class="bg-slate-50 dark:bg-zinc-900/50 rounded-3xl p-8 lg:p-12">
+        <h2 class="text-3xl font-light mb-8">{{ 'PRODUCTS_PREPARE_TITLE' | translate }}</h2>
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">1</span>
+            <p class="text-lg font-light">{{ 'PRODUCTS_PREPARE_STEP1' | translate }}</p>
+          </div>
+          <div class="flex gap-4">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">2</span>
+            <p class="text-lg font-light">{{ 'PRODUCTS_PREPARE_STEP2' | translate }}</p>
+          </div>
+          <div class="flex gap-4">
+            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">3</span>
+            <p class="text-lg font-light">{{ 'PRODUCTS_PREPARE_STEP3' | translate }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ingredients & Storage -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
+        <div>
+          <h2 class="text-2xl font-light mb-6">{{ 'PRODUCTS_INGREDIENTS_TITLE' | translate }}</h2>
+          <p class="text-slate-600 dark:text-slate-400 font-light mb-4">{{ 'PRODUCTS_INGREDIENTS_COPY' | translate }}</p>
+          <p class="text-sm font-bold text-slate-500 uppercase tracking-wider">{{ 'PRODUCTS_ALLERGEN_NOTE' | translate }}</p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-light mb-6">{{ 'PRODUCTS_STORAGE_TITLE' | translate }}</h2>
+          <p class="text-slate-600 dark:text-slate-400 font-light">{{ 'PRODUCTS_STORAGE_COPY' | translate }}</p>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
+
 <app-footer></app-footer>

@@ -41,7 +41,7 @@ export class CheckoutComponent implements OnInit {
   discount = 0;
 
   product = {
-    nameKey: 'HOME_PRODUCTS_CLASSIC_TITLE',
+    nameKey: 'PRODUCT_ORIGINAL_TITLE',
     variantKey: 'CHECKOUT_VARIANT_ORIGINAL',
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk',
