@@ -163,88 +163,47 @@
   </div>
 </section>
 
-<!-- Not Only Soup Section -->
-<section class="py-24 bg-white dark:bg-stone-900 transition-colors duration-300">
+<!-- Small Recipes CTA Section -->
+<section class="py-20 bg-stone-50 dark:bg-stone-800/30 transition-colors duration-300">
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-light mb-6 text-stone-900 dark:text-white">
+      {{ 'HOME_RECIPES_CTA_TITLE' | translate }}
+    </h2>
+    <p class="text-lg text-stone-600 dark:text-stone-400 mb-10 max-w-xl mx-auto font-light leading-relaxed">
+      {{ 'HOME_RECIPES_CTA_DESC' | translate }}
+    </p>
+    <a
+      routerLink="/recipes"
+      class="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold hover:bg-red-700 transition-all shadow-lg hover:scale-105"
+    >
+      {{ 'HOME_RECIPES_CTA_BUTTON' | translate }}
+    </a>
+  </div>
+</section>
+
+<!-- Story / Brand Section -->
+<section
+  class="py-32 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800"
+>
   <div class="container mx-auto px-6">
-    <div class="max-w-4xl mx-auto text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 dark:text-white">{{ 'HOME_VERSATILE_TITLE' | translate }}</h2>
-      <p class="text-lg text-stone-600 dark:text-stone-400 leading-relaxed max-w-2xl mx-auto">
-        {{ 'HOME_VERSATILE_DESC' | translate }}
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-stone-900 dark:text-white tracking-tight">
+        {{ 'STORY_HERO_TITLE' | translate }}
+      </h2>
+      <p class="text-xl font-light text-stone-600 dark:text-stone-400 leading-relaxed mb-12">
+        {{ 'STORY_HERO_DESC' | translate }}
       </p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Use Case 1 -->
-      <div
-        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
-      >
-        <div
-          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
-        >
-          <span class="material-icons text-primary text-3xl" aria-hidden="true">soup_kitchen</span>
-        </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_SOUP_TITLE' | translate }}</h3>
-        <p class="text-stone-600 dark:text-stone-400 text-sm">
-          {{ 'HOME_VERSATILE_SOUP_DESC' | translate }}
-        </p>
-      </div>
-
-      <!-- Use Case 2 -->
-      <div
-        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
-      >
-        <div
-          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
-        >
-          <span class="material-icons text-primary text-3xl" aria-hidden="true">restaurant</span>
-        </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_SAUCE_TITLE' | translate }}</h3>
-        <p class="text-stone-600 dark:text-stone-400 text-sm">
-          {{ 'HOME_VERSATILE_SAUCE_DESC' | translate }}
-        </p>
-      </div>
-
-      <!-- Use Case 3 -->
-      <div
-        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
-      >
-        <div
-          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
-        >
-          <span class="material-icons text-primary text-3xl" aria-hidden="true">rice_bowl</span>
-        </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_BOWLS_TITLE' | translate }}</h3>
-        <p class="text-stone-600 dark:text-stone-400 text-sm">
-          {{ 'HOME_VERSATILE_BOWLS_DESC' | translate }}
-        </p>
-      </div>
-
-      <!-- Use Case 4 -->
-      <div
-        class="bg-background-light dark:bg-background-dark p-8 rounded-2xl text-center hover:shadow-lg transition-shadow border border-transparent hover:border-primary/20"
-      >
-        <div
-          class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6"
-        >
-          <span class="material-icons text-primary text-3xl" aria-hidden="true">timer</span>
-        </div>
-        <h3 class="text-xl font-bold mb-2 dark:text-white">{{ 'HOME_VERSATILE_QUICK_TITLE' | translate }}</h3>
-        <p class="text-stone-600 dark:text-stone-400 text-sm">
-          {{ 'HOME_VERSATILE_QUICK_DESC' | translate }}
-        </p>
-      </div>
-    </div>
-
-    <div class="mt-16 text-center">
       <a
-        routerLink="/recipes"
-        class="inline-block bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-all"
+        routerLink="/story"
+        class="group inline-flex items-center gap-2 text-lg font-medium text-primary hover:text-red-700 transition-colors"
       >
-        {{ 'HOME_VERSATILE_EXPLORE' | translate }}
+        <span>{{ 'NAV_STORY' | translate }}</span>
+        <span class="material-icons transition-transform group-hover:translate-x-1" aria-hidden="true"
+          >arrow_forward</span
+        >
       </a>
     </div>
   </div>
 </section>
-
 
 <app-footer></app-footer>
