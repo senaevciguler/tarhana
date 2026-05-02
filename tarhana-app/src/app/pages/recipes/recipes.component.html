@@ -78,159 +78,126 @@
     </div>
 
     <!-- Recipe Grid (Full Width) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
-      <!-- Card 1: Classic Tarhana Soup -->
-      <div
-        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
-      >
-        <div class="h-48 overflow-hidden relative">
-          <img
-            [alt]="'RECIPES_CARD1_TITLE' | translate"
-            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=600"
-          />
-          <div
-            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-          >
-            <span class="material-icons text-[14px] text-primary">bolt</span>
-            {{ 'RECIPES_TIME_10' | translate }}
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-            {{ 'RECIPES_CARD1_TITLE' | translate }}
-          </h3>
-          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-            {{ 'RECIPES_CARD1_DESC' | translate }}
-          </p>
-          <div class="flex items-center justify-between mt-auto">
-            <div class="flex items-center gap-1 text-primary">
-              <span class="material-icons text-sm">signal_cellular_alt</span>
-              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
-            </div>
-            <a
-              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-              href="#"
-              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-24">
+      @for (recipe of recipes; track recipe.id) {
+        <div
+          class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800 flex flex-col"
+        >
+          <div class="h-48 overflow-hidden relative">
+            <img
+              [alt]="recipe.titleKey | translate"
+              class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              [src]="recipe.image"
+            />
+            <div
+              class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
             >
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2: Creamy Tarhana Soup -->
-      <div
-        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
-      >
-        <div class="h-48 overflow-hidden relative">
-          <img
-            [alt]="'RECIPES_CARD2_TITLE' | translate"
-            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            src="https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&q=80&w=600"
-          />
-          <div
-            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-          >
-            <span class="material-icons text-[14px] text-primary">bolt</span>
-            {{ 'RECIPES_TIME_10' | translate }}
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-            {{ 'RECIPES_CARD2_TITLE' | translate }}
-          </h3>
-          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-            {{ 'RECIPES_CARD2_DESC' | translate }}
-          </p>
-          <div class="flex items-center justify-between mt-auto">
-            <div class="flex items-center gap-1 text-primary">
-              <span class="material-icons text-sm">signal_cellular_alt</span>
-              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
+              <span class="material-icons text-[14px] text-primary">schedule</span>
+              {{ recipe.timeKey | translate }}
             </div>
-            <a
-              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-              href="#"
-              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
-            >
           </div>
-        </div>
-      </div>
-
-      <!-- Card 3: Vegetable Broth Tarhana -->
-      <div
-        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
-      >
-        <div class="h-48 overflow-hidden relative">
-          <img
-            [alt]="'RECIPES_CARD3_TITLE' | translate"
-            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=600"
-          />
-          <div
-            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-          >
-            <span class="material-icons text-[14px] text-primary">timer</span>
-            {{ 'RECIPES_TIME_15' | translate }}
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-            {{ 'RECIPES_CARD3_TITLE' | translate }}
-          </h3>
-          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-            {{ 'RECIPES_CARD3_DESC' | translate }}
-          </p>
-          <div class="flex items-center justify-between mt-auto">
-            <div class="flex items-center gap-1 text-primary">
-              <span class="material-icons text-sm">signal_cellular_alt</span>
-              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
+              {{ recipe.titleKey | translate }}
+            </h3>
+            <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
+              {{ recipe.descKey | translate }}
+            </p>
+            <div class="flex items-center justify-between mt-auto">
+              <div class="flex items-center gap-1 text-primary">
+                <span class="material-icons text-sm">signal_cellular_alt</span>
+                <span class="text-xs font-bold uppercase tracking-wider">{{ recipe.difficultyKey | translate }}</span>
+              </div>
+              <button
+                (click)="openRecipe(recipe)"
+                class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
+              >
+                {{ 'RECIPES_VIEW_RECIPE' | translate }}
+              </button>
             </div>
-            <a
-              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-              href="#"
-              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
-            >
           </div>
         </div>
-      </div>
-
-      <!-- Card 4: Tarhana Sauce Base -->
-      <div
-        class="recipe-card group bg-white dark:bg-stone-900 rounded-xl overflow-hidden editorial-shadow border border-stone-100 dark:border-stone-800"
-      >
-        <div class="h-48 overflow-hidden relative">
-          <img
-            [alt]="'RECIPES_CARD4_TITLE' | translate"
-            class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&q=80&w=600"
-          />
-          <div
-            class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
-          >
-            <span class="material-icons text-[14px] text-primary">timer</span>
-            {{ 'RECIPES_TIME_15' | translate }}
-          </div>
-        </div>
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors dark:text-white">
-            {{ 'RECIPES_CARD4_TITLE' | translate }}
-          </h3>
-          <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
-            {{ 'RECIPES_CARD4_DESC' | translate }}
-          </p>
-          <div class="flex items-center justify-between mt-auto">
-            <div class="flex items-center gap-1 text-primary">
-              <span class="material-icons text-sm">signal_cellular_alt</span>
-              <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_EASY' | translate }}</span>
-            </div>
-            <a
-              class="text-primary font-bold text-sm underline underline-offset-4 decoration-2 decoration-primary/30 hover:decoration-primary transition-all"
-              href="#"
-              >{{ 'RECIPES_VIEW_RECIPE' | translate }}</a
-            >
-          </div>
-        </div>
-      </div>
+      }
     </div>
+
+    <!-- Recipe Modal -->
+    @if (selectedRecipe) {
+      <div class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+        <!-- Backdrop -->
+        <div
+          class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm"
+          (click)="closeRecipe()"
+        ></div>
+
+        <!-- Modal Content -->
+        <div class="relative bg-white dark:bg-stone-900 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl animate-fade-in">
+          <button
+            (click)="closeRecipe()"
+            class="absolute top-4 right-4 z-10 p-2 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-500 hover:text-stone-900 dark:hover:text-white transition-colors"
+          >
+            <span class="material-icons">close</span>
+          </button>
+
+          <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="h-64 md:h-full">
+              <img
+                [src]="selectedRecipe.image"
+                [alt]="selectedRecipe.titleKey | translate"
+                class="w-full h-full object-cover"
+              >
+            </div>
+            <div class="p-8 space-y-6">
+              <div>
+                <h2 class="text-3xl font-bold text-stone-900 dark:text-white mb-2">
+                  {{ selectedRecipe.titleKey | translate }}
+                </h2>
+                <div class="flex items-center gap-4 text-sm text-stone-500 dark:text-stone-400 font-medium">
+                  <span class="flex items-center gap-1">
+                    <span class="material-icons text-primary text-sm">schedule</span>
+                    {{ selectedRecipe.timeKey | translate }}
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <span class="material-icons text-primary text-sm">signal_cellular_alt</span>
+                    {{ selectedRecipe.difficultyKey | translate }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div>
+                  <h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-2">Ingredients</h3>
+                  <p class="text-stone-600 dark:text-stone-300 leading-relaxed">
+                    {{ selectedRecipe.ingredientsKey | translate }}
+                  </p>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-2">Preparation</h3>
+                  <p class="text-stone-600 dark:text-stone-300 leading-relaxed">
+                    {{ selectedRecipe.stepsKey | translate }}
+                  </p>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-2">Serving Suggestion</h3>
+                  <p class="text-stone-600 dark:text-stone-300 leading-relaxed italic">
+                    {{ selectedRecipe.servingKey | translate }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-stone-100 dark:border-stone-800">
+                <a
+                  routerLink="/products"
+                  (click)="closeRecipe()"
+                  class="inline-block bg-primary text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all text-center w-full"
+                >
+                  {{ 'RECIPES_CTA_BUTTON' | translate }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
 
     <!-- Bottom CTA Section -->
     <section class="bg-stone-100 dark:bg-stone-900 rounded-2xl p-12 text-center max-w-4xl mx-auto border border-stone-200 dark:border-stone-800">
