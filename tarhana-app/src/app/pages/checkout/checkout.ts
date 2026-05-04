@@ -12,6 +12,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { LanguageService } from '../../services/language.service';
+import { CartService } from '../../services/cart.service';
+import { ShopifyService } from '../../services/shopify.service';
 import { inject } from '@angular/core';
 
 @Component({
@@ -30,22 +32,15 @@ import { inject } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
   langService = inject(LanguageService);
+  cartService = inject(CartService);
+  shopifyService = inject(ShopifyService);
   checkoutForm!: FormGroup;
   orderPlaced = false;
   orderReference = '';
   selectedPaymentMethod = 'card';
-  quantity = 1;
-  pricePerItem = 129;
   shippingCost = 49;
   promoCode = '';
   discount = 0;
-
-  product = {
-    nameKey: 'HOME_PRODUCTS_CLASSIC_TITLE',
-    variantKey: 'CHECKOUT_VARIANT_ORIGINAL',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk',
-  };
 
   constructor(private fb: FormBuilder) {}
 
@@ -120,18 +115,16 @@ export class CheckoutComponent implements OnInit {
     swishGroup.get('phone')?.updateValueAndValidity();
   }
 
-  incrementQuantity() {
-    this.quantity++;
+  incrementQuantity(variantId: string, currentQuantity: number) {
+    this.cartService.updateQuantity(variantId, currentQuantity + 1);
   }
 
-  decrementQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
+  decrementQuantity(variantId: string, currentQuantity: number) {
+    this.cartService.updateQuantity(variantId, currentQuantity - 1);
   }
 
   get subtotal() {
-    return this.quantity * this.pricePerItem;
+    return this.cartService.subtotal();
   }
 
   get total() {
@@ -150,10 +143,24 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm.get('payment.method')?.setValue(method);
   }
 
-  placeOrder() {
+  async placeOrder() {
     if (this.checkoutForm.valid) {
+      // In a real Shopify integration, we would create a checkout and redirect
+      // For now, we mock the local order placement
+
+      /*
+      // Future Shopify integration:
+      const firstItem = this.cartService.items()[0];
+      if (firstItem) {
+        const checkoutUrl = await this.shopifyService.createCheckout(firstItem.variantId, firstItem.quantity);
+        window.location.href = checkoutUrl;
+        return;
+      }
+      */
+
       this.orderReference = 'TRH-' + Math.random().toString(36).substr(2, 9).toUpperCase();
       this.orderPlaced = true;
+      this.cartService.clearCart();
       window.scrollTo(0, 0);
     } else {
       this.markFormGroupTouched(this.checkoutForm);
