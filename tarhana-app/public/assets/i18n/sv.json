@@ -194,6 +194,8 @@
   "CHECKOUT_PROMO_HINT": "Prova 'TARHANA20' för 20 kr rabatt",
   "CHECKOUT_TOTAL": "Totalt",
   "CHECKOUT_VAT_INCL": "Inklusive moms",
+  "CHECKOUT_COMING_SOON": "Kommer snart",
+  "CHECKOUT_DISABLED_DESC": "Vi håller på att färdigställa vår lokala registrering för livsmedelsverksamhet. Kassan kommer att aktiveras så snart allt är klart. Tack för ditt tålamod!",
   "CHECKOUT_CONFIRM_TITLE": "Tack!",
   "CHECKOUT_CONFIRM_DESC": "Din order har tagits emot och behandlas just nu.",
   "CHECKOUT_ORDER_DETAILS": "Orderdetaljer",
