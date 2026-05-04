@@ -234,5 +234,8 @@
   "ALT_STORY_KITCHEN": "Minimalistisk skandinavisk köksinredning med naturligt ljus",
   "ALT_STORY_GRAINS": "Naturliga ekologiska spannmål och texturer som används i Tarhana",
   "ALT_STORY_MOMENT": "Autentiskt köksögonblick",
-  "ALT_STORY_HERO": "En varm skål soppa på ett minimalistiskt träbord i ett skandinaviskt kök"
+  "ALT_STORY_HERO": "En varm skål soppa på ett minimalistiskt träbord i ett skandinaviskt kök",
+  "CART_EMPTY": "Din varukorg är tom",
+  "CART_CONTINUE_SHOPPING": "Fortsätt handla",
+  "CART_SHIPPING_HINT": "Frakt beräknas i kassan"
 }

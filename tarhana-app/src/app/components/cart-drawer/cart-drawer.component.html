@@ -1,0 +1,82 @@
+<!-- Overlay -->
+<div
+  *ngIf="cartService.isOpen()"
+  (click)="close()"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity duration-300"
+></div>
+
+<!-- Drawer -->
+<div
+  class="fixed top-0 right-0 h-full w-full max-w-md bg-white dark:bg-zinc-900 z-[70] shadow-2xl transition-transform duration-500 ease-out transform border-l border-slate-100 dark:border-zinc-800"
+  [class.translate-x-0]="cartService.isOpen()"
+  [class.translate-x-full]="!cartService.isOpen()"
+>
+  <div class="flex flex-col h-full">
+    <!-- Header -->
+    <div class="p-6 border-b border-slate-100 dark:border-zinc-800 flex items-center justify-between">
+      <h2 class="text-xl font-bold font-display">{{ 'CHECKOUT_ORDER_SUMMARY' | translate }}</h2>
+      <button (click)="close()" class="p-2 hover:bg-slate-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
+        <span class="material-icons" aria-hidden="true">close</span>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-grow overflow-y-auto p-6 space-y-6">
+      <div *ngIf="cartService.items().length === 0" class="flex flex-col items-center justify-center h-full text-center space-y-4">
+        <span class="material-icons text-6xl text-slate-200 dark:text-zinc-700" aria-hidden="true">shopping_bag</span>
+        <p class="text-slate-500 dark:text-zinc-400 font-medium">{{ 'CART_EMPTY' | translate }}</p>
+        <button (click)="close()" class="text-primary font-bold hover:underline">{{ 'CART_CONTINUE_SHOPPING' | translate }}</button>
+      </div>
+
+      <div *ngFor="let item of cartService.items()" class="flex gap-4 group">
+        <div class="w-20 h-24 bg-slate-50 dark:bg-zinc-800 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center p-2">
+          <img [src]="item.image" [alt]="item.title | translate" class="w-full h-full object-contain">
+        </div>
+        <div class="flex-grow">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-sm leading-tight">{{ item.title | translate }}</h3>
+              <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">{{ item.variantLabel | translate }}</p>
+            </div>
+            <button (click)="removeItem(item.variantId)" class="text-slate-400 hover:text-red-500 transition-colors">
+              <span class="material-icons text-lg" aria-hidden="true">delete_outline</span>
+            </button>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="flex items-center border border-slate-200 dark:border-zinc-700 rounded-lg">
+              <button
+                (click)="updateQuantity(item.variantId, item.quantity - 1)"
+                class="px-2 py-1 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-500 transition-colors"
+              >-</button>
+              <span class="px-2 text-sm font-bold min-w-[2rem] text-center">{{ item.quantity }}</span>
+              <button
+                (click)="updateQuantity(item.variantId, item.quantity + 1)"
+                class="px-2 py-1 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-500 transition-colors"
+              >+</button>
+            </div>
+            <span class="font-bold text-sm">{{ item.price * item.quantity }} {{ item.currency }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div *ngIf="cartService.items().length > 0" class="p-6 border-t border-slate-100 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-800/30">
+      <div class="flex justify-between items-center mb-6">
+        <span class="text-slate-500 dark:text-zinc-400">{{ 'CHECKOUT_SUBTOTAL' | translate }}</span>
+        <span class="text-xl font-bold">{{ cartService.subtotal() }} {{ cartService.items()[0].currency }}</span>
+      </div>
+      <button
+        routerLink="/checkout"
+        (click)="close()"
+        class="w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20"
+      >
+        <span>{{ 'CHECKOUT_TITLE' | translate }}</span>
+        <span class="material-icons text-xl" aria-hidden="true">arrow_forward</span>
+      </button>
+      <p class="text-[10px] text-center text-slate-400 dark:text-zinc-500 mt-4 uppercase tracking-widest font-bold">
+        {{ 'CART_SHIPPING_HINT' | translate }}
+      </p>
+    </div>
+  </div>
+</div>

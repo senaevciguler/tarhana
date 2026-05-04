@@ -234,5 +234,8 @@
   "ALT_STORY_KITCHEN": "Minimalist Scandinavian kitchen interior with natural light",
   "ALT_STORY_GRAINS": "Natural organic grains and textures used in Tarhana",
   "ALT_STORY_MOMENT": "Authentic kitchen moment",
-  "ALT_STORY_HERO": "A warm bowl of soup on a minimal wooden table in a Scandinavian kitchen"
+  "ALT_STORY_HERO": "A warm bowl of soup on a minimal wooden table in a Scandinavian kitchen",
+  "CART_EMPTY": "Your cart is empty",
+  "CART_CONTINUE_SHOPPING": "Continue shopping",
+  "CART_SHIPPING_HINT": "Shipping calculated at checkout"
 }

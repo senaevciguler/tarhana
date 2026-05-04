@@ -33,7 +33,7 @@
         >{{ 'NAV_HEALTH' | translate }}</a
       >
     </div>
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-6">
       <div class="flex items-center gap-2 text-sm font-bold dark:text-white">
         <button
           (click)="setLanguage('SV')"
@@ -53,6 +53,22 @@
           EN
         </button>
       </div>
+
+      <!-- Cart Button -->
+      <button
+        (click)="toggleCart()"
+        class="relative p-2 text-slate-700 dark:text-white hover:text-primary dark:hover:text-primary transition-colors group"
+      >
+        <span class="material-icons text-2xl" aria-hidden="true">shopping_bag</span>
+        <span
+          *ngIf="cartService.itemCount() > 0"
+          class="absolute top-0 right-0 w-5 h-5 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white dark:border-background-dark group-hover:scale-110 transition-transform"
+        >
+          {{ cartService.itemCount() }}
+        </span>
+      </button>
     </div>
   </div>
 </nav>
+
+<app-cart-drawer></app-cart-drawer>
