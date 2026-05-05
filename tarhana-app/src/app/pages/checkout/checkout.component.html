@@ -2,7 +2,28 @@
 
 <div class="bg-background-light dark:bg-background-dark min-h-screen text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
   <main class="max-w-7xl mx-auto px-4 py-8 md:py-16">
-    <div *ngIf="!orderPlaced">
+
+    <!-- Pre-launch "Coming Soon" View -->
+    <div *ngIf="!enableCheckout && !orderPlaced" class="max-w-3xl mx-auto text-center py-20 bg-white dark:bg-zinc-900 rounded-3xl border border-slate-100 dark:border-zinc-800 shadow-sm px-6">
+      <div class="w-20 h-20 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-8">
+        <span class="material-icons text-4xl">hourglass_top</span>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-bold mb-6 font-display">{{ 'CHECKOUT_COMING_SOON' | translate }}</h1>
+      <p class="text-lg text-slate-500 dark:text-zinc-400 mb-10 leading-relaxed max-w-xl mx-auto">
+        {{ 'CHECKOUT_DISABLED_DESC' | translate }}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a routerLink="/products" class="px-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-primary/20">
+          {{ 'CHECKOUT_BACK_PRODUCTS' | translate }}
+        </a>
+        <a routerLink="/" class="px-8 py-4 bg-slate-100 dark:bg-zinc-800 text-slate-900 dark:text-white rounded-xl font-bold hover:bg-slate-200 dark:hover:bg-zinc-700 transition-all">
+          {{ 'CHECKOUT_BACK_HOME' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <!-- Active Checkout View -->
+    <div *ngIf="enableCheckout && !orderPlaced">
       <h1 class="text-3xl md:text-4xl font-bold mb-8 md:mb-12">{{ 'CHECKOUT_TITLE' | translate }}</h1>
 
       <!-- Empty Cart State -->

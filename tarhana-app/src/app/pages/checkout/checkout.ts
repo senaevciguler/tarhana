@@ -14,6 +14,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { LanguageService } from '../../services/language.service';
 import { CartService } from '../../services/cart.service';
 import { ShopifyService } from '../../services/shopify.service';
+import { SHOPIFY_CONFIG } from '../../shopify.config';
 import { inject } from '@angular/core';
 
 @Component({
@@ -41,6 +42,9 @@ export class CheckoutComponent implements OnInit {
   shippingCost = 49;
   promoCode = '';
   discount = 0;
+
+  // Pre-launch safety
+  enableCheckout = SHOPIFY_CONFIG.enableCheckout;
 
   constructor(private fb: FormBuilder) {}
 
@@ -144,20 +148,20 @@ export class CheckoutComponent implements OnInit {
   }
 
   async placeOrder() {
-    if (this.checkoutForm.valid) {
-      // In a real Shopify integration, we would create a checkout and redirect
-      // For now, we mock the local order placement
-
-      /*
-      // Future Shopify integration:
-      const firstItem = this.cartService.items()[0];
-      if (firstItem) {
-        const checkoutUrl = await this.shopifyService.createCheckout(firstItem.variantId, firstItem.quantity);
-        window.location.href = checkoutUrl;
+    if (this.enableCheckout) {
+        const checkoutUrl = await this.cartService.getCheckoutUrl();
+        if (checkoutUrl) {
+            window.location.href = checkoutUrl;
+        } else {
+            console.error('Failed to get Shopify checkout URL');
+            // Fallback to internal message if Shopify fails
+            this.orderReference = 'ERR-SHOPIFY';
+            this.orderPlaced = true;
+        }
         return;
-      }
-      */
+    }
 
+    if (this.checkoutForm.valid) {
       this.orderReference = 'TRH-' + Math.random().toString(36).substr(2, 9).toUpperCase();
       this.orderPlaced = true;
       this.cartService.clearCart();

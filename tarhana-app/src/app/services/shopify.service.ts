@@ -1,10 +1,15 @@
-import { Injectable, signal } from '@angular/core';
-import { ShopifyProduct } from './shopify.types';
+import { Injectable, signal, inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ShopifyProduct, ShopifyCart } from './shopify.types';
+import { SHOPIFY_CONFIG } from '../shopify.config';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopifyService {
+  private http = inject(HttpClient);
+
   // Mock data representing Shopify products
   private products = signal<ShopifyProduct[]>([
     {
@@ -35,21 +40,301 @@ export class ShopifyService {
     }
   ]);
 
+  private get headers() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_CONFIG.storefrontAccessToken,
+    });
+  }
+
+  private get apiUrl() {
+    return `https://${SHOPIFY_CONFIG.domain}/api/${SHOPIFY_CONFIG.apiVersion}/graphql.json`;
+  }
+
   getProducts() {
     return this.products.asReadonly();
   }
 
-  // Placeholder for future Shopify Storefront API integration
   async fetchProducts() {
-    // In the future, this will use HttpClient to fetch from Shopify
-    // const response = await firstValueFrom(this.http.post(SHOPIFY_API_URL, query, headers));
-    // return response.data.products;
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {
+      console.warn('Shopify credentials missing, using mock products.');
+      return this.products();
+    }
+
+    const query = `
+      query getProducts {
+        products(first: 10) {
+          edges {
+            node {
+              id
+              handle
+              title
+              description
+              variants(first: 1) {
+                edges {
+                  node {
+                    id
+                    price {
+                      amount
+                      currencyCode
+                    }
+                  }
+                }
+              }
+              images(first: 1) {
+                edges {
+                  node {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(this.apiUrl, { query }, { headers: this.headers })
+      );
+
+      if (response.data?.products?.edges) {
+        const shopifyProducts: ShopifyProduct[] = response.data.products.edges.map((edge: any) => {
+          const node = edge.node;
+          const variant = node.variants.edges[0]?.node;
+          return {
+            id: node.id,
+            handle: node.handle,
+            title: node.title,
+            description: node.description,
+            price: parseFloat(variant?.price.amount || '0'),
+            currency: variant?.price.currencyCode === 'SEK' ? 'kr' : variant?.price.currencyCode,
+            image: node.images.edges[0]?.node.url,
+            variantId: variant?.id,
+            tags: [],
+            weight: '',
+            variantLabel: ''
+          };
+        });
+
+        if (shopifyProducts.length > 0) {
+          this.products.set(shopifyProducts);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching products from Shopify:', error);
+    }
+
     return this.products();
   }
 
-  async createCheckout(variantId: string, quantity: number) {
-    // In the future, this will call Shopify to create a checkout and return the webUrl
-    console.log(`Creating Shopify checkout for variant ${variantId} with quantity ${quantity}`);
-    return 'https://ella-pantry.myshopify.com/checkout';
+  private mapCart(rawCart: any): ShopifyCart {
+    return {
+      id: rawCart.id,
+      checkoutUrl: rawCart.checkoutUrl,
+      lines: rawCart.lines?.edges?.map((edge: any) => ({
+        id: edge.node.id,
+        quantity: edge.node.quantity,
+        merchandise: {
+          id: edge.node.merchandise.id,
+          title: edge.node.merchandise.title,
+          product: {
+            title: edge.node.merchandise.product.title
+          }
+        }
+      })) || [],
+      cost: rawCart.cost
+    };
+  }
+
+  async createCart(variantId: string, quantity: number): Promise<ShopifyCart | null> {
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
+
+    const query = `
+      mutation cartCreate($input: CartInput) {
+        cartCreate(input: $input) {
+          cart {
+            id
+            checkoutUrl
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  quantity
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      title
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      input: {
+        lines: [
+          {
+            merchandiseId: variantId,
+            quantity: quantity
+          }
+        ]
+      }
+    };
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+      );
+      return response.data?.cartCreate?.cart ? this.mapCart(response.data.cartCreate.cart) : null;
+    } catch (error) {
+      console.error('Error creating cart on Shopify:', error);
+      return null;
+    }
+  }
+
+  async addToCart(cartId: string, variantId: string, quantity: number): Promise<ShopifyCart | null> {
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
+
+    const query = `
+      mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+        cartLinesAdd(cartId: $cartId, lines: $lines) {
+          cart {
+            id
+            checkoutUrl
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  quantity
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      title
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      cartId,
+      lines: [{ merchandiseId: variantId, quantity }]
+    };
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+      );
+      return response.data?.cartLinesAdd?.cart ? this.mapCart(response.data.cartLinesAdd.cart) : null;
+    } catch (error) {
+      console.error('Error adding to cart on Shopify:', error);
+      return null;
+    }
+  }
+
+  async updateCartLine(cartId: string, lineId: string, quantity: number): Promise<ShopifyCart | null> {
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
+
+    const query = `
+      mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+        cartLinesUpdate(cartId: $cartId, lines: $lines) {
+          cart {
+            id
+            checkoutUrl
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      cartId,
+      lines: [{ id: lineId, quantity }]
+    };
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+      );
+      // Note: update mutation in this simple form doesn't return full lines by default in my mapCart if not requested
+      // But we can still map the base properties.
+      return response.data?.cartLinesUpdate?.cart ? this.mapCart(response.data.cartLinesUpdate.cart) : null;
+    } catch (error) {
+      console.error('Error updating cart line on Shopify:', error);
+      return null;
+    }
+  }
+
+  async removeFromCart(cartId: string, lineId: string): Promise<ShopifyCart | null> {
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
+
+    const query = `
+      mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+        cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+          cart {
+            id
+            checkoutUrl
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      cartId,
+      lineIds: [lineId]
+    };
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+      );
+      return response.data?.cartLinesRemove?.cart ? this.mapCart(response.data.cartLinesRemove.cart) : null;
+    } catch (error) {
+      console.error('Error removing from cart on Shopify:', error);
+      return null;
+    }
   }
 }

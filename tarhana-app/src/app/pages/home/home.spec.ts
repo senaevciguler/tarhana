@@ -3,6 +3,8 @@ import { HomeComponent } from './home';
 import { provideRouter } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
 import { signal } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,6 +15,8 @@ describe('HomeComponent', () => {
       imports: [HomeComponent],
       providers: [
         provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
         {
           provide: LanguageService,
           useValue: {

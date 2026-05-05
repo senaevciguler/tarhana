@@ -194,6 +194,8 @@
   "CHECKOUT_PROMO_HINT": "Try \"TARHANA20\" for 20 kr off",
   "CHECKOUT_TOTAL": "Total",
   "CHECKOUT_VAT_INCL": "Including VAT",
+  "CHECKOUT_COMING_SOON": "Coming Soon",
+  "CHECKOUT_DISABLED_DESC": "We are currently finalizing our local food-business registration. Checkout will be enabled as soon as everything is ready. Thank you for your patience!",
   "CHECKOUT_CONFIRM_TITLE": "Thank you!",
   "CHECKOUT_CONFIRM_DESC": "Your order has been received and is being processed.",
   "CHECKOUT_ORDER_DETAILS": "Order Details",
