@@ -11,7 +11,7 @@ import { ShopifyProduct } from '../../services/shopify.types';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, TranslatePipe, CommonModule],
+  imports: [NavbarComponent, FooterComponent, TranslatePipe, CommonModule, RouterLink],
   templateUrl: './products.component.html',
 })
 export class ProductsComponent implements OnInit  {

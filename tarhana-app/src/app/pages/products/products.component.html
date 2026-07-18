@@ -13,7 +13,10 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 max-w-5xl mx-auto">
         <!-- Dynamic Product Cards -->
-        <div *ngFor="let product of products()" class="group flex flex-col bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 dark:border-zinc-800">
+        <div *ngFor="let product of products()"
+             [id]="'product-card-' + product.handle"
+             [routerLink]="['/products', product.handle]"
+             class="group flex flex-col bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100 dark:border-zinc-800 cursor-pointer">
           <div class="relative aspect-[4/5] overflow-hidden bg-slate-50 dark:bg-zinc-800 flex items-center justify-center p-8">
             <img
               [alt]="product.title | translate"
@@ -44,7 +47,7 @@
               </div>
 
               <button
-                (click)="addToCart(product)"
+                (click)="addToCart(product); $event.stopPropagation()"
                 class="w-full py-4 bg-primary text-white rounded-xl font-bold hover:bg-red-700 transition-all flex items-center justify-center gap-2 group"
               >
                 <span class="material-icons text-xl group-hover:translate-x-1 transition-transform">shopping_bag</span>

@@ -1,3 +1,13 @@
+export interface ShopifyVariant {
+  id: string;
+  title: string;
+  price: number;
+  currency: string;
+  availableForSale: boolean;
+  quantityAvailable: number;
+  compareAtPrice?: number | null;
+}
+
 export interface ShopifyProduct {
   id: string;
   handle: string;
@@ -13,7 +23,8 @@ export interface ShopifyProduct {
   availableForSale: boolean;
   quantityAvailable: number;
   compareAtPrice?: number | null;
-  
+  images?: string[];
+  variants?: ShopifyVariant[];
 }
 
 export interface CartItem {
