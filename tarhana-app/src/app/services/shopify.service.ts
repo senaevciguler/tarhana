@@ -284,7 +284,8 @@ async fetchProducts() {
           }
         }
       })) || [],
-      cost: rawCart.cost
+      cost: rawCart.cost,
+      discountCodes: rawCart.discountCodes
     };
   }
 
@@ -571,6 +572,86 @@ async fetchProducts() {
       return null;
     }
   }
+
+  async applyDiscountCode(
+    cartId: string,
+    discountCode: string
+  ): Promise<ShopifyCart | null> {
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
+
+    const query = `
+      mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
+        cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+          cart {
+            id
+            checkoutUrl
+            discountCodes {
+              code
+              applicable
+            }
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  quantity
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      title
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+            }
+          }
+          userErrors {
+            field
+            message
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      cartId,
+      discountCodes: discountCode ? [discountCode] : [],
+    };
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(
+          this.apiUrl,
+          { query, variables },
+          { headers: this.headers }
+        )
+      );
+
+      if (response.data?.cartDiscountCodesUpdate?.userErrors?.length) {
+        console.error('User errors applying discount:', response.data.cartDiscountCodesUpdate.userErrors);
+      }
+
+      return response.data?.cartDiscountCodesUpdate?.cart
+        ? this.mapCart(response.data.cartDiscountCodesUpdate.cart)
+        : null;
+    } catch (error) {
+      console.error('Error applying discount code on Shopify:', error);
+      return null;
+    }
+  }
+
   async fetchProduct(handle: string): Promise<ShopifyProduct | null> {
 
   if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {

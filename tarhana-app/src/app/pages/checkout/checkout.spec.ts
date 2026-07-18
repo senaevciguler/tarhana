@@ -5,6 +5,7 @@ import { LanguageService } from '../../services/language.service';
 import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { CartService } from '../../services/cart.service';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -23,7 +24,10 @@ describe('CheckoutComponent', () => {
             translate: (key: string) => {
               const mockTranslations: Record<string, string> = {
                 'CHECKOUT_TITLE': 'Checkout',
-                'CHECKOUT_COMING_SOON': 'Coming Soon'
+                'CHECKOUT_COMING_SOON': 'Coming Soon',
+                'CHECKOUT_PROMO_SUCCESS': 'Discount applied successfully!',
+                'CHECKOUT_PROMO_INVALID': 'Invalid discount code',
+                'CHECKOUT_PROMO_ERROR': 'Error applying discount code'
               };
               return mockTranslations[key] || key;
             },
@@ -51,5 +55,35 @@ describe('CheckoutComponent', () => {
     } else {
       expect(compiled.querySelector('h1')?.textContent).toContain('Coming Soon');
     }
+  });
+
+  it('should update discount and total correctly when a valid discount code is applied', async () => {
+    const cartService = TestBed.inject(CartService);
+    const applyDiscountSpy = spyOn(cartService, 'applyDiscount').and.returnValue(
+      Promise.resolve({ success: true, discountAmount: 25 })
+    );
+
+    component.promoCode = 'VALID25';
+    await component.applyPromoCode();
+
+    expect(applyDiscountSpy).toHaveBeenCalledWith('VALID25');
+    expect(component.discount()).toBe(25);
+    expect(component.promoSuccess()).toContain('Discount applied successfully!');
+    expect(component.promoError()).toBe('');
+  });
+
+  it('should clear discount and display error message when an invalid discount code is applied', async () => {
+    const cartService = TestBed.inject(CartService);
+    const applyDiscountSpy = spyOn(cartService, 'applyDiscount').and.returnValue(
+      Promise.resolve({ success: false, errorMessage: 'Invalid discount code' })
+    );
+
+    component.promoCode = 'WRONG';
+    await component.applyPromoCode();
+
+    expect(applyDiscountSpy).toHaveBeenCalledWith('WRONG');
+    expect(component.discount()).toBe(0);
+    expect(component.promoError()).toBe('Invalid discount code');
+    expect(component.promoSuccess()).toBe('');
   });
 });

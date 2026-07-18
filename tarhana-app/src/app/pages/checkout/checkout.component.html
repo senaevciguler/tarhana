@@ -35,16 +35,61 @@
 
   </div>
 
-  <div class="flex justify-between text-xl font-bold mt-8">
-
+  <div class="flex flex-col gap-3 mt-8 border-t pt-6">
+    <div class="flex justify-between text-xl font-medium">
       <span>Subtotal</span>
-
       <span>{{ subtotal }} kr</span>
+    </div>
 
+    <div class="flex justify-between text-xl font-medium text-slate-500">
+      <span>Shipping</span>
+      <span>{{ shippingCost }} kr</span>
+    </div>
+
+    <div *ngIf="discount() > 0" class="flex justify-between text-xl font-medium text-green-600">
+      <span>{{ 'CHECKOUT_DISCOUNT' | translate }}</span>
+      <span>-{{ discount() }} kr</span>
+    </div>
+
+    <div class="flex justify-between text-2xl font-bold border-t pt-3 mt-2">
+      <span>Total</span>
+      <span>{{ total() }} kr</span>
+    </div>
+  </div>
+
+  <!-- Promo Code Section -->
+  <div class="mt-8 pt-6 border-t border-slate-100 dark:border-zinc-800">
+    <div class="flex gap-2 max-w-md">
+      <input
+        type="text"
+        [(ngModel)]="promoCode"
+        [placeholder]="'CHECKOUT_PROMO_PLACEHOLDER' | translate"
+        class="flex-grow px-4 py-2 rounded-lg border border-slate-200 dark:border-zinc-700 dark:bg-zinc-800 focus:ring-2 focus:ring-primary outline-none transition-all text-sm"
+      >
+      <button
+        (click)="applyPromoCode()"
+        type="button"
+        id="apply-promo-btn"
+        class="px-6 py-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
+      >
+        {{ 'CHECKOUT_PROMO_APPLY' | translate }}
+      </button>
+    </div>
+    <p class="text-[10px] text-slate-400 mt-2 italic">
+      {{ 'CHECKOUT_PROMO_HINT' | translate }}
+    </p>
+
+    <!-- Error/Success Feedback -->
+    <p *ngIf="promoError()" id="promo-error-msg" class="text-xs text-red-500 mt-2">
+      {{ promoError() | translate }}
+    </p>
+    <p *ngIf="promoSuccess()" id="promo-success-msg" class="text-xs text-green-600 mt-2">
+      {{ promoSuccess() | translate }}
+    </p>
   </div>
 
   <button
-      class="mt-10 w-full bg-primary text-white py-5 rounded-xl"
+      class="mt-10 w-full bg-primary text-white py-5 rounded-xl font-bold"
       (click)="placeOrder()">
 
       Proceed to Secure Checkout

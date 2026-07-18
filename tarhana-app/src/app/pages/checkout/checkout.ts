@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
-import { RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -15,7 +14,6 @@ import { LanguageService } from '../../services/language.service';
 import { CartService } from '../../services/cart.service';
 import { ShopifyService } from '../../services/shopify.service';
 import { SHOPIFY_CONFIG } from '../../shopify.config';
-import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-checkout',
@@ -23,7 +21,6 @@ import { inject } from '@angular/core';
   imports: [
     NavbarComponent,
     FooterComponent,
-    RouterLink,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
@@ -41,7 +38,9 @@ export class CheckoutComponent implements OnInit {
   selectedPaymentMethod = 'card';
   shippingCost = 49;
   promoCode = '';
-  discount = 0;
+  discount = signal<number>(0);
+  promoError = signal<string>('');
+  promoSuccess = signal<string>('');
 
   // Pre-launch safety
   enableCheckout = SHOPIFY_CONFIG.enableCheckout;
@@ -133,15 +132,43 @@ export class CheckoutComponent implements OnInit {
     return this.cartService.subtotal();
   }
 
-  get total() {
-    return this.subtotal + this.shippingCost - this.discount;
-  }
+  total = computed(() => {
+    return this.cartService.subtotal() + this.shippingCost - this.discount();
+  });
 
-  applyPromoCode() {
-    if (this.promoCode.toUpperCase() === 'TARHANA20') {
-      this.discount = 20;
-    } else {
-      this.discount = 0;
+  async applyPromoCode() {
+    console.log('applyPromoCode called with:', this.promoCode);
+    this.promoError.set('');
+    this.promoSuccess.set('');
+
+    if (!this.promoCode.trim()) {
+      console.log('Promo code is empty, clearing discount.');
+      this.discount.set(0);
+      return;
+    }
+
+    try {
+      console.log('Calling cartService.applyDiscount with:', this.promoCode.trim());
+      const result = await this.cartService.applyDiscount(this.promoCode.trim());
+      console.log('cartService.applyDiscount result:', result);
+      if (result.success) {
+        this.discount.set(result.discountAmount ?? 0);
+        this.promoSuccess.set(this.langService.translate('CHECKOUT_PROMO_SUCCESS') || 'Discount applied successfully!');
+        console.log('Promo success applied. Discount is now:', this.discount());
+      } else {
+        this.discount.set(0);
+        const rawError = result.errorMessage || 'Invalid discount code';
+        if (rawError === 'Invalid discount code') {
+          this.promoError.set(this.langService.translate('CHECKOUT_PROMO_INVALID') || 'Invalid discount code');
+        } else {
+          this.promoError.set(this.langService.translate('CHECKOUT_PROMO_ERROR') || 'Error applying discount code');
+        }
+        console.log('Promo failed. Error is:', this.promoError());
+      }
+    } catch (error) {
+      console.error('Error in applyPromoCode:', error);
+      this.discount.set(0);
+      this.promoError.set(this.langService.translate('CHECKOUT_PROMO_ERROR') || 'Error applying discount code');
     }
   }
 

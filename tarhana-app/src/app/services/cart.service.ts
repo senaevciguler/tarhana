@@ -1,6 +1,7 @@
 import { Injectable, signal, computed, effect, inject } from '@angular/core';
 import { CartItem, ShopifyProduct, ShopifyCart } from './shopify.types';
 import { ShopifyService } from './shopify.service';
+import { SHOPIFY_CONFIG } from '../shopify.config';
 
 @Injectable({
   providedIn: 'root',
@@ -253,6 +254,50 @@ export class CartService {
 
       return cart.checkoutUrl;
     });
+  }
+
+  async applyDiscount(code: string): Promise<{ success: boolean; discountAmount?: number; errorMessage?: string }> {
+    if (!code || !code.trim()) {
+      return { success: false, errorMessage: 'Invalid discount code' };
+    }
+
+    const cleanCode = code.trim();
+
+    // Check if Shopify is configured and we have an active cart ID
+    const isShopifyConfigured = !!(SHOPIFY_CONFIG.domain && SHOPIFY_CONFIG.storefrontAccessToken);
+    if (isShopifyConfigured && this.shopifyCartId()) {
+      try {
+        const cart = await this.shopifyService.applyDiscountCode(this.shopifyCartId()!, cleanCode);
+        if (cart) {
+          // Find the applied discount code status
+          const discountObj = cart.discountCodes?.find(dc => dc.code.toUpperCase() === cleanCode.toUpperCase());
+          if (discountObj && discountObj.applicable) {
+            // Update the checkout URL
+            this.shopifyCheckoutUrl.set(cart.checkoutUrl);
+
+            const subtotalVal = Number(cart.cost.subtotalAmount?.amount || 0);
+            const totalVal = Number(cart.cost.totalAmount?.amount || 0);
+            const discountAmount = Math.max(0, subtotalVal - totalVal);
+
+            return { success: true, discountAmount };
+          } else {
+            return { success: false, errorMessage: 'Invalid discount code' };
+          }
+        } else {
+          return { success: false, errorMessage: 'Error applying discount code' };
+        }
+      } catch (error) {
+        console.error('Error applying discount in CartService:', error);
+        return { success: false, errorMessage: 'Error applying discount code' };
+      }
+    }
+
+    // Local / Mock fallback path
+    if (cleanCode.toUpperCase() === 'TARHANA20') {
+      return { success: true, discountAmount: 20 };
+    }
+
+    return { success: false, errorMessage: 'Invalid discount code' };
   }
 
   clearCart() {

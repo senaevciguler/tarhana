@@ -77,4 +77,8 @@ export interface ShopifyCart {
       currencyCode: string;
     };
   };
+  discountCodes?: {
+    code: string;
+    applicable: boolean;
+  }[];
 }

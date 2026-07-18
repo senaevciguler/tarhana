@@ -94,7 +94,8 @@ describe('CartService', () => {
       'createCart',
       'addToCart',
       'updateCartLine',
-      'removeFromCart'
+      'removeFromCart',
+      'applyDiscountCode'
     ]);
 
     TestBed.configureTestingModule({
@@ -201,5 +202,55 @@ describe('CartService', () => {
       'gid://shopify/CartLine/101'
     );
     expect(service.items().length).toBe(0);
+  }));
+
+  it('should apply discount on Shopify cart correctly when configured', fakeAsync(() => {
+    // Set up shopifyCartId by adding an item first
+    mockShopifyService.createCart.and.returnValue(Promise.resolve(mockCartResponse1));
+    service.addItem(mockProduct1);
+    tick();
+
+    const discountedCartResponse: ShopifyCart = {
+      ...mockCartResponse1,
+      discountCodes: [{ code: 'TARHANA20', applicable: true }],
+      cost: {
+        subtotalAmount: { amount: '129.0', currencyCode: 'SEK' },
+        totalAmount: { amount: '109.0', currencyCode: 'SEK' }
+      },
+      checkoutUrl: 'https://checkout.shopify.com/1?discount=TARHANA20'
+    };
+    mockShopifyService.applyDiscountCode.and.returnValue(Promise.resolve(discountedCartResponse));
+
+    let applyResult: any;
+    service.applyDiscount('TARHANA20').then(res => {
+      applyResult = res;
+    });
+    tick();
+
+    expect(mockShopifyService.applyDiscountCode).toHaveBeenCalledWith('gid://shopify/Cart/test-cart-id', 'TARHANA20');
+    expect(applyResult).toEqual({ success: true, discountAmount: 20 });
+    expect(service.checkoutUrl()).toBe('https://checkout.shopify.com/1?discount=TARHANA20');
+  }));
+
+  it('should fall back to local mock validation when Shopify is not configured', fakeAsync(() => {
+    // Clear shopifyCartId to trigger fallback/mock path
+    service.clearCart();
+    tick();
+
+    let applyResult: any;
+    service.applyDiscount('TARHANA20').then(res => {
+      applyResult = res;
+    });
+    tick();
+
+    expect(applyResult).toEqual({ success: true, discountAmount: 20 });
+
+    let invalidResult: any;
+    service.applyDiscount('INVALID').then(res => {
+      invalidResult = res;
+    });
+    tick();
+
+    expect(invalidResult).toEqual({ success: false, errorMessage: 'Invalid discount code' });
   }));
 });
