@@ -13,47 +13,91 @@ export class ShopifyService {
   // Mock data representing Shopify products
   private products = signal<ShopifyProduct[]>([
     {
-  id: 'gid://shopify/Product/1',
-  handle: 'original-fermented-soup-mix',
-  title: 'PRODUCT_ORIGINAL_TITLE',
-  description: 'PRODUCT_ORIGINAL_DESC',
-  price: 129,
-  currency: 'kr',
-  image: '...',
-  variantId: 'gid://shopify/ProductVariant/101',
-  tags: [
-    'PRODUCT_ORIGINAL_BADGE1',
-    'PRODUCT_ORIGINAL_BADGE2',
-    'PRODUCT_ORIGINAL_BADGE3'
-  ],
-  weight: 'PRODUCT_ORIGINAL_WEIGHT',
-  variantLabel: 'PRODUCT_ORIGINAL_VARIANT',
-
-  availableForSale: true,
-  quantityAvailable: 5,
-  compareAtPrice: 159
-},
-  {
-  id: 'gid://shopify/Product/2',
-  handle: 'unsalted-fermented-soup-mix',
-  title: 'PRODUCT_UNSALTED_TITLE',
-  description: 'PRODUCT_UNSALTED_DESC',
-  price: 129,
-  currency: 'kr',
-  image: '...',
-  variantId: 'gid://shopify/ProductVariant/201',
-  tags: [
-    'PRODUCT_UNSALTED_BADGE1',
-    'PRODUCT_UNSALTED_BADGE2',
-    'PRODUCT_UNSALTED_BADGE3'
-  ],
-  weight: 'PRODUCT_UNSALTED_WEIGHT',
-  variantLabel: 'PRODUCT_UNSALTED_VARIANT',
-
-  availableForSale: false,
-  quantityAvailable: 0,
-  compareAtPrice: null
-},
+      id: 'gid://shopify/Product/1',
+      handle: 'original-fermented-soup-mix',
+      title: 'PRODUCT_ORIGINAL_TITLE',
+      description: 'PRODUCT_ORIGINAL_DESC',
+      price: 129,
+      currency: 'kr',
+      image: '...',
+      variantId: 'gid://shopify/ProductVariant/101',
+      tags: [
+        'PRODUCT_ORIGINAL_BADGE1',
+        'PRODUCT_ORIGINAL_BADGE2',
+        'PRODUCT_ORIGINAL_BADGE3'
+      ],
+      weight: 'PRODUCT_ORIGINAL_WEIGHT',
+      variantLabel: 'PRODUCT_ORIGINAL_VARIANT',
+      availableForSale: true,
+      quantityAvailable: 5,
+      compareAtPrice: 159,
+      images: ['...'],
+      variants: [
+        {
+          id: 'gid://shopify/ProductVariant/101',
+          title: 'PRODUCT_ORIGINAL_VARIANT',
+          price: 129,
+          currency: 'kr',
+          availableForSale: true,
+          quantityAvailable: 5,
+          compareAtPrice: 159
+        }
+      ],
+      options: [
+        {
+          id: 'gid://shopify/ProductOption/1',
+          name: 'Title',
+          values: ['Default Title']
+        }
+      ],
+      seo: {
+        title: 'Original Fermented Soup Mix | Ella\'s Pantry',
+        description: 'Authentic fermented soup mix inspired by tarhana.'
+      }
+    },
+    {
+      id: 'gid://shopify/Product/2',
+      handle: 'unsalted-fermented-soup-mix',
+      title: 'PRODUCT_UNSALTED_TITLE',
+      description: 'PRODUCT_UNSALTED_DESC',
+      price: 129,
+      currency: 'kr',
+      image: '...',
+      variantId: 'gid://shopify/ProductVariant/201',
+      tags: [
+        'PRODUCT_UNSALTED_BADGE1',
+        'PRODUCT_UNSALTED_BADGE2',
+        'PRODUCT_UNSALTED_BADGE3'
+      ],
+      weight: 'PRODUCT_UNSALTED_WEIGHT',
+      variantLabel: 'PRODUCT_UNSALTED_VARIANT',
+      availableForSale: false,
+      quantityAvailable: 0,
+      compareAtPrice: null,
+      images: ['...'],
+      variants: [
+        {
+          id: 'gid://shopify/ProductVariant/201',
+          title: 'PRODUCT_UNSALTED_VARIANT',
+          price: 129,
+          currency: 'kr',
+          availableForSale: false,
+          quantityAvailable: 0,
+          compareAtPrice: null
+        }
+      ],
+      options: [
+        {
+          id: 'gid://shopify/ProductOption/2',
+          name: 'Title',
+          values: ['Default Title']
+        }
+      ],
+      seo: {
+        title: 'Unsalted Fermented Soup Mix | Ella\'s Pantry',
+        description: 'Unsalted fermented soup mix inspired by tarhana.'
+      }
+    }
   ]);
 
   private get headers() {
@@ -91,20 +135,34 @@ async fetchProducts() {
               url
             }
 
-            variants(first: 1) {
+            images(first: 20) {
+              nodes {
+                url
+              }
+            }
+
+            options {
+              id
+              name
+              values
+            }
+
+            seo {
+              title
+              description
+            }
+
+            variants(first: 50) {
               edges {
                 node {
                   id
-
+                  title
                   availableForSale
-
                   quantityAvailable
-
                   price {
                     amount
                     currencyCode
                   }
-
                   compareAtPrice {
                     amount
                   }
@@ -133,7 +191,22 @@ async fetchProducts() {
         response.data.products.edges.map((edge: any) => {
 
           const node = edge.node;
-          const variant = node.variants.edges[0]?.node;
+          const variantsList = node.variants?.edges?.map((vEdge: any) => {
+            const v = vEdge.node;
+            return {
+              id: v.id,
+              title: v.title ?? '',
+              price: Number(v.price?.amount ?? 0),
+              currency: v.price?.currencyCode === 'SEK' ? 'kr' : (v.price?.currencyCode ?? ''),
+              availableForSale: v.availableForSale ?? true,
+              quantityAvailable: v.quantityAvailable !== undefined && v.quantityAvailable !== null
+                ? v.quantityAvailable
+                : ((v.availableForSale ?? true) ? 999 : 0),
+              compareAtPrice: v.compareAtPrice ? Number(v.compareAtPrice.amount) : null
+            };
+          }) ?? [];
+
+          const variant = variantsList[0];
 
           return {
 
@@ -145,35 +218,40 @@ async fetchProducts() {
 
             description: node.description,
 
-            price: Number(variant?.price?.amount ?? 0),
+            price: variant?.price ?? 0,
 
-            currency:
-              variant?.price?.currencyCode === 'SEK'
-                ? 'kr'
-                : variant?.price?.currencyCode,
+            currency: variant?.currency ?? '',
 
             image: node.featuredImage?.url ?? '',
 
-            variantId: variant?.id,
+            variantId: variant?.id ?? '',
 
             tags: [],
 
             weight: '',
 
-            variantLabel: '',
+            variantLabel: variant?.title ?? '',
 
-            availableForSale:
-              variant?.availableForSale ?? true,
+            availableForSale: variant?.availableForSale ?? true,
 
-            quantityAvailable:
-              variant?.quantityAvailable !== undefined && variant?.quantityAvailable !== null
-                ? variant.quantityAvailable
-                : ((variant?.availableForSale ?? true) ? 999 : 0),
+            quantityAvailable: variant?.quantityAvailable ?? 0,
 
-            compareAtPrice:
-              variant?.compareAtPrice
-                ? Number(variant.compareAtPrice.amount)
-                : null
+            compareAtPrice: variant?.compareAtPrice ?? null,
+
+            images: node.images?.nodes?.map((img: any) => img.url) ?? [],
+
+            variants: variantsList,
+
+            options: node.options?.map((opt: any) => ({
+              id: opt.id,
+              name: opt.name,
+              values: opt.values ?? []
+            })) ?? [],
+
+            seo: {
+              title: node.seo?.title ?? null,
+              description: node.seo?.description ?? null
+            }
 
           };
 
@@ -441,7 +519,24 @@ async fetchProducts() {
           url
         }
 
-        variants(first: 1) {
+        images(first: 20) {
+          nodes {
+            url
+          }
+        }
+
+        options {
+          id
+          name
+          values
+        }
+
+        seo {
+          title
+          description
+        }
+
+        variants(first: 50) {
           nodes {
             id
             title
@@ -487,7 +582,19 @@ async fetchProducts() {
       return null;
     }
 
-    const variant = product.variants.nodes[0];
+    const variantsList = product.variants?.nodes?.map((v: any) => ({
+      id: v.id,
+      title: v.title ?? '',
+      price: Number(v.price?.amount ?? 0),
+      currency: v.price?.currencyCode === 'SEK' ? 'kr' : (v.price?.currencyCode ?? ''),
+      availableForSale: v.availableForSale ?? true,
+      quantityAvailable: v.quantityAvailable !== undefined && v.quantityAvailable !== null
+        ? v.quantityAvailable
+        : ((v.availableForSale ?? true) ? 999 : 0),
+      compareAtPrice: v.compareAtPrice ? Number(v.compareAtPrice.amount) : null
+    })) ?? [];
+
+    const variant = variantsList[0];
 
     return {
       id: product.id,
@@ -495,26 +602,37 @@ async fetchProducts() {
       title: product.title,
       description: product.description,
 
-      price: Number(variant.price.amount),
-      currency: variant.price.currencyCode,
+      price: variant?.price ?? 0,
+      currency: variant?.currency ?? '',
 
       image: product.featuredImage?.url ?? '',
 
-      variantId: variant.id,
+      variantId: variant?.id ?? '',
 
-      tags: product.tags,
+      tags: product.tags ?? [],
 
       weight: '',
-      variantLabel: variant.title,
+      variantLabel: variant?.title ?? '',
 
-      availableForSale: variant.availableForSale,
-      quantityAvailable: variant.quantityAvailable !== undefined && variant.quantityAvailable !== null
-        ? variant.quantityAvailable
-        : (variant.availableForSale ? 999 : 0),
+      availableForSale: variant?.availableForSale ?? true,
+      quantityAvailable: variant?.quantityAvailable ?? 0,
 
-      compareAtPrice: variant.compareAtPrice
-        ? Number(variant.compareAtPrice.amount)
-        : null
+      compareAtPrice: variant?.compareAtPrice ?? null,
+
+      images: product.images?.nodes?.map((img: any) => img.url) ?? [],
+
+      variants: variantsList,
+
+      options: product.options?.map((opt: any) => ({
+        id: opt.id,
+        name: opt.name,
+        values: opt.values ?? []
+      })) ?? [],
+
+      seo: {
+        title: product.seo?.title ?? null,
+        description: product.seo?.description ?? null
+      }
     };
 
   } catch (error) {
