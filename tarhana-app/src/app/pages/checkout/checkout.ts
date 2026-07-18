@@ -49,7 +49,9 @@ export class CheckoutComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    console.log('Checkout loaded');
     this.initForm();
+    console.log(this.checkoutForm);
   }
 
   initForm() {
@@ -148,8 +150,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   async placeOrder() {
+    console.log('PLACE ORDER CLICKED');
     if (this.enableCheckout) {
+      console.log('Checkout başladı');
         const checkoutUrl = await this.cartService.getCheckoutUrl();
+          console.log(checkoutUrl);
         if (checkoutUrl) {
             window.location.href = checkoutUrl;
         } else {

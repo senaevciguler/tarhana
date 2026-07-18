@@ -1,0 +1,48 @@
+<app-navbar />
+
+<div class="max-w-6xl mx-auto px-6 py-16">
+
+  <div *ngIf="loading()">
+
+    Loading...
+
+  </div>
+
+  <div *ngIf="!loading() && product()">
+
+    <img
+      [src]="product()!.image"
+      class="w-full max-w-md rounded-xl">
+
+    <h1 class="text-4xl font-bold mt-8">
+
+      {{ product()!.title }}
+
+    </h1>
+
+    <p class="mt-4 text-lg">
+
+      {{ product()!.description }}
+
+    </p>
+
+    <h2 class="text-3xl font-bold mt-6">
+
+      {{ product()!.price }}
+      {{ product()!.currency }}
+
+    </h2>
+
+    <button
+      class="mt-8 bg-primary text-white px-8 py-4 rounded-xl"
+      (click)="addToCart()">
+
+      Add to Cart
+
+    </button>
+
+  </div>
+
+</div>
+
+<app-footer />

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -14,11 +14,17 @@ import { ShopifyProduct } from '../../services/shopify.types';
   imports: [NavbarComponent, FooterComponent, TranslatePipe, CommonModule],
   templateUrl: './products.component.html',
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit  {
+
   shopifyService = inject(ShopifyService);
   cartService = inject(CartService);
 
   products = this.shopifyService.getProducts();
+
+ async ngOnInit() {
+  await this.shopifyService.fetchProducts();
+}
+
 
   addToCart(product: ShopifyProduct) {
     this.cartService.addItem(product);

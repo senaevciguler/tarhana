@@ -61,50 +61,79 @@ export class CartService {
   }
 
   async addItem(product: ShopifyProduct) {
-    const existingItem = this.cartItems().find(item => item.variantId === product.variantId);
+  const existingItem = this.cartItems().find(
+    item => item.variantId === product.variantId
+  );
 
-    if (existingItem) {
-      await this.updateQuantity(product.variantId, existingItem.quantity + 1);
-    } else {
-      const newItem: CartItem = {
-        id: Math.random().toString(36).substring(2, 9),
-        productId: product.id,
-        variantId: product.variantId,
-        title: product.title,
-        variantLabel: product.variantLabel,
-        price: product.price,
-        currency: product.currency,
-        image: product.image,
-        quantity: 1
-      };
+  // Ürün zaten sepetteyse sadece miktarı artır
+  if (existingItem) {
+    await this.updateQuantity(
+      product.variantId,
+      existingItem.quantity + 1
+    );
+    this.openDrawer();
+    return;
+  }
 
-      this.cartItems.update(items => [...items, newItem]);
+  // Yeni ürün
+  const newItem: CartItem = {
+    id: Math.random().toString(36).substring(2, 9),
+    productId: product.id,
+    variantId: product.variantId,
+    title: product.title,
+    variantLabel: product.variantLabel,
+    price: product.price,
+    currency: product.currency,
+    image: product.image,
+    quantity: 1
+  };
 
-      // Sync with Shopify
-      if (!this.shopifyCartId()) {
-        const cart = await this.shopifyService.createCart(product.variantId, 1);
-        if (cart) {
-          this.shopifyCartId.set(cart.id);
-          this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-          // Store the shopifyLineId
-          const line = cart.lines[0];
-          if (line) {
-             this.updateLineId(product.variantId, line.id);
-          }
-        }
-      } else {
-        const cart = await this.shopifyService.addToCart(this.shopifyCartId()!, product.variantId, 1);
-        if (cart) {
-          this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-          // We don't get lines back easily in the partial mutation return without more complexity,
-          // but for robustness we will re-fetch or use full sync in a more complex app.
-          // For now we rely on getCheckoutUrl to ensure everything is perfect before redirect.
-        }
+  this.cartItems.update(items => [...items, newItem]);
+
+  // İlk ürün -> Shopify'da yeni cart oluştur
+  if (!this.shopifyCartId()) {
+
+    const cart = await this.shopifyService.createCart(
+      product.variantId,
+      1
+    );
+
+    if (cart) {
+      this.shopifyCartId.set(cart.id);
+      this.shopifyCheckoutUrl.set(cart.checkoutUrl);
+
+      const firstLine = cart.lines[0];
+
+      if (firstLine) {
+        this.updateLineId(product.variantId, firstLine.id);
       }
     }
 
-    this.openDrawer();
+  } else {
+
+    // Mevcut cart'a yeni ürün ekle
+    const cart = await this.shopifyService.addToCart(
+      this.shopifyCartId()!,
+      product.variantId,
+      1
+    );
+
+    if (cart) {
+      this.shopifyCheckoutUrl.set(cart.checkoutUrl);
+
+      // Shopify'ın döndürdüğü satırdan lineId'yi bul
+      const addedLine = cart.lines.find(
+        line => line.merchandise.id === product.variantId
+      );
+
+      if (addedLine) {
+        this.updateLineId(product.variantId, addedLine.id);
+      }
+    }
   }
+
+  this.openDrawer();
+}
 
   private updateLineId(variantId: string, lineId: string) {
     this.cartItems.update(items => items.map(item =>
@@ -152,29 +181,50 @@ export class CartService {
     }
   }
 
-  async getCheckoutUrl(): Promise<string> {
-    // For robustness, always recreate the cart before redirecting to ensure it matches local state perfectly
-    const items = this.cartItems();
-    if (items.length === 0) return '';
+ async getCheckoutUrl(): Promise<string> {
 
-    const cart = await this.shopifyService.createCart(items[0].variantId, items[0].quantity);
-    if (cart) {
-        this.shopifyCartId.set(cart.id);
-        this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-
-        // Add remaining items
-        for (let i = 1; i < items.length; i++) {
-            await this.shopifyService.addToCart(cart.id, items[i].variantId, items[i].quantity);
-        }
-        return cart.checkoutUrl;
-    }
-
+  // Sepet boşsa checkout yok
+  if (this.cartItems().length === 0) {
     return '';
   }
 
-  clearCart() {
-    this.cartItems.set([]);
-    this.shopifyCartId.set(null);
-    this.shopifyCheckoutUrl.set(null);
+  // Shopify checkout zaten oluşturulmuşsa tekrar oluşturma
+  if (this.shopifyCheckoutUrl()) {
+    return this.shopifyCheckoutUrl()!;
   }
+
+  // Cart kaybolmuşsa yeniden oluştur
+  const firstItem = this.cartItems()[0];
+
+  const cart = await this.shopifyService.createCart(
+    firstItem.variantId,
+    firstItem.quantity
+  );
+
+  if (!cart) {
+    return '';
+  }
+
+  this.shopifyCartId.set(cart.id);
+  this.shopifyCheckoutUrl.set(cart.checkoutUrl);
+
+  // İlk ürün dışındaki ürünleri ekle
+  for (let i = 1; i < this.cartItems().length; i++) {
+    await this.shopifyService.addToCart(
+      cart.id,
+      this.cartItems()[i].variantId,
+      this.cartItems()[i].quantity
+    );
+  }
+
+  return cart.checkoutUrl;
+}
+
+clearCart() {
+  this.cartItems.set([]);
+  this.shopifyCartId.set(null);
+  this.shopifyCheckoutUrl.set(null);
+
+  localStorage.removeItem('ella_pantry_cart');
+}
 }

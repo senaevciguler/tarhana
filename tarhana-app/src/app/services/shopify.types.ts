@@ -10,6 +10,10 @@ export interface ShopifyProduct {
   tags: string[];
   weight: string;
   variantLabel: string;
+  availableForSale: boolean;
+  quantityAvailable: number;
+  compareAtPrice?: number | null;
+  
 }
 
 export interface CartItem {

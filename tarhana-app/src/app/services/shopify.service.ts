@@ -13,31 +13,47 @@ export class ShopifyService {
   // Mock data representing Shopify products
   private products = signal<ShopifyProduct[]>([
     {
-      id: 'gid://shopify/Product/1',
-      handle: 'original-fermented-soup-mix',
-      title: 'PRODUCT_ORIGINAL_TITLE',
-      description: 'PRODUCT_ORIGINAL_DESC',
-      price: 129,
-      currency: 'kr',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk',
-      variantId: 'gid://shopify/ProductVariant/101',
-      tags: ['PRODUCT_ORIGINAL_BADGE1', 'PRODUCT_ORIGINAL_BADGE2', 'PRODUCT_ORIGINAL_BADGE3'],
-      weight: 'PRODUCT_ORIGINAL_WEIGHT',
-      variantLabel: 'PRODUCT_ORIGINAL_VARIANT'
-    },
-    {
-      id: 'gid://shopify/Product/2',
-      handle: 'unsalted-fermented-soup-mix',
-      title: 'PRODUCT_UNSALTED_TITLE',
-      description: 'PRODUCT_UNSALTED_DESC',
-      price: 129,
-      currency: 'kr',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDjaTiPnsI61uxKff57YDNfgbjKDiWdMvFSHp0jX89oKuyxARwdGUeaFVPAWipDO8AZCXPFZTgCSDLtbRfoqGoiORYn7peqxl_PglDuZBacidPiGJCRC7ov0OphhkiXL6jhaNCyEH4zP-6VVMnatWTt8hpUOuwl3or9mNCE3KM9hCRenphP_WIu02VBMBbfOaCcNA0W-lpjMQIF85vKOllNwl7Ccdi6GD9XKP4icgl5SbtA84lV6wClevwqpw6fghO3Nlo36Evs4Wk',
-      variantId: 'gid://shopify/ProductVariant/201',
-      tags: ['PRODUCT_UNSALTED_BADGE1', 'PRODUCT_UNSALTED_BADGE2', 'PRODUCT_UNSALTED_BADGE3'],
-      weight: 'PRODUCT_UNSALTED_WEIGHT',
-      variantLabel: 'PRODUCT_UNSALTED_VARIANT'
-    }
+  id: 'gid://shopify/Product/1',
+  handle: 'original-fermented-soup-mix',
+  title: 'PRODUCT_ORIGINAL_TITLE',
+  description: 'PRODUCT_ORIGINAL_DESC',
+  price: 129,
+  currency: 'kr',
+  image: '...',
+  variantId: 'gid://shopify/ProductVariant/101',
+  tags: [
+    'PRODUCT_ORIGINAL_BADGE1',
+    'PRODUCT_ORIGINAL_BADGE2',
+    'PRODUCT_ORIGINAL_BADGE3'
+  ],
+  weight: 'PRODUCT_ORIGINAL_WEIGHT',
+  variantLabel: 'PRODUCT_ORIGINAL_VARIANT',
+
+  availableForSale: true,
+  quantityAvailable: 100,
+  compareAtPrice: null
+},
+  {
+  id: 'gid://shopify/Product/2',
+  handle: 'unsalted-fermented-soup-mix',
+  title: 'PRODUCT_UNSALTED_TITLE',
+  description: 'PRODUCT_UNSALTED_DESC',
+  price: 129,
+  currency: 'kr',
+  image: '...',
+  variantId: 'gid://shopify/ProductVariant/201',
+  tags: [
+    'PRODUCT_UNSALTED_BADGE1',
+    'PRODUCT_UNSALTED_BADGE2',
+    'PRODUCT_UNSALTED_BADGE3'
+  ],
+  weight: 'PRODUCT_UNSALTED_WEIGHT',
+  variantLabel: 'PRODUCT_UNSALTED_VARIANT',
+
+  availableForSale: true,
+  quantityAvailable: 100,
+  compareAtPrice: null
+},
   ]);
 
   private get headers() {
@@ -55,36 +71,42 @@ export class ShopifyService {
     return this.products.asReadonly();
   }
 
-  async fetchProducts() {
-    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {
-      console.warn('Shopify credentials missing, using mock products.');
-      return this.products();
-    }
+async fetchProducts() {
+  if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {
+    console.warn('Shopify credentials missing, using mock products.');
+    return this.products();
+  }
 
-    const query = `
-      query getProducts {
-        products(first: 10) {
-          edges {
-            node {
-              id
-              handle
-              title
-              description
-              variants(first: 1) {
-                edges {
-                  node {
-                    id
-                    price {
-                      amount
-                      currencyCode
-                    }
+  const query = `
+    query getProducts {
+      products(first: 20) {
+        edges {
+          node {
+            id
+            handle
+            title
+            description
+
+            featuredImage {
+              url
+            }
+
+            variants(first: 1) {
+              edges {
+                node {
+                  id
+
+                  availableForSale
+
+                  quantityAvailable
+
+                  price {
+                    amount
+                    currencyCode
                   }
-                }
-              }
-              images(first: 1) {
-                edges {
-                  node {
-                    url
+
+                  compareAtPrice {
+                    amount
                   }
                 }
               }
@@ -92,42 +114,80 @@ export class ShopifyService {
           }
         }
       }
-    `;
+    }
+  `;
 
-    try {
-      const response: any = await firstValueFrom(
-        this.http.post(this.apiUrl, { query }, { headers: this.headers })
-      );
+  try {
 
-      if (response.data?.products?.edges) {
-        const shopifyProducts: ShopifyProduct[] = response.data.products.edges.map((edge: any) => {
+    const response: any = await firstValueFrom(
+      this.http.post(
+        this.apiUrl,
+        { query },
+        { headers: this.headers }
+      )
+    );
+
+    if (response.data?.products?.edges) {
+
+      const shopifyProducts: ShopifyProduct[] =
+        response.data.products.edges.map((edge: any) => {
+
           const node = edge.node;
           const variant = node.variants.edges[0]?.node;
+
           return {
+
             id: node.id,
+
             handle: node.handle,
+
             title: node.title,
+
             description: node.description,
-            price: parseFloat(variant?.price.amount || '0'),
-            currency: variant?.price.currencyCode === 'SEK' ? 'kr' : variant?.price.currencyCode,
-            image: node.images.edges[0]?.node.url,
+
+            price: Number(variant?.price?.amount ?? 0),
+
+            currency:
+              variant?.price?.currencyCode === 'SEK'
+                ? 'kr'
+                : variant?.price?.currencyCode,
+
+            image: node.featuredImage?.url ?? '',
+
             variantId: variant?.id,
+
             tags: [],
+
             weight: '',
-            variantLabel: ''
+
+            variantLabel: '',
+
+            availableForSale:
+              variant?.availableForSale ?? true,
+
+            quantityAvailable:
+              variant?.quantityAvailable ?? 0,
+
+            compareAtPrice:
+              variant?.compareAtPrice
+                ? Number(variant.compareAtPrice.amount)
+                : null
+
           };
+
         });
 
-        if (shopifyProducts.length > 0) {
-          this.products.set(shopifyProducts);
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching products from Shopify:', error);
+      this.products.set(shopifyProducts);
     }
 
-    return this.products();
+  } catch (error) {
+
+    console.error('Error fetching products from Shopify:', error);
+
   }
+
+  return this.products();
+}
 
   private mapCart(rawCart: any): ShopifyCart {
     return {
@@ -149,68 +209,91 @@ export class ShopifyService {
   }
 
   async createCart(variantId: string, quantity: number): Promise<ShopifyCart | null> {
-    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
 
-    const query = `
-      mutation cartCreate($input: CartInput) {
-        cartCreate(input: $input) {
-          cart {
-            id
-            checkoutUrl
-            lines(first: 10) {
-              edges {
-                node {
-                  id
-                  quantity
-                  merchandise {
-                    ... on ProductVariant {
-                      id
+  if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {
+    console.log('Missing Shopify config');
+    return null;
+  }
+
+  const query = `
+    mutation cartCreate($input: CartInput) {
+      cartCreate(input: $input) {
+        cart {
+          id
+          checkoutUrl
+          lines(first: 10) {
+            edges {
+              node {
+                id
+                quantity
+                merchandise {
+                  ... on ProductVariant {
+                    id
+                    title
+                    product {
                       title
-                      product {
-                        title
-                      }
                     }
                   }
                 }
               }
             }
-            cost {
-              totalAmount {
-                amount
-                currencyCode
-              }
-              subtotalAmount {
-                amount
-                currencyCode
-              }
+          }
+          cost {
+            totalAmount {
+              amount
+              currencyCode
+            }
+            subtotalAmount {
+              amount
+              currencyCode
             }
           }
         }
+        userErrors {
+          field
+          message
+        }
       }
-    `;
-
-    const variables = {
-      input: {
-        lines: [
-          {
-            merchandiseId: variantId,
-            quantity: quantity
-          }
-        ]
-      }
-    };
-
-    try {
-      const response: any = await firstValueFrom(
-        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
-      );
-      return response.data?.cartCreate?.cart ? this.mapCart(response.data.cartCreate.cart) : null;
-    } catch (error) {
-      console.error('Error creating cart on Shopify:', error);
-      return null;
     }
-  }
+  `;
 
+  const variables = {
+    input: {
+      lines: [
+        {
+          merchandiseId: variantId,
+          quantity
+        }
+      ]
+    }
+  };
+
+  console.log('API URL:', this.apiUrl);
+  console.log('Variant:', variantId);
+  console.log('Token:', SHOPIFY_CONFIG.storefrontAccessToken);
+  console.log('Variables:', variables);
+
+  try {
+    const response: any = await firstValueFrom(
+      this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+    );
+
+    console.log('FULL RESPONSE:', response);
+
+    if (response.data?.cartCreate?.userErrors?.length) {
+      console.log('USER ERRORS:', response.data.cartCreate.userErrors);
+    }
+
+    return response.data?.cartCreate?.cart
+      ? this.mapCart(response.data.cartCreate.cart)
+      : null;
+
+  } catch (error: any) {
+    console.error('HTTP ERROR:', error);
+    console.error('Server response:', error.error);
+    return null;
+  }
+}
   async addToCart(cartId: string, variantId: string, quantity: number): Promise<ShopifyCart | null> {
     if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
 
@@ -337,4 +420,104 @@ export class ShopifyService {
       return null;
     }
   }
+  async fetchProduct(handle: string): Promise<ShopifyProduct | null> {
+
+  if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {
+    return null;
+  }
+
+  const query = `
+    query Product($handle: String!) {
+      product(handle: $handle) {
+        id
+        handle
+        title
+        description
+        tags
+
+        featuredImage {
+          url
+        }
+
+        variants(first: 1) {
+          nodes {
+            id
+            title
+            availableForSale
+            quantityAvailable
+
+            price {
+              amount
+              currencyCode
+            }
+
+            compareAtPrice {
+              amount
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    handle
+  };
+
+  try {
+
+    const response: any = await firstValueFrom(
+      this.http.post(
+        this.apiUrl,
+        {
+          query,
+          variables
+        },
+        {
+          headers: this.headers
+        }
+      )
+    );
+
+    const product = response.data?.product;
+
+    if (!product) {
+      return null;
+    }
+
+    const variant = product.variants.nodes[0];
+
+    return {
+      id: product.id,
+      handle: product.handle,
+      title: product.title,
+      description: product.description,
+
+      price: Number(variant.price.amount),
+      currency: variant.price.currencyCode,
+
+      image: product.featuredImage?.url ?? '',
+
+      variantId: variant.id,
+
+      tags: product.tags,
+
+      weight: '',
+      variantLabel: variant.title,
+
+      availableForSale: variant.availableForSale,
+      quantityAvailable: variant.quantityAvailable ?? 0,
+
+      compareAtPrice: variant.compareAtPrice
+        ? Number(variant.compareAtPrice.amount)
+        : null
+    };
+
+  } catch (error) {
+
+    console.error('Error fetching product:', error);
+
+    return null;
+  }
+}
 }
