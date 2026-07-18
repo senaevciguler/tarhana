@@ -47,7 +47,7 @@ describe('CheckoutComponent', () => {
   it('should render correct title based on checkout state', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     if (component.enableCheckout) {
-      expect(compiled.querySelector('h1')?.textContent).toContain('Checkout');
+      expect(compiled.querySelector('h1')?.textContent).toContain('Review your order');
     } else {
       expect(compiled.querySelector('h1')?.textContent).toContain('Coming Soon');
     }

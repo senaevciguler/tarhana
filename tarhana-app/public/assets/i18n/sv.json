@@ -61,6 +61,8 @@
   "PRODUCT_PRICE_ORIGINAL": "129 kr",
   "PRODUCT_PRICE_UNSALTED": "129 kr",
   "PRODUCT_ADD_TO_CART": "Lägg i varukorgen",
+  "PRODUCT_OUT_OF_STOCK": "Slutsåld",
+  "PRODUCT_ONLY_LEFT": "Endast {count} kvar",
   "PRODUCTS_CHOOSE_TITLE": "Vilken ska jag välja?",
   "PRODUCTS_CHOOSE_ORIGINAL_HEADING": "Original fermenterad soppmix",
   "PRODUCTS_CHOOSE_ORIGINAL_TEXT": "Bäst för den klassiska, färdigbalanserade smaken.",

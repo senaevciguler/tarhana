@@ -30,8 +30,8 @@ export class ShopifyService {
   variantLabel: 'PRODUCT_ORIGINAL_VARIANT',
 
   availableForSale: true,
-  quantityAvailable: 100,
-  compareAtPrice: null
+  quantityAvailable: 5,
+  compareAtPrice: 159
 },
   {
   id: 'gid://shopify/Product/2',
@@ -50,8 +50,8 @@ export class ShopifyService {
   weight: 'PRODUCT_UNSALTED_WEIGHT',
   variantLabel: 'PRODUCT_UNSALTED_VARIANT',
 
-  availableForSale: true,
-  quantityAvailable: 100,
+  availableForSale: false,
+  quantityAvailable: 0,
   compareAtPrice: null
 },
   ]);
@@ -166,7 +166,9 @@ async fetchProducts() {
               variant?.availableForSale ?? true,
 
             quantityAvailable:
-              variant?.quantityAvailable ?? 0,
+              variant?.quantityAvailable !== undefined && variant?.quantityAvailable !== null
+                ? variant.quantityAvailable
+                : ((variant?.availableForSale ?? true) ? 999 : 0),
 
             compareAtPrice:
               variant?.compareAtPrice
@@ -506,7 +508,9 @@ async fetchProducts() {
       variantLabel: variant.title,
 
       availableForSale: variant.availableForSale,
-      quantityAvailable: variant.quantityAvailable ?? 0,
+      quantityAvailable: variant.quantityAvailable !== undefined && variant.quantityAvailable !== null
+        ? variant.quantityAvailable
+        : (variant.availableForSale ? 999 : 0),
 
       compareAtPrice: variant.compareAtPrice
         ? Number(variant.compareAtPrice.amount)
