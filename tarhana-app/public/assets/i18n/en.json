@@ -61,6 +61,8 @@
   "PRODUCT_PRICE_ORIGINAL": "129 kr",
   "PRODUCT_PRICE_UNSALTED": "129 kr",
   "PRODUCT_ADD_TO_CART": "Add to cart",
+  "PRODUCT_OUT_OF_STOCK": "Out of stock",
+  "PRODUCT_ONLY_LEFT": "Only {count} left",
   "PRODUCTS_CHOOSE_TITLE": "Which one should I choose?",
   "PRODUCTS_CHOOSE_ORIGINAL_HEADING": "Original Fermented Soup Mix",
   "PRODUCTS_CHOOSE_ORIGINAL_TEXT": "Best for the classic, ready-balanced taste.",
