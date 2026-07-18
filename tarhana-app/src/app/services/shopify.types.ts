@@ -8,6 +8,17 @@ export interface ShopifyVariant {
   compareAtPrice?: number | null;
 }
 
+export interface ShopifyProductOption {
+  id?: string;
+  name: string;
+  values: string[];
+}
+
+export interface ShopifySEO {
+  title: string | null;
+  description: string | null;
+}
+
 export interface ShopifyProduct {
   id: string;
   handle: string;
@@ -25,6 +36,8 @@ export interface ShopifyProduct {
   compareAtPrice?: number | null;
   images?: string[];
   variants?: ShopifyVariant[];
+  options?: ShopifyProductOption[];
+  seo?: ShopifySEO;
 }
 
 export interface CartItem {
