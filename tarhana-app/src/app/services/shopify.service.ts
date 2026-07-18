@@ -288,93 +288,107 @@ async fetchProducts() {
     };
   }
 
-  async createCart(variantId: string, quantity: number): Promise<ShopifyCart | null> {
+  async createCart(
+    variantIdOrLines: string | { variantId: string; quantity: number }[],
+    quantity?: number
+  ): Promise<ShopifyCart | null> {
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {
+      console.log('Missing Shopify config');
+      return null;
+    }
 
-  if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) {
-    console.log('Missing Shopify config');
-    return null;
-  }
-
-  const query = `
-    mutation cartCreate($input: CartInput) {
-      cartCreate(input: $input) {
-        cart {
-          id
-          checkoutUrl
-          lines(first: 10) {
-            edges {
-              node {
-                id
-                quantity
-                merchandise {
-                  ... on ProductVariant {
-                    id
-                    title
-                    product {
+    const query = `
+      mutation cartCreate($input: CartInput) {
+        cartCreate(input: $input) {
+          cart {
+            id
+            checkoutUrl
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  quantity
+                  merchandise {
+                    ... on ProductVariant {
+                      id
                       title
+                      product {
+                        title
+                      }
                     }
                   }
                 }
               }
             }
-          }
-          cost {
-            totalAmount {
-              amount
-              currencyCode
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
+                amount
+                currencyCode
+              }
             }
-            subtotalAmount {
-              amount
-              currencyCode
-            }
           }
-        }
-        userErrors {
-          field
-          message
+          userErrors {
+            field
+            message
+          }
         }
       }
+    `;
+
+    const linesInput = Array.isArray(variantIdOrLines)
+      ? variantIdOrLines.map((line) => ({
+          merchandiseId: line.variantId,
+          quantity: line.quantity,
+        }))
+      : [
+          {
+            merchandiseId: variantIdOrLines,
+            quantity: quantity || 1,
+          },
+        ];
+
+    const variables = {
+      input: {
+        lines: linesInput,
+      },
+    };
+
+    console.log('API URL:', this.apiUrl);
+    console.log('Variables:', variables);
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(
+          this.apiUrl,
+          { query, variables },
+          { headers: this.headers }
+        )
+      );
+
+      console.log('FULL RESPONSE:', response);
+
+      if (response.data?.cartCreate?.userErrors?.length) {
+        console.log('USER ERRORS:', response.data.cartCreate.userErrors);
+      }
+
+      return response.data?.cartCreate?.cart
+        ? this.mapCart(response.data.cartCreate.cart)
+        : null;
+    } catch (error: any) {
+      console.error('HTTP ERROR:', error);
+      return null;
     }
-  `;
-
-  const variables = {
-    input: {
-      lines: [
-        {
-          merchandiseId: variantId,
-          quantity
-        }
-      ]
-    }
-  };
-
-  console.log('API URL:', this.apiUrl);
-  console.log('Variant:', variantId);
-  console.log('Token:', SHOPIFY_CONFIG.storefrontAccessToken);
-  console.log('Variables:', variables);
-
-  try {
-    const response: any = await firstValueFrom(
-      this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
-    );
-
-    console.log('FULL RESPONSE:', response);
-
-    if (response.data?.cartCreate?.userErrors?.length) {
-      console.log('USER ERRORS:', response.data.cartCreate.userErrors);
-    }
-
-    return response.data?.cartCreate?.cart
-      ? this.mapCart(response.data.cartCreate.cart)
-      : null;
-
-  } catch (error: any) {
-    console.error('HTTP ERROR:', error);
-    console.error('Server response:', error.error);
-    return null;
   }
-}
-  async addToCart(cartId: string, variantId: string, quantity: number): Promise<ShopifyCart | null> {
+
+  async addToCart(
+    cartId: string,
+    variantId: string,
+    quantity: number
+  ): Promise<ShopifyCart | null> {
     if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
 
     const query = `
@@ -413,21 +427,31 @@ async fetchProducts() {
 
     const variables = {
       cartId,
-      lines: [{ merchandiseId: variantId, quantity }]
+      lines: [{ merchandiseId: variantId, quantity }],
     };
 
     try {
       const response: any = await firstValueFrom(
-        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+        this.http.post(
+          this.apiUrl,
+          { query, variables },
+          { headers: this.headers }
+        )
       );
-      return response.data?.cartLinesAdd?.cart ? this.mapCart(response.data.cartLinesAdd.cart) : null;
+      return response.data?.cartLinesAdd?.cart
+        ? this.mapCart(response.data.cartLinesAdd.cart)
+        : null;
     } catch (error) {
       console.error('Error adding to cart on Shopify:', error);
       return null;
     }
   }
 
-  async updateCartLine(cartId: string, lineId: string, quantity: number): Promise<ShopifyCart | null> {
+  async updateCartLine(
+    cartId: string,
+    lineId: string,
+    quantity: number
+  ): Promise<ShopifyCart | null> {
     if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
 
     const query = `
@@ -436,6 +460,23 @@ async fetchProducts() {
           cart {
             id
             checkoutUrl
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  quantity
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      title
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
             cost {
               totalAmount {
                 amount
@@ -449,23 +490,30 @@ async fetchProducts() {
 
     const variables = {
       cartId,
-      lines: [{ id: lineId, quantity }]
+      lines: [{ id: lineId, quantity }],
     };
 
     try {
       const response: any = await firstValueFrom(
-        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+        this.http.post(
+          this.apiUrl,
+          { query, variables },
+          { headers: this.headers }
+        )
       );
-      // Note: update mutation in this simple form doesn't return full lines by default in my mapCart if not requested
-      // But we can still map the base properties.
-      return response.data?.cartLinesUpdate?.cart ? this.mapCart(response.data.cartLinesUpdate.cart) : null;
+      return response.data?.cartLinesUpdate?.cart
+        ? this.mapCart(response.data.cartLinesUpdate.cart)
+        : null;
     } catch (error) {
       console.error('Error updating cart line on Shopify:', error);
       return null;
     }
   }
 
-  async removeFromCart(cartId: string, lineId: string): Promise<ShopifyCart | null> {
+  async removeFromCart(
+    cartId: string,
+    lineId: string
+  ): Promise<ShopifyCart | null> {
     if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
 
     const query = `
@@ -474,6 +522,23 @@ async fetchProducts() {
           cart {
             id
             checkoutUrl
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  quantity
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      title
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
             cost {
               totalAmount {
                 amount
@@ -487,14 +552,20 @@ async fetchProducts() {
 
     const variables = {
       cartId,
-      lineIds: [lineId]
+      lineIds: [lineId],
     };
 
     try {
       const response: any = await firstValueFrom(
-        this.http.post(this.apiUrl, { query, variables }, { headers: this.headers })
+        this.http.post(
+          this.apiUrl,
+          { query, variables },
+          { headers: this.headers }
+        )
       );
-      return response.data?.cartLinesRemove?.cart ? this.mapCart(response.data.cartLinesRemove.cart) : null;
+      return response.data?.cartLinesRemove?.cart
+        ? this.mapCart(response.data.cartLinesRemove.cart)
+        : null;
     } catch (error) {
       console.error('Error removing from cart on Shopify:', error);
       return null;
