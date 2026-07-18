@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckoutComponent } from './checkout';
 import { provideRouter } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
+import { ShippingService } from '../../services/shipping.service';
 import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -51,5 +52,27 @@ describe('CheckoutComponent', () => {
     } else {
       expect(compiled.querySelector('h1')?.textContent).toContain('Coming Soon');
     }
+  });
+
+  it('should compute shippingCost based on form value of country and deliveryMethod', () => {
+    const shippingService = TestBed.inject(ShippingService);
+    spyOn(shippingService, 'calculateShipping').and.callThrough();
+
+    // Trigger getter
+    const cost = component.shippingCost;
+    expect(shippingService.calculateShipping).toHaveBeenCalledWith(0, 'Sweden', 'home');
+    expect(cost).toBe(49);
+
+    // Change country to Norway
+    component.checkoutForm.get('shipping.country')?.setValue('Norway');
+    const costNorway = component.shippingCost;
+    expect(shippingService.calculateShipping).toHaveBeenCalledWith(0, 'Norway', 'home');
+    expect(costNorway).toBe(99);
+
+    // Change deliveryMethod to pickup
+    component.checkoutForm.get('shipping.deliveryMethod')?.setValue('pickup');
+    const costPickup = component.shippingCost;
+    expect(shippingService.calculateShipping).toHaveBeenCalledWith(0, 'Norway', 'pickup');
+    expect(costPickup).toBe(0);
   });
 });

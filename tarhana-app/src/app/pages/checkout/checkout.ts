@@ -14,6 +14,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { LanguageService } from '../../services/language.service';
 import { CartService } from '../../services/cart.service';
 import { ShopifyService } from '../../services/shopify.service';
+import { ShippingService } from '../../services/shipping.service';
 import { SHOPIFY_CONFIG } from '../../shopify.config';
 import { inject } from '@angular/core';
 
@@ -35,13 +36,22 @@ export class CheckoutComponent implements OnInit {
   langService = inject(LanguageService);
   cartService = inject(CartService);
   shopifyService = inject(ShopifyService);
+  shippingService = inject(ShippingService);
   checkoutForm!: FormGroup;
   orderPlaced = false;
   orderReference = '';
   selectedPaymentMethod = 'card';
-  shippingCost = 49;
   promoCode = '';
   discount = 0;
+
+  get shippingCost() {
+    if (!this.checkoutForm) {
+      return this.shippingService.calculateShipping(this.subtotal, 'Sweden', 'home');
+    }
+    const country = this.checkoutForm.get('shipping.country')?.value || 'Sweden';
+    const deliveryMethod = this.checkoutForm.get('shipping.deliveryMethod')?.value || 'home';
+    return this.shippingService.calculateShipping(this.subtotal, country, deliveryMethod);
+  }
 
   // Pre-launch safety
   enableCheckout = SHOPIFY_CONFIG.enableCheckout;
