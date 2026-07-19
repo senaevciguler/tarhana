@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -42,7 +42,9 @@ export class CheckoutComponent implements OnInit {
   orderReference = '';
   selectedPaymentMethod = 'card';
   promoCode = '';
-  discount = 0;
+  discount = signal<number>(0);
+  promoError = signal<string>('');
+  promoSuccess = signal<string>('');
 
   get shippingCost() {
     if (!this.checkoutForm) {
@@ -143,15 +145,28 @@ export class CheckoutComponent implements OnInit {
     return this.cartService.subtotal();
   }
 
-  get total() {
-    return this.subtotal + this.shippingCost - this.discount;
-  }
+  total = computed(() => {
+    return this.subtotal + this.shippingCost - this.discount();
+  });
 
-  applyPromoCode() {
-    if (this.promoCode.toUpperCase() === 'TARHANA20') {
-      this.discount = 20;
+  async applyPromoCode() {
+    this.promoError.set('');
+    this.promoSuccess.set('');
+    const code = this.promoCode.trim();
+    if (!code) {
+      this.discount.set(0);
+      return;
+    }
+
+    const success = await this.cartService.applyDiscount(code);
+    if (success) {
+      this.discount.set(this.cartService.discountAmount());
+      const msg = this.langService.translate('PROMO_SUCCESS_MSG');
+      this.promoSuccess.set(msg !== 'PROMO_SUCCESS_MSG' ? msg : 'Promo code applied successfully!');
     } else {
-      this.discount = 0;
+      this.discount.set(0);
+      const msg = this.langService.translate('PROMO_ERROR_MSG');
+      this.promoError.set(msg !== 'PROMO_ERROR_MSG' ? msg : 'Invalid promo code');
     }
   }
 

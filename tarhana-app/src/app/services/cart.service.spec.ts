@@ -94,7 +94,8 @@ describe('CartService', () => {
       'createCart',
       'addToCart',
       'updateCartLine',
-      'removeFromCart'
+      'removeFromCart',
+      'applyDiscount'
     ]);
 
     TestBed.configureTestingModule({
@@ -201,5 +202,48 @@ describe('CartService', () => {
       'gid://shopify/CartLine/101'
     );
     expect(service.items().length).toBe(0);
+  }));
+
+  it('should fallback to mock validation of TARHANA20 when Shopify is not configured', fakeAsync(() => {
+    // If shopify is not configured, applyDiscount returns true for TARHANA20
+    let success: boolean = false;
+    service.applyDiscount('TARHANA20').then(res => success = res);
+    tick();
+
+    expect(success).toBeTrue();
+    expect(service.discountAmount()).toBe(20);
+
+    // Any invalid code should return false
+    let successInvalid: boolean = true;
+    service.applyDiscount('INVALID').then(res => successInvalid = res);
+    tick();
+
+    expect(successInvalid).toBeFalse();
+    expect(service.discountAmount()).toBe(0);
+  }));
+
+  it('should apply discount through Shopify and compute discount amount dynamically', fakeAsync(() => {
+    mockShopifyService.createCart.and.returnValue(Promise.resolve(mockCartResponse1));
+    service.addItem(mockProduct1);
+    tick();
+
+    const discountedCartResponse: ShopifyCart = {
+      ...mockCartResponse1,
+      discountCodes: [{ code: 'TARHANA20', applicable: true }],
+      cost: {
+        totalAmount: { amount: '109.0', currencyCode: 'SEK' },
+        subtotalAmount: { amount: '129.0', currencyCode: 'SEK' }
+      }
+    };
+
+    mockShopifyService.applyDiscount.and.returnValue(Promise.resolve(discountedCartResponse));
+
+    let success: boolean = false;
+    service.applyDiscount('TARHANA20').then(res => success = res);
+    tick();
+
+    expect(mockShopifyService.applyDiscount).toHaveBeenCalledWith('gid://shopify/Cart/test-cart-id', ['TARHANA20']);
+    expect(success).toBeTrue();
+    expect(service.discountAmount()).toBe(20); // 129.0 - 109.0
   }));
 });

@@ -46,6 +46,50 @@ describe('ShopifyService', () => {
     SHOPIFY_CONFIG.storefrontAccessToken = origToken;
   });
 
+  it('should query correct fields and map response correctly in applyDiscount', async () => {
+    const origDomain = SHOPIFY_CONFIG.domain;
+    const origToken = SHOPIFY_CONFIG.storefrontAccessToken;
+    SHOPIFY_CONFIG.domain = 'test-store.myshopify.com';
+    SHOPIFY_CONFIG.storefrontAccessToken = 'test-token';
+
+    const mockResponse = {
+      data: {
+        cartDiscountCodesUpdate: {
+          cart: {
+            id: 'gid://shopify/Cart/test-cart-id',
+            checkoutUrl: 'https://checkout.shopify.com/1',
+            discountCodes: [
+              { code: 'TESTCOUPON', applicable: true }
+            ],
+            lines: [],
+            cost: {
+              totalAmount: { amount: '109.0', currencyCode: 'SEK' },
+              subtotalAmount: { amount: '129.0', currencyCode: 'SEK' }
+            }
+          },
+          userErrors: []
+        }
+      }
+    };
+
+    const promise = service.applyDiscount('gid://shopify/Cart/test-cart-id', ['TESTCOUPON']);
+
+    const req = httpTestingController.expectOne(`https://test-store.myshopify.com/api/${SHOPIFY_CONFIG.apiVersion}/graphql.json`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body.query).toContain('cartDiscountCodesUpdate');
+    req.flush(mockResponse);
+
+    const cart = await promise;
+    expect(cart).toBeTruthy();
+    expect(cart!.id).toBe('gid://shopify/Cart/test-cart-id');
+    expect(cart!.discountCodes).toEqual([{ code: 'TESTCOUPON', applicable: true }]);
+    expect(cart!.cost.subtotalAmount.amount).toBe('129.0');
+    expect(cart!.cost.totalAmount.amount).toBe('109.0');
+
+    SHOPIFY_CONFIG.domain = origDomain;
+    SHOPIFY_CONFIG.storefrontAccessToken = origToken;
+  });
+
   it('should query correct fields and map response correctly in fetchProducts', async () => {
     const origDomain = SHOPIFY_CONFIG.domain;
     const origToken = SHOPIFY_CONFIG.storefrontAccessToken;

@@ -273,6 +273,10 @@ async fetchProducts() {
     return {
       id: rawCart.id,
       checkoutUrl: rawCart.checkoutUrl,
+      discountCodes: rawCart.discountCodes?.map((dc: any) => ({
+        code: dc.code,
+        applicable: dc.applicable,
+      })) || [],
       lines: rawCart.lines?.edges?.map((edge: any) => ({
         id: edge.node.id,
         quantity: edge.node.quantity,
@@ -303,6 +307,10 @@ async fetchProducts() {
           cart {
             id
             checkoutUrl
+            discountCodes {
+              code
+              applicable
+            }
             lines(first: 10) {
               edges {
                 node {
@@ -397,6 +405,10 @@ async fetchProducts() {
           cart {
             id
             checkoutUrl
+            discountCodes {
+              code
+              applicable
+            }
             lines(first: 10) {
               edges {
                 node {
@@ -416,6 +428,10 @@ async fetchProducts() {
             }
             cost {
               totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
                 amount
                 currencyCode
               }
@@ -460,6 +476,10 @@ async fetchProducts() {
           cart {
             id
             checkoutUrl
+            discountCodes {
+              code
+              applicable
+            }
             lines(first: 10) {
               edges {
                 node {
@@ -479,6 +499,10 @@ async fetchProducts() {
             }
             cost {
               totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
                 amount
                 currencyCode
               }
@@ -522,6 +546,10 @@ async fetchProducts() {
           cart {
             id
             checkoutUrl
+            discountCodes {
+              code
+              applicable
+            }
             lines(first: 10) {
               edges {
                 node {
@@ -541,6 +569,10 @@ async fetchProducts() {
             }
             cost {
               totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
                 amount
                 currencyCode
               }
@@ -568,6 +600,80 @@ async fetchProducts() {
         : null;
     } catch (error) {
       console.error('Error removing from cart on Shopify:', error);
+      return null;
+    }
+  }
+
+  async applyDiscount(
+    cartId: string,
+    discountCodes: string[]
+  ): Promise<ShopifyCart | null> {
+    if (!SHOPIFY_CONFIG.domain || !SHOPIFY_CONFIG.storefrontAccessToken) return null;
+
+    const query = `
+      mutation cartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
+        cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+          cart {
+            id
+            checkoutUrl
+            discountCodes {
+              code
+              applicable
+            }
+            lines(first: 10) {
+              edges {
+                node {
+                  id
+                  quantity
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      title
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+            }
+          }
+          userErrors {
+            field
+            message
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      cartId,
+      discountCodes,
+    };
+
+    try {
+      const response: any = await firstValueFrom(
+        this.http.post(
+          this.apiUrl,
+          { query, variables },
+          { headers: this.headers }
+        )
+      );
+      return response.data?.cartDiscountCodesUpdate?.cart
+        ? this.mapCart(response.data.cartDiscountCodesUpdate.cart)
+        : null;
+    } catch (error) {
+      console.error('Error applying discount to cart on Shopify:', error);
       return null;
     }
   }
