@@ -43,6 +43,7 @@ export class CheckoutComponent implements OnInit {
   selectedPaymentMethod = 'card';
   promoCode = '';
   discount = 0;
+  inventoryError = '';
 
   get shippingCost() {
     if (!this.checkoutForm) {
@@ -58,9 +59,10 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log('Checkout loaded');
     this.initForm();
+    await this.shopifyService.fetchProducts();
     console.log(this.checkoutForm);
   }
 
@@ -161,6 +163,29 @@ export class CheckoutComponent implements OnInit {
 
   async placeOrder() {
     console.log('PLACE ORDER CLICKED');
+    this.inventoryError = '';
+
+    // Validate inventory before checkout
+    for (const item of this.cartService.items()) {
+      const stock = this.cartService.getVariantStock(item.variantId);
+      if (stock) {
+        if (!stock.availableForSale || stock.quantityAvailable <= 0) {
+          const title = this.langService.translate(item.title);
+          this.inventoryError = this.langService.translate('CHECKOUT_ERR_OUT_OF_STOCK_ITEM').replace('{title}', title);
+          window.scrollTo(0, 0);
+          return;
+        }
+        if (item.quantity > stock.quantityAvailable) {
+          const title = this.langService.translate(item.title);
+          this.inventoryError = this.langService.translate('CHECKOUT_ERR_EXCEEDS_STOCK_ITEM')
+            .replace('{title}', title)
+            .replace('{count}', stock.quantityAvailable.toString());
+          window.scrollTo(0, 0);
+          return;
+        }
+      }
+    }
+
     if (this.enableCheckout) {
       console.log('Checkout başladı');
         const checkoutUrl = await this.cartService.getCheckoutUrl();

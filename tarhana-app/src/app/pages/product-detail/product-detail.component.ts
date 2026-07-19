@@ -9,6 +9,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { ShopifyService } from '../../services/shopify.service';
 import { ShopifyProduct, ShopifyVariant } from '../../services/shopify.types';
 import { CartService } from '../../services/cart.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -28,6 +29,7 @@ export class ProductDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   shopifyService = inject(ShopifyService);
   cartService = inject(CartService);
+  langService = inject(LanguageService);
 
   product = signal<ShopifyProduct | null>(null);
   loading = signal(true);
@@ -62,8 +64,9 @@ export class ProductDetailComponent implements OnInit {
 
   isAvailable = computed(() => {
     const variant = this.selectedVariant();
-    if (variant) return variant.availableForSale;
-    return this.product()?.availableForSale ?? false;
+    if (variant) return variant.availableForSale && variant.quantityAvailable > 0;
+    const prod = this.product();
+    return (prod?.availableForSale ?? false) && (prod?.quantityAvailable ?? 0) > 0;
   });
 
   quantityAvailable = computed(() => {
@@ -115,6 +118,10 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  getOnlyLeftText(count: number): string {
+    return this.langService.translate('PRODUCT_ONLY_LEFT').replace('{count}', count.toString());
+  }
+
   selectVariant(variant: ShopifyVariant) {
     this.selectedVariant.set(variant);
     this.quantity.set(1); // Reset quantity on variant change
@@ -155,8 +162,6 @@ export class ProductDetailComponent implements OnInit {
     };
 
     // Add selected quantity of items
-    for (let i = 0; i < this.quantity(); i++) {
-      this.cartService.addItem(productToAdd);
-    }
+    this.cartService.addItem(productToAdd, this.quantity());
   }
 }

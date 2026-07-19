@@ -6,6 +6,12 @@
     Review your order
   </h1>
 
+  <!-- Inventory Error Message Banner -->
+  <div *ngIf="inventoryError" class="mb-6 p-4 bg-rose-50 border-l-4 border-rose-500 text-rose-700 dark:bg-rose-950/20 dark:border-rose-500 dark:text-rose-400 rounded-r-xl flex items-center gap-3">
+    <span class="material-icons text-xl">error_outline</span>
+    <span class="font-medium">{{ inventoryError }}</span>
+  </div>
+
   <div
       *ngFor="let item of cartService.items()"
       class="flex justify-between border-b py-4">
