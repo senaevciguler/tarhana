@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -15,6 +15,7 @@ import { LanguageService } from '../../services/language.service';
 import { CartService } from '../../services/cart.service';
 import { ShopifyService } from '../../services/shopify.service';
 import { ShippingService } from '../../services/shipping.service';
+import { SeoService } from '../../services/seo.service';
 import { SHOPIFY_CONFIG } from '../../shopify.config';
 import { inject } from '@angular/core';
 
@@ -37,6 +38,7 @@ export class CheckoutComponent implements OnInit {
   cartService = inject(CartService);
   shopifyService = inject(ShopifyService);
   shippingService = inject(ShippingService);
+  seoService = inject(SeoService);
   checkoutForm!: FormGroup;
   orderPlaced = false;
   orderReference = '';
@@ -57,7 +59,16 @@ export class CheckoutComponent implements OnInit {
   // Pre-launch safety
   enableCheckout = SHOPIFY_CONFIG.enableCheckout;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    effect(() => {
+      const title = this.langService.translate('SEO_CHECKOUT_TITLE');
+      const desc = this.langService.translate('SEO_CHECKOUT_DESC');
+
+      this.seoService.updateMeta(title, desc);
+      this.seoService.updateCanonical();
+      this.seoService.updateJsonLd(null);
+    });
+  }
 
   async ngOnInit() {
     console.log('Checkout loaded');

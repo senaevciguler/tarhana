@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, effect } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -6,6 +6,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { ShopifyService } from '../../services/shopify.service';
 import { CartService } from '../../services/cart.service';
 import { LanguageService } from '../../services/language.service';
+import { SeoService } from '../../services/seo.service';
 import { CommonModule } from '@angular/common';
 import { ShopifyProduct } from '../../services/shopify.types';
 
@@ -20,8 +21,37 @@ export class ProductsComponent implements OnInit  {
   shopifyService = inject(ShopifyService);
   cartService = inject(CartService);
   langService = inject(LanguageService);
+  seoService = inject(SeoService);
 
   products = this.shopifyService.getProducts();
+
+  constructor() {
+    effect(() => {
+      const title = this.langService.translate('SEO_PRODUCTS_TITLE');
+      const desc = this.langService.translate('SEO_PRODUCTS_DESC');
+
+      this.seoService.updateMeta(title, desc);
+      this.seoService.updateCanonical();
+
+      // Dynamic ItemList JSON-LD Schema
+      const productsList = this.products();
+      if (productsList && productsList.length > 0) {
+        const origin = typeof window !== 'undefined' ? window.location.origin : '';
+        const itemListSchema = {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": productsList.map((prod, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "url": `${origin}/products/${prod.handle}`
+          }))
+        };
+        this.seoService.updateJsonLd(itemListSchema);
+      } else {
+        this.seoService.updateJsonLd(null);
+      }
+    });
+  }
 
   async ngOnInit() {
     await this.shopifyService.fetchProducts();
