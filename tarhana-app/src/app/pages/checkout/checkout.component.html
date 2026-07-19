@@ -7,39 +7,42 @@
   </h1>
 
   <!-- Inventory Error Message Banner -->
-  <div *ngIf="inventoryError" class="mb-6 p-4 bg-rose-50 border-l-4 border-rose-500 text-rose-700 dark:bg-rose-950/20 dark:border-rose-500 dark:text-rose-400 rounded-r-xl flex items-center gap-3">
-    <span class="material-icons text-xl">error_outline</span>
-    <span class="font-medium">{{ inventoryError }}</span>
-  </div>
+  @if (inventoryError) {
+    <div class="mb-6 p-4 bg-rose-50 border-l-4 border-rose-500 text-rose-700 dark:bg-rose-950/20 dark:border-rose-500 dark:text-rose-400 rounded-r-xl flex items-center gap-3">
+      <span class="material-icons text-xl">error_outline</span>
+      <span class="font-medium">{{ inventoryError }}</span>
+    </div>
+  }
 
-  <div
-      *ngFor="let item of cartService.items()"
-      class="flex justify-between border-b py-4">
+  @for (item of cartService.items(); track item.variantId) {
+    <div class="flex justify-between border-b py-4">
 
-    <div class="flex gap-4">
+      <div class="flex gap-4">
 
-      <img
-        [src]="item.image"
-        class="w-20 h-20 rounded-lg object-cover">
+        <img
+          [src]="item.image"
+          class="w-20 h-20 rounded-lg object-cover"
+          loading="lazy">
+
+        <div>
+          <h3>{{ item.title }}</h3>
+
+          <p>
+            Qty: {{ item.quantity }}
+          </p>
+
+        </div>
+
+      </div>
 
       <div>
-        <h3>{{ item.title }}</h3>
 
-        <p>
-          Qty: {{ item.quantity }}
-        </p>
+        {{ item.price * item.quantity }} kr
 
       </div>
 
     </div>
-
-    <div>
-
-      {{ item.price * item.quantity }} kr
-
-    </div>
-
-  </div>
+  }
 
   <div class="flex justify-between text-xl font-bold mt-8">
 

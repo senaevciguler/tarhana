@@ -8,6 +8,7 @@
           [alt]="'ALT_TRAD_SOUP' | translate"
           class="w-full h-full object-cover"
           src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=1200"
+          loading="lazy"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
         <div class="absolute bottom-6 left-6">
@@ -88,6 +89,7 @@
               [alt]="recipe.titleKey | translate"
               class="recipe-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               [src]="recipe.image"
+              loading="lazy"
             />
             <div
               class="absolute top-4 right-4 bg-white/90 dark:bg-stone-900/90 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1 dark:text-white"
@@ -144,6 +146,7 @@
                 [src]="selectedRecipe.image"
                 [alt]="selectedRecipe.titleKey | translate"
                 class="w-full h-full object-cover"
+                loading="lazy"
               >
             </div>
             <div class="p-8 space-y-6">

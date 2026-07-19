@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { RouterLink } from '@angular/router';
@@ -7,8 +6,9 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-cart-drawer',
   standalone: true,
-  imports: [CommonModule, TranslatePipe, RouterLink],
+  imports: [TranslatePipe, RouterLink],
   templateUrl: './cart-drawer.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartDrawerComponent {
   cartService = inject(CartService);
