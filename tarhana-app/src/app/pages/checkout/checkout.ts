@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, effect } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -15,8 +15,8 @@ import { LanguageService } from '../../services/language.service';
 import { CartService } from '../../services/cart.service';
 import { ShopifyService } from '../../services/shopify.service';
 import { ShippingService } from '../../services/shipping.service';
+import { SeoService } from '../../services/seo.service';
 import { SHOPIFY_CONFIG } from '../../shopify.config';
-import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-checkout',
@@ -37,6 +37,7 @@ export class CheckoutComponent implements OnInit {
   cartService = inject(CartService);
   shopifyService = inject(ShopifyService);
   shippingService = inject(ShippingService);
+  private seoService = inject(SeoService);
   checkoutForm!: FormGroup;
   orderPlaced = false;
   orderReference = '';
@@ -56,7 +57,15 @@ export class CheckoutComponent implements OnInit {
   // Pre-launch safety
   enableCheckout = SHOPIFY_CONFIG.enableCheckout;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    effect(() => {
+      this.langService.language();
+      this.seoService.updateMetaTags({
+        title: this.langService.translate('SEO_CHECKOUT_TITLE'),
+        description: this.langService.translate('SEO_CHECKOUT_DESC')
+      });
+    });
+  }
 
   ngOnInit() {
     console.log('Checkout loaded');

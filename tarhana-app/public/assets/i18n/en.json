@@ -241,5 +241,17 @@
   "ALT_STORY_HERO": "A warm bowl of soup on a minimal wooden table in a Scandinavian kitchen",
   "CART_EMPTY": "Your cart is empty",
   "CART_CONTINUE_SHOPPING": "Continue shopping",
-  "CART_SHIPPING_HINT": "Shipping calculated at checkout"
+  "CART_SHIPPING_HINT": "Shipping calculated at checkout",
+  "SEO_HOME_TITLE": "Ella’s Pantry | Premium Fermented Soup Mix",
+  "SEO_HOME_DESC": "Discover Ella’s Pantry fermented soup mix inspired by tarhana. Naturally fermented, free of additives, and ready in minutes.",
+  "SEO_PRODUCTS_TITLE": "Products | Ella’s Pantry",
+  "SEO_PRODUCTS_DESC": "Browse our premium fermented soup mix lineup. Choose between our Original and Unsalted Fermented Soup Mix.",
+  "SEO_RECIPES_TITLE": "Recipes | Ella’s Pantry",
+  "SEO_RECIPES_DESC": "Explore delicious recipes using our fermented soup mix. Warm soups, savory chips, and dynamic kitchen creations.",
+  "SEO_STORY_TITLE": "Our Story | Ella’s Pantry",
+  "SEO_STORY_DESC": "Born in Anatolia, crafted in Stockholm. Read how Ella’s Pantry brings the ancient wisdom of fermentation to the modern kitchen.",
+  "SEO_HEALTH_TITLE": "Ingredients & Nutrition | Ella’s Pantry",
+  "SEO_HEALTH_DESC": "Learn about the clean, natural ingredients and slow fermentation process behind Ella’s Pantry soup mix.",
+  "SEO_CHECKOUT_TITLE": "Checkout | Ella’s Pantry",
+  "SEO_CHECKOUT_DESC": "Complete your order of premium fermented soup mix at Ella’s Pantry."
 }

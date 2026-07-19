@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, computed, effect } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { NavbarComponent } from '../../components/navbar/navbar';
@@ -9,6 +9,8 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { ShopifyService } from '../../services/shopify.service';
 import { ShopifyProduct, ShopifyVariant } from '../../services/shopify.types';
 import { CartService } from '../../services/cart.service';
+import { LanguageService } from '../../services/language.service';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -28,6 +30,9 @@ export class ProductDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   shopifyService = inject(ShopifyService);
   cartService = inject(CartService);
+  langService = inject(LanguageService);
+  private seoService = inject(SeoService);
+  private document = inject(DOCUMENT);
 
   product = signal<ShopifyProduct | null>(null);
   loading = signal(true);
@@ -71,6 +76,44 @@ export class ProductDetailComponent implements OnInit {
     if (variant) return variant.quantityAvailable;
     return this.product()?.quantityAvailable ?? 0;
   });
+
+  constructor() {
+    effect(() => {
+      // Dynamic SEO update on product or language changes
+      this.langService.language();
+      const prod = this.product();
+      if (prod) {
+        const title = this.langService.translate(prod.title);
+        const desc = this.langService.translate(prod.description);
+
+        const schema = {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": title,
+          "description": desc,
+          "image": prod.image ? [prod.image] : [],
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "SEK",
+            "price": this.currentPrice().toString(),
+            "availability": this.isAvailable() ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            "url": this.document.URL
+          },
+          "brand": {
+            "@type": "Brand",
+            "name": "Ella’s Pantry"
+          }
+        };
+
+        this.seoService.updateMetaTags({
+          title: `${title} | Ella’s Pantry`,
+          description: desc,
+          image: prod.image,
+          schema
+        });
+      }
+    });
+  }
 
   async ngOnInit() {
     this.route.paramMap.subscribe(async (params) => {
