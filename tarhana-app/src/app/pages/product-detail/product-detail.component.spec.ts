@@ -179,11 +179,14 @@ describe('ProductDetailComponent', () => {
     component.quantity.set(3);
     component.addToCart();
 
-    expect(cartService.addItem).toHaveBeenCalledTimes(3);
-    expect(cartService.addItem).toHaveBeenCalledWith(jasmine.objectContaining({
-      id: mockProduct.id,
-      variantId: mockProduct.variants![0].id,
-      price: 129
-    }));
+    expect(cartService.addItem).toHaveBeenCalledTimes(1);
+    expect(cartService.addItem).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        id: mockProduct.id,
+        variantId: mockProduct.variants![0].id,
+        price: 129
+      }),
+      3
+    );
   });
 });

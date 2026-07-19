@@ -51,6 +51,22 @@ export class CartService {
     this.cartItems().reduce((total, item) => total + (item.price * item.quantity), 0)
   );
 
+  getVariantStock(variantId: string): { quantityAvailable: number; availableForSale: boolean } | null {
+    const products = this.shopifyService.getProducts()();
+    for (const p of products) {
+      if (p.variantId === variantId) {
+        return { quantityAvailable: p.quantityAvailable, availableForSale: p.availableForSale };
+      }
+      if (p.variants) {
+        const variant = p.variants.find(v => v.id === variantId);
+        if (variant) {
+          return { quantityAvailable: variant.quantityAvailable, availableForSale: variant.availableForSale };
+        }
+      }
+    }
+    return null;
+  }
+
   openDrawer() {
     this.isDrawerOpen.set(true);
   }
@@ -85,7 +101,11 @@ export class CartService {
     });
   }
 
-  async addItem(product: ShopifyProduct) {
+  async addItem(product: ShopifyProduct, quantityToAdd: number = 1) {
+    if (!product.availableForSale || product.quantityAvailable <= 0) {
+      return;
+    }
+
     this.openDrawer();
     return this.enqueueCartOperation(async () => {
       const existingItem = this.cartItems().find(
@@ -94,7 +114,15 @@ export class CartService {
 
       // If product is already in cart, just increment its quantity
       if (existingItem) {
-        const targetQuantity = existingItem.quantity + 1;
+        const currentQty = existingItem.quantity;
+        let targetQuantity = currentQty + quantityToAdd;
+        if (targetQuantity > product.quantityAvailable) {
+          targetQuantity = product.quantityAvailable; // Cap at max available
+        }
+        if (targetQuantity === currentQty) {
+          return; // No change
+        }
+
         this.cartItems.update(items =>
           items.map(item =>
             item.variantId === product.variantId ? { ...item, quantity: targetQuantity } : item
@@ -127,6 +155,14 @@ export class CartService {
       }
 
       // New product
+      let initialQty = quantityToAdd;
+      if (initialQty > product.quantityAvailable) {
+        initialQty = product.quantityAvailable;
+      }
+      if (initialQty <= 0) {
+        return;
+      }
+
       const newItem: CartItem = {
         id: Math.random().toString(36).substring(2, 9),
         productId: product.id,
@@ -136,7 +172,7 @@ export class CartService {
         price: product.price,
         currency: product.currency,
         image: product.image,
-        quantity: 1
+        quantity: initialQty
       };
 
       this.cartItems.update(items => [...items, newItem]);
@@ -144,7 +180,7 @@ export class CartService {
       if (!this.shopifyCartId()) {
         const cart = await this.shopifyService.createCart(
           product.variantId,
-          1
+          initialQty
         );
         if (cart) {
           this.shopifyCartId.set(cart.id);
@@ -155,7 +191,7 @@ export class CartService {
         const cart = await this.shopifyService.addToCart(
           this.shopifyCartId()!,
           product.variantId,
-          1
+          initialQty
         );
         if (cart) {
           this.shopifyCheckoutUrl.set(cart.checkoutUrl);
@@ -187,6 +223,17 @@ export class CartService {
     if (quantity <= 0) {
       await this.removeItem(variantId);
       return;
+    }
+
+    const stockInfo = this.getVariantStock(variantId);
+    if (stockInfo) {
+      if (!stockInfo.availableForSale || stockInfo.quantityAvailable <= 0) {
+        await this.removeItem(variantId);
+        return;
+      }
+      if (quantity > stockInfo.quantityAvailable) {
+        quantity = stockInfo.quantityAvailable; // Cap it
+      }
     }
 
     return this.enqueueCartOperation(async () => {

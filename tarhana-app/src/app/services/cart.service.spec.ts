@@ -1,4 +1,5 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { CartService } from './cart.service';
 import { ShopifyService } from './shopify.service';
 import { ShopifyProduct, ShopifyCart } from './shopify.types';
@@ -94,8 +95,11 @@ describe('CartService', () => {
       'createCart',
       'addToCart',
       'updateCartLine',
-      'removeFromCart'
+      'removeFromCart',
+      'getProducts'
     ]);
+    const mockProductsSignal = signal<any[]>([mockProduct1, mockProduct2]);
+    spy.getProducts.and.returnValue(mockProductsSignal);
 
     TestBed.configureTestingModule({
       providers: [
