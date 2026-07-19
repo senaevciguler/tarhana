@@ -241,5 +241,17 @@
   "ALT_STORY_HERO": "En varm skål soppa på ett minimalistiskt träbord i ett skandinaviskt kök",
   "CART_EMPTY": "Din varukorg är tom",
   "CART_CONTINUE_SHOPPING": "Fortsätt handla",
-  "CART_SHIPPING_HINT": "Frakt beräknas i kassan"
+  "CART_SHIPPING_HINT": "Frakt beräknas i kassan",
+  "SEO_HOME_TITLE": "Ella’s Pantry | Premium fermenterad soppmix",
+  "SEO_HOME_DESC": "Upptäck Ella’s Pantry fermenterade soppmix inspirerad av tarhana. Naturligt fermenterad, helt utan tillsatser och klar på några minuter.",
+  "SEO_PRODUCTS_TITLE": "Produkter | Ella’s Pantry",
+  "SEO_PRODUCTS_DESC": "Utforska vårt utbud av premium fermenterad soppmix. Välj mellan Original och Osaltad fermenterad soppmix.",
+  "SEO_RECIPES_TITLE": "Recept | Ella’s Pantry",
+  "SEO_RECIPES_DESC": "Utforska goda recept med vår fermenterade soppmix. Varma soppor, frasiga chips och spännande matlagning.",
+  "SEO_STORY_TITLE": "Vår berättelse | Ella’s Pantry",
+  "SEO_STORY_DESC": "Född i Anatolien, skapad i Stockholm. Läs om hur Ella’s Pantry tar med sig den uråldriga kunskapen om fermentering till det moderna köket.",
+  "SEO_HEALTH_TITLE": "Ingredienser & Näring | Ella’s Pantry",
+  "SEO_HEALTH_DESC": "Läs om de rena, naturliga ingredienserna och den långsamma fermenteringsprocessen bakom Ella’s Pantry soppmix.",
+  "SEO_CHECKOUT_TITLE": "Kassa | Ella’s Pantry",
+  "SEO_CHECKOUT_DESC": "Slutför ditt köp av premium fermenterad soppmix hos Ella’s Pantry."
 }
