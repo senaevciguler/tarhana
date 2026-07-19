@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { Component, inject, OnInit, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { ShopifyService } from '../../services/shopify.service';
 import { ShopifyProduct, ShopifyVariant } from '../../services/shopify.types';
 import { CartService } from '../../services/cart.service';
 import { LanguageService } from '../../services/language.service';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -30,6 +31,7 @@ export class ProductDetailComponent implements OnInit {
   shopifyService = inject(ShopifyService);
   cartService = inject(CartService);
   langService = inject(LanguageService);
+  seoService = inject(SeoService);
 
   product = signal<ShopifyProduct | null>(null);
   loading = signal(true);
@@ -74,6 +76,42 @@ export class ProductDetailComponent implements OnInit {
     if (variant) return variant.quantityAvailable;
     return this.product()?.quantityAvailable ?? 0;
   });
+
+  constructor() {
+    effect(() => {
+      const prod = this.product();
+      if (prod) {
+        const titleKey = prod.handle === 'unsalted-fermented-soup-mix' ? 'PRODUCT_UNSALTED_TITLE' : 'PRODUCT_ORIGINAL_TITLE';
+        const descKey = prod.handle === 'unsalted-fermented-soup-mix' ? 'PRODUCT_UNSALTED_DESC' : 'PRODUCT_ORIGINAL_DESC';
+
+        const localizedTitle = this.langService.translate(titleKey);
+        const title = `${localizedTitle} - Ella’s Pantry`;
+        const desc = this.langService.translate(descKey);
+
+        this.seoService.updateMeta(title, desc, prod.image);
+        this.seoService.updateCanonical();
+
+        // Generate Product schema
+        const productSchema = {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": localizedTitle,
+          "description": desc,
+          "image": prod.image,
+          "offers": {
+            "@type": "Offer",
+            "price": prod.price,
+            "priceCurrency": prod.currency || 'SEK',
+            "availability": prod.availableForSale ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            "url": typeof window !== 'undefined' ? window.location.href : ''
+          }
+        };
+        this.seoService.updateJsonLd(productSchema);
+      } else {
+        this.seoService.updateJsonLd(null);
+      }
+    });
+  }
 
   async ngOnInit() {
     this.route.paramMap.subscribe(async (params) => {

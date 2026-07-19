@@ -1,9 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../services/seo.service';
+import { LanguageService } from '../../services/language.service';
 
 interface Recipe {
   id: number;
@@ -24,6 +26,9 @@ interface Recipe {
   templateUrl: './recipes.component.html',
 })
 export class RecipesComponent implements OnDestroy {
+  private seoService = inject(SeoService);
+  private langService = inject(LanguageService);
+
   recipes: Recipe[] = [
     {
       id: 1,
@@ -81,6 +86,17 @@ export class RecipesComponent implements OnDestroy {
       image: 'https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&q=80&w=600',
     },
   ];
+
+  constructor() {
+    effect(() => {
+      const title = this.langService.translate('SEO_RECIPES_TITLE');
+      const desc = this.langService.translate('SEO_RECIPES_DESC');
+
+      this.seoService.updateMeta(title, desc);
+      this.seoService.updateCanonical();
+      this.seoService.updateJsonLd(null);
+    });
+  }
 
   selectedRecipe: Recipe | null = null;
 
