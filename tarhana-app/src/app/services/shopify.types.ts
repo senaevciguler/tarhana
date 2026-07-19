@@ -56,6 +56,10 @@ export interface CartItem {
 export interface ShopifyCart {
   id: string;
   checkoutUrl: string;
+  discountCodes?: {
+    code: string;
+    applicable: boolean;
+  }[];
   lines: {
     id: string;
     quantity: number;

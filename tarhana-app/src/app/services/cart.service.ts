@@ -11,6 +11,7 @@ export class CartService {
   private isDrawerOpen = signal<boolean>(false);
   private shopifyCartId = signal<string | null>(null);
   private shopifyCheckoutUrl = signal<string | null>(null);
+  private discountAmountSignal = signal<number>(0);
 
   // Queue to serialize all cart operations sequentially and prevent concurrent race conditions
   private cartOperationQueue: Promise<any> = Promise.resolve();
@@ -24,6 +25,7 @@ export class CartService {
         this.cartItems.set(parsed.items || []);
         this.shopifyCartId.set(parsed.cartId || null);
         this.shopifyCheckoutUrl.set(parsed.checkoutUrl || null);
+        this.discountAmountSignal.set(parsed.discountAmount || 0);
       } catch (e) {
         console.error('Failed to parse saved cart', e);
       }
@@ -34,12 +36,14 @@ export class CartService {
       localStorage.setItem('ella_pantry_cart', JSON.stringify({
         items: this.cartItems(),
         cartId: this.shopifyCartId(),
-        checkoutUrl: this.shopifyCheckoutUrl()
+        checkoutUrl: this.shopifyCheckoutUrl(),
+        discountAmount: this.discountAmountSignal()
       }));
     });
   }
 
   items = this.cartItems.asReadonly();
+  discountAmount = this.discountAmountSignal.asReadonly();
   isOpen = this.isDrawerOpen.asReadonly();
   checkoutUrl = this.shopifyCheckoutUrl.asReadonly();
 
@@ -85,6 +89,59 @@ export class CartService {
     });
   }
 
+  private handleCartResponse(cart: ShopifyCart | null) {
+    if (!cart) return;
+    this.shopifyCheckoutUrl.set(cart.checkoutUrl);
+    this.syncCartLines(cart);
+
+    // Update discount amount if there's any active, applicable discount code in the cart
+    const applicableDiscount = cart.discountCodes?.filter(dc => dc.applicable);
+    if (applicableDiscount && applicableDiscount.length > 0) {
+      const subTotalAmount = Number(cart.cost?.subtotalAmount?.amount ?? 0);
+      const totalAmount = Number(cart.cost?.totalAmount?.amount ?? 0);
+      const diff = subTotalAmount - totalAmount;
+      this.discountAmountSignal.set(diff > 0 ? diff : 0);
+    } else {
+      this.discountAmountSignal.set(0);
+    }
+  }
+
+  async applyDiscount(code: string): Promise<boolean> {
+    if (!code) {
+      this.discountAmountSignal.set(0);
+      return false;
+    }
+
+    if (!this.shopifyCartId() && this.cartItems().length > 0) {
+      // If we don't have a Shopify cart yet, let's try to get or create one
+      await this.getCheckoutUrl();
+    }
+
+    if (this.shopifyCartId()) {
+      const cart = await this.shopifyService.applyDiscount(
+        this.shopifyCartId()!,
+        [code]
+      );
+      if (cart) {
+        this.handleCartResponse(cart);
+        // Check if the discount was successfully applied
+        const hasApplicableDiscount = cart.discountCodes?.some(
+          dc => dc.code.toUpperCase() === code.toUpperCase() && dc.applicable
+        );
+        return !!hasApplicableDiscount;
+      }
+    }
+
+    // Fallback to local mock validation of 'TARHANA20' (20 kr discount) when Shopify is not configured
+    if (code.toUpperCase() === 'TARHANA20') {
+      this.discountAmountSignal.set(20);
+      return true;
+    } else {
+      this.discountAmountSignal.set(0);
+      return false;
+    }
+  }
+
   async addItem(product: ShopifyProduct) {
     this.openDrawer();
     return this.enqueueCartOperation(async () => {
@@ -108,8 +165,7 @@ export class CartService {
             targetQuantity
           );
           if (cart) {
-            this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-            this.syncCartLines(cart);
+            this.handleCartResponse(cart);
           }
         } else if (this.shopifyCartId()) {
           // If cart exists but line ID is missing, add it to the existing cart
@@ -119,8 +175,7 @@ export class CartService {
             targetQuantity
           );
           if (cart) {
-            this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-            this.syncCartLines(cart);
+            this.handleCartResponse(cart);
           }
         }
         return;
@@ -148,8 +203,7 @@ export class CartService {
         );
         if (cart) {
           this.shopifyCartId.set(cart.id);
-          this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-          this.syncCartLines(cart);
+          this.handleCartResponse(cart);
         }
       } else {
         const cart = await this.shopifyService.addToCart(
@@ -158,8 +212,7 @@ export class CartService {
           1
         );
         if (cart) {
-          this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-          this.syncCartLines(cart);
+          this.handleCartResponse(cart);
         }
       }
     });
@@ -176,8 +229,7 @@ export class CartService {
           itemToRemove.shopifyLineId
         );
         if (cart) {
-          this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-          this.syncCartLines(cart);
+          this.handleCartResponse(cart);
         }
       }
     });
@@ -204,8 +256,7 @@ export class CartService {
           quantity
         );
         if (cart) {
-          this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-          this.syncCartLines(cart);
+          this.handleCartResponse(cart);
         }
       } else if (this.shopifyCartId() && itemToUpdate) {
         // If cart exists but line ID is missing, add it to the existing cart
@@ -215,8 +266,7 @@ export class CartService {
           quantity
         );
         if (cart) {
-          this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-          this.syncCartLines(cart);
+          this.handleCartResponse(cart);
         }
       }
     });
@@ -248,8 +298,7 @@ export class CartService {
       }
 
       this.shopifyCartId.set(cart.id);
-      this.shopifyCheckoutUrl.set(cart.checkoutUrl);
-      this.syncCartLines(cart);
+      this.handleCartResponse(cart);
 
       return cart.checkoutUrl;
     });
@@ -259,6 +308,7 @@ export class CartService {
     this.cartItems.set([]);
     this.shopifyCartId.set(null);
     this.shopifyCheckoutUrl.set(null);
+    this.discountAmountSignal.set(0);
     localStorage.removeItem('ella_pantry_cart');
   }
 }

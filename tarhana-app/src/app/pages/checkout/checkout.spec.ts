@@ -3,6 +3,7 @@ import { CheckoutComponent } from './checkout';
 import { provideRouter } from '@angular/router';
 import { LanguageService } from '../../services/language.service';
 import { ShippingService } from '../../services/shipping.service';
+import { CartService } from '../../services/cart.service';
 import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -74,5 +75,35 @@ describe('CheckoutComponent', () => {
     const costPickup = component.shippingCost;
     expect(shippingService.calculateShipping).toHaveBeenCalledWith(0, 'Norway', 'pickup');
     expect(costPickup).toBe(0);
+  });
+
+  it('should apply discount when applyPromoCode is called', async () => {
+    const cartService = TestBed.inject(CartService);
+    spyOn(cartService, 'applyDiscount').and.returnValue(Promise.resolve(true));
+    (cartService as any).discountAmountSignal = signal(20);
+    Object.defineProperty(cartService, 'discountAmount', {
+      value: signal(20)
+    });
+
+    component.promoCode = 'TARHANA20';
+    await component.applyPromoCode();
+
+    expect(cartService.applyDiscount).toHaveBeenCalledWith('TARHANA20');
+    expect(component.discount()).toBe(20);
+    expect(component.promoSuccess()).toContain('Promo code applied successfully!');
+    expect(component.promoError()).toBe('');
+  });
+
+  it('should set error message when invalid promo code is applied', async () => {
+    const cartService = TestBed.inject(CartService);
+    spyOn(cartService, 'applyDiscount').and.returnValue(Promise.resolve(false));
+
+    component.promoCode = 'INVALID';
+    await component.applyPromoCode();
+
+    expect(cartService.applyDiscount).toHaveBeenCalledWith('INVALID');
+    expect(component.discount()).toBe(0);
+    expect(component.promoSuccess()).toBe('');
+    expect(component.promoError()).toContain('Invalid promo code');
   });
 });
