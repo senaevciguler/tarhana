@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, effect } from '@angular/core';
+import { Component, inject, OnInit, effect, ChangeDetectionStrategy } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -7,14 +7,14 @@ import { ShopifyService } from '../../services/shopify.service';
 import { CartService } from '../../services/cart.service';
 import { LanguageService } from '../../services/language.service';
 import { SeoService } from '../../services/seo.service';
-import { CommonModule } from '@angular/common';
 import { ShopifyProduct } from '../../services/shopify.types';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, TranslatePipe, CommonModule, RouterLink],
+  imports: [NavbarComponent, FooterComponent, TranslatePipe, RouterLink],
   templateUrl: './products.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent implements OnInit  {
 

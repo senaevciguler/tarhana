@@ -1,5 +1,4 @@
-import { Component, OnDestroy, inject, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, inject, effect, ChangeDetectionStrategy } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { TranslatePipe } from '../../pipes/translate.pipe';
@@ -22,8 +21,9 @@ interface Recipe {
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, TranslatePipe, RouterLink],
+  imports: [NavbarComponent, FooterComponent, TranslatePipe, RouterLink],
   templateUrl: './recipes.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecipesComponent implements OnDestroy {
   private seoService = inject(SeoService);

@@ -1,4 +1,4 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, inject, effect, ChangeDetectionStrategy } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { RouterLink } from '@angular/router';
@@ -11,6 +11,7 @@ import { LanguageService } from '../../services/language.service';
   standalone: true,
   imports: [NavbarComponent, FooterComponent, RouterLink, TranslatePipe],
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
   private seoService = inject(SeoService);

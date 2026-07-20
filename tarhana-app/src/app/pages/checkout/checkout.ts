@@ -1,7 +1,6 @@
-import { Component, OnInit, effect } from '@angular/core';
+import { Component, OnInit, effect, ChangeDetectionStrategy } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
-import { RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -9,8 +8,6 @@ import {
   ReactiveFormsModule,
   FormsModule,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '../../pipes/translate.pipe';
 import { LanguageService } from '../../services/language.service';
 import { CartService } from '../../services/cart.service';
 import { ShopifyService } from '../../services/shopify.service';
@@ -25,13 +22,11 @@ import { inject } from '@angular/core';
   imports: [
     NavbarComponent,
     FooterComponent,
-    RouterLink,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule,
-    TranslatePipe,
   ],
   templateUrl: './checkout.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutComponent implements OnInit {
   langService = inject(LanguageService);

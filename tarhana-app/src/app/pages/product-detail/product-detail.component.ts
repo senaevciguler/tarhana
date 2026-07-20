@@ -1,5 +1,4 @@
-import { Component, inject, OnInit, signal, computed, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { NavbarComponent } from '../../components/navbar/navbar';
@@ -16,14 +15,14 @@ import { SeoService } from '../../services/seo.service';
   selector: 'app-product-detail',
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     NavbarComponent,
     FooterComponent,
     TranslatePipe
   ],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss'
+  styleUrl: './product-detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent implements OnInit {
 
