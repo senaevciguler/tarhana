@@ -1,68 +1,98 @@
 <footer class="bg-stone-100 dark:bg-stone-950 border-t border-primary/10 py-16 mt-20">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-      <div class="col-span-1 md:col-span-1">
-        <a class="flex items-center gap-2 mb-6 cursor-pointer" routerLink="/">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+      <!-- About Section -->
+      <div class="md:col-span-4 space-y-6">
+        <a class="flex items-center gap-2 cursor-pointer" routerLink="/">
           <span class="font-serif text-2xl font-bold text-[#23452E]">E</span>
-          <span class="font-display font-bold text-lg tracking-tight dark:text-white"
-            >Ella’s Pantry</span
-          >
+          <span class="font-display font-bold text-lg tracking-tight dark:text-white">Ella’s Pantry</span>
         </a>
-        <p class="text-stone-500 dark:text-stone-400 text-sm leading-relaxed">
-          {{ 'FOOTER_TAGLINE' | translate }}
+        <p class="text-stone-500 dark:text-stone-400 text-sm leading-relaxed font-light max-w-sm">
+          {{ 'FOOTER_ABOUT_DESC' | translate }}
         </p>
       </div>
-      <div>
-        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER_EXPLORE' | translate }}</h5>
-        <ul class="space-y-4 text-sm text-stone-500 dark:text-stone-400">
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/products">{{ 'NAV_PRODUCTS' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/recipes">{{ 'NAV_RECIPES' | translate }}</a></li>
-          <li>
-            <a class="hover:text-primary transition-colors cursor-pointer" routerLink="/story">{{ 'NAV_STORY' | translate }}</a>
-          </li>
-          <li><a class="hover:text-primary transition-colors cursor-pointer" routerLink="/health">{{ 'FOOTER_HEALTH' | translate }}</a></li>
+
+      <!-- Explore Section -->
+      <div class="md:col-span-2">
+        <h5 class="font-semibold text-xs uppercase tracking-wider mb-6 text-stone-400 dark:text-stone-500">
+          {{ 'FOOTER_EXPLORE' | translate }}
+        </h5>
+        <ul class="space-y-4 text-sm text-stone-600 dark:text-stone-400 font-light">
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/products">{{ 'NAV_PRODUCTS' | translate }}</a></li>
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/recipes">{{ 'NAV_RECIPES' | translate }}</a></li>
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/story">{{ 'NAV_STORY' | translate }}</a></li>
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/health">{{ 'FOOTER_HEALTH' | translate }}</a></li>
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/contact">{{ 'FOOTER_CONTACT' | translate }}</a></li>
         </ul>
       </div>
-      <div>
-        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER_SUPPORT' | translate }}</h5>
-        <ul class="space-y-4 text-sm text-stone-500 dark:text-stone-400">
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_CONTACT' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_SHIPPING' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_FAQ' | translate }}</a></li>
-          <li><a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_LOCATOR' | translate }}</a></li>
+
+      <!-- Legal Section -->
+      <div class="md:col-span-2">
+        <h5 class="font-semibold text-xs uppercase tracking-wider mb-6 text-stone-400 dark:text-stone-500">
+          {{ 'FOOTER_LEGAL' | translate }}
+        </h5>
+        <ul class="space-y-4 text-sm text-stone-600 dark:text-stone-400 font-light">
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/privacy">{{ 'FOOTER_PRIVACY' | translate }}</a></li>
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/privacy" fragment="cookies">{{ 'FOOTER_COOKIE_POLICY' | translate }}</a></li>
+          <li><a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/terms">{{ 'FOOTER_TERMS' | translate }}</a></li>
         </ul>
       </div>
-      <div>
-        <h5 class="font-bold mb-6 dark:text-white">{{ 'FOOTER_SOCIAL' | translate }}</h5>
-        <div class="flex gap-4">
-          <a
-            class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-            href="#"
-          >
-            <span class="material-icons text-lg">facebook</span>
-          </a>
-          <a
-            class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-            href="#"
-          >
-            <span class="material-icons text-lg">camera_alt</span>
-          </a>
-          <a
-            class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all"
-            href="#"
-          >
-            <span class="material-icons text-lg">play_circle</span>
-          </a>
-        </div>
+
+      <!-- Newsletter Section -->
+      <div class="md:col-span-4 space-y-6">
+        <h5 class="font-semibold text-xs uppercase tracking-wider text-stone-400 dark:text-stone-500">
+          {{ 'FOOTER_NEWSLETTER_TITLE' | translate }}
+        </h5>
+        <p class="text-stone-500 dark:text-stone-400 text-sm font-light leading-relaxed">
+          {{ 'FOOTER_NEWSLETTER_DESC' | translate }}
+        </p>
+
+        <form (ngSubmit)="subscribeNewsletter()" class="space-y-3">
+          <div class="flex gap-2">
+            <input
+              type="email"
+              [(ngModel)]="email"
+              name="newsletterEmail"
+              [placeholder]="'FOOTER_NEWSLETTER_PLACEHOLDER' | translate"
+              class="flex-grow px-4 py-3 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#23452E] text-sm dark:text-white transition-all"
+            />
+            <button
+              type="submit"
+              class="px-5 py-3 bg-[#23452E] text-white hover:bg-emerald-800 transition-colors text-sm font-medium rounded-lg uppercase tracking-wider"
+            >
+              {{ 'FOOTER_NEWSLETTER_BTN' | translate }}
+            </button>
+          </div>
+
+          @if (newsletterSuccess()) {
+            <p class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+              {{ 'FOOTER_NEWSLETTER_SUCCESS' | translate }}
+            </p>
+          }
+          @if (newsletterError()) {
+            <p class="text-xs text-red-500 font-medium">
+              {{ 'FOOTER_NEWSLETTER_ERROR' | translate }}
+            </p>
+          }
+        </form>
       </div>
     </div>
-    <div
-      class="mt-16 pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-stone-400 font-medium"
-    >
+
+    <!-- Bottom Bar -->
+    <div class="mt-16 pt-8 border-t border-stone-200 dark:border-stone-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-stone-400 font-medium">
       <p>{{ 'FOOTER_COPYRIGHT' | translate }}</p>
-      <div class="flex gap-6">
-        <a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_PRIVACY' | translate }}</a>
-        <a class="hover:text-primary transition-colors" href="#">{{ 'FOOTER_TERMS' | translate }}</a>
+
+      <!-- Social Link -->
+      <div class="flex items-center gap-4">
+        <a
+          href="https://instagram.com/ellas_pantry"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 text-stone-500 hover:text-[#23452E] dark:hover:text-white transition-colors text-sm font-light"
+        >
+          <span class="material-icons text-base">camera_alt</span>
+          <span>Instagram</span>
+        </a>
       </div>
     </div>
   </div>

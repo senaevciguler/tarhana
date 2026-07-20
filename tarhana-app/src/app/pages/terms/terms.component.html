@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+
+<div class="bg-stone-50 dark:bg-background-dark text-stone-900 dark:text-stone-100 min-h-screen py-20">
+  <div class="max-w-4xl mx-auto px-6">
+    <!-- Header -->
+    <div class="border-b border-stone-200 dark:border-stone-800 pb-12 mb-12">
+      <h1 class="text-4xl md:text-5xl font-light tracking-tight text-[#23452E] dark:text-white mb-4">
+        {{ 'TERMS_TITLE' | translate }}
+      </h1>
+      <p class="text-stone-500 dark:text-stone-400 font-light text-sm">
+        {{ 'TERMS_LAST_UPDATED' | translate }}
+      </p>
+    </div>
+
+    <!-- Content Sections -->
+    <div class="space-y-12 text-stone-700 dark:text-stone-300 font-light leading-relaxed">
+      <!-- Section: Ordering -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'TERMS_ORDERING_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'TERMS_ORDERING_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Payments -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'TERMS_PAYMENTS_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'TERMS_PAYMENTS_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Shipping -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'TERMS_SHIPPING_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'TERMS_SHIPPING_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Returns & Refunds -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'TERMS_RETURNS_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'TERMS_RETURNS_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Refunds -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'TERMS_REFUNDS_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'TERMS_REFUNDS_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Consumer Rights in Sweden -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'TERMS_RIGHTS_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'TERMS_RIGHTS_TEXT' | translate }}
+        </p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

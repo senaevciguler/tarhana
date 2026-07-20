@@ -6,52 +6,13 @@ Component HMR has been enabled, see https://angular.dev/hmr for more info.
 ❯ Building...
 ✔ Building...
 Initial chunk files | Names         |  Raw size
-main.js             | main          | 265.74 kB |
-styles.css          | styles        |  48.66 kB |
+main.js             | main          | 322.96 kB |
+styles.css          | styles        |  51.73 kB |
 
-                    | Initial total | 314.40 kB
+                    | Initial total | 374.69 kB
 
-Application bundle generation complete. [5.389 seconds]
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: RouterLink is not used within the template of CheckoutComponent[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/pages/checkout/checkout.ts:28:4:
-[37m      28 │     [32mRouterLink[37m,
-         ╵     [32m~~~~~~~~~~[0m
-
-
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mTS-998113: TranslatePipe is not used within the template of CheckoutComponent[0m [1m[35m[plugin angular-compiler][0m
-
-    src/app/pages/checkout/checkout.ts:32:4:
-[37m      32 │     [32mTranslatePipe[37m,
-         ╵     [32m~~~~~~~~~~~~~[0m
-
+Application bundle generation complete. [4.013 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
   ➜  Local:   http://localhost:4200/
-fatal error: all goroutines are asleep - deadlock!
-
-goroutine 1 [chan receive]:
-github.com/evanw/esbuild/internal/helpers.(*ThreadSafeWaitGroup).Wait(...)
-	github.com/evanw/esbuild/internal/helpers/waitgroup.go:36
-main.runService.func2()
-	github.com/evanw/esbuild/cmd/esbuild/service.go:114 +0x51
-main.runService(0x1)
-	github.com/evanw/esbuild/cmd/esbuild/service.go:160 +0x50c
-main.main()
-	github.com/evanw/esbuild/cmd/esbuild/main.go:249 +0xb6b
-
-goroutine 33 [chan receive]:
-main.runService.func1()
-	github.com/evanw/esbuild/cmd/esbuild/service.go:98 +0x45
-created by main.runService in goroutine 1
-	github.com/evanw/esbuild/cmd/esbuild/service.go:97 +0x1db
-
-goroutine 34 [chan receive]:
-main.(*serviceType).sendRequest(0xc0001940c0, {0x989ba0, 0xc0012aef30})
-	github.com/evanw/esbuild/cmd/esbuild/service.go:192 +0x12b
-main.runService.func3()
-	github.com/evanw/esbuild/cmd/esbuild/service.go:125 +0x3e
-created by main.runService in goroutine 1
-	github.com/evanw/esbuild/cmd/esbuild/service.go:122 +0x30d
