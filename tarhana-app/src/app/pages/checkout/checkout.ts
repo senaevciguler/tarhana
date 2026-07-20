@@ -13,6 +13,7 @@ import { CartService } from '../../services/cart.service';
 import { ShopifyService } from '../../services/shopify.service';
 import { ShippingService } from '../../services/shipping.service';
 import { SeoService } from '../../services/seo.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { SHOPIFY_CONFIG } from '../../shopify.config';
 import { inject } from '@angular/core';
 
@@ -34,6 +35,7 @@ export class CheckoutComponent implements OnInit {
   shopifyService = inject(ShopifyService);
   shippingService = inject(ShippingService);
   seoService = inject(SeoService);
+  analyticsService = inject(AnalyticsService);
   checkoutForm!: FormGroup;
   orderPlaced = false;
   orderReference = '';
@@ -70,6 +72,12 @@ export class CheckoutComponent implements OnInit {
     this.initForm();
     await this.shopifyService.fetchProducts();
     console.log(this.checkoutForm);
+
+    // Track begin_checkout event
+    const items = this.cartService.items();
+    const subtotal = this.cartService.subtotal();
+    const currency = items.length > 0 ? items[0].currency : 'SEK';
+    this.analyticsService.trackBeginCheckout(items, subtotal, currency);
   }
 
   initForm() {
@@ -210,6 +218,13 @@ export class CheckoutComponent implements OnInit {
     if (this.checkoutForm.valid) {
       this.orderReference = 'TRH-' + Math.random().toString(36).substr(2, 9).toUpperCase();
       this.orderPlaced = true;
+
+      // Track purchase event before clearing cart
+      const items = this.cartService.items();
+      const value = this.total;
+      const currency = items.length > 0 ? items[0].currency : 'SEK';
+      this.analyticsService.trackPurchase(items, value, currency, this.orderReference);
+
       this.cartService.clearCart();
       window.scrollTo(0, 0);
     } else {

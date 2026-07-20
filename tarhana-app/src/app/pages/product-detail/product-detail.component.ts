@@ -10,6 +10,7 @@ import { ShopifyProduct, ShopifyVariant } from '../../services/shopify.types';
 import { CartService } from '../../services/cart.service';
 import { LanguageService } from '../../services/language.service';
 import { SeoService } from '../../services/seo.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -31,6 +32,7 @@ export class ProductDetailComponent implements OnInit {
   cartService = inject(CartService);
   langService = inject(LanguageService);
   seoService = inject(SeoService);
+  analyticsService = inject(AnalyticsService);
 
   product = signal<ShopifyProduct | null>(null);
   loading = signal(true);
@@ -143,6 +145,9 @@ export class ProductDetailComponent implements OnInit {
               compareAtPrice: prod.compareAtPrice
             });
           }
+
+          // Track view_item GA4 event
+          this.analyticsService.trackViewItem(prod, 1);
         } else {
           this.error.set('Product not found.');
         }
@@ -200,5 +205,8 @@ export class ProductDetailComponent implements OnInit {
 
     // Add selected quantity of items
     this.cartService.addItem(productToAdd, this.quantity());
+
+    // Track add_to_cart GA4 event
+    this.analyticsService.trackAddToCart(productToAdd, this.quantity());
   }
 }
