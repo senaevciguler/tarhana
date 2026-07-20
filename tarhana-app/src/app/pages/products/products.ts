@@ -8,6 +8,7 @@ import { CartService } from '../../services/cart.service';
 import { LanguageService } from '../../services/language.service';
 import { SeoService } from '../../services/seo.service';
 import { ShopifyProduct } from '../../services/shopify.types';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit  {
   cartService = inject(CartService);
   langService = inject(LanguageService);
   seoService = inject(SeoService);
+  analyticsService = inject(AnalyticsService);
 
   products = this.shopifyService.getProducts();
 
@@ -59,6 +61,8 @@ export class ProductsComponent implements OnInit  {
 
   addToCart(product: ShopifyProduct) {
     this.cartService.addItem(product);
+    // Track add_to_cart GA4 event
+    this.analyticsService.trackAddToCart(product, 1);
   }
 
   getDiscountPercentage(product: ShopifyProduct): number {
