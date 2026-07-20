@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+
+<div class="bg-stone-50 dark:bg-background-dark text-stone-900 dark:text-stone-100 min-h-screen py-20">
+  <div class="max-w-4xl mx-auto px-6">
+    <!-- Header -->
+    <div class="border-b border-stone-200 dark:border-stone-800 pb-12 mb-12">
+      <h1 class="text-4xl md:text-5xl font-light tracking-tight text-[#23452E] dark:text-white mb-4">
+        {{ 'PRIVACY_TITLE' | translate }}
+      </h1>
+      <p class="text-stone-500 dark:text-stone-400 font-light text-sm">
+        {{ 'PRIVACY_LAST_UPDATED' | translate }}
+      </p>
+    </div>
+
+    <!-- Content Sections -->
+    <div class="space-y-12 text-stone-700 dark:text-stone-300 font-light leading-relaxed">
+      <!-- Section: GDPR Compliance -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'PRIVACY_GDPR_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'PRIVACY_GDPR_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Personal Data Collection -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'PRIVACY_PERSONAL_DATA_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'PRIVACY_PERSONAL_DATA_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Cookies -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'PRIVACY_COOKIES_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'PRIVACY_COOKIES_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Newsletter -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'PRIVACY_NEWSLETTER_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'PRIVACY_NEWSLETTER_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Shopify Checkout -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'PRIVACY_SHOPIFY_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'PRIVACY_SHOPIFY_TEXT' | translate }}
+        </p>
+      </section>
+
+      <!-- Section: Contact Information -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-medium text-stone-900 dark:text-white">
+          {{ 'PRIVACY_CONTACT_TITLE' | translate }}
+        </h2>
+        <p>
+          {{ 'PRIVACY_CONTACT_TEXT' | translate }}
+        </p>
+        <div class="pt-2">
+          <p class="font-medium text-[#23452E] dark:text-emerald-400">
+            Ella’s Pantry AB<br>
+            Email: info&#64;ellaspantry.se
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

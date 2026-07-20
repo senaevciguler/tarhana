@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FooterComponent } from './footer';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -9,7 +10,7 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent],
+      imports: [FooterComponent, FormsModule],
       providers: [provideRouter([]), provideHttpClient()],
     }).compileComponents();
 
@@ -20,5 +21,20 @@ describe('FooterComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should handle invalid newsletter subscription', () => {
+    component.email.set('invalid-email');
+    component.subscribeNewsletter();
+    expect(component.newsletterError()).toBeTrue();
+    expect(component.newsletterSuccess()).toBeFalse();
+  });
+
+  it('should handle valid newsletter subscription', () => {
+    component.email.set('test@example.com');
+    component.subscribeNewsletter();
+    expect(component.newsletterError()).toBeFalse();
+    expect(component.newsletterSuccess()).toBeTrue();
+    expect(component.email()).toBe('');
   });
 });
