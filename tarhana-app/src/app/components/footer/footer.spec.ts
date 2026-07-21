@@ -37,4 +37,10 @@ describe('FooterComponent', () => {
     expect(component.newsletterSuccess()).toBeTrue();
     expect(component.email()).toBe('');
   });
+
+  it('should render brand name and copyright info', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.font-display')?.textContent).toContain('Ella’s Pantry');
+  });
 });
