@@ -27,6 +27,16 @@ describe('RecipesComponent', () => {
     expect(component.recipes.length).toBe(3);
   });
 
+  it('should have gridRecipes filtered down to 2 recipes', () => {
+    expect(component.gridRecipes.length).toBe(2);
+    expect(component.gridRecipes[0].titleKey).toBe('RECIPES_CARD4_TITLE'); // Tarhana Bread
+    expect(component.gridRecipes[1].titleKey).toBe('RECIPES_CARD5_TITLE'); // Tarhana Chips
+  });
+
+  it('should have the featured hero recipe as the first item in the main array', () => {
+    expect(component.recipes[0].titleKey).toBe('RECIPES_CARD1_TITLE'); // Traditional Tarhana Soup
+  });
+
   it('should open a recipe modal', () => {
     const recipe = component.recipes[0];
     component.openRecipe(recipe);
