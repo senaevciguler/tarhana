@@ -24,7 +24,7 @@ describe('RecipesComponent', () => {
   });
 
   it('should have a list of recipes', () => {
-    expect(component.recipes.length).toBe(5);
+    expect(component.recipes.length).toBe(3);
   });
 
   it('should open a recipe modal', () => {

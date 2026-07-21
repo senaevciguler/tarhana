@@ -43,28 +43,6 @@ export class RecipesComponent implements OnDestroy {
     },
     {
       id: 2,
-      titleKey: 'RECIPES_CARD2_TITLE',
-      descKey: 'RECIPES_CARD2_DESC',
-      ingredientsKey: 'RECIPES_CARD2_INGREDIENTS',
-      stepsKey: 'RECIPES_CARD2_STEPS',
-      servingKey: 'RECIPES_CARD2_SERVING',
-      timeKey: 'RECIPES_TIME_10',
-      difficultyKey: 'RECIPES_EASY',
-      image: 'https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      id: 3,
-      titleKey: 'RECIPES_CARD3_TITLE',
-      descKey: 'RECIPES_CARD3_DESC',
-      ingredientsKey: 'RECIPES_CARD3_INGREDIENTS',
-      stepsKey: 'RECIPES_CARD3_STEPS',
-      servingKey: 'RECIPES_CARD3_SERVING',
-      timeKey: 'RECIPES_TIME_15',
-      difficultyKey: 'RECIPES_EASY',
-      image: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=600',
-    },
-    {
-      id: 4,
       titleKey: 'RECIPES_CARD4_TITLE',
       descKey: 'RECIPES_CARD4_DESC',
       ingredientsKey: 'RECIPES_CARD4_INGREDIENTS',
@@ -75,7 +53,7 @@ export class RecipesComponent implements OnDestroy {
       image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=600',
     },
     {
-      id: 5,
+      id: 3,
       titleKey: 'RECIPES_CARD5_TITLE',
       descKey: 'RECIPES_CARD5_DESC',
       ingredientsKey: 'RECIPES_CARD5_INGREDIENTS',
@@ -88,6 +66,7 @@ export class RecipesComponent implements OnDestroy {
   ];
 
   constructor() {
+    window.scrollTo(0, 0);
     effect(() => {
       const title = this.langService.translate('SEO_RECIPES_TITLE');
       const desc = this.langService.translate('SEO_RECIPES_DESC');
