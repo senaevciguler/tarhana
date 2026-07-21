@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit  {
   products = this.shopifyService.getProducts();
 
   constructor() {
+    window.scrollTo(0, 0);
     effect(() => {
       const title = this.langService.translate('SEO_PRODUCTS_TITLE');
       const desc = this.langService.translate('SEO_PRODUCTS_DESC');
