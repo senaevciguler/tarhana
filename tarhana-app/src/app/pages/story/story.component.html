@@ -1,129 +1,274 @@
 <app-navbar></app-navbar>
 
-<div class="bg-white dark:bg-background-dark text-stone-900 dark:text-stone-100 min-h-screen">
-  <!-- Hero Section -->
-  <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
-    <div
-      class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
-      style="background-image: url('https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=2070&auto=format&fit=crop')"
-      role="img"
-      [attr.aria-label]="'ALT_STORY_HERO' | translate"
-    ></div>
-    <div class="absolute inset-0 bg-black/40"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="bg-[#FAF9F6] dark:bg-background-dark text-stone-900 dark:text-stone-100 min-h-screen font-sans antialiased overflow-x-hidden">
 
-    <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
-      <h1 class="text-5xl md:text-8xl font-light text-white mb-8 tracking-tight animate-slide-up leading-[1.1]">
-        {{ 'STORY_HERO_TITLE' | translate }}
-      </h1>
-      <p class="text-xl md:text-2xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed animate-fade-in">
-        {{ 'STORY_HERO_DESC' | translate }}
-      </p>
-    </div>
-  </section>
-
-  <!-- Section: Why we started -->
-  <section class="py-32 px-4">
-    <div class="max-w-4xl mx-auto text-center space-y-12">
-      <h2 class="text-4xl font-light tracking-tight">{{ 'STORY_WHY_TITLE' | translate }}</h2>
-      <div class="w-12 h-0.5 bg-primary mx-auto"></div>
-      <p class="text-xl md:text-2xl text-stone-600 dark:text-stone-400 font-light leading-relaxed max-w-3xl mx-auto">
-        {{ 'STORY_WHY_DESC' | translate }}
-      </p>
-    </div>
-  </section>
-
-  <!-- Section: What makes tarhana special -->
-  <section class="py-32 bg-stone-50 dark:bg-stone-900/50 px-4">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-20 items-center mb-24">
-        <div class="space-y-8">
-          <h2 class="text-4xl font-light tracking-tight">{{ 'STORY_SPECIAL_TITLE' | translate }}</h2>
-          <p class="text-lg text-stone-600 dark:text-stone-400 font-light leading-relaxed">
-            {{ 'STORY_SPECIAL_DESC' | translate }}
-          </p>
+  <!-- SECTION 1 — HERO -->
+  <section class="relative min-h-[90vh] flex items-center pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center w-full">
+      <!-- Hero Text (left-aligned) -->
+      <div class="lg:col-span-7 space-y-8 max-w-xl lg:max-w-none">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold tracking-widest uppercase">
+          {{ 'STORY_FINAL_BTN' | translate }}
         </div>
-        <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
+        <h1 class="text-4xl md:text-6xl font-serif font-light text-stone-900 dark:text-white tracking-tight leading-[1.1] animate-slide-up">
+          {{ 'STORY_HERO_TITLE' | translate }}
+        </h1>
+        <p class="text-lg md:text-xl text-stone-600 dark:text-stone-300 font-light leading-relaxed animate-fade-in">
+          {{ 'STORY_HERO_DESC' | translate }}
+        </p>
+      </div>
+
+      <!-- Hero Visual: Premium Jar Photo (right-aligned, large, visually focused) -->
+      <div class="lg:col-span-5 flex justify-center w-full">
+        <div class="relative w-full max-w-[420px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] bg-stone-100">
+          <img
+            src="/assets/jar-photo.png"
+            [alt]="'ALT_STORY_HERO' | translate"
+            class="object-cover w-full h-full animate-fade-in"
+            loading="eager"
+          />
+          <!-- Subtle overlay/border -->
+          <div class="absolute inset-0 border border-black/10 rounded-[2rem]"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — OUR STORY -->
+  <section class="py-24 md:py-36 border-t border-stone-200/50 dark:border-stone-800 bg-white dark:bg-stone-900/40 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        <!-- Left Column: The Journey -->
+        <div class="lg:col-span-5 space-y-12">
+          <div class="space-y-4">
+            <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+              @if (langService.language() === 'SV') { Resan } @else { The Journey }
+            </h2>
+            <h3 class="text-3xl md:text-4xl font-serif font-light tracking-tight">
+              @if (langService.language() === 'SV') { Från Anatolien till Stockholm } @else { From Anatolia to Stockholm }
+            </h3>
+          </div>
+
+          <!-- Editorial vertical timeline of the 4 steps -->
+          <div class="space-y-8 pl-2 relative border-l border-stone-200 dark:border-stone-800">
+            <!-- Step 1 -->
+            <div class="relative pl-6">
+              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
+              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">01</h4>
+              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
+                @if (langService.language() === 'SV') { Född i Anatolien } @else { Born in Anatolia }
+              </p>
+            </div>
+            <!-- Step 2 -->
+            <div class="relative pl-6">
+              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
+              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">02</h4>
+              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
+                @if (langService.language() === 'SV') { Skapad i Stockholm } @else { Crafted in Stockholm }
+              </p>
+            </div>
+            <!-- Step 3 -->
+            <div class="relative pl-6">
+              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
+              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">03</h4>
+              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
+                @if (langService.language() === 'SV') { Traditionell fermentering } @else { Traditional fermentation }
+              </p>
+            </div>
+            <!-- Step 4 -->
+            <div class="relative pl-6">
+              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
+              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">04</h4>
+              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
+                @if (langService.language() === 'SV') { Modern svenskt kök } @else { Modern Swedish kitchen }
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Story Narrative -->
+        <div class="lg:col-span-7 space-y-16 lg:pt-8">
+          <!-- Why we started -->
+          <div class="space-y-6">
+            <h3 class="text-2xl font-serif font-light tracking-tight text-stone-800 dark:text-stone-200">
+              {{ 'STORY_WHY_TITLE' | translate }}
+            </h3>
+            <p class="text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+              {{ 'STORY_WHY_DESC' | translate }}
+            </p>
+          </div>
+
+          <!-- Slow-made/Promise details -->
+          <div class="space-y-6">
+            <h3 class="text-2xl font-serif font-light tracking-tight text-stone-800 dark:text-stone-200">
+              {{ 'STORY_PROMISE_TITLE' | translate }}
+            </h3>
+            <p class="text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed mb-8">
+              {{ 'STORY_PROMISE_DESC' | translate }}
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="flex items-start gap-3">
+                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
+                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT1' | translate }}</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
+                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT2' | translate }}</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
+                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT3' | translate }}</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
+                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT4' | translate }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — MEET ELLA -->
+  <section class="py-24 md:py-36 bg-stone-50 dark:bg-stone-900/20 px-4 md:px-8 border-t border-stone-200/50 dark:border-stone-850">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+        <!-- Left: Friendly face illustration -->
+        <div class="lg:col-span-5 flex justify-center w-full order-2 lg:order-1">
+          <div class="relative w-full max-w-[400px] aspect-square rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 bg-white dark:bg-stone-800 p-8 flex items-center justify-center">
+            <img
+              src="/assets/ella-character.png"
+              [alt]="'ALT_FOOD_PHOTO' | translate"
+              class="object-contain w-full h-full"
+              loading="lazy"
+            />
+            <!-- Elegant label overlay border -->
+            <div class="absolute inset-4 border border-stone-200/50 dark:border-stone-700 rounded-[1.5rem] pointer-events-none"></div>
+          </div>
+        </div>
+
+        <!-- Right: Description -->
+        <div class="lg:col-span-7 space-y-8 order-1 lg:order-2">
+          <div class="space-y-4">
+            <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+              @if (langService.language() === 'SV') { Vem är Ella } @else { Who is Ella }
+            </h2>
+            <h3 class="text-4xl md:text-5xl font-serif font-light tracking-tight">
+              @if (langService.language() === 'SV') { Möt Ella } @else { Meet Ella }
+            </h3>
+          </div>
+          <div class="space-y-6 text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+            <p>
+              @if (langService.language() === 'SV') {
+                Ella representerar värmen, gästfriheten och den hemgjorda känslan bakom Ella’s Pantry. Hon är den vänliga själen som ger liv åt vårt kök och förbinder uråldriga matlagningstraditioner med dagens moderna hem.
+              } @else {
+                Ella represents the warmth, hospitality, and homemade feeling behind Ella’s Pantry. She is the friendly soul who brings our kitchen to life, connecting ancient culinary wisdom with today's modern homes.
+              }
+            </p>
+            <p>
+              @if (langService.language() === 'SV') {
+                Denna illustration pryder våra burkar och påminner oss om att god mat handlar om mer än bara ingredienser — det handlar om gemenskap, omsorg, och att dela något genuint med dem vi älskar. Ella är inte en produkt; hon är det vänliga ansiktet bakom varje klunk.
+              } @else {
+                This illustration graces our packaging, serving as a reminder that great food is about more than just ingredients—it is about connection, care, and sharing something genuine with the ones we love. Ella is not a product; she is the welcoming face behind every warm bowl.
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — FROM TRADITION TO THE TABLE -->
+  <!-- Note: We keep this process section aligned with strict text-left, image-right configuration with rounded image containers and specific spacing to preserve layout conventions -->
+  <section class="py-24 md:py-36 bg-white dark:bg-stone-900 px-4 md:px-8 border-t border-stone-200/50 dark:border-stone-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-20 items-center mb-16">
+        <div class="space-y-8">
+          <div class="space-y-4">
+            <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+              @if (langService.language() === 'SV') { Tradition till Bordet } @else { Tradition to the Table }
+            </h2>
+            <h3 class="text-4xl font-serif font-light tracking-tight">
+              @if (langService.language() === 'SV') { Från Tradition till Bordet } @else { From Tradition to the Table }
+            </h3>
+          </div>
+          <p class="text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+            @if (langService.language() === 'SV') {
+              Vår fermenterade soppmix handlar om upplevelsen av äkta, långsam hantverksmat redo på några minuter. Den ger djup, fyllig näring och en milt syrlig, autentisk smak till ditt matbord, skapad för att avnjutas i lugn och ro eller delas med hela familjen.
+            } @else {
+              Our fermented soup mix is about the experience of authentic, slow-crafted tradition ready in minutes. It brings deep, comforting nourishment and a gently tangy, rich flavor to your dining table, built to be savored slowly or shared with those you love.
+            }
+          </p>
+
+          <!-- Key Experiential Points -->
+          <ul class="space-y-4">
+            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
+              <span class="w-2 h-2 rounded-full bg-primary"></span>
+              <span>@if (langService.language() === 'SV') { Tröstande och fyllig } @else { Comforting and rich }</span>
+            </li>
+            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
+              <span class="w-2 h-2 rounded-full bg-primary"></span>
+              <span>@if (langService.language() === 'SV') { Äkta hemgjord känsla } @else { True homemade feeling }</span>
+            </li>
+            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
+              <span class="w-2 h-2 rounded-full bg-primary"></span>
+              <span>@if (langService.language() === 'SV') { Klar på några minuter } @else { Ready in minutes }</span>
+            </li>
+            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
+              <span class="w-2 h-2 rounded-full bg-primary"></span>
+              <span>@if (langService.language() === 'SV') { Naturligt långsamt fermenterad } @else { Naturally slow fermented }</span>
+            </li>
+            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
+              <span class="w-2 h-2 rounded-full bg-primary"></span>
+              <span>@if (langService.language() === 'SV') { Delad med familjen } @else { Shared with family }</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Large Visually Impactful Image (existing soup image) -->
+        <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl transition-all duration-700 hover:scale-[1.01]">
           <img
             id="story-process-image"
-            src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?q=80&w=2000&auto=format&fit=crop"
-            [alt]="'ALT_STORY_MIXING' | translate"
+            src="/assets/hero-tarhana-soup.png"
+            [alt]="'ALT_TRAD_SOUP' | translate"
             class="object-cover w-full h-full"
             loading="lazy"
           />
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="p-10 bg-white dark:bg-stone-800 rounded-2xl shadow-sm border border-stone-100 dark:border-stone-700 transition-all hover:shadow-md">
-          <h3 class="text-xl font-medium mb-4">{{ 'STORY_SPECIAL_CARD1_TITLE' | translate }}</h3>
-          <p class="text-stone-500 dark:text-stone-400 font-light">{{ 'STORY_SPECIAL_CARD1_DESC' | translate }}</p>
+      <!-- Keep Three Elegant Quality Pillars from Slow-made details to fully satisfy "Keep existing story content" -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+        <div class="p-8 md:p-10 bg-stone-50 dark:bg-stone-850 rounded-2xl border border-stone-100 dark:border-stone-800 shadow-sm transition-all hover:shadow-md hover:border-stone-200/80">
+          <h3 class="text-xl font-serif font-light mb-4">{{ 'STORY_SPECIAL_CARD1_TITLE' | translate }}</h3>
+          <p class="text-stone-500 dark:text-stone-400 font-light leading-relaxed">{{ 'STORY_SPECIAL_CARD1_DESC' | translate }}</p>
         </div>
-        <div class="p-10 bg-white dark:bg-stone-800 rounded-2xl shadow-sm border border-stone-100 dark:border-stone-700 transition-all hover:shadow-md">
-          <h3 class="text-xl font-medium mb-4">{{ 'STORY_SPECIAL_CARD2_TITLE' | translate }}</h3>
-          <p class="text-stone-500 dark:text-stone-400 font-light">{{ 'STORY_SPECIAL_CARD2_DESC' | translate }}</p>
+        <div class="p-8 md:p-10 bg-stone-50 dark:bg-stone-850 rounded-2xl border border-stone-100 dark:border-stone-800 shadow-sm transition-all hover:shadow-md hover:border-stone-200/80">
+          <h3 class="text-xl font-serif font-light mb-4">{{ 'STORY_SPECIAL_CARD2_TITLE' | translate }}</h3>
+          <p class="text-stone-500 dark:text-stone-400 font-light leading-relaxed">{{ 'STORY_SPECIAL_CARD2_DESC' | translate }}</p>
         </div>
-        <div class="p-10 bg-white dark:bg-stone-800 rounded-2xl shadow-sm border border-stone-100 dark:border-stone-700 transition-all hover:shadow-md">
-          <h3 class="text-xl font-medium mb-4">{{ 'STORY_SPECIAL_CARD3_TITLE' | translate }}</h3>
-          <p class="text-stone-500 dark:text-stone-400 font-light">{{ 'STORY_SPECIAL_CARD3_DESC' | translate }}</p>
+        <div class="p-8 md:p-10 bg-stone-50 dark:bg-stone-850 rounded-2xl border border-stone-100 dark:border-stone-800 shadow-sm transition-all hover:shadow-md hover:border-stone-200/80">
+          <h3 class="text-xl font-serif font-light mb-4">{{ 'STORY_SPECIAL_CARD3_TITLE' | translate }}</h3>
+          <p class="text-stone-500 dark:text-stone-400 font-light leading-relaxed">{{ 'STORY_SPECIAL_CARD3_DESC' | translate }}</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section: Our promise -->
-  <section class="py-32 px-4">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-      <div class="order-2 md:order-1 relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
-        <img
-          src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2070&auto=format&fit=crop"
-          [alt]="'ALT_STORY_KITCHEN' | translate"
-          class="object-cover w-full h-full"
-          loading="lazy"
-        />
-      </div>
-      <div class="order-1 md:order-2 space-y-12">
-        <div class="space-y-6">
-          <h2 class="text-4xl font-light tracking-tight">{{ 'STORY_PROMISE_TITLE' | translate }}</h2>
-          <p class="text-lg text-stone-600 dark:text-stone-400 font-light leading-relaxed">
-            {{ 'STORY_PROMISE_DESC' | translate }}
-          </p>
-        </div>
-        <ul class="space-y-6">
-          <li class="flex items-center gap-4 text-lg font-light">
-            <span class="w-2 h-2 rounded-full bg-primary"></span>
-            {{ 'STORY_PROMISE_POINT1' | translate }}
-          </li>
-          <li class="flex items-center gap-4 text-lg font-light">
-            <span class="w-2 h-2 rounded-full bg-primary"></span>
-            {{ 'STORY_PROMISE_POINT2' | translate }}
-          </li>
-          <li class="flex items-center gap-4 text-lg font-light">
-            <span class="w-2 h-2 rounded-full bg-primary"></span>
-            {{ 'STORY_PROMISE_POINT3' | translate }}
-          </li>
-          <li class="flex items-center gap-4 text-lg font-light">
-            <span class="w-2 h-2 rounded-full bg-primary"></span>
-            {{ 'STORY_PROMISE_POINT4' | translate }}
-          </li>
-        </ul>
       </div>
     </div>
   </section>
 
   <!-- Final CTA -->
-  <section class="py-40 px-4 text-center bg-stone-50 dark:bg-stone-900/30">
-    <div class="max-w-3xl mx-auto space-y-12">
+  <section class="py-32 md:py-44 px-4 text-center bg-[#FAF9F6] dark:bg-stone-900/30 border-t border-stone-200/50 dark:border-stone-850">
+    <div class="max-w-3xl mx-auto space-y-10">
       <div class="space-y-4">
-        <h2 class="text-4xl md:text-5xl font-light tracking-tight">{{ 'STORY_FINAL_TITLE' | translate }}</h2>
-        <p class="text-xl text-stone-600 dark:text-stone-400 font-light">
+        <h2 class="text-4xl md:text-5xl font-serif font-light tracking-tight">{{ 'STORY_FINAL_TITLE' | translate }}</h2>
+        <p class="text-lg md:text-xl text-stone-600 dark:text-stone-400 font-light">
           {{ 'STORY_FINAL_DESC' | translate }}
         </p>
       </div>
-      <div class="pt-8">
+      <div class="pt-6">
         <button
           routerLink="/products"
-          class="px-12 py-5 bg-primary text-white hover:bg-red-700 transition-all rounded-full text-sm tracking-[0.2em] uppercase font-medium shadow-lg hover:shadow-xl active:scale-95"
+          class="px-10 py-4 bg-primary text-white hover:bg-stone-800 dark:hover:bg-white dark:hover:text-stone-900 transition-all rounded-full text-xs tracking-[0.2em] uppercase font-semibold shadow-lg hover:shadow-xl active:scale-95"
         >
           {{ 'STORY_FINAL_BTN' | translate }}
         </button>
