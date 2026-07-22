@@ -65,6 +65,8 @@ export class RecipesComponent implements OnDestroy {
     },
   ];
 
+  gridRecipes: Recipe[] = this.recipes.slice(1);
+
   constructor() {
     window.scrollTo(0, 0);
     effect(() => {
