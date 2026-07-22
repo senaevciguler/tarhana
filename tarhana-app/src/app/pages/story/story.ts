@@ -15,7 +15,7 @@ import { LanguageService } from '../../services/language.service';
 })
 export class StoryComponent {
   private seoService = inject(SeoService);
-  private langService = inject(LanguageService);
+  public langService = inject(LanguageService);
 
   constructor() {
     effect(() => {
