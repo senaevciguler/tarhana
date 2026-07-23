@@ -6,12 +6,12 @@ Component HMR has been enabled, see https://angular.dev/hmr for more info.
 ❯ Building...
 ✔ Building...
 Initial chunk files | Names         |  Raw size
-main.js             | main          | 399.11 kB |
-styles.css          | styles        |  60.11 kB |
+main.js             | main          | 397.44 kB |
+styles.css          | styles        |  60.15 kB |
 
-                    | Initial total | 459.22 kB
+                    | Initial total | 457.59 kB
 
-Application bundle generation complete. [4.206 seconds]
+Application bundle generation complete. [4.083 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
