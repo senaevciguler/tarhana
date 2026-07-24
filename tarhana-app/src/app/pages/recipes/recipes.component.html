@@ -11,7 +11,7 @@
         <img
           [alt]="'ALT_TRAD_SOUP' | translate"
           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=1200"
+          [src]="recipes[0].image"
           loading="lazy"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -35,14 +35,24 @@
         <p class="text-lg text-stone-600 dark:text-stone-400 leading-relaxed">
           {{ 'RECIPES_FEATURED_DESC' | translate }}
         </p>
-        <div class="flex items-center gap-6 py-4 dark:text-stone-300">
+        <div class="flex flex-wrap items-center gap-6 py-4 dark:text-stone-300">
           <div class="flex items-center gap-2">
             <span class="material-icons text-primary/60">schedule</span>
-            <span class="font-medium">{{ 'RECIPES_TIME_10' | translate }}</span>
+            <span class="font-medium text-sm text-stone-500 dark:text-stone-400">
+              {{ 'RECIPES_TIME_LABEL' | translate }}: <strong class="text-stone-800 dark:text-white font-semibold">{{ recipes[0].timeKey | translate }}</strong>
+            </span>
           </div>
           <div class="flex items-center gap-2">
             <span class="material-icons text-primary/60">bar_chart</span>
-            <span class="font-medium">{{ 'RECIPES_DIFFICULTY_BEGINNER' | translate }}</span>
+            <span class="font-medium text-sm text-stone-500 dark:text-stone-400">
+              {{ 'RECIPES_DIFFICULTY_LABEL' | translate }}: <strong class="text-stone-800 dark:text-white font-semibold">{{ recipes[0].difficultyKey | translate }}</strong>
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-icons text-primary/60">people</span>
+            <span class="font-medium text-sm text-stone-500 dark:text-stone-400">
+              {{ 'RECIPES_SERVINGS_LABEL' | translate }}: <strong class="text-stone-800 dark:text-white font-semibold">{{ recipes[0].servingsKey | translate }}</strong>
+            </span>
           </div>
         </div>
         <button
@@ -55,34 +65,6 @@
         </button>
       </div>
     </section>
-
-    <!-- Filters -->
-    <div class="flex flex-wrap items-center justify-between gap-6 mb-12">
-      <div class="flex gap-3 overflow-x-auto pb-2">
-        <button class="bg-primary text-white px-6 py-2 rounded-full font-bold whitespace-nowrap">
-          {{ 'RECIPES_FILTER_ALL' | translate }}
-        </button>
-        <button
-          class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
-        >
-          {{ 'RECIPES_FILTER_SOUPS' | translate }}
-        </button>
-        <button
-          class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
-        >
-          {{ 'RECIPES_FILTER_QUICK' | translate }}
-        </button>
-        <button
-          class="bg-white dark:bg-stone-800 dark:text-white border border-primary/20 px-6 py-2 rounded-full font-bold hover:bg-primary/5 transition-colors whitespace-nowrap"
-        >
-          {{ 'RECIPES_FILTER_SAUCES_BOWLS' | translate }}
-        </button>
-      </div>
-      <div class="flex items-center gap-2 text-stone-500 dark:text-stone-400 font-medium">
-        <span class="material-icons">sort</span>
-        <span>{{ 'RECIPES_SORT_BY' | translate }}</span>
-      </div>
-    </div>
 
     <!-- Recipe Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-24">
@@ -112,10 +94,20 @@
             <p class="text-stone-500 dark:text-stone-400 text-sm mb-6 leading-relaxed">
               {{ recipe.descKey | translate }}
             </p>
-            <div class="flex items-center justify-between mt-auto">
+            <div class="flex flex-col gap-2 mb-6 text-xs text-stone-500 dark:text-stone-400">
+              <div class="flex items-center gap-1">
+                <span class="material-icons text-[14px]">bar_chart</span>
+                <span>{{ 'RECIPES_DIFFICULTY_LABEL' | translate }}: <strong class="text-stone-700 dark:text-stone-300">{{ recipe.difficultyKey | translate }}</strong></span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="material-icons text-[14px]">people</span>
+                <span>{{ 'RECIPES_SERVINGS_LABEL' | translate }}: <strong class="text-stone-700 dark:text-stone-300">{{ recipe.servingsKey | translate }}</strong></span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between mt-auto pt-4 border-t border-stone-100 dark:border-stone-800">
               <div class="flex items-center gap-1 text-primary">
-                <span class="material-icons text-sm">signal_cellular_alt</span>
-                <span class="text-xs font-bold uppercase tracking-wider">{{ recipe.difficultyKey | translate }}</span>
+                <span class="material-icons text-sm">restaurant_menu</span>
+                <span class="text-xs font-bold uppercase tracking-wider">{{ 'RECIPES_VIEW_RECIPE' | translate }}</span>
               </div>
               <button
                 (click)="openRecipe(recipe)"
@@ -162,14 +154,18 @@
                 <h2 class="text-3xl font-bold text-stone-900 dark:text-white mb-2">
                   {{ selectedRecipe.titleKey | translate }}
                 </h2>
-                <div class="flex items-center gap-4 text-sm text-stone-500 dark:text-stone-400 font-medium">
+                <div class="flex flex-wrap items-center gap-4 text-sm text-stone-500 dark:text-stone-400 font-medium">
                   <span class="flex items-center gap-1">
                     <span class="material-icons text-primary text-sm">schedule</span>
-                    {{ selectedRecipe.timeKey | translate }}
+                    {{ 'RECIPES_TIME_LABEL' | translate }}: {{ selectedRecipe.timeKey | translate }}
                   </span>
                   <span class="flex items-center gap-1">
                     <span class="material-icons text-primary text-sm">signal_cellular_alt</span>
-                    {{ selectedRecipe.difficultyKey | translate }}
+                    {{ 'RECIPES_DIFFICULTY_LABEL' | translate }}: {{ selectedRecipe.difficultyKey | translate }}
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <span class="material-icons text-primary text-sm">people</span>
+                    {{ 'RECIPES_SERVINGS_LABEL' | translate }}: {{ selectedRecipe.servingsKey | translate }}
                   </span>
                 </div>
               </div>
@@ -177,21 +173,21 @@
               <div class="space-y-4">
                 <div>
                   <h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-2">Ingredients</h3>
-                  <p class="text-stone-600 dark:text-stone-300 leading-relaxed">
+                  <div class="text-stone-600 dark:text-stone-300 leading-relaxed whitespace-pre-line">
                     {{ selectedRecipe.ingredientsKey | translate }}
-                  </p>
+                  </div>
                 </div>
                 <div>
                   <h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-2">Preparation</h3>
-                  <p class="text-stone-600 dark:text-stone-300 leading-relaxed">
+                  <div class="text-stone-600 dark:text-stone-300 leading-relaxed whitespace-pre-line">
                     {{ selectedRecipe.stepsKey | translate }}
-                  </p>
+                  </div>
                 </div>
                 <div>
                   <h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-2">Serving Suggestion</h3>
-                  <p class="text-stone-600 dark:text-stone-300 leading-relaxed italic">
+                  <div class="text-stone-600 dark:text-stone-300 leading-relaxed italic whitespace-pre-line">
                     {{ selectedRecipe.servingKey | translate }}
-                  </p>
+                  </div>
                 </div>
               </div>
 

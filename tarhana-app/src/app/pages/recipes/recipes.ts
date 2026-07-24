@@ -15,6 +15,7 @@ interface Recipe {
   servingKey: string;
   timeKey: string;
   difficultyKey: string;
+  servingsKey: string;
   image: string;
 }
 
@@ -39,7 +40,8 @@ export class RecipesComponent implements OnDestroy {
       servingKey: 'RECIPES_CARD1_SERVING',
       timeKey: 'RECIPES_TIME_10',
       difficultyKey: 'RECIPES_EASY',
-      image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=600',
+      servingsKey: 'RECIPES_SERVINGS_1',
+      image: '/assets/hero-tarhana-soup.png',
     },
     {
       id: 2,
@@ -48,9 +50,10 @@ export class RecipesComponent implements OnDestroy {
       ingredientsKey: 'RECIPES_CARD4_INGREDIENTS',
       stepsKey: 'RECIPES_CARD4_STEPS',
       servingKey: 'RECIPES_CARD4_SERVING',
-      timeKey: 'RECIPES_TIME_35',
-      difficultyKey: 'RECIPES_MEDIUM',
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=600',
+      timeKey: 'RECIPES_TIME_30',
+      difficultyKey: 'RECIPES_EASY',
+      servingsKey: 'RECIPES_SERVINGS_4',
+      image: '/assets/tarhana-bread.png',
     },
     {
       id: 3,
@@ -59,9 +62,10 @@ export class RecipesComponent implements OnDestroy {
       ingredientsKey: 'RECIPES_CARD5_INGREDIENTS',
       stepsKey: 'RECIPES_CARD5_STEPS',
       servingKey: 'RECIPES_CARD5_SERVING',
-      timeKey: 'RECIPES_TIME_10',
+      timeKey: 'RECIPES_TIME_30',
       difficultyKey: 'RECIPES_EASY',
-      image: 'https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&q=80&w=600',
+      servingsKey: 'RECIPES_SERVINGS_CHIPS',
+      image: '/assets/tarhana-chips.png',
     },
   ];
 
