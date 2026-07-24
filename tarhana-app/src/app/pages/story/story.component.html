@@ -1,26 +1,31 @@
 <app-navbar></app-navbar>
 
-<div class="bg-[#FAF9F6] dark:bg-background-dark text-stone-900 dark:text-stone-100 min-h-screen font-sans antialiased overflow-x-hidden">
+<div class="bg-[#FAF9F6] dark:bg-stone-950 text-stone-900 dark:text-stone-100 min-h-screen font-sans antialiased overflow-x-hidden">
 
   <!-- SECTION 1 — HERO -->
-  <section class="relative min-h-[90vh] flex items-center pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+  <section class="relative min-h-[85vh] flex items-center pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center w-full">
       <!-- Hero Text (left-aligned) -->
       <div class="lg:col-span-7 space-y-8 max-w-xl lg:max-w-none">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold tracking-widest uppercase">
-          {{ 'STORY_FINAL_BTN' | translate }}
-        </div>
         <h1 class="text-4xl md:text-6xl font-serif font-light text-stone-900 dark:text-white tracking-tight leading-[1.1] animate-slide-up">
           {{ 'STORY_HERO_TITLE' | translate }}
         </h1>
-        <p class="text-lg md:text-xl text-stone-600 dark:text-stone-300 font-light leading-relaxed animate-fade-in">
-          {{ 'STORY_HERO_DESC' | translate }}
+        <p class="text-lg md:text-xl text-stone-600 dark:text-stone-300 font-light leading-relaxed animate-fade-in max-w-lg">
+          {{ 'STORY_HERO_SUBTITLE' | translate }}
         </p>
+        <div class="pt-4 animate-fade-in">
+          <a
+            routerLink="/products"
+            class="inline-block px-8 py-4 bg-primary text-white hover:bg-stone-800 dark:hover:bg-white dark:hover:text-stone-900 transition-all rounded-full text-xs tracking-[0.2em] uppercase font-semibold shadow-md hover:shadow-lg active:scale-95"
+          >
+            {{ 'STORY_HERO_CTA' | translate }}
+          </a>
+        </div>
       </div>
 
       <!-- Hero Visual: Premium Jar Photo (right-aligned, large, visually focused) -->
       <div class="lg:col-span-5 flex justify-center w-full">
-        <div class="relative w-full max-w-[420px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] bg-stone-100">
+        <div class="relative w-full max-w-[420px] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-700 hover:scale-[1.02] bg-stone-100 dark:bg-stone-900">
           <img
             src="/assets/jar-photo.png"
             [alt]="'ALT_STORY_HERO' | translate"
@@ -28,253 +33,286 @@
             loading="eager"
           />
           <!-- Subtle overlay/border -->
-          <div class="absolute inset-0 border border-black/10 rounded-[2rem]"></div>
+          <div class="absolute inset-0 border border-black/10 dark:border-white/10 rounded-[2rem]"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 2 — OUR STORY -->
-  <section class="py-24 md:py-36 border-t border-stone-200/50 dark:border-stone-800 bg-white dark:bg-stone-900/40 px-4 md:px-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-        <!-- Left Column: The Journey -->
-        <div class="lg:col-span-5 space-y-12">
-          <div class="space-y-4">
-            <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
-              @if (langService.language() === 'SV') { Resan } @else { The Journey }
-            </h2>
-            <h3 class="text-3xl md:text-4xl font-serif font-light tracking-tight">
-              @if (langService.language() === 'SV') { Från Anatolien till Stockholm } @else { From Anatolia to Stockholm }
-            </h3>
-          </div>
+  <!-- SECTION 2 — THE STORY (Det började med en skål tarhana) -->
+  <!-- We use a very clean, spacious editorial style with wide margins -->
+  <section class="py-24 md:py-36 border-t border-stone-200/50 dark:border-stone-800 bg-white dark:bg-stone-900 px-4 md:px-8">
+    <div class="max-w-3xl mx-auto space-y-12 text-center md:text-left">
+      <div class="space-y-4">
+        <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+          @if (langService.language() === 'SV') { Vår Berättelse } @else { Our Story }
+        </h2>
+        <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif font-light tracking-tight leading-tight">
+          {{ 'STORY_SECTION2_TITLE' | translate }}
+        </h3>
+      </div>
 
-          <!-- Editorial vertical timeline of the 4 steps -->
-          <div class="space-y-8 pl-2 relative border-l border-stone-200 dark:border-stone-800">
-            <!-- Step 1 -->
-            <div class="relative pl-6">
-              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
-              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">01</h4>
-              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
-                @if (langService.language() === 'SV') { Född i Anatolien } @else { Born in Anatolia }
-              </p>
-            </div>
-            <!-- Step 2 -->
-            <div class="relative pl-6">
-              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
-              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">02</h4>
-              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
-                @if (langService.language() === 'SV') { Skapad i Stockholm } @else { Crafted in Stockholm }
-              </p>
-            </div>
-            <!-- Step 3 -->
-            <div class="relative pl-6">
-              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
-              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">03</h4>
-              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
-                @if (langService.language() === 'SV') { Traditionell fermentering } @else { Traditional fermentation }
-              </p>
-            </div>
-            <!-- Step 4 -->
-            <div class="relative pl-6">
-              <div class="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary"></div>
-              <h4 class="text-sm font-semibold tracking-wider uppercase text-stone-500 dark:text-stone-400">04</h4>
-              <p class="text-lg font-serif font-light text-stone-900 dark:text-white">
-                @if (langService.language() === 'SV') { Modern svenskt kök } @else { Modern Swedish kitchen }
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column: Story Narrative -->
-        <div class="lg:col-span-7 space-y-16 lg:pt-8">
-          <!-- Why we started -->
-          <div class="space-y-6">
-            <h3 class="text-2xl font-serif font-light tracking-tight text-stone-800 dark:text-stone-200">
-              {{ 'STORY_WHY_TITLE' | translate }}
-            </h3>
-            <p class="text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
-              {{ 'STORY_WHY_DESC' | translate }}
-            </p>
-          </div>
-
-          <!-- Slow-made/Promise details -->
-          <div class="space-y-6">
-            <h3 class="text-2xl font-serif font-light tracking-tight text-stone-800 dark:text-stone-200">
-              {{ 'STORY_PROMISE_TITLE' | translate }}
-            </h3>
-            <p class="text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed mb-8">
-              {{ 'STORY_PROMISE_DESC' | translate }}
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="flex items-start gap-3">
-                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
-                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT1' | translate }}</span>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
-                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT2' | translate }}</span>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
-                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT3' | translate }}</span>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="w-2 h-2 rounded-full bg-primary mt-2"></span>
-                <span class="text-stone-700 dark:text-stone-300 font-light">{{ 'STORY_PROMISE_POINT4' | translate }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="space-y-8 text-base md:text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+        <p class="font-normal text-stone-800 dark:text-stone-200 italic">
+          "{{ 'STORY_SECTION2_P1' | translate }}"
+        </p>
+        <p>
+          {{ 'STORY_SECTION2_P2' | translate }}
+        </p>
+        <p>
+          {{ 'STORY_SECTION2_P3' | translate }}
+        </p>
+        <p>
+          {{ 'STORY_SECTION2_P4' | translate }}
+        </p>
+        <p>
+          {{ 'STORY_SECTION2_P5' | translate }}
+        </p>
+        <p>
+          {{ 'STORY_SECTION2_P6' | translate }}
+        </p>
+        <p class="text-lg md:text-xl text-stone-800 dark:text-white font-serif italic font-light pt-2">
+          {{ 'STORY_SECTION2_P7' | translate }}
+        </p>
+        <p class="font-semibold text-primary">
+          {{ 'STORY_SECTION2_P8' | translate }}
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3 — MEET ELLA -->
-  <section class="py-24 md:py-36 bg-stone-50 dark:bg-stone-900/20 px-4 md:px-8 border-t border-stone-200/50 dark:border-stone-850">
+  <!-- SECTION 3 — WHY ELLA'S PANTRY -->
+  <!-- Lifestyle soup image on left, story text on right (alternating section) -->
+  <section class="py-24 md:py-36 bg-stone-50 dark:bg-stone-900/30 border-t border-stone-200/50 dark:border-stone-800/80 px-4 md:px-8">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
-        <!-- Left: Friendly face illustration -->
-        <div class="lg:col-span-5 flex justify-center w-full order-2 lg:order-1">
-          <div class="relative w-full max-w-[400px] aspect-square rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 bg-white dark:bg-stone-800 p-8 flex items-center justify-center">
+        <!-- Left: Large lifestyle image -->
+        <div class="lg:col-span-6 flex justify-center w-full">
+          <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 bg-stone-100 dark:bg-stone-900">
+            <img
+              id="story-process-image"
+              src="/assets/hero-tarhana-soup.png"
+              [alt]="'ALT_TRAD_SOUP' | translate"
+              class="object-cover w-full h-full"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 border border-black/10 dark:border-white/10 rounded-[2rem]"></div>
+          </div>
+        </div>
+
+        <!-- Right: Text copy -->
+        <div class="lg:col-span-6 space-y-8">
+          <div class="space-y-4">
+            <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+              @if (langService.language() === 'SV') { Varför Ella's Pantry } @else { Why Ella's Pantry }
+            </h2>
+            <h3 class="text-3xl md:text-4xl font-serif font-light tracking-tight">
+              {{ 'STORY_SECTION3_TITLE' | translate }}
+            </h3>
+          </div>
+          <div class="space-y-6 text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+            <p>
+              {{ 'STORY_SECTION3_P1' | translate }}
+            </p>
+            <p class="text-2xl font-serif italic text-primary font-light pl-4 border-l-2 border-primary/30">
+              {{ 'STORY_SECTION3_P2' | translate }}
+            </p>
+            <p>
+              {{ 'STORY_SECTION3_P3' | translate }}
+            </p>
+            <p>
+              {{ 'STORY_SECTION3_P4' | translate }}
+            </p>
+            <p class="font-medium text-stone-800 dark:text-white">
+              {{ 'STORY_SECTION3_P5' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — MEET ELLA -->
+  <!-- Text on left, Mascot illustration on right (alternating section) -->
+  <section class="py-24 md:py-36 bg-white dark:bg-stone-900 border-t border-stone-200/50 dark:border-stone-800 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+        <!-- Left: Text copy -->
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold tracking-widest uppercase">
+              @if (langService.language() === 'SV') { Vår Vänliga Guide } @else { Our Friendly Guide }
+            </div>
+            <h2 class="text-3xl md:text-4xl font-serif font-light tracking-tight">
+              {{ 'STORY_SECTION4_TITLE' | translate }}
+            </h2>
+          </div>
+          <div class="space-y-6 text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+            <p class="font-normal text-stone-800 dark:text-stone-100">
+              {{ 'STORY_SECTION4_P1' | translate }}
+            </p>
+            <p>
+              {{ 'STORY_SECTION4_P2' | translate }}
+            </p>
+            <p class="italic text-stone-500 dark:text-stone-400">
+              {{ 'STORY_SECTION4_P3' | translate }} {{ 'STORY_SECTION4_P4' | translate }}
+            </p>
+            <p class="text-sm text-stone-400 dark:text-stone-500">
+              {{ 'STORY_SECTION4_P5' | translate }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Friendly face illustration -->
+        <div class="lg:col-span-5 flex justify-center w-full">
+          <div class="relative w-full max-w-[360px] aspect-square rounded-[2rem] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-700 bg-[#FAF9F6] dark:bg-stone-800 p-10 flex items-center justify-center">
             <img
               src="/assets/ella-character.png"
               [alt]="'ALT_FOOD_PHOTO' | translate"
-              class="object-contain w-full h-full"
+              class="object-contain w-full h-full max-h-[220px]"
               loading="lazy"
             />
             <!-- Elegant label overlay border -->
             <div class="absolute inset-4 border border-stone-200/50 dark:border-stone-700 rounded-[1.5rem] pointer-events-none"></div>
           </div>
         </div>
-
-        <!-- Right: Description -->
-        <div class="lg:col-span-7 space-y-8 order-1 lg:order-2">
-          <div class="space-y-4">
-            <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
-              @if (langService.language() === 'SV') { Vem är Ella } @else { Who is Ella }
-            </h2>
-            <h3 class="text-4xl md:text-5xl font-serif font-light tracking-tight">
-              @if (langService.language() === 'SV') { Möt Ella } @else { Meet Ella }
-            </h3>
-          </div>
-          <div class="space-y-6 text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
-            <p>
-              @if (langService.language() === 'SV') {
-                Ella representerar värmen, gästfriheten och den hemgjorda känslan bakom Ella’s Pantry. Hon är den vänliga själen som ger liv åt vårt kök och förbinder uråldriga matlagningstraditioner med dagens moderna hem.
-              } @else {
-                Ella represents the warmth, hospitality, and homemade feeling behind Ella’s Pantry. She is the friendly soul who brings our kitchen to life, connecting ancient culinary wisdom with today's modern homes.
-              }
-            </p>
-            <p>
-              @if (langService.language() === 'SV') {
-                Denna illustration pryder våra burkar och påminner oss om att god mat handlar om mer än bara ingredienser — det handlar om gemenskap, omsorg, och att dela något genuint med dem vi älskar. Ella är inte en produkt; hon är det vänliga ansiktet bakom varje klunk.
-              } @else {
-                This illustration graces our packaging, serving as a reminder that great food is about more than just ingredients—it is about connection, care, and sharing something genuine with the ones we love. Ella is not a product; she is the welcoming face behind every warm bowl.
-              }
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4 — FROM TRADITION TO THE TABLE -->
-  <!-- Note: We keep this process section aligned with strict text-left, image-right configuration with rounded image containers and specific spacing to preserve layout conventions -->
-  <section class="py-24 md:py-36 bg-white dark:bg-stone-900 px-4 md:px-8 border-t border-stone-200/50 dark:border-stone-800">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-20 items-center mb-16">
-        <div class="space-y-8">
-          <div class="space-y-4">
-            <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
-              @if (langService.language() === 'SV') { Tradition till Bordet } @else { Tradition to the Table }
-            </h2>
-            <h3 class="text-4xl font-serif font-light tracking-tight">
-              @if (langService.language() === 'SV') { Från Tradition till Bordet } @else { From Tradition to the Table }
-            </h3>
+  <!-- SECTION 5 — OUR PHILOSOPHY (Made for real life) -->
+  <!-- Clean icon grid instead of feature cards -->
+  <section class="py-24 md:py-36 bg-stone-50 dark:bg-stone-900/30 border-t border-stone-200/50 dark:border-stone-800 px-4 md:px-8">
+    <div class="max-w-5xl mx-auto space-y-16">
+      <div class="text-center space-y-4 max-w-2xl mx-auto">
+        <h2 class="text-xs uppercase tracking-[0.25em] text-primary font-bold">
+          @if (langService.language() === 'SV') { Vår Filosofi } @else { Our Philosophy }
+        </h2>
+        <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif font-light tracking-tight">
+          {{ 'STORY_SECTION5_TITLE' | translate }}
+        </h3>
+      </div>
+
+      <!-- Clean Minimalist Grid with 6 items -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Item 1: Naturally fermented -->
+        <div class="flex items-start gap-4 p-6 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-800 shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+            <!-- Fermentation/Organic loop icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.3 16.2c-2.9 2.9-7.7 2.9-10.6 0-2.9-2.9-2.9-7.7 0-10.6 2.9-2.9 7.7-2.9 10.6 0a4 4 0 011.2 2.8v3.6a4 4 0 001.2 2.8c2.9 2.9 7.7 2.9 10.6 0" />
+            </svg>
           </div>
-          <p class="text-lg text-stone-600 dark:text-stone-300 font-light leading-relaxed">
-            @if (langService.language() === 'SV') {
-              Vår fermenterade soppmix handlar om upplevelsen av äkta, långsam hantverksmat redo på några minuter. Den ger djup, fyllig näring och en milt syrlig, autentisk smak till ditt matbord, skapad för att avnjutas i lugn och ro eller delas med hela familjen.
-            } @else {
-              Our fermented soup mix is about the experience of authentic, slow-crafted tradition ready in minutes. It brings deep, comforting nourishment and a gently tangy, rich flavor to your dining table, built to be savored slowly or shared with those you love.
-            }
-          </p>
-
-          <!-- Key Experiential Points -->
-          <ul class="space-y-4">
-            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
-              <span class="w-2 h-2 rounded-full bg-primary"></span>
-              <span>@if (langService.language() === 'SV') { Tröstande och fyllig } @else { Comforting and rich }</span>
-            </li>
-            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
-              <span class="w-2 h-2 rounded-full bg-primary"></span>
-              <span>@if (langService.language() === 'SV') { Äkta hemgjord känsla } @else { True homemade feeling }</span>
-            </li>
-            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
-              <span class="w-2 h-2 rounded-full bg-primary"></span>
-              <span>@if (langService.language() === 'SV') { Klar på några minuter } @else { Ready in minutes }</span>
-            </li>
-            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
-              <span class="w-2 h-2 rounded-full bg-primary"></span>
-              <span>@if (langService.language() === 'SV') { Naturligt långsamt fermenterad } @else { Naturally slow fermented }</span>
-            </li>
-            <li class="flex items-center gap-4 text-base md:text-lg font-light text-stone-700 dark:text-stone-300">
-              <span class="w-2 h-2 rounded-full bg-primary"></span>
-              <span>@if (langService.language() === 'SV') { Delad med familjen } @else { Shared with family }</span>
-            </li>
-          </ul>
+          <div>
+            <h4 class="text-base font-semibold text-stone-900 dark:text-white">{{ 'STORY_SECTION5_GRID1' | translate }}</h4>
+          </div>
         </div>
 
-        <!-- Large Visually Impactful Image (existing soup image) -->
-        <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl transition-all duration-700 hover:scale-[1.01]">
-          <img
-            id="story-process-image"
-            src="/assets/hero-tarhana-soup.png"
-            [alt]="'ALT_TRAD_SOUP' | translate"
-            class="object-cover w-full h-full"
-            loading="lazy"
-          />
+        <!-- Item 2: Simple ingredients -->
+        <div class="flex items-start gap-4 p-6 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-800 shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+            <!-- Plant/Leaf icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-base font-semibold text-stone-900 dark:text-white">{{ 'STORY_SECTION5_GRID2' | translate }}</h4>
+          </div>
+        </div>
+
+        <!-- Item 3: Pantry-friendly -->
+        <div class="flex items-start gap-4 p-6 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-800 shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+            <!-- Jar/Container icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-base font-semibold text-stone-900 dark:text-white">{{ 'STORY_SECTION5_GRID3' | translate }}</h4>
+          </div>
+        </div>
+
+        <!-- Item 4: Ready in minutes -->
+        <div class="flex items-start gap-4 p-6 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-800 shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+            <!-- Timer/Clock icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-base font-semibold text-stone-900 dark:text-white">{{ 'STORY_SECTION5_GRID4' | translate }}</h4>
+          </div>
+        </div>
+
+        <!-- Item 5: Easy to take anywhere -->
+        <div class="flex items-start gap-4 p-6 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-800 shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+            <!-- Map/Globe icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-base font-semibold text-stone-900 dark:text-white">{{ 'STORY_SECTION5_GRID5' | translate }}</h4>
+          </div>
+        </div>
+
+        <!-- Item 6: Comfort in every bowl -->
+        <div class="flex items-start gap-4 p-6 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200/40 dark:border-stone-800 shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+            <!-- Heart icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-base font-semibold text-stone-900 dark:text-white">{{ 'STORY_SECTION5_GRID6' | translate }}</h4>
+          </div>
         </div>
       </div>
 
-      <!-- Keep Three Elegant Quality Pillars from Slow-made details to fully satisfy "Keep existing story content" -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-        <div class="p-8 md:p-10 bg-stone-50 dark:bg-stone-850 rounded-2xl border border-stone-100 dark:border-stone-800 shadow-sm transition-all hover:shadow-md hover:border-stone-200/80">
-          <h3 class="text-xl font-serif font-light mb-4">{{ 'STORY_SPECIAL_CARD1_TITLE' | translate }}</h3>
-          <p class="text-stone-500 dark:text-stone-400 font-light leading-relaxed">{{ 'STORY_SPECIAL_CARD1_DESC' | translate }}</p>
-        </div>
-        <div class="p-8 md:p-10 bg-stone-50 dark:bg-stone-850 rounded-2xl border border-stone-100 dark:border-stone-800 shadow-sm transition-all hover:shadow-md hover:border-stone-200/80">
-          <h3 class="text-xl font-serif font-light mb-4">{{ 'STORY_SPECIAL_CARD2_TITLE' | translate }}</h3>
-          <p class="text-stone-500 dark:text-stone-400 font-light leading-relaxed">{{ 'STORY_SPECIAL_CARD2_DESC' | translate }}</p>
-        </div>
-        <div class="p-8 md:p-10 bg-stone-50 dark:bg-stone-850 rounded-2xl border border-stone-100 dark:border-stone-800 shadow-sm transition-all hover:shadow-md hover:border-stone-200/80">
-          <h3 class="text-xl font-serif font-light mb-4">{{ 'STORY_SPECIAL_CARD3_TITLE' | translate }}</h3>
-          <p class="text-stone-500 dark:text-stone-400 font-light leading-relaxed">{{ 'STORY_SPECIAL_CARD3_DESC' | translate }}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="py-32 md:py-44 px-4 text-center bg-[#FAF9F6] dark:bg-stone-900/30 border-t border-stone-200/50 dark:border-stone-850">
-    <div class="max-w-3xl mx-auto space-y-10">
-      <div class="space-y-4">
-        <h2 class="text-4xl md:text-5xl font-serif font-light tracking-tight">{{ 'STORY_FINAL_TITLE' | translate }}</h2>
-        <p class="text-lg md:text-xl text-stone-600 dark:text-stone-400 font-light">
-          {{ 'STORY_FINAL_DESC' | translate }}
+      <!-- Philosophy short paragraph -->
+      <div class="pt-8 text-center max-w-2xl mx-auto space-y-4">
+        <p class="text-xl font-serif font-light text-stone-800 dark:text-stone-200">
+          {{ 'STORY_SECTION5_P1' | translate }}
+        </p>
+        <p class="text-stone-600 dark:text-stone-300 font-light leading-relaxed">
+          {{ 'STORY_SECTION5_P2' | translate }}
         </p>
       </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — CLOSING (A tradition worth rediscovering) -->
+  <section class="py-32 md:py-44 px-4 text-center bg-white dark:bg-stone-950 border-t border-stone-200/50 dark:border-stone-800/80">
+    <div class="max-w-3xl mx-auto space-y-10">
+      <div class="space-y-4">
+        <h2 class="text-4xl md:text-5xl font-serif font-light tracking-tight text-stone-900 dark:text-white">
+          {{ 'STORY_SECTION6_TITLE' | translate }}
+        </h2>
+        <div class="space-y-4 text-lg md:text-xl text-stone-600 dark:text-stone-400 font-light leading-relaxed max-w-xl mx-auto">
+          <p>
+            {{ 'STORY_SECTION6_P1' | translate }} {{ 'STORY_SECTION6_P2' | translate }}
+          </p>
+          <p class="text-stone-500">
+            {{ 'STORY_SECTION6_P3' | translate }}
+          </p>
+        </div>
+      </div>
       <div class="pt-6">
-        <button
+        <a
           routerLink="/products"
-          class="px-10 py-4 bg-primary text-white hover:bg-stone-800 dark:hover:bg-white dark:hover:text-stone-900 transition-all rounded-full text-xs tracking-[0.2em] uppercase font-semibold shadow-lg hover:shadow-xl active:scale-95"
+          class="inline-block px-10 py-4 bg-primary text-white hover:bg-stone-800 dark:hover:bg-white dark:hover:text-stone-900 transition-all rounded-full text-xs tracking-[0.2em] uppercase font-semibold shadow-lg hover:shadow-xl active:scale-95"
         >
-          {{ 'STORY_FINAL_BTN' | translate }}
-        </button>
+          {{ 'STORY_SECTION6_CTA' | translate }}
+        </a>
       </div>
     </div>
   </section>
+
 </div>
 
 <app-footer></app-footer>
