@@ -89,7 +89,9 @@
               <div class="mt-auto space-y-6">
                 <div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400 pb-6 border-b border-stone-100 dark:border-zinc-800">
                   <span>{{ product.weight | translate }}</span>
-                  <span>{{ product.variantLabel | translate }}</span>
+                  @if (product.variantLabel && product.variantLabel !== 'Default Title') {
+                    <span>{{ product.variantLabel | translate }}</span>
+                  }
                 </div>
 
                 <!-- Inventory/Availability Status Alert -->

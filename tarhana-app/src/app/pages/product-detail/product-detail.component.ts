@@ -44,6 +44,12 @@ export class ProductDetailComponent implements OnInit {
   quantity = signal<number>(1);
 
   // Derived properties
+  productSubtitle = computed(() => {
+    const prod = this.product();
+    if (!prod) return '';
+    return prod.handle.includes('unsalted') ? 'PRODUCT_UNSALTED_SUBTITLE' : 'PRODUCT_ORIGINAL_SUBTITLE';
+  });
+
   currentPrice = computed(() => {
     const variant = this.selectedVariant();
     if (variant) return variant.price;
@@ -82,10 +88,12 @@ export class ProductDetailComponent implements OnInit {
     effect(() => {
       const prod = this.product();
       if (prod) {
-        const titleKey = prod.handle === 'unsalted-fermented-soup-mix' ? 'PRODUCT_UNSALTED_TITLE' : 'PRODUCT_ORIGINAL_TITLE';
-        const descKey = prod.handle === 'unsalted-fermented-soup-mix' ? 'PRODUCT_UNSALTED_DESC' : 'PRODUCT_ORIGINAL_DESC';
+        const titleKey = prod.handle.includes('unsalted') ? 'PRODUCT_UNSALTED_TITLE' : 'PRODUCT_ORIGINAL_TITLE';
+        const descKey = prod.handle.includes('unsalted') ? 'PRODUCT_UNSALTED_DESC' : 'PRODUCT_ORIGINAL_DESC';
 
-        const localizedTitle = this.langService.translate(titleKey);
+        const localizedTitle = this.langService.translate(prod.title) !== prod.title
+          ? this.langService.translate(prod.title)
+          : this.langService.translate(titleKey);
         const title = `${localizedTitle} - Ella’s Pantry`;
         const desc = this.langService.translate(descKey);
 

@@ -29,7 +29,7 @@
 
         <!-- Left Column: Image & Gallery -->
         <div class="space-y-6">
-          <div class="relative aspect-square overflow-hidden bg-white dark:bg-zinc-900 rounded-3xl border border-slate-100 dark:border-zinc-800 flex items-center justify-center p-8 shadow-sm">
+          <div class="relative aspect-[4/3] overflow-hidden bg-white dark:bg-zinc-900 rounded-3xl border border-slate-100 dark:border-zinc-800 flex items-center justify-center p-4 shadow-sm">
             <!-- Out of Stock Badge Overlay -->
             @if (!isAvailable()) {
               <div class="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-10">
@@ -71,12 +71,18 @@
           <div class="space-y-6">
 
             <!-- Title & Badges -->
-            <div class="space-y-2">
-              <h1 id="product-title" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+            <div class="space-y-3">
+              <h1 id="product-title" class="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold tracking-tight text-stone-900 dark:text-white">
                 {{ product()!.title | translate }}
               </h1>
 
-              <div class="flex flex-wrap gap-2 pt-2">
+              @if (productSubtitle()) {
+                <p id="product-subtitle" class="text-base sm:text-lg text-stone-500 dark:text-stone-400 font-light italic">
+                  {{ productSubtitle() | translate }}
+                </p>
+              }
+
+              <div class="flex flex-wrap gap-2 pt-1">
                 @for (tag of product()!.tags; track tag) {
                   <span class="px-3 py-1 bg-primary/10 text-primary dark:bg-red-950/40 dark:text-red-400 rounded-full text-xs font-bold uppercase tracking-wider">
                     {{ tag | translate }}
@@ -128,7 +134,9 @@
                       class="relative p-4 rounded-xl border border-slate-100 dark:border-zinc-800 text-left transition-all hover:bg-slate-50 dark:hover:bg-zinc-800 flex justify-between items-center bg-white dark:bg-zinc-900"
                     >
                       <div>
-                        <span class="block font-bold">{{ variant.title }}</span>
+                        @if (variant.title !== 'Default Title') {
+                          <span class="block font-bold">{{ variant.title }}</span>
+                        }
                         @if (!variant.availableForSale || variant.quantityAvailable === 0) {
                           <span class="text-xs text-slate-500 dark:text-slate-400">
                             {{ 'PRODUCT_OUT_OF_STOCK' | translate }}
