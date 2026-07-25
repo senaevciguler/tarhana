@@ -1,164 +1,402 @@
 <app-navbar></app-navbar>
+
 <div class="bg-stone-50 dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300 min-h-screen font-sans">
-  <main class="py-20 md:py-28">
-    <!-- Header -->
-    <header class="max-w-4xl mx-auto px-6 text-center mb-20 md:mb-28">
-      <span class="text-xs uppercase tracking-[0.2em] text-stone-500 font-semibold mb-3 block">
+  <main class="py-12 md:py-20">
+    <!-- Premium Editorial Header -->
+    <header class="max-w-4xl mx-auto px-6 text-center mb-16 md:mb-24">
+      <span class="text-xs uppercase tracking-[0.25em] text-stone-400 font-bold mb-3 block">
         Ella's Pantry
       </span>
-      <h1 class="text-4xl md:text-5xl font-serif font-semibold text-stone-900 dark:text-white mb-6 tracking-tight">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-stone-900 dark:text-white mb-6 tracking-tight">
         {{ 'PRODUCTS_TITLE' | translate }}
       </h1>
-      <div class="h-[1px] w-12 bg-primary/30 mx-auto mb-6"></div>
-      <p class="text-lg md:text-xl text-stone-600 dark:text-stone-400 font-light max-w-2xl mx-auto leading-relaxed">
+      <div class="h-[1px] w-16 bg-primary/40 mx-auto mb-6"></div>
+      <p class="text-lg md:text-xl text-stone-500 dark:text-stone-400 font-light max-w-2xl mx-auto leading-relaxed">
         {{ 'PRODUCTS_INTRO' | translate }}
       </p>
     </header>
 
-    <!-- Product Grid -->
-    <section class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 mb-28 md:mb-36">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
-        <!-- Dynamic Product Cards -->
-        @for (product of products(); track product.handle) {
-          <div [id]="'product-card-' + product.handle"
-               [routerLink]="['/products', product.handle]"
-               class="group flex flex-col bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-500 border border-stone-100/80 dark:border-zinc-800/80 cursor-pointer">
+    <!-- Main Stacked Product Sections (Apple/Notion Style) -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-36 pb-24">
+      @for (product of products(); track product.handle; let index = $index) {
+        <section
+          [id]="'product-card-' + product.handle"
+          class="bg-white dark:bg-zinc-900/60 rounded-3xl border border-stone-100 dark:border-zinc-800/80 p-6 md:p-12 shadow-sm transition-all duration-500"
+        >
+          <!-- 2-Column Split: Image Left, Controls Right -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-            <!-- Image Area -->
-            <div class="relative aspect-[4/5] overflow-hidden bg-[#FAF9F6] dark:bg-zinc-800/30 flex items-center justify-center p-12 transition-colors duration-500">
-              <!-- Status Badges Overlay -->
-              <div class="absolute top-6 left-6 z-10 flex flex-col gap-2">
-                <!-- Discount percentage pill -->
-                @if (product.compareAtPrice && product.compareAtPrice > product.price) {
-                  <span class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
-                    -{{ getDiscountPercentage(product) }}%
-                  </span>
-                }
-                <!-- Out of stock badge -->
-                @if (!product.availableForSale || product.quantityAvailable === 0) {
-                  <span class="px-3 py-1 bg-zinc-900/90 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
-                    {{ 'PRODUCT_OUT_OF_STOCK' | translate }}
-                  </span>
-                }
-              </div>
-
-              <img
-                [alt]="product.title | translate"
-                class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                [src]="product.image"
-                [class.opacity-50]="!product.availableForSale || product.quantityAvailable === 0"
-                loading="lazy"
-              />
-            </div>
-
-            <!-- Content Area -->
-            <div class="p-8 md:p-10 flex flex-col flex-grow bg-white dark:bg-zinc-900">
-              <div class="flex flex-col mb-4">
-                <h2 class="text-2xl font-serif font-semibold leading-tight text-stone-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-                  {{ product.title | translate }}
-                </h2>
-
-                <!-- Price info -->
-                <div class="flex items-baseline gap-3">
-                  @if (product.compareAtPrice && product.compareAtPrice > product.price) {
-                    <span class="text-base line-through text-stone-400 dark:text-zinc-500 font-normal">
-                      {{ product.compareAtPrice }} {{ product.currency }}
+            <!-- Left Column: Premium Image Area & Mini Gallery -->
+            <div class="space-y-6">
+              <!-- Aspect ratio 4/3 combined with p-4 padding -->
+              <div class="relative aspect-[4/3] overflow-hidden bg-[#FAF9F6] dark:bg-zinc-800/30 rounded-2xl border border-stone-100 dark:border-zinc-800/60 flex items-center justify-center p-4 shadow-inner">
+                <!-- Status Overlays -->
+                <div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
+                  @if (getDiscountPercentage(product)) {
+                    <span class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
+                      -{{ getDiscountPercentage(product) }}%
                     </span>
                   }
-                  <span class="text-2xl font-bold text-primary">
-                    {{ product.price }} {{ product.currency }}
-                  </span>
-                </div>
-              </div>
-
-              <!-- Product description -->
-              <p class="text-stone-600 dark:text-stone-400 text-sm leading-relaxed mb-6 font-light">
-                {{ product.description | translate }}
-              </p>
-
-              <!-- Tags -->
-              <div class="flex flex-wrap gap-2 mb-8">
-                @for (tag of product.tags; track tag) {
-                  <span class="px-3 py-1 bg-stone-50 dark:bg-zinc-800 border border-stone-100 dark:border-zinc-800/60 rounded-full text-[10px] uppercase tracking-wider font-semibold text-stone-500 dark:text-stone-400">
-                    {{ tag | translate }}
-                  </span>
-                }
-              </div>
-
-              <!-- Info section (weight, variant) -->
-              <div class="mt-auto space-y-6">
-                <div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400 pb-6 border-b border-stone-100 dark:border-zinc-800">
-                  <span>{{ product.weight | translate }}</span>
-                  @if (product.variantLabel && product.variantLabel !== 'Default Title') {
-                    <span>{{ product.variantLabel | translate }}</span>
+                  @if (!isAvailable(product)) {
+                    <span class="px-3 py-1 bg-zinc-900/90 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-sm">
+                      {{ 'PRODUCT_OUT_OF_STOCK' | translate }}
+                    </span>
                   }
                 </div>
 
-                <!-- Inventory/Availability Status Alert -->
-                <div class="pt-1">
-                  <!-- Only X left status alert -->
-                  @if (product.availableForSale && product.quantityAvailable > 0 && product.quantityAvailable < 10) {
-                    <div class="flex items-center gap-2 text-amber-600 dark:text-amber-500 text-xs font-bold uppercase tracking-wider">
-                      <span class="material-icons text-lg">error_outline</span>
-                      <span>{{ getOnlyLeftText(product.quantityAvailable) }}</span>
+                <img
+                  [alt]="product.title | translate"
+                  class="w-full h-full object-contain transition-transform duration-700 hover:scale-105"
+                  [src]="getSelectedImage(product)"
+                  [class.opacity-50]="!isAvailable(product)"
+                  loading="lazy"
+                />
+              </div>
+
+              <!-- Thumbnail Gallery (if available) -->
+              @if (product.images && product.images.length > 1) {
+                <div class="flex flex-wrap gap-2 justify-center">
+                  @for (img of product.images; track img) {
+                    <button
+                      (click)="setSelectedImage(product, img)"
+                      [class.border-primary]="getSelectedImage(product) === img"
+                      [class.border-stone-200]="getSelectedImage(product) !== img"
+                      class="w-14 h-14 aspect-square rounded-xl overflow-hidden border bg-white dark:bg-zinc-900 p-1 flex items-center justify-center hover:opacity-90 transition-all shadow-sm"
+                    >
+                      <img [src]="img" class="w-full h-full object-contain" [alt]="product.title | translate" loading="lazy" />
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+
+            <!-- Right Column: Editorial Details & Buy Options -->
+            <div class="flex flex-col h-full justify-between space-y-6 lg:space-y-8">
+              <div>
+                <!-- Subtitle / Category -->
+                <span class="text-xs uppercase tracking-[0.2em] text-primary font-bold block mb-2">
+                  Ella's Pantry Custom Wisdom
+                </span>
+
+                <!-- Title Block -->
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-900 dark:text-white mb-2 leading-tight">
+                  {{ product.title | translate }}
+                </h2>
+                <p class="text-stone-500 dark:text-stone-400 font-light italic text-sm md:text-base mb-6">
+                  {{ getProductSubtitle(product) | translate }}
+                </p>
+
+                <!-- Tags list -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                  @for (tag of product.tags; track tag) {
+                    <span class="px-3 py-1 bg-stone-50 dark:bg-zinc-800/80 border border-stone-100 dark:border-zinc-800/50 rounded-full text-[10px] uppercase tracking-wider font-semibold text-stone-500 dark:text-stone-400">
+                      {{ tag | translate }}
+                    </span>
+                  }
+                </div>
+
+                <!-- Price and Slashes -->
+                <div class="flex items-baseline gap-4 py-4 border-y border-stone-100 dark:border-zinc-800/50 mb-6">
+                  @if (getDiscountPercentage(product)) {
+                    <span class="text-lg line-through text-stone-400 dark:text-zinc-500 font-normal">
+                      {{ compareAtPrice(product) }} {{ product.currency }}
+                    </span>
+                  }
+                  <span class="text-3xl font-extrabold text-primary">
+                    {{ currentPrice(product) }} {{ product.currency }}
+                  </span>
+                </div>
+
+                <!-- Short Bio -->
+                <p class="text-stone-600 dark:text-stone-300 text-sm md:text-base leading-relaxed font-light mb-8">
+                  {{ product.description | translate }}
+                </p>
+
+                <!-- Variant Selector -->
+                @if (product.variants && product.variants.length > 1) {
+                  <div class="mb-6 space-y-3">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                      {{ 'CHECKOUT_VARIANT_ORIGINAL' | translate }}
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      @for (variant of product.variants; track variant.id) {
+                        @if (variant.title !== 'Default Title') {
+                          <button
+                            (click)="setSelectedVariant(product, variant)"
+                            [class.ring-2]="getSelectedVariant(product).id === variant.id"
+                            [class.ring-primary]="getSelectedVariant(product).id === variant.id"
+                            [class.bg-stone-50]="getSelectedVariant(product).id !== variant.id"
+                            [class.bg-zinc-800]="getSelectedVariant(product).id !== variant.id"
+                            class="relative p-4 rounded-xl border border-stone-100 dark:border-zinc-800 text-left transition-all hover:bg-stone-50 dark:hover:bg-zinc-800/80 flex justify-between items-center bg-white dark:bg-zinc-900"
+                          >
+                            <span class="font-bold text-sm text-stone-800 dark:text-white">{{ variant.title | translate }}</span>
+                            <span class="font-bold text-xs text-primary">{{ variant.price }} {{ variant.currency }}</span>
+                          </button>
+                        }
+                      }
                     </div>
-                  }
-                  <!-- Out of stock status alert -->
-                  @if (!product.availableForSale || product.quantityAvailable === 0) {
+                  </div>
+                }
+
+                <!-- Stock / Inventory Alert Banner -->
+                <div class="mb-6">
+                  @if (isAvailable(product)) {
+                    @if (isLowStock(product)) {
+                      <div class="flex items-center gap-2 text-amber-600 dark:text-amber-500 text-xs font-bold uppercase tracking-wider">
+                        <span class="material-icons text-base">error_outline</span>
+                        <span>{{ getOnlyLeftText(getQuantityAvailable(product)) }}</span>
+                      </div>
+                    } @else {
+                      <div class="flex items-center gap-2 text-green-600 dark:text-green-500 text-xs font-bold uppercase tracking-wider">
+                        <span class="material-icons text-base">check_circle_outline</span>
+                        <span>{{ 'PRODUCT_IN_STOCK' | translate }}</span>
+                      </div>
+                    }
+                  } @else {
                     <div class="flex items-center gap-2 text-rose-600 dark:text-rose-500 text-xs font-bold uppercase tracking-wider">
-                      <span class="material-icons text-lg">highlight_off</span>
+                      <span class="material-icons text-base">highlight_off</span>
                       <span>{{ 'PRODUCT_OUT_OF_STOCK' | translate }}</span>
                     </div>
                   }
                 </div>
+              </div>
 
-                <!-- Add to Cart Button -->
-                <button
-                  (click)="addToCart(product); $event.stopPropagation()"
-                  [disabled]="!product.availableForSale || product.quantityAvailable === 0"
-                  [class.opacity-50]="!product.availableForSale || product.quantityAvailable === 0"
-                  [class.cursor-not-allowed]="!product.availableForSale || product.quantityAvailable === 0"
-                  class="w-full py-4 bg-primary hover:bg-[#1a3423] text-white text-xs font-bold uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2 group"
-                >
-                  <span class="material-icons text-lg group-hover:translate-x-1 transition-transform">shopping_bag</span>
-                  <span>{{ (!product.availableForSale || product.quantityAvailable === 0) ? ('PRODUCT_OUT_OF_STOCK' | translate) : ('PRODUCT_ADD_TO_CART' | translate) }}</span>
-                </button>
+              <!-- Action Section -->
+              <div class="pt-6 border-t border-stone-100 dark:border-zinc-800/50">
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <!-- Quantity Selector -->
+                  <div class="flex items-center border border-stone-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-white dark:bg-zinc-900">
+                    <div
+                      role="button"
+                      tabindex="0"
+                      (click)="!isDecrementDisabled(product) && decrementQuantity(product)"
+                      [class.opacity-40]="isDecrementDisabled(product)"
+                      [class.cursor-not-allowed]="isDecrementDisabled(product)"
+                      class="px-4 py-3 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors select-none outline-none"
+                    >
+                      <span class="material-icons text-base">remove</span>
+                    </div>
+                    <span class="px-6 font-bold text-lg select-none text-center min-w-[50px] text-stone-800 dark:text-white">
+                      {{ getQuantity(product) }}
+                    </span>
+                    <div
+                      role="button"
+                      tabindex="0"
+                      (click)="!isIncrementDisabled(product) && incrementQuantity(product)"
+                      [class.opacity-40]="isIncrementDisabled(product)"
+                      [class.cursor-not-allowed]="isIncrementDisabled(product)"
+                      class="px-4 py-3 hover:bg-stone-50 dark:hover:bg-zinc-800 transition-colors select-none outline-none"
+                    >
+                      <span class="material-icons text-base">add</span>
+                    </div>
+                  </div>
+
+                  <!-- Add to Cart CTA -->
+                  <button
+                    (click)="addToCart(product)"
+                    [disabled]="!isAvailable(product)"
+                    [class.opacity-50]="!isAvailable(product)"
+                    [class.cursor-not-allowed]="!isAvailable(product)"
+                    class="flex-grow py-4 bg-primary hover:bg-[#1a3423] text-white text-xs font-bold uppercase tracking-widest rounded-xl transition-all flex items-center justify-center gap-2 group"
+                  >
+                    <span class="material-icons text-lg group-hover:translate-x-1 transition-transform">shopping_bag</span>
+                    <span>{{ (!isAvailable(product)) ? ('PRODUCT_OUT_OF_STOCK' | translate) : ('PRODUCT_ADD_TO_CART' | translate) }}</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom Row: Rich Product Wisdom Sections (Apple Style Accordions) -->
+          <div class="mt-16 pt-12 border-t border-stone-100 dark:border-zinc-800/50">
+            <h3 class="text-xs uppercase tracking-[0.25em] text-stone-400 font-bold mb-8">
+              {{ 'SEO_STORY_TITLE' | translate }} & Information
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <!-- Ingredients & Allergens -->
+              <div class="bg-[#FAF9F6] dark:bg-zinc-900/40 p-6 rounded-2xl border border-stone-100 dark:border-zinc-800/30 flex flex-col justify-between">
+                <div class="space-y-3">
+                  <div class="flex items-center gap-2 text-primary">
+                    <span class="material-icons">eco</span>
+                    <h4 class="font-serif font-bold text-lg text-stone-900 dark:text-white">
+                      {{ 'PRODUCTS_INGREDIENTS_TITLE' | translate }}
+                    </h4>
+                  </div>
+                  <p class="text-stone-600 dark:text-stone-300 text-sm leading-relaxed font-light">
+                    {{ 'PRODUCTS_INGREDIENTS_COPY' | translate }}
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-stone-100 dark:border-zinc-800/40">
+                  <span class="text-[10px] uppercase tracking-wider font-bold text-primary block mb-1">Allergens</span>
+                  <p class="text-xs text-stone-500 dark:text-stone-400 font-semibold italic">
+                    {{ 'PRODUCTS_INGREDIENTS_ALLERGENS' | translate }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Preparation Guide -->
+              <div class="bg-[#FAF9F6] dark:bg-zinc-900/40 p-6 rounded-2xl border border-stone-100 dark:border-zinc-800/30 space-y-4">
+                <div class="flex items-center gap-2 text-primary">
+                  <span class="material-icons">restaurant_menu</span>
+                  <h4 class="font-serif font-bold text-lg text-stone-900 dark:text-white">
+                    {{ 'HOME_PREPARE_TITLE' | translate }}
+                  </h4>
+                </div>
+                <div class="space-y-3 text-xs leading-relaxed text-stone-600 dark:text-stone-300 font-light">
+                  <p class="font-medium text-stone-700 dark:text-stone-200">
+                    {{ 'HOME_PREPARE_INTRO' | translate }}
+                  </p>
+                  <ul class="space-y-2">
+                    <li class="flex items-start gap-2">
+                      <span class="font-bold text-primary">1.</span>
+                      <span>{{ 'HOME_PREPARE_STEP1' | translate }}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="font-bold text-primary">2.</span>
+                      <span>{{ 'HOME_PREPARE_STEP2' | translate }}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="font-bold text-primary">3.</span>
+                      <span>{{ 'HOME_PREPARE_STEP3' | translate }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Storage & Shelf Life -->
+              <div class="bg-[#FAF9F6] dark:bg-zinc-900/40 p-6 rounded-2xl border border-stone-100 dark:border-zinc-800/30 flex flex-col justify-between">
+                <div class="space-y-3">
+                  <div class="flex items-center gap-2 text-primary">
+                    <span class="material-icons">inventory_2</span>
+                    <h4 class="font-serif font-bold text-lg text-stone-900 dark:text-white">
+                      {{ 'PRODUCTS_STORAGE_TITLE' | translate }}
+                    </h4>
+                  </div>
+                  <p class="text-stone-600 dark:text-stone-300 text-sm leading-relaxed font-light">
+                    {{ 'PRODUCTS_STORAGE_COPY' | translate }}
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-stone-100 dark:border-zinc-800/40">
+                  <span class="text-[10px] uppercase tracking-wider font-bold text-primary block mb-1">Standard Weight</span>
+                  <p class="text-xs text-stone-500 dark:text-stone-400 font-semibold">
+                    Net Weight: 250 grams per pouch
+                  </p>
+                </div>
+              </div>
+
+              <!-- Nutrition Facts (Highly professional!) -->
+              <div class="bg-[#FAF9F6] dark:bg-zinc-900/40 p-6 rounded-2xl border border-stone-100 dark:border-zinc-800/30 col-span-1 md:col-span-2 space-y-4">
+                <div class="flex items-center gap-2 text-primary">
+                  <span class="material-icons">analytics</span>
+                  <h4 class="font-serif font-bold text-lg text-stone-900 dark:text-white">
+                    Nutritional Information / Näringsvärde
+                  </h4>
+                </div>
+                <p class="text-xs text-stone-500 dark:text-stone-400 font-light">
+                  Typical values per 100g of dry mix. / Genomsnittligt näringsvärde per 100g torrvara.
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 pt-2">
+                  <div class="border-b border-stone-200 dark:border-zinc-800 pb-2">
+                    <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-semibold">Energy / Energi</span>
+                    <span class="text-sm font-bold text-stone-800 dark:text-white">1420 kJ / 338 kcal</span>
+                  </div>
+                  <div class="border-b border-stone-200 dark:border-zinc-800 pb-2">
+                    <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-semibold">Fat / Fett</span>
+                    <span class="text-sm font-bold text-stone-800 dark:text-white">5.4g</span>
+                    <span class="text-[10px] text-stone-500 block">(saturated: 2.1g)</span>
+                  </div>
+                  <div class="border-b border-stone-200 dark:border-zinc-800 pb-2">
+                    <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-semibold">Carbs / Kolhydrater</span>
+                    <span class="text-sm font-bold text-stone-800 dark:text-white">58g</span>
+                    <span class="text-[10px] text-stone-500 block">(sugars: 4.2g)</span>
+                  </div>
+                  <div class="border-b border-stone-200 dark:border-zinc-800 pb-2">
+                    <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-semibold">Protein</span>
+                    <span class="text-sm font-bold text-stone-800 dark:text-white">12.5g</span>
+                  </div>
+                  <div class="border-b border-stone-200 dark:border-zinc-800 pb-2">
+                    <span class="text-[10px] uppercase tracking-wider text-stone-400 block font-semibold">Salt</span>
+                    <span class="text-sm font-bold text-stone-800 dark:text-white">
+                      {{ product.handle.includes('unsalted') ? '0.0g' : '3.8g' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FAQ Section -->
+              <div class="bg-[#FAF9F6] dark:bg-zinc-900/40 p-6 rounded-2xl border border-stone-100 dark:border-zinc-800/30 space-y-4">
+                <div class="flex items-center gap-2 text-primary">
+                  <span class="material-icons">help_outline</span>
+                  <h4 class="font-serif font-bold text-lg text-stone-900 dark:text-white">
+                    FAQ / Vanliga Frågor
+                  </h4>
+                </div>
+
+                <div class="space-y-3">
+                  <details class="group cursor-pointer">
+                    <summary class="text-xs font-bold text-stone-800 dark:text-stone-200 flex justify-between items-center outline-none list-none">
+                      @if (langService.language() === 'EN') {
+                        <span>Is it vegan?</span>
+                      } @else {
+                        <span>Är den vegansk?</span>
+                      }
+                      <span class="material-icons text-xs group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="text-xs text-stone-500 dark:text-stone-400 mt-2 leading-relaxed">
+                      @if (langService.language() === 'EN') {
+                        <span>No, our traditional recipe contains high-quality natural yogurt.</span>
+                      } @else {
+                        <span>Nej, vårt traditionella recept innehåller naturlig yoghurt av hög kvalitet.</span>
+                      }
+                    </p>
+                  </details>
+
+                  <details class="group cursor-pointer border-t border-stone-100 dark:border-zinc-800/40 pt-2">
+                    <summary class="text-xs font-bold text-stone-800 dark:text-stone-200 flex justify-between items-center outline-none list-none">
+                      @if (langService.language() === 'EN') {
+                        <span>Are there additives?</span>
+                      } @else {
+                        <span>Innehåller den tillsatser?</span>
+                      }
+                      <span class="material-icons text-xs group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="text-xs text-stone-500 dark:text-stone-400 mt-2 leading-relaxed">
+                      @if (langService.language() === 'EN') {
+                        <span>Never. Our soup mixes are 100% clean-label, crafted using only pure, whole food ingredients.</span>
+                      } @else {
+                        <span>Aldrig. Våra soppmixer har 100% ren etikett, skapade med enbart naturliga råvaror.</span>
+                      }
+                    </p>
+                  </details>
+
+                  <details class="group cursor-pointer border-t border-stone-100 dark:border-zinc-800/40 pt-2">
+                    <summary class="text-xs font-bold text-stone-800 dark:text-stone-200 flex justify-between items-center outline-none list-none">
+                      @if (langService.language() === 'EN') {
+                        <span>Where is it made?</span>
+                      } @else {
+                        <span>Var tillverkas den?</span>
+                      }
+                      <span class="material-icons text-xs group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="text-xs text-stone-500 dark:text-stone-400 mt-2 leading-relaxed">
+                      @if (langService.language() === 'EN') {
+                        <span>We blend and package each batch locally in Stockholm, Sweden, preserving authentic Anatolian methods.</span>
+                      } @else {
+                        <span>Vi blandar och paketerar varje batch lokalt i Stockholm, och bevarar autentiska anatoliska metoder.</span>
+                      }
+                    </p>
+                  </details>
+                </div>
               </div>
             </div>
           </div>
-        }
-      </div>
-    </section>
 
-    <!-- Detailed Info Sections -->
-    <section class="max-w-4xl mx-auto px-6 space-y-16 pb-12 border-t border-stone-200 dark:border-zinc-800/80 pt-16">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-        <!-- Ingredients & Allergens -->
-        <div class="space-y-4">
-          <h2 class="text-xl font-serif font-semibold text-stone-900 dark:text-white">
-            {{ 'PRODUCTS_INGREDIENTS_TITLE' | translate }}
-          </h2>
-          <p class="text-stone-600 dark:text-stone-400 leading-relaxed text-sm font-light">
-            {{ 'PRODUCTS_INGREDIENTS_COPY' | translate }}
-          </p>
-          <div class="p-4 bg-stone-100/50 dark:bg-zinc-800/50 rounded-lg inline-block border-l-2 border-primary">
-            <p class="text-xs font-bold tracking-wider uppercase text-stone-700 dark:text-stone-300">
-              {{ 'PRODUCTS_INGREDIENTS_ALLERGENS' | translate }}
-            </p>
-          </div>
-        </div>
-
-        <!-- Storage -->
-        <div class="space-y-4">
-          <h2 class="text-xl font-serif font-semibold text-stone-900 dark:text-white">
-            {{ 'PRODUCTS_STORAGE_TITLE' | translate }}
-          </h2>
-          <p class="text-stone-600 dark:text-stone-400 leading-relaxed text-sm font-light">
-            {{ 'PRODUCTS_STORAGE_COPY' | translate }}
-          </p>
-        </div>
-      </div>
-    </section>
+        </section>
+      }
+    </div>
   </main>
 </div>
+
 <app-footer></app-footer>
