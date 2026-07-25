@@ -40,7 +40,9 @@
             <div class="flex justify-between items-start">
               <div>
                 <h3 class="font-bold text-sm leading-tight">{{ item.title | translate }}</h3>
-                <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">{{ item.variantLabel | translate }}</p>
+                @if (item.variantLabel && item.variantLabel !== 'Default Title') {
+                  <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">{{ item.variantLabel | translate }}</p>
+                }
               </div>
               <button (click)="removeItem(item.variantId)" class="text-slate-400 hover:text-red-500 transition-colors">
                 <span class="material-icons text-lg" aria-hidden="true">delete_outline</span>

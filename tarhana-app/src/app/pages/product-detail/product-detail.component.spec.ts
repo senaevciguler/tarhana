@@ -19,7 +19,7 @@ describe('ProductDetailComponent', () => {
   const mockProduct: ShopifyProduct = {
     id: 'gid://shopify/Product/1',
     handle: 'original-fermented-soup-mix',
-    title: 'Original Fermented Soup Mix',
+    title: 'PRODUCT_ORIGINAL_TITLE',
     description: 'A naturally fermented soup mix inspired by traditional tarhana.',
     price: 129,
     currency: 'kr',
@@ -86,11 +86,15 @@ describe('ProductDetailComponent', () => {
         {
           provide: LanguageService,
           useValue: {
-            translate: (key: string) => key,
+            translate: (key: string) => {
+              if (key === 'PRODUCT_ORIGINAL_TITLE') return 'Classic Tarhana';
+              if (key === 'PRODUCT_ORIGINAL_SUBTITLE') return 'Traditional Fermented Soup Mix';
+              return key;
+            },
             language: signal('EN'),
             setLanguage: () => Promise.resolve()
           }
-        }
+         }
       ]
     })
     .compileComponents();
@@ -113,7 +117,8 @@ describe('ProductDetailComponent', () => {
 
   it('should display product title, description and initial pricing info', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#product-title')?.textContent).toContain('Original Fermented Soup Mix');
+    expect(compiled.querySelector('#product-title')?.textContent).toContain('Classic Tarhana');
+    expect(compiled.querySelector('#product-subtitle')?.textContent).toContain('Traditional Fermented Soup Mix');
     expect(compiled.querySelector('#product-description')?.textContent).toContain('A naturally fermented soup mix inspired by traditional tarhana.');
     expect(compiled.querySelector('#product-price')?.textContent).toContain('129 kr');
     expect(compiled.querySelector('#product-compare-at-price')?.textContent).toContain('159 kr');
