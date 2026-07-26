@@ -19,13 +19,19 @@
                 [(ngModel)]="email"
                 name="newsletterEmail"
                 [placeholder]="'FOOTER_NEWSLETTER_PLACEHOLDER' | translate"
-                class="flex-grow px-4 py-3 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#23452E] text-sm dark:text-white transition-all"
+                [disabled]="newsletterSubmitting()"
+                class="flex-grow px-4 py-3 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#23452E] text-sm dark:text-white transition-all disabled:opacity-50"
               />
               <button
                 type="submit"
-                class="px-6 py-3 bg-[#23452E] text-white hover:bg-emerald-800 transition-colors text-sm font-medium rounded-lg uppercase tracking-wider whitespace-nowrap"
+                [disabled]="newsletterSubmitting()"
+                class="px-6 py-3 bg-[#23452E] text-white hover:bg-emerald-800 transition-colors text-sm font-medium rounded-lg uppercase tracking-wider whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ 'FOOTER_NEWSLETTER_BTN' | translate }}
+                @if (newsletterSubmitting()) {
+                  {{ 'CONTACT_FORM_SUBMITTING' | translate }}
+                } @else {
+                  {{ 'FOOTER_NEWSLETTER_BTN' | translate }}
+                }
               </button>
             </div>
 
