@@ -6,6 +6,8 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { SeoService } from '../../services/seo.service';
 import { LanguageService } from '../../services/language.service';
+import { HttpClient } from '@angular/common/http';
+import { SHOPIFY_CONFIG } from '../../shopify.config';
 
 @Component({
   selector: 'app-contact',
@@ -18,6 +20,7 @@ export class ContactComponent {
   private fb = inject(FormBuilder);
   private seoService = inject(SeoService);
   private langService = inject(LanguageService);
+  private http = inject(HttpClient);
 
   contactForm: FormGroup;
   isSubmitting = signal(false);
@@ -51,14 +54,65 @@ export class ContactComponent {
     this.submitSuccess.set(false);
     this.submitError.set(false);
 
-    // Mock API submission
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      // Simulate successful response
-      this.submitSuccess.set(true);
-      console.log('Contact form submitted successfully:', this.contactForm.value);
-      this.contactForm.reset();
-    }, 1200);
+    const name = this.contactForm.get('name')?.value;
+    const email = this.contactForm.get('email')?.value;
+    const message = this.contactForm.get('message')?.value;
+
+    const service = SHOPIFY_CONFIG.contactFormService;
+    const key = SHOPIFY_CONFIG.contactFormKey;
+
+    if (service === 'web3forms' && key) {
+      const payload = {
+        access_key: key,
+        name: name,
+        email: email,
+        message: message,
+        subject: "New Contact Message - Ella's Pantry",
+        from_name: "Ella's Pantry Storefront"
+      };
+      this.http.post('https://api.web3forms.com/submit', payload).subscribe({
+        next: (response: any) => {
+          this.isSubmitting.set(false);
+          if (response && (response.success || response.status === 200)) {
+            this.submitSuccess.set(true);
+            this.contactForm.reset();
+          } else {
+            this.submitError.set(true);
+          }
+        },
+        error: (err) => {
+          console.error('Web3Forms submission failed:', err);
+          this.isSubmitting.set(false);
+          this.submitError.set(true);
+        }
+      });
+    } else if (service === 'formspree' && key) {
+      const payload = {
+        name: name,
+        email: email,
+        message: message
+      };
+      this.http.post(`https://formspree.io/f/${key}`, payload).subscribe({
+        next: (response: any) => {
+          this.isSubmitting.set(false);
+          this.submitSuccess.set(true);
+          this.contactForm.reset();
+        },
+        error: (err) => {
+          console.error('Formspree submission failed:', err);
+          this.isSubmitting.set(false);
+          this.submitError.set(true);
+        }
+      });
+    } else {
+      // Mock API submission for local development and testing
+      setTimeout(() => {
+        this.isSubmitting.set(false);
+        this.submitSuccess.set(true);
+        console.log('Contact form submitted successfully (mocked):', { name, email, message });
+        this.contactForm.reset();
+      }, 1200);
+    }
   }
 
   private markAllTouched() {

@@ -47,7 +47,7 @@
     <!-- Main Footer Grid -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
       <!-- About Section -->
-      <div class="md:col-span-4 space-y-6">
+      <div class="md:col-span-5 space-y-6">
         <a class="flex items-center gap-3 cursor-pointer" routerLink="/">
           <div class="bg-[#23452E] text-white rounded-md w-7 h-7 flex items-center justify-center font-serif text-lg font-bold shadow-sm">
             E
@@ -60,7 +60,7 @@
       </div>
 
       <!-- Explore Section -->
-      <div class="md:col-span-3">
+      <div class="md:col-span-4">
         <h5 class="font-semibold text-xs uppercase tracking-wider mb-6 text-stone-400 dark:text-stone-500">
           {{ 'FOOTER_EXPLORE' | translate }}
         </h5>
@@ -80,52 +80,23 @@
               {{ 'NAV_STORY' | translate }}
             </a>
           </li>
-        </ul>
-      </div>
-
-      <!-- Support Section -->
-      <div class="md:col-span-3">
-        <h5 class="font-semibold text-xs uppercase tracking-wider mb-6 text-stone-400 dark:text-stone-500">
-          {{ 'FOOTER_SUPPORT' | translate }}
-        </h5>
-        <ul class="space-y-4 text-sm text-stone-600 dark:text-stone-400 font-light">
           <li>
             <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/contact">
               {{ 'FOOTER_CONTACT' | translate }}
-            </a>
-          </li>
-          <li>
-            <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/terms" fragment="shipping">
-              {{ 'FOOTER_SHIPPING' | translate }}
-            </a>
-          </li>
-          <li>
-            <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/privacy">
-              {{ 'FOOTER_PRIVACY' | translate }}
-            </a>
-          </li>
-          <li>
-            <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/terms">
-              {{ 'FOOTER_TERMS' | translate }}
-            </a>
-          </li>
-          <li>
-            <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/privacy" fragment="cookies">
-              {{ 'FOOTER_COOKIE_POLICY' | translate }}
             </a>
           </li>
         </ul>
       </div>
 
       <!-- Social Section -->
-      <div class="md:col-span-2">
+      <div class="md:col-span-3">
         <h5 class="font-semibold text-xs uppercase tracking-wider mb-6 text-stone-400 dark:text-stone-500">
           {{ 'FOOTER_SOCIAL' | translate }}
         </h5>
         <ul class="space-y-4 text-sm text-stone-600 dark:text-stone-400 font-light">
           <li>
             <a
-              href="https://instagram.com/ellas_pantry"
+              href="https://www.instagram.com/ellaspantryofficial/"
               target="_blank"
               rel="noopener noreferrer"
               class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer"
@@ -135,12 +106,22 @@
           </li>
           <li>
             <a
-              href="https://tiktok.com/@ellas_pantry"
+              href="https://www.tiktok.com/@ellaspantryofficial"
               target="_blank"
               rel="noopener noreferrer"
               class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer"
             >
               TikTok
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://se.pinterest.com/ellaspantryofficial/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer"
+            >
+              Pinterest
             </a>
           </li>
           <li>
@@ -158,8 +139,25 @@
     </div>
 
     <!-- Bottom Bar -->
-    <div class="mt-16 pt-8 border-t border-stone-200 dark:border-stone-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-stone-400 font-medium">
-      <p>{{ 'FOOTER_COPYRIGHT' | translate }}</p>
+    <div class="mt-16 pt-8 border-t border-stone-200 dark:border-stone-800 flex flex-col lg:flex-row justify-between items-center gap-6 text-xs text-stone-400 font-medium">
+      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
+        <p>{{ 'FOOTER_COPYRIGHT' | translate }}</p>
+        <span class="hidden md:inline text-stone-300 dark:text-stone-700">|</span>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer font-light" routerLink="/terms" fragment="shipping">
+            {{ 'FOOTER_SHIPPING' | translate }}
+          </a>
+          <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer font-light" routerLink="/privacy">
+            {{ 'FOOTER_PRIVACY' | translate }}
+          </a>
+          <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer font-light" routerLink="/terms">
+            {{ 'FOOTER_TERMS' | translate }}
+          </a>
+          <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer font-light" routerLink="/privacy" fragment="cookies">
+            {{ 'FOOTER_COOKIE_POLICY' | translate }}
+          </a>
+        </div>
+      </div>
       <p class="text-stone-400 dark:text-stone-500 font-light">{{ 'FOOTER_MADE_IN' | translate }}</p>
     </div>
   </div>
