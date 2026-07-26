@@ -53,7 +53,7 @@
     <!-- Main Footer Grid -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
       <!-- About Section -->
-      <div class="md:col-span-5 space-y-6">
+      <div class="md:col-span-4 space-y-6">
         <a class="flex items-center gap-3 cursor-pointer" routerLink="/">
           <div class="bg-[#23452E] text-white rounded-md w-7 h-7 flex items-center justify-center font-serif text-lg font-bold shadow-sm">
             E
@@ -66,7 +66,7 @@
       </div>
 
       <!-- Explore Section -->
-      <div class="md:col-span-4">
+      <div class="md:col-span-3">
         <h5 class="font-semibold text-xs uppercase tracking-wider mb-6 text-stone-400 dark:text-stone-500">
           {{ 'FOOTER_EXPLORE' | translate }}
         </h5>
@@ -86,9 +86,18 @@
               {{ 'NAV_STORY' | translate }}
             </a>
           </li>
+        </ul>
+      </div>
+
+      <!-- Support Section -->
+      <div class="md:col-span-2">
+        <h5 class="font-semibold text-xs uppercase tracking-wider mb-6 text-stone-400 dark:text-stone-500">
+          {{ 'FOOTER_SUPPORT' | translate }}
+        </h5>
+        <ul class="space-y-4 text-sm text-stone-600 dark:text-stone-400 font-light">
           <li>
             <a class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer" routerLink="/contact">
-              {{ 'FOOTER_CONTACT' | translate }}
+              {{ 'NAV_CONTACT' | translate }}
             </a>
           </li>
         </ul>
@@ -128,16 +137,6 @@
               class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer"
             >
               Pinterest
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://youtube.com/@ellas_pantry"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-[#23452E] dark:hover:text-white transition-colors cursor-pointer"
-            >
-              YouTube
             </a>
           </li>
         </ul>
