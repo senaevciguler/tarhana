@@ -23,6 +23,8 @@ module.exports = {
       animation: {
         'fade-in': 'fadeIn 1s ease-out forwards',
         'slide-up': 'slideUp 0.8s ease-out forwards',
+        'mascot-float': 'mascotFloat 6s ease-in-out infinite',
+        'mascot-breath': 'mascotBreath 4s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -32,6 +34,14 @@ module.exports = {
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        mascotFloat: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        mascotBreath: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.025)' },
         },
       },
     },

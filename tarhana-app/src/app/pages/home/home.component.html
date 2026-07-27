@@ -14,62 +14,79 @@
   </div>
 
   <div class="container mx-auto px-6 relative z-10 text-white">
-    <div class="max-w-4xl">
-      <h1 class="text-5xl md:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up">
-        {{ 'HOME_HERO_TITLE' | translate }}
-      </h1>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-8 max-w-4xl">
+        <h1 class="text-5xl md:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up">
+          {{ 'HOME_HERO_TITLE' | translate }}
+        </h1>
 
-      <div
-        class="w-24 h-1 bg-primary my-8 animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
-      ></div>
-
-      <div
-        class="flex flex-col sm:flex-row gap-4 mb-12 animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
-      >
-        <!-- Trust Badges -->
         <div
-          class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+          class="w-24 h-1 bg-primary my-8 animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
+        ></div>
+
+        <div
+          class="flex flex-col sm:flex-row gap-4 mb-12 animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
         >
-          <span class="material-icons text-white/70 text-lg" aria-hidden="true">schedule</span>
-          <span class="text-sm font-medium tracking-wide text-white/90">{{
-            'HOME_HERO_BADGE_READY' | translate
-          }}</span>
+          <!-- Trust Badges -->
+          <div
+            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+          >
+            <span class="material-icons text-white/70 text-lg" aria-hidden="true">schedule</span>
+            <span class="text-sm font-medium tracking-wide text-white/90">{{
+              'HOME_HERO_BADGE_READY' | translate
+            }}</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+          >
+            <span class="material-icons text-white/70 text-lg" aria-hidden="true">eco</span>
+            <span class="text-sm font-medium tracking-wide text-white/90">{{
+              'HOME_HERO_BADGE_ADDITIVES' | translate
+            }}</span>
+          </div>
+
+          <div
+            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+          >
+            <span class="material-icons text-white/70 text-lg" aria-hidden="true">biotech</span>
+            <span class="text-sm font-medium tracking-wide text-white/90">{{
+              'HOME_HERO_BADGE_FERMENTED' | translate
+            }}</span>
+          </div>
         </div>
 
         <div
-          class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+          class="flex flex-col sm:flex-row gap-5 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
         >
-          <span class="material-icons text-white/70 text-lg" aria-hidden="true">eco</span>
-          <span class="text-sm font-medium tracking-wide text-white/90">{{
-            'HOME_HERO_BADGE_ADDITIVES' | translate
-          }}</span>
-        </div>
-
-        <div
-          class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
-        >
-          <span class="material-icons text-white/70 text-lg" aria-hidden="true">biotech</span>
-          <span class="text-sm font-medium tracking-wide text-white/90">{{
-            'HOME_HERO_BADGE_FERMENTED' | translate
-          }}</span>
+          <a
+            routerLink="/products"
+            class="bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-red-700 transition-all text-center shadow-xl hover:scale-105"
+          >
+            {{ 'HOME_HERO_SHOP' | translate }}
+          </a>
+          <a
+            routerLink="/recipes"
+            class="bg-white/10 backdrop-blur-lg text-white border border-white/20 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all text-center hover:scale-105"
+          >
+            {{ 'HOME_HERO_DISCOVER' | translate }}
+          </a>
         </div>
       </div>
 
-      <div
-        class="flex flex-col sm:flex-row gap-5 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
-      >
-        <a
-          routerLink="/products"
-          class="bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-red-700 transition-all text-center shadow-xl hover:scale-105"
-        >
-          {{ 'HOME_HERO_SHOP' | translate }}
-        </a>
-        <a
-          routerLink="/recipes"
-          class="bg-white/10 backdrop-blur-lg text-white border border-white/20 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all text-center hover:scale-105"
-        >
-          {{ 'HOME_HERO_DISCOVER' | translate }}
-        </a>
+      <!-- Mascot Natural Peeking Placement in Hero -->
+      <div class="hidden lg:col-span-4 lg:flex justify-center items-center animate-fade-in [animation-delay:500ms] opacity-0 [animation-fill-mode:forwards]">
+        <div class="relative p-6">
+          <app-mascot
+            size="xl"
+            animate="float"
+            [hoverEffect]="true"
+            [lazy]="false"
+            altText="Ella Mascot peeking from the soup kitchen"
+          ></app-mascot>
+          <!-- Elegant premium glow backing -->
+          <div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full -z-10"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -140,8 +157,18 @@
 </section>
 
 <!-- Small Recipes CTA Section -->
-<section class="py-20 bg-stone-50 dark:bg-stone-800/30 transition-colors duration-300">
-  <div class="container mx-auto px-6 text-center">
+<section class="relative py-20 bg-stone-50 dark:bg-stone-800/30 transition-colors duration-300 overflow-hidden">
+  <!-- Subtle Mascot guide in Recipes Section -->
+  <div class="absolute left-6 bottom-4 hidden md:block opacity-80 z-10">
+    <app-mascot
+      size="lg"
+      animate="breath"
+      [hoverEffect]="true"
+      altText="Ella Mascot guiding to recipes"
+    ></app-mascot>
+  </div>
+
+  <div class="container mx-auto px-6 text-center relative z-20">
     <h2 class="text-3xl md:text-4xl font-light mb-6 text-stone-900 dark:text-white">
       {{ 'HOME_RECIPES_CTA_TITLE' | translate }}
     </h2>
@@ -159,10 +186,20 @@
 
 <!-- Story / Brand Section -->
 <section
-  class="py-32 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800"
+  class="relative py-32 bg-white dark:bg-stone-900 transition-colors duration-300 border-t border-stone-100 dark:border-stone-800"
 >
-  <div class="container mx-auto px-6">
+  <div class="container mx-auto px-6 relative z-10">
     <div class="max-w-3xl mx-auto text-center">
+      <!-- Minimalist representation of mascot guiding users below page -->
+      <div class="mb-6">
+        <app-mascot
+          size="sm"
+          animate="breath"
+          [hoverEffect]="true"
+          altText="Ella Mascot invite"
+        ></app-mascot>
+      </div>
+
       <h2 class="text-4xl md:text-5xl font-bold mb-8 text-stone-900 dark:text-white tracking-tight">
         {{ 'STORY_HERO_TITLE' | translate }}
       </h2>
