@@ -60,69 +60,42 @@ export class ContactComponent {
     const email = this.contactForm.get('email')?.value;
     const message = this.contactForm.get('message')?.value;
 
-    const service = SHOPIFY_CONFIG.contactFormService;
     const key = SHOPIFY_CONFIG.contactFormKey;
 
-    if (service === 'web3forms' && key) {
-      const payload = {
-        access_key: key,
-        name: name,
-        email: email,
-        message: message,
-        subject: "New Contact Message - Ella's Pantry",
-        from_name: "Ella's Pantry Storefront"
-      };
-      this.http.post('https://api.web3forms.com/submit', payload).subscribe({
-        next: (response: any) => {
-          this.isSubmitting.set(false);
-          if (response && (response.success || response.status === 200)) {
-            this.submitSuccess.set(true);
-            this.contactForm.reset();
-          } else {
-            this.submitError.set(true);
-            if (response && response.message) {
-              this.submitErrorMessage.set(response.message);
-            }
-          }
-        },
-        error: (err) => {
-          console.error('Web3Forms submission failed:', err);
-          this.isSubmitting.set(false);
-          this.submitError.set(true);
-          if (err && err.error && err.error.message) {
-            this.submitErrorMessage.set(err.error.message);
-          }
-        }
-      });
-    } else if (service === 'formspree' && key) {
-      const payload = {
-        name: name,
-        email: email,
-        message: message
-      };
-      this.http.post(`https://formspree.io/f/${key}`, payload).subscribe({
-        next: (response: any) => {
-          this.isSubmitting.set(false);
+    const payload = new FormData();
+    payload.append('access_key', key);
+    payload.append('name', name);
+    payload.append('email', email);
+    payload.append('message', message);
+    payload.append('subject', "New Contact Message - Ella's Pantry");
+    payload.append('from_name', "Ella's Pantry Storefront");
+
+    this.http.post('https://api.web3forms.com/submit', payload).subscribe({
+      next: (response: any) => {
+        this.isSubmitting.set(false);
+        if (response && (response.success || response.status === 200)) {
           this.submitSuccess.set(true);
           this.contactForm.reset();
-        },
-        error: (err) => {
-          console.error('Formspree submission failed:', err);
-          this.isSubmitting.set(false);
+        } else {
           this.submitError.set(true);
-          if (err && err.error && err.error.error) {
-            this.submitErrorMessage.set(err.error.error);
+          if (response && response.message) {
+            this.submitErrorMessage.set(response.message);
+          } else {
+            this.submitErrorMessage.set(this.langService.translate('CONTACT_ERROR_GENERIC'));
           }
         }
-      });
-    } else {
-      // Unconfigured / Mock flow: block fake success and set descriptive error message
-      this.isSubmitting.set(false);
-      this.submitError.set(true);
-      const msg = this.langService.translate('CONTACT_ERROR_UNCONFIGURED');
-      this.submitErrorMessage.set(msg);
-      console.warn('Contact form submission blocked: Real email sending is unconfigured (mock mode active). To enable, paste your Web3Forms Access Key or Formspree Form ID in SHOPIFY_CONFIG.');
-    }
+      },
+      error: (err) => {
+        console.error('Web3Forms submission failed:', err);
+        this.isSubmitting.set(false);
+        this.submitError.set(true);
+        if (err && err.error && err.error.message) {
+          this.submitErrorMessage.set(err.error.message);
+        } else {
+          this.submitErrorMessage.set(this.langService.translate('CONTACT_ERROR_UNAVAILABLE'));
+        }
+      }
+    });
   }
 
   private markAllTouched() {

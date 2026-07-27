@@ -4,7 +4,7 @@ declare const process: any;
 function getContactFormKey(): string {
   // 1. Try build-time replaced WEB3FORMS_ACCESS_KEY variable
   try {
-    if (typeof WEB3FORMS_ACCESS_KEY !== 'undefined') {
+    if (typeof WEB3FORMS_ACCESS_KEY !== 'undefined' && WEB3FORMS_ACCESS_KEY !== "''" && WEB3FORMS_ACCESS_KEY !== '') {
       return WEB3FORMS_ACCESS_KEY;
     }
   } catch (e) {}
@@ -23,18 +23,15 @@ function getContactFormKey(): string {
     }
   } catch (e) {}
 
-  return '';
+  // 4. Default fallback key
+  return '6ac83938-038a-497a-979b-beae95d59f73';
 }
 
 export const SHOPIFY_CONFIG = {
-  domain: '73aav0-cb.myshopify.com', // e.g., 'your-store.myshopify.com'
+  domain: '73aav0-cb.myshopify.com',
   storefrontAccessToken: '6e415b543ceb69d369dc8e7a8d8170cb',
   apiVersion: '2024-01',
-  enableCheckout: true, // Set to true to enable Shopify checkout redirection
-
-  // Production-Ready Contact Form Configuration
-  // To receive contact form emails at info@ellaspantry.se, obtain a free Web3Forms Access Key
-  // at https://web3forms.com/ or a Formspree Form ID at https://formspree.io/ and configure below.
-  contactFormService: 'web3forms', // Options: 'web3forms' | 'formspree' | 'mock'
-  contactFormKey: getContactFormKey() // Paste your Web3Forms Access Key or Formspree Form ID here, or provide it via environment variables
+  enableCheckout: true,
+  contactFormService: 'web3forms',
+  contactFormKey: getContactFormKey()
 };

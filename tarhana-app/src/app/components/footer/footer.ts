@@ -41,67 +41,40 @@ export class FooterComponent {
     this.newsletterSubmitting.set(true);
     this.newsletterSuccess.set(false);
 
-    const service = SHOPIFY_CONFIG.contactFormService;
     const key = SHOPIFY_CONFIG.contactFormKey;
 
-    if (service === 'web3forms' && key) {
-      const payload = {
-        access_key: key,
-        email: emailVal,
-        subject: "New Newsletter Subscriber - Ella's Pantry",
-        from_name: "Ella's Pantry Storefront",
-        message: `A new visitor has subscribed to the newsletter: ${emailVal}`
-      };
-      this.http.post('https://api.web3forms.com/submit', payload).subscribe({
-        next: (response: any) => {
-          this.newsletterSubmitting.set(false);
-          if (response && (response.success || response.status === 200)) {
-            this.newsletterSuccess.set(true);
-            this.email.set('');
-          } else {
-            this.newsletterError.set(true);
-            if (response && response.message) {
-              this.newsletterErrorMessage.set(response.message);
-            }
-          }
-        },
-        error: (err) => {
-          console.error('Web3Forms newsletter subscription failed:', err);
-          this.newsletterSubmitting.set(false);
-          this.newsletterError.set(true);
-          if (err && err.error && err.error.message) {
-            this.newsletterErrorMessage.set(err.error.message);
-          }
-        }
-      });
-    } else if (service === 'formspree' && key) {
-      const payload = {
-        email: emailVal,
-        message: `Newsletter subscription signup from Ella's Pantry Storefront: ${emailVal}`
-      };
-      this.http.post(`https://formspree.io/f/${key}`, payload).subscribe({
-        next: (response: any) => {
-          this.newsletterSubmitting.set(false);
+    const payload = new FormData();
+    payload.append('access_key', key);
+    payload.append('email', emailVal);
+    payload.append('subject', "New Newsletter Subscriber - Ella's Pantry");
+    payload.append('from_name', "Ella's Pantry Storefront");
+    payload.append('message', `A new visitor has subscribed to the newsletter: ${emailVal}`);
+
+    this.http.post('https://api.web3forms.com/submit', payload).subscribe({
+      next: (response: any) => {
+        this.newsletterSubmitting.set(false);
+        if (response && (response.success || response.status === 200)) {
           this.newsletterSuccess.set(true);
           this.email.set('');
-        },
-        error: (err) => {
-          console.error('Formspree newsletter subscription failed:', err);
-          this.newsletterSubmitting.set(false);
+        } else {
           this.newsletterError.set(true);
-          if (err && err.error && err.error.error) {
-            this.newsletterErrorMessage.set(err.error.error);
+          if (response && response.message) {
+            this.newsletterErrorMessage.set(response.message);
+          } else {
+            this.newsletterErrorMessage.set(this.langService.translate('FOOTER_NEWSLETTER_ERROR'));
           }
         }
-      });
-    } else {
-      // Unconfigured / Mock flow: block fake success and set error
-      this.newsletterSubmitting.set(false);
-      this.newsletterError.set(true);
-      this.newsletterSuccess.set(false);
-      const msg = this.langService.translate('FOOTER_NEWSLETTER_UNCONFIGURED');
-      this.newsletterErrorMessage.set(msg);
-      console.warn('Newsletter subscription blocked: Real email sending is unconfigured (mock mode active). To enable, paste your Web3Forms Access Key or Formspree Form ID in SHOPIFY_CONFIG.');
-    }
+      },
+      error: (err) => {
+        console.error('Web3Forms newsletter subscription failed:', err);
+        this.newsletterSubmitting.set(false);
+        this.newsletterError.set(true);
+        if (err && err.error && err.error.message) {
+          this.newsletterErrorMessage.set(err.error.message);
+        } else {
+          this.newsletterErrorMessage.set(this.langService.translate('CONTACT_ERROR_UNAVAILABLE'));
+        }
+      }
+    });
   }
 }
