@@ -2,7 +2,7 @@
 <div class="bg-background-light dark:bg-background-dark text-stone-800 dark:text-stone-100 transition-colors duration-300">
   <main class="max-w-7xl mx-auto px-6 py-12">
     <!-- Featured Hero Section -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
+    <section class="relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
       <div
         id="hero-recipe-image"
         (click)="openRecipe(recipes[0])"
@@ -22,9 +22,19 @@
           >
         </div>
       </div>
-      <div class="lg:col-span-5 space-y-6">
+      <div class="lg:col-span-5 space-y-6 relative">
+        <!-- Subtle guide mascot peeking next to tag -->
+        <div class="absolute -top-12 -right-4 hidden lg:block opacity-90">
+          <app-mascot
+            size="md"
+            animate="float"
+            [hoverEffect]="true"
+            altText="Ella Mascot decorative guide"
+          ></app-mascot>
+        </div>
+
         <div
-          class="flex items-center gap-2 text-primary font-bold tracking-widest text-sm uppercase"
+          class="flex items-center gap-2 text-primary font-bold tracking-widest text-sm uppercase animate-fade-in"
         >
           <span class="material-icons text-sm">restaurant</span>
           {{ 'RECIPES_FUSION_TAG' | translate }}
@@ -207,19 +217,31 @@
     }
 
     <!-- Bottom CTA Section -->
-    <section class="bg-stone-100 dark:bg-stone-900 rounded-2xl p-12 text-center max-w-4xl mx-auto border border-stone-200 dark:border-stone-800">
-      <h2 class="text-3xl font-bold mb-4 text-stone-900 dark:text-white">
-        {{ 'RECIPES_CTA_TITLE' | translate }}
-      </h2>
-      <p class="text-lg text-stone-600 dark:text-stone-400 mb-8 max-w-2xl mx-auto">
-        {{ 'RECIPES_CTA_TEXT' | translate }}
-      </p>
-      <a
-        routerLink="/products"
-        class="inline-block bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all"
-      >
-        {{ 'RECIPES_CTA_BUTTON' | translate }}
-      </a>
+    <section class="relative bg-stone-100 dark:bg-stone-900 rounded-2xl p-12 text-center max-w-4xl mx-auto border border-stone-200 dark:border-stone-800 overflow-hidden">
+      <!-- Mascot sitting guide on right of footer CTA -->
+      <div class="absolute right-6 bottom-4 hidden md:block opacity-95">
+        <app-mascot
+          size="md"
+          animate="breath"
+          [hoverEffect]="true"
+          altText="Ella Mascot encouraging you to explore"
+        ></app-mascot>
+      </div>
+
+      <div class="relative z-10">
+        <h2 class="text-3xl font-bold mb-4 text-stone-900 dark:text-white">
+          {{ 'RECIPES_CTA_TITLE' | translate }}
+        </h2>
+        <p class="text-lg text-stone-600 dark:text-stone-400 mb-8 max-w-2xl mx-auto">
+          {{ 'RECIPES_CTA_TEXT' | translate }}
+        </p>
+        <a
+          routerLink="/products"
+          class="inline-block bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all"
+        >
+          {{ 'RECIPES_CTA_BUTTON' | translate }}
+        </a>
+      </div>
     </section>
   </main>
 </div>
