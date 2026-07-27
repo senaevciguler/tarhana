@@ -273,6 +273,8 @@
   "CONTACT_SUCCESS_TEXT": "Tack för att du hör av dig! Vi har tagit emot ditt meddelande och återkommer till dig så snart som möjligt.",
   "CONTACT_SUCCESS_BTN": "Skicka ett till meddelande",
   "CONTACT_ERROR_GENERIC": "Något gick fel. Kontrollera fälten och försök igen.",
+  "CONTACT_ERROR_UNCONFIGURED": "E-posttjänsten är inte konfigurerad. Riktiga e-postmeddelanden kan inte skickas. Vänligen konfigurera Web3Forms eller Formspree i SHOPIFY_CONFIG.",
+  "FOOTER_NEWSLETTER_UNCONFIGURED": "Tjänsten för nyhetsbrevsprenumeration är inte konfigurerad.",
   "CONTACT_FORM_NAME": "Ditt namn",
   "CONTACT_FORM_NAME_PLACEHOLDER": "Ange ditt fullständiga namn",
   "CONTACT_FORM_ERR_NAME": "Namn krävs (minst 2 tecken)",

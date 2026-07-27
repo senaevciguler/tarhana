@@ -26,6 +26,7 @@ export class ContactComponent {
   isSubmitting = signal(false);
   submitSuccess = signal(false);
   submitError = signal(false);
+  submitErrorMessage = signal<string | null>(null);
 
   constructor() {
     this.contactForm = this.fb.group({
@@ -53,6 +54,7 @@ export class ContactComponent {
     this.isSubmitting.set(true);
     this.submitSuccess.set(false);
     this.submitError.set(false);
+    this.submitErrorMessage.set(null);
 
     const name = this.contactForm.get('name')?.value;
     const email = this.contactForm.get('email')?.value;
@@ -78,12 +80,18 @@ export class ContactComponent {
             this.contactForm.reset();
           } else {
             this.submitError.set(true);
+            if (response && response.message) {
+              this.submitErrorMessage.set(response.message);
+            }
           }
         },
         error: (err) => {
           console.error('Web3Forms submission failed:', err);
           this.isSubmitting.set(false);
           this.submitError.set(true);
+          if (err && err.error && err.error.message) {
+            this.submitErrorMessage.set(err.error.message);
+          }
         }
       });
     } else if (service === 'formspree' && key) {
@@ -102,16 +110,18 @@ export class ContactComponent {
           console.error('Formspree submission failed:', err);
           this.isSubmitting.set(false);
           this.submitError.set(true);
+          if (err && err.error && err.error.error) {
+            this.submitErrorMessage.set(err.error.error);
+          }
         }
       });
     } else {
-      // Mock API submission for local development and testing
-      setTimeout(() => {
-        this.isSubmitting.set(false);
-        this.submitSuccess.set(true);
-        console.log('Contact form submitted successfully (mocked):', { name, email, message });
-        this.contactForm.reset();
-      }, 1200);
+      // Unconfigured / Mock flow: block fake success and set descriptive error message
+      this.isSubmitting.set(false);
+      this.submitError.set(true);
+      const msg = this.langService.translate('CONTACT_ERROR_UNCONFIGURED');
+      this.submitErrorMessage.set(msg);
+      console.warn('Contact form submission blocked: Real email sending is unconfigured (mock mode active). To enable, paste your Web3Forms Access Key or Formspree Form ID in SHOPIFY_CONFIG.');
     }
   }
 

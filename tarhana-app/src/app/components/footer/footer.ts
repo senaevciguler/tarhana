@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { HttpClient } from '@angular/common/http';
 import { SHOPIFY_CONFIG } from '../../shopify.config';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,11 +15,13 @@ import { SHOPIFY_CONFIG } from '../../shopify.config';
 })
 export class FooterComponent {
   private http = inject(HttpClient);
+  private langService = inject(LanguageService); // Inject LanguageService for translations
 
   email = signal('');
   newsletterSuccess = signal(false);
   newsletterError = signal(false);
   newsletterSubmitting = signal(false);
+  newsletterErrorMessage = signal<string | null>(null);
 
   subscribeNewsletter() {
     const emailVal = this.email().trim();
@@ -27,11 +30,13 @@ export class FooterComponent {
     const standardEmailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!emailVal || (!emailPattern.test(emailVal) && !standardEmailPattern.test(emailVal))) {
+      this.newsletterErrorMessage.set(null);
       this.newsletterError.set(true);
       this.newsletterSuccess.set(false);
       return;
     }
 
+    this.newsletterErrorMessage.set(null);
     this.newsletterError.set(false);
     this.newsletterSubmitting.set(true);
     this.newsletterSuccess.set(false);
@@ -55,12 +60,18 @@ export class FooterComponent {
             this.email.set('');
           } else {
             this.newsletterError.set(true);
+            if (response && response.message) {
+              this.newsletterErrorMessage.set(response.message);
+            }
           }
         },
         error: (err) => {
           console.error('Web3Forms newsletter subscription failed:', err);
           this.newsletterSubmitting.set(false);
           this.newsletterError.set(true);
+          if (err && err.error && err.error.message) {
+            this.newsletterErrorMessage.set(err.error.message);
+          }
         }
       });
     } else if (service === 'formspree' && key) {
@@ -78,16 +89,19 @@ export class FooterComponent {
           console.error('Formspree newsletter subscription failed:', err);
           this.newsletterSubmitting.set(false);
           this.newsletterError.set(true);
+          if (err && err.error && err.error.error) {
+            this.newsletterErrorMessage.set(err.error.error);
+          }
         }
       });
     } else {
-      // Mock API submission for local development and testing
-      setTimeout(() => {
-        this.newsletterSubmitting.set(false);
-        this.newsletterSuccess.set(true);
-        console.log('Newsletter subscription email (mocked):', emailVal);
-        this.email.set('');
-      }, 1000);
+      // Unconfigured / Mock flow: block fake success and set error
+      this.newsletterSubmitting.set(false);
+      this.newsletterError.set(true);
+      this.newsletterSuccess.set(false);
+      const msg = this.langService.translate('FOOTER_NEWSLETTER_UNCONFIGURED');
+      this.newsletterErrorMessage.set(msg);
+      console.warn('Newsletter subscription blocked: Real email sending is unconfigured (mock mode active). To enable, paste your Web3Forms Access Key or Formspree Form ID in SHOPIFY_CONFIG.');
     }
   }
 }

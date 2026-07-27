@@ -60,22 +60,18 @@ describe('FooterComponent', () => {
     expect(component.newsletterSuccess()).toBeFalse();
   });
 
-  it('should handle mock service newsletter subscription', fakeAsync(() => {
+  it('should handle mock/unconfigured service newsletter subscription by displaying an error', () => {
     SHOPIFY_CONFIG.contactFormService = 'mock';
     SHOPIFY_CONFIG.contactFormKey = '';
 
     component.email.set('test@example.com');
     component.subscribeNewsletter();
 
-    expect(component.newsletterSubmitting()).toBeTrue();
-    expect(component.newsletterSuccess()).toBeFalse();
-
-    tick(1000);
-
     expect(component.newsletterSubmitting()).toBeFalse();
-    expect(component.newsletterSuccess()).toBeTrue();
-    expect(component.email()).toBe('');
-  }));
+    expect(component.newsletterSuccess()).toBeFalse();
+    expect(component.newsletterError()).toBeTrue();
+    expect(component.newsletterErrorMessage()).toBeDefined();
+  });
 
   it('should handle web3forms service newsletter subscription success', () => {
     SHOPIFY_CONFIG.contactFormService = 'web3forms';

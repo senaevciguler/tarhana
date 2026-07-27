@@ -42,7 +42,7 @@
             }
             @if (newsletterError()) {
               <p class="text-xs text-red-500 font-medium">
-                {{ 'FOOTER_NEWSLETTER_ERROR' | translate }}
+                {{ newsletterErrorMessage() || ('FOOTER_NEWSLETTER_ERROR' | translate) }}
               </p>
             }
           </form>
