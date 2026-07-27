@@ -34,7 +34,10 @@
             ],
             "styles": [
               "src/styles.scss"
-            ]
+            ],
+            "define": {
+              "WEB3FORMS_ACCESS_KEY": "''"
+            }
           },
           "configurations": {
             "production": {
@@ -89,7 +92,10 @@
                 "input": "public"
               }
             ],
-            "karmaConfig": "karma.conf.js"
+            "karmaConfig": "karma.conf.js",
+            "define": {
+              "WEB3FORMS_ACCESS_KEY": "''"
+            }
           }
         }
       }
