@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ContactComponent } from './contact';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -11,11 +11,9 @@ describe('ContactComponent', () => {
   let component: ContactComponent;
   let fixture: ComponentFixture<ContactComponent>;
   let httpMock: HttpTestingController;
-  let originalService: string;
   let originalKey: string;
 
   beforeEach(async () => {
-    originalService = SHOPIFY_CONFIG.contactFormService;
     originalKey = SHOPIFY_CONFIG.contactFormKey;
 
     await TestBed.configureTestingModule({
@@ -43,7 +41,6 @@ describe('ContactComponent', () => {
   });
 
   afterEach(() => {
-    SHOPIFY_CONFIG.contactFormService = originalService;
     SHOPIFY_CONFIG.contactFormKey = originalKey;
 
     // Flush any residual translation requests that may have been triggered
@@ -75,25 +72,7 @@ describe('ContactComponent', () => {
     expect(component.contactForm.valid).toBeTrue();
   });
 
-  it('should trigger submit error/unconfigured state on mock/unconfigured form submission', () => {
-    SHOPIFY_CONFIG.contactFormService = 'mock';
-    SHOPIFY_CONFIG.contactFormKey = '';
-
-    component.contactForm.get('name')?.setValue('Ella');
-    component.contactForm.get('email')?.setValue('info@ellaspantry.se');
-    component.contactForm.get('message')?.setValue('Hello, I would love to ask about your delicious fermented soup mixes!');
-
-    component.onSubmit();
-    fixture.detectChanges();
-
-    expect(component.isSubmitting()).toBeFalse();
-    expect(component.submitSuccess()).toBeFalse();
-    expect(component.submitError()).toBeTrue();
-    expect(component.submitErrorMessage()).toBeDefined();
-  });
-
   it('should trigger submit success state on valid Web3Forms submission', () => {
-    SHOPIFY_CONFIG.contactFormService = 'web3forms';
     SHOPIFY_CONFIG.contactFormKey = 'test-web3-key';
 
     component.contactForm.get('name')?.setValue('Ella');
@@ -105,8 +84,8 @@ describe('ContactComponent', () => {
 
     const req = httpMock.expectOne('https://api.web3forms.com/submit');
     expect(req.request.method).toBe('POST');
-    expect(req.request.body.access_key).toBe('test-web3-key');
-    expect(req.request.body.name).toBe('Ella');
+    expect(req.request.body.get('access_key')).toBe('test-web3-key');
+    expect(req.request.body.get('name')).toBe('Ella');
 
     req.flush({ success: true });
     fixture.detectChanges();
@@ -117,7 +96,6 @@ describe('ContactComponent', () => {
   });
 
   it('should trigger submit error state on failed Web3Forms submission', () => {
-    SHOPIFY_CONFIG.contactFormService = 'web3forms';
     SHOPIFY_CONFIG.contactFormKey = 'test-web3-key';
 
     component.contactForm.get('name')?.setValue('Ella');
