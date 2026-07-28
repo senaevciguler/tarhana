@@ -1,22 +1,13 @@
 <app-navbar></app-navbar>
 <!-- Hero Section -->
-<section class="relative h-[90vh] min-h-[700px] flex items-center overflow-hidden">
-  <!-- Background with Subtle Animation -->
-  <div class="absolute inset-0 z-0">
-    <img
-      src="/assets/hero-tarhana-soup.png"
-      [alt]="'ALT_TRAD_SOUP' | translate"
-      class="w-full h-full object-cover scale-105 animate-fade-in"
-      fetchpriority="high"
-      loading="eager"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-  </div>
+<section class="relative min-h-[85vh] lg:h-[90vh] flex items-center bg-[#FAF9F5] dark:bg-stone-950 transition-colors duration-300 overflow-hidden">
 
-  <div class="container mx-auto px-6 relative z-10 text-white">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
-      <div class="lg:col-span-8 max-w-4xl">
-        <h1 class="text-5xl md:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up">
+  <div class="container mx-auto px-6 relative z-10 py-12 lg:py-0">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
+
+      <!-- Left Column: Premium Headline, Trust Badges, CTAs -->
+      <div class="lg:col-span-6 flex flex-col justify-center text-stone-900 dark:text-stone-50 max-w-2xl">
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up text-stone-900 dark:text-stone-50">
           {{ 'HOME_HERO_TITLE' | translate }}
         </h1>
 
@@ -24,38 +15,39 @@
           class="w-24 h-1 bg-primary my-8 animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
         ></div>
 
+        <!-- Trust Badges with refined high-contrast styling -->
         <div
-          class="flex flex-col sm:flex-row gap-4 mb-12 animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
+          class="flex flex-wrap gap-4 mb-12 animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
         >
-          <!-- Trust Badges -->
           <div
-            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+            class="flex items-center gap-2 bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-4 py-2 rounded-full w-fit"
           >
-            <span class="material-icons text-white/70 text-lg" aria-hidden="true">schedule</span>
-            <span class="text-sm font-medium tracking-wide text-white/90">{{
-              'HOME_HERO_BADGE_READY' | translate
-            }}</span>
+            <span class="material-icons text-stone-500 dark:text-stone-400 text-lg" aria-hidden="true">schedule</span>
+            <span class="text-sm font-medium tracking-wide text-stone-700 dark:text-stone-300">
+              {{ 'HOME_HERO_BADGE_READY' | translate }}
+            </span>
           </div>
 
           <div
-            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+            class="flex items-center gap-2 bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-4 py-2 rounded-full w-fit"
           >
-            <span class="material-icons text-white/70 text-lg" aria-hidden="true">eco</span>
-            <span class="text-sm font-medium tracking-wide text-white/90">{{
-              'HOME_HERO_BADGE_ADDITIVES' | translate
-            }}</span>
+            <span class="material-icons text-stone-500 dark:text-stone-400 text-lg" aria-hidden="true">eco</span>
+            <span class="text-sm font-medium tracking-wide text-stone-700 dark:text-stone-300">
+              {{ 'HOME_HERO_BADGE_ADDITIVES' | translate }}
+            </span>
           </div>
 
           <div
-            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+            class="flex items-center gap-2 bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-4 py-2 rounded-full w-fit"
           >
-            <span class="material-icons text-white/70 text-lg" aria-hidden="true">biotech</span>
-            <span class="text-sm font-medium tracking-wide text-white/90">{{
-              'HOME_HERO_BADGE_FERMENTED' | translate
-            }}</span>
+            <span class="material-icons text-stone-500 dark:text-stone-400 text-lg" aria-hidden="true">biotech</span>
+            <span class="text-sm font-medium tracking-wide text-stone-700 dark:text-stone-300">
+              {{ 'HOME_HERO_BADGE_FERMENTED' | translate }}
+            </span>
           </div>
         </div>
 
+        <!-- Action CTAs -->
         <div
           class="flex flex-col sm:flex-row gap-5 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
         >
@@ -67,30 +59,51 @@
           </a>
           <a
             routerLink="/recipes"
-            class="bg-white/10 backdrop-blur-lg text-white border border-white/20 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all text-center hover:scale-105"
+            class="bg-stone-200/60 hover:bg-stone-200/90 dark:bg-stone-800/40 dark:hover:bg-stone-800/70 text-stone-900 dark:text-stone-100 border border-stone-300/40 dark:border-stone-700/40 px-10 py-5 rounded-full font-bold text-lg transition-all text-center hover:scale-105"
           >
             {{ 'HOME_HERO_DISCOVER' | translate }}
           </a>
         </div>
       </div>
-      <!-- Right-aligned Ella character for balancing composition -->
-      <div class="lg:col-span-4 flex justify-center lg:justify-end animate-slide-up [animation-delay:500ms] opacity-0 [animation-fill-mode:forwards] z-20">
-        <app-ella-character
-          size="w-40 h-40 sm:w-52 sm:h-52 lg:w-72 lg:h-72 p-2"
-          alignment="right"
-          animation="fade"
-          [floating]="true"
-          pose="standing-soup"
-          [lazy]="false"
-          altText="Ella holding soup"
-        ></app-ella-character>
+
+      <!-- Right Column: Premium Soup Bowl Visual & Ella Mascot perfectly integrated -->
+      <div class="lg:col-span-6 relative flex items-center justify-center lg:justify-end animate-slide-up [animation-delay:500ms] opacity-0 [animation-fill-mode:forwards] z-20">
+        <!-- Composition Wrapper keeping Soup and Ella beautifully proportioned and aligned -->
+        <div class="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] xl:max-w-[520px] aspect-square flex items-center justify-center">
+
+          <!-- Large, premium Soup Bowl photo container (the central visual focal point) -->
+          <div class="w-full h-full rounded-full overflow-hidden shadow-2xl border-8 border-white dark:border-stone-900 z-10 relative">
+            <img
+              src="/assets/soup.png"
+              [alt]="'ALT_TRAD_SOUP' | translate"
+              class="w-full h-full object-cover scale-100 transition-transform duration-1000 hover:scale-105"
+              fetchpriority="high"
+              loading="eager"
+            />
+          </div>
+
+          <!-- Ella Mascot scaled up and positioned naturally beside/overlapping the bowl -->
+          <div class="absolute -bottom-6 -left-8 sm:-left-12 lg:-left-16 z-20 w-[150px] sm:w-[200px] md:w-[240px] lg:w-[280px]">
+            <app-ella-character
+              size="w-full"
+              alignment="none"
+              animation="fade"
+              [floating]="true"
+              pose="standing-soup"
+              [lazy]="false"
+              altText="Ella holding soup"
+            ></app-ella-character>
+          </div>
+
+        </div>
       </div>
+
     </div>
   </div>
 
   <!-- Scroll Indicator -->
   <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
-    <span class="material-icons text-white text-3xl">expand_more</span>
+    <span class="material-icons text-stone-400 dark:text-stone-600 text-3xl">expand_more</span>
   </div>
 </section>
 
