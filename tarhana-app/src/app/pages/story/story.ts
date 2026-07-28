@@ -5,11 +5,12 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { SeoService } from '../../services/seo.service';
 import { LanguageService } from '../../services/language.service';
+import { EllaCharacterComponent } from '../../components/ella-character/ella-character';
 
 @Component({
   selector: 'app-story',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterLink, TranslatePipe],
+  imports: [NavbarComponent, FooterComponent, RouterLink, TranslatePipe, EllaCharacterComponent],
   templateUrl: './story.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

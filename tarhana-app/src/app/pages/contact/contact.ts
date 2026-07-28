@@ -8,11 +8,12 @@ import { SeoService } from '../../services/seo.service';
 import { LanguageService } from '../../services/language.service';
 import { HttpClient } from '@angular/common/http';
 import { SHOPIFY_CONFIG } from '../../shopify.config';
+import { EllaCharacterComponent } from '../../components/ella-character/ella-character';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterLink, ReactiveFormsModule, TranslatePipe],
+  imports: [NavbarComponent, FooterComponent, RouterLink, ReactiveFormsModule, TranslatePipe, EllaCharacterComponent],
   templateUrl: './contact.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

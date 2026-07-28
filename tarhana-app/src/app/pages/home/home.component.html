@@ -15,7 +15,7 @@
 
   <div class="container mx-auto px-6 relative z-10 text-white">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-      <div class="lg:col-span-8 max-w-4xl">
+      <div class="lg:col-span-12 max-w-4xl">
         <h1 class="text-5xl md:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up">
           {{ 'HOME_HERO_TITLE' | translate }}
         </h1>
@@ -71,21 +71,6 @@
           >
             {{ 'HOME_HERO_DISCOVER' | translate }}
           </a>
-        </div>
-      </div>
-
-      <!-- Mascot Natural Peeking Placement in Hero -->
-      <div class="hidden lg:col-span-4 lg:flex justify-center items-center animate-fade-in [animation-delay:500ms] opacity-0 [animation-fill-mode:forwards]">
-        <div class="relative p-6">
-          <app-mascot
-            size="xl"
-            animate="float"
-            [hoverEffect]="true"
-            [lazy]="false"
-            altText="Ella Mascot peeking from the soup kitchen"
-          ></app-mascot>
-          <!-- Elegant premium glow backing -->
-          <div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full -z-10"></div>
         </div>
       </div>
     </div>
@@ -158,15 +143,6 @@
 
 <!-- Small Recipes CTA Section -->
 <section class="relative py-20 bg-stone-50 dark:bg-stone-800/30 transition-colors duration-300 overflow-hidden">
-  <!-- Subtle Mascot guide in Recipes Section -->
-  <div class="absolute left-6 bottom-4 hidden md:block opacity-80 z-10">
-    <app-mascot
-      size="lg"
-      animate="breath"
-      [hoverEffect]="true"
-      altText="Ella Mascot guiding to recipes"
-    ></app-mascot>
-  </div>
 
   <div class="container mx-auto px-6 text-center relative z-20">
     <h2 class="text-3xl md:text-4xl font-light mb-6 text-stone-900 dark:text-white">
@@ -190,15 +166,6 @@
 >
   <div class="container mx-auto px-6 relative z-10">
     <div class="max-w-3xl mx-auto text-center">
-      <!-- Minimalist representation of mascot guiding users below page -->
-      <div class="mb-6">
-        <app-mascot
-          size="sm"
-          animate="breath"
-          [hoverEffect]="true"
-          altText="Ella Mascot invite"
-        ></app-mascot>
-      </div>
 
       <h2 class="text-4xl md:text-5xl font-bold mb-8 text-stone-900 dark:text-white tracking-tight">
         {{ 'STORY_HERO_TITLE' | translate }}

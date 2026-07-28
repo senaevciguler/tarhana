@@ -5,7 +5,6 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { RouterLink } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
 import { LanguageService } from '../../services/language.service';
-import { MascotComponent } from '../../components/mascot/mascot';
 
 interface Recipe {
   id: number;
@@ -23,7 +22,7 @@ interface Recipe {
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, TranslatePipe, RouterLink, MascotComponent],
+  imports: [NavbarComponent, FooterComponent, TranslatePipe, RouterLink],
   templateUrl: './recipes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
