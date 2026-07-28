@@ -1,96 +1,105 @@
 <app-navbar></app-navbar>
 <!-- Hero Section -->
-<section class="relative h-[90vh] min-h-[700px] flex items-center overflow-hidden">
-  <!-- Background with Subtle Animation -->
-  <div class="absolute inset-0 z-0">
-    <img
-      src="/assets/hero-tarhana-soup.png"
-      [alt]="'ALT_TRAD_SOUP' | translate"
-      class="w-full h-full object-cover scale-105 animate-fade-in"
-      fetchpriority="high"
-      loading="eager"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
-  </div>
+<section class="relative min-h-screen lg:h-[92vh] lg:min-h-[800px] flex items-center overflow-hidden bg-[#FAF9F5] dark:bg-stone-900 transition-colors duration-300 py-12 lg:py-0">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
 
-  <div class="container mx-auto px-6 relative z-10 text-white">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
-      <div class="lg:col-span-8 max-w-4xl">
-        <h1 class="text-5xl md:text-8xl font-bold mb-4 leading-[1.1] animate-slide-up">
+      <!-- Left Column: Content -->
+      <div class="lg:col-span-6 flex flex-col justify-center text-left max-w-2xl lg:max-w-none">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold text-stone-900 dark:text-white leading-[1.1] tracking-tight animate-slide-up">
           {{ 'HOME_HERO_TITLE' | translate }}
         </h1>
 
         <div
-          class="w-24 h-1 bg-primary my-8 animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
+          class="w-20 h-1 bg-primary my-6 sm:my-8 animate-slide-up [animation-delay:200ms] opacity-0 [animation-fill-mode:forwards]"
         ></div>
 
         <div
-          class="flex flex-col sm:flex-row gap-4 mb-12 animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
+          class="flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12 animate-slide-up [animation-delay:300ms] opacity-0 [animation-fill-mode:forwards]"
         >
           <!-- Trust Badges -->
           <div
-            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+            class="flex items-center gap-2 bg-stone-100 dark:bg-stone-800/80 border border-stone-200/60 dark:border-stone-700/60 px-4 py-2 rounded-full w-fit"
           >
-            <span class="material-icons text-white/70 text-lg" aria-hidden="true">schedule</span>
-            <span class="text-sm font-medium tracking-wide text-white/90">{{
-              'HOME_HERO_BADGE_READY' | translate
-            }}</span>
+            <span class="material-icons text-[#23452E] dark:text-[#a3b899] text-lg" aria-hidden="true">schedule</span>
+            <span class="text-sm font-medium tracking-wide text-stone-700 dark:text-stone-300">
+              {{ 'HOME_HERO_BADGE_READY' | translate }}
+            </span>
           </div>
 
           <div
-            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+            class="flex items-center gap-2 bg-stone-100 dark:bg-stone-800/80 border border-stone-200/60 dark:border-stone-700/60 px-4 py-2 rounded-full w-fit"
           >
-            <span class="material-icons text-white/70 text-lg" aria-hidden="true">eco</span>
-            <span class="text-sm font-medium tracking-wide text-white/90">{{
-              'HOME_HERO_BADGE_ADDITIVES' | translate
-            }}</span>
+            <span class="material-icons text-[#23452E] dark:text-[#a3b899] text-lg" aria-hidden="true">eco</span>
+            <span class="text-sm font-medium tracking-wide text-stone-700 dark:text-stone-300">
+              {{ 'HOME_HERO_BADGE_ADDITIVES' | translate }}
+            </span>
           </div>
 
           <div
-            class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full w-fit"
+            class="flex items-center gap-2 bg-stone-100 dark:bg-stone-800/80 border border-stone-200/60 dark:border-stone-700/60 px-4 py-2 rounded-full w-fit"
           >
-            <span class="material-icons text-white/70 text-lg" aria-hidden="true">biotech</span>
-            <span class="text-sm font-medium tracking-wide text-white/90">{{
-              'HOME_HERO_BADGE_FERMENTED' | translate
-            }}</span>
+            <span class="material-icons text-[#23452E] dark:text-[#a3b899] text-lg" aria-hidden="true">biotech</span>
+            <span class="text-sm font-medium tracking-wide text-stone-700 dark:text-stone-300">
+              {{ 'HOME_HERO_BADGE_FERMENTED' | translate }}
+            </span>
           </div>
         </div>
 
         <div
-          class="flex flex-col sm:flex-row gap-5 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
+          class="flex flex-col sm:flex-row gap-4 sm:gap-5 animate-slide-up [animation-delay:400ms] opacity-0 [animation-fill-mode:forwards]"
         >
           <a
             routerLink="/products"
-            class="bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-red-700 transition-all text-center shadow-xl hover:scale-105"
+            class="bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-red-700 transition-all text-center shadow-md hover:scale-105"
           >
             {{ 'HOME_HERO_SHOP' | translate }}
           </a>
           <a
             routerLink="/recipes"
-            class="bg-white/10 backdrop-blur-lg text-white border border-white/20 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all text-center hover:scale-105"
+            class="bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-white border border-stone-200 dark:border-stone-700 px-10 py-5 rounded-full font-bold text-lg hover:bg-stone-200 dark:hover:bg-stone-700 transition-all text-center hover:scale-105"
           >
             {{ 'HOME_HERO_DISCOVER' | translate }}
           </a>
         </div>
       </div>
-      <!-- Right-aligned Ella character for balancing composition -->
-      <div class="lg:col-span-4 flex justify-center lg:justify-end animate-slide-up [animation-delay:500ms] opacity-0 [animation-fill-mode:forwards] z-20">
-        <app-ella-character
-          size="w-40 h-40 sm:w-52 sm:h-52 lg:w-72 lg:h-72 p-2"
-          alignment="right"
-          animation="fade"
-          [floating]="true"
-          pose="standing-soup"
-          [lazy]="false"
-          altText="Ella holding soup"
-        ></app-ella-character>
+
+      <!-- Right Column: Visual Composition with Soup Image and Ella -->
+      <div class="lg:col-span-6 flex items-center justify-center lg:justify-end relative w-full h-[360px] sm:h-[480px] lg:h-[580px] mt-8 lg:mt-0 animate-slide-up [animation-delay:500ms] opacity-0 [animation-fill-mode:forwards] z-20 overflow-visible">
+        <!-- Inner wrapper that matches the bowl size and acts as the positioning context -->
+        <div class="relative w-[260px] h-[260px] sm:w-[380px] sm:h-[380px] lg:w-[440px] lg:h-[440px] xl:w-[480px] xl:h-[480px]">
+          <!-- Big Premium Soup Bowl circular frame as Focal Point -->
+          <div class="w-full h-full rounded-full overflow-hidden shadow-2xl border-4 sm:border-8 border-white dark:border-stone-800 z-10 relative">
+            <img
+              src="/assets/hero-tarhana-soup.png"
+              [alt]="'ALT_TRAD_SOUP' | translate"
+              class="w-full h-full object-cover scale-105"
+              fetchpriority="high"
+              loading="eager"
+            />
+          </div>
+
+          <!-- Significantly enlarged Ella illustration standing beside/overlapping the bowl container -->
+          <div class="absolute -left-12 sm:-left-20 lg:-left-24 bottom-[-10px] sm:bottom-[-20px] lg:bottom-[-30px] z-20 pointer-events-none">
+            <app-ella-character
+              size="w-48 h-48 sm:w-72 sm:h-72 lg:w-[360px] lg:h-[360px] xl:w-[400px] xl:h-[400px]"
+              alignment="none"
+              animation="float"
+              [hoverEffect]="true"
+              pose="standing-soup"
+              [lazy]="false"
+              altText="Ella holding soup"
+            ></app-ella-character>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 
   <!-- Scroll Indicator -->
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
-    <span class="material-icons text-white text-3xl">expand_more</span>
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce opacity-30 hidden md:block">
+    <span class="material-icons text-stone-900 dark:text-white text-3xl">expand_more</span>
   </div>
 </section>
 
