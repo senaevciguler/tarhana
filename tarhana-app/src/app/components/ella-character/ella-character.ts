@@ -48,8 +48,10 @@ export class EllaCharacterComponent implements OnInit, OnDestroy {
   // Centralized pose mapping. This makes it extremely easy to replace this single PNG with multiple Ella poses later without changing the implementations!
   private poseMap: Record<string, string> = {
     'default': '/assets/ella-character.png',
-    'cooking': '/assets/ella-character.png',
-    'stirring': '/assets/ella-character.png',
+    'cooking': '/assets/pose1.png',
+    'stirring': '/assets/pose1.png',
+    'cooking-stirring': '/assets/pose1.png',
+    'standing-soup': '/assets/fullFigure.png',
     'waving': '/assets/ella-character.png',
     'wave': '/assets/ella-character.png',
     'shopping': '/assets/ella-character.png',
