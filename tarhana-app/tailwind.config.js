@@ -25,9 +25,11 @@ module.exports = {
         'slide-up': 'slideUp 0.8s ease-out forwards',
         'mascot-float': 'mascotFloat 6s ease-in-out infinite',
         'mascot-breath': 'mascotBreath 4s ease-in-out infinite',
-        'ella-float': 'ellaFloat 5s ease-in-out infinite',
+        'ella-float': 'ellaFloat 9s ease-in-out infinite',
+        'ella-idle': 'ellaIdle 10s ease-in-out infinite',
         'ella-breath': 'ellaBreath 6s ease-in-out infinite',
         'ella-rotate': 'ellaRotate 8s ease-in-out infinite',
+        'ella-fade': 'ellaFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'ella-fade-in': 'ellaFadeIn 1s ease-out forwards',
       },
       keyframes: {
@@ -49,7 +51,11 @@ module.exports = {
         },
         ellaFloat: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-4px)' },
+          '50%': { transform: 'translateY(-3px)' },
+        },
+        ellaIdle: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.008)' },
         },
         ellaBreath: {
           '0%, 100%': { transform: 'scale(1)' },
@@ -58,6 +64,10 @@ module.exports = {
         ellaRotate: {
           '0%, 100%': { transform: 'rotate(0deg)' },
           '50%': { transform: 'rotate(1.5deg)' },
+        },
+        ellaFade: {
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         ellaFadeIn: {
           '0%': { opacity: '0', transform: 'scale(0.98)' },
