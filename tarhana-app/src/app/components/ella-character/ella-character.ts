@@ -5,13 +5,20 @@ import { Component, Input, ChangeDetectionStrategy, ElementRef, OnInit, OnDestro
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div [class]="getContainerClasses()" class="inline-block relative">
-      <img
-        [src]="getImageSrc()"
-        [alt]="altText"
-        [loading]="lazy ? 'lazy' : 'eager'"
-        [class]="getImageClasses()"
-      />
+    <div [class]="getContainerClasses()" class="inline-block relative overflow-visible">
+      <!-- Decoupled viewport entry layer -->
+      <div [class]="getEntryClasses()" class="w-full h-full">
+        <!-- Decoupled loop animation layer -->
+        <div [class]="getLoopingClasses()">
+          <!-- Interactive image layer with smooth hover response -->
+          <img
+            [src]="getImageSrc()"
+            [alt]="altText"
+            [loading]="lazy ? 'lazy' : 'eager'"
+            [class]="getImageClasses()"
+          />
+        </div>
+      </div>
     </div>
   `,
   styles: [`
@@ -25,11 +32,11 @@ import { Component, Input, ChangeDetectionStrategy, ElementRef, OnInit, OnDestro
 export class EllaCharacterComponent implements OnInit, OnDestroy {
   @Input() size: 'small' | 'medium' | 'large' | string = 'medium';
   @Input() alignment: 'left' | 'right' | 'center' | 'none' = 'none';
-  @Input() animation: 'float' | 'breath' | 'rotate' | 'fade-in' | 'none' = 'none';
+  @Input() animation: 'float' | 'idle' | 'fade' | 'fade-in' | 'breath' | 'rotate' | 'none' = 'none';
   @Input() floating: boolean = false;
   @Input() hoverEffect: boolean = true;
   @Input() lazy: boolean = true;
-  @Input() pose: 'default' | 'cooking' | 'stirring' | 'waving' | string = 'default';
+  @Input() pose: 'default' | 'cooking' | 'stirring' | 'waving' | 'wave' | 'shopping' | 'reading' | string = 'default';
   @Input() altText: string = 'Ella Mascot';
 
   private el = inject(ElementRef);
@@ -43,7 +50,10 @@ export class EllaCharacterComponent implements OnInit, OnDestroy {
     'default': '/assets/ella-character.png',
     'cooking': '/assets/ella-character.png',
     'stirring': '/assets/ella-character.png',
-    'waving': '/assets/ella-character.png'
+    'waving': '/assets/ella-character.png',
+    'wave': '/assets/ella-character.png',
+    'shopping': '/assets/ella-character.png',
+    'reading': '/assets/ella-character.png'
   };
 
   ngOnInit() {
@@ -117,45 +127,50 @@ export class EllaCharacterComponent implements OnInit, OnDestroy {
     return classes.join(' ');
   }
 
+  getEntryClasses(): string {
+    const classes: string[] = ['transition-all duration-1000 ease-out'];
+    if (this.isVisible()) {
+      if (this.animation === 'fade') {
+        classes.push('animate-ella-fade');
+      } else if (this.animation === 'fade-in') {
+        classes.push('animate-ella-fade-in');
+      } else {
+        classes.push('opacity-100 scale-100');
+      }
+    } else {
+      if (this.animation === 'fade' || this.animation === 'fade-in') {
+        classes.push('opacity-0');
+      } else {
+        classes.push('opacity-0 scale-95');
+      }
+    }
+    return classes.join(' ');
+  }
+
+  getLoopingClasses(): string {
+    const classes: string[] = ['w-full h-full'];
+
+    if (this.animation === 'float' || this.floating) {
+      classes.push('animate-ella-float');
+    } else if (this.animation === 'idle') {
+      classes.push('animate-ella-idle');
+    } else if (this.animation === 'breath') {
+      classes.push('animate-ella-breath');
+    } else if (this.animation === 'rotate') {
+      classes.push('animate-ella-rotate');
+    }
+
+    return classes.join(' ');
+  }
+
   getImageClasses(): string {
     const classes: string[] = [
-      'w-full h-full object-contain transition-all duration-700 ease-out select-none pointer-events-auto'
+      'w-full h-full object-contain transition-transform duration-700 ease-out select-none pointer-events-auto'
     ];
 
-    // Initial opacity state based on visibility signal to allow soft fade-in
-    if (this.isVisible()) {
-      classes.push('opacity-100');
-    } else {
-      classes.push('opacity-0 scale-95');
-    }
-
-    // Floating effect (boolean input) - 2-4px vertical movement
-    if (this.floating) {
-      classes.push('animate-ella-float');
-    }
-
-    // Specific animations
-    switch (this.animation) {
-      case 'float':
-        // Only add if not already added by floating boolean
-        if (!this.floating) {
-          classes.push('animate-ella-float');
-        }
-        break;
-      case 'breath':
-        classes.push('animate-ella-breath');
-        break;
-      case 'rotate':
-        classes.push('animate-ella-rotate');
-        break;
-      case 'fade-in':
-        classes.push('animate-ella-fade-in');
-        break;
-    }
-
-    // Hover effect: slight scale on hover (2-3%) and very subtle rotation (1-2 degrees)
+    // Hover effect: slight scale on hover (2%) and very subtle rotation (1 degree)
     if (this.hoverEffect) {
-      classes.push('hover:scale-[1.025] hover:rotate-[1deg]');
+      classes.push('hover:scale-[1.02] hover:rotate-[1deg]');
     }
 
     return classes.join(' ');

@@ -39,22 +39,30 @@ describe('EllaCharacterComponent', () => {
     expect(containerEl.className).toContain('h-16');
   });
 
-  it('should apply proper animation classes', () => {
-    fixture.componentRef.setInput('animation', 'breath');
+  it('should apply proper entry animation classes on the entry wrapper layer', () => {
+    component.isVisible.set(true);
+    fixture.componentRef.setInput('animation', 'fade');
     fixture.detectChanges();
-    const imgEl = fixture.debugElement.query(By.css('img')).nativeElement as HTMLImageElement;
-    expect(imgEl.className).toContain('animate-ella-breath');
+    const entryEl = fixture.debugElement.queryAll(By.css('div'))[1].nativeElement as HTMLDivElement;
+    expect(entryEl.className).toContain('animate-ella-fade');
+  });
 
-    fixture.componentRef.setInput('animation', 'rotate');
+  it('should apply proper looping animation classes on the loop wrapper layer', () => {
+    fixture.componentRef.setInput('animation', 'idle');
     fixture.detectChanges();
-    expect(imgEl.className).toContain('animate-ella-rotate');
+    const loopEl = fixture.debugElement.queryAll(By.css('div'))[2].nativeElement as HTMLDivElement;
+    expect(loopEl.className).toContain('animate-ella-idle');
+
+    fixture.componentRef.setInput('animation', 'float');
+    fixture.detectChanges();
+    expect(loopEl.className).toContain('animate-ella-float');
   });
 
   it('should apply floating animation class when floating is true', () => {
     fixture.componentRef.setInput('floating', true);
     fixture.detectChanges();
-    const imgEl = fixture.debugElement.query(By.css('img')).nativeElement as HTMLImageElement;
-    expect(imgEl.className).toContain('animate-ella-float');
+    const loopEl = fixture.debugElement.queryAll(By.css('div'))[2].nativeElement as HTMLDivElement;
+    expect(loopEl.className).toContain('animate-ella-float');
   });
 
   it('should respect alignment changes', () => {
@@ -62,5 +70,20 @@ describe('EllaCharacterComponent', () => {
     fixture.detectChanges();
     const containerEl = fixture.debugElement.query(By.css('div')).nativeElement as HTMLDivElement;
     expect(containerEl.className).toContain('mx-auto');
+  });
+
+  it('should apply custom hover scale and rotate transition classes on image element', () => {
+    fixture.componentRef.setInput('hoverEffect', true);
+    fixture.detectChanges();
+    const imgEl = fixture.debugElement.query(By.css('img')).nativeElement as HTMLImageElement;
+    expect(imgEl.className).toContain('hover:scale-[1.02]');
+    expect(imgEl.className).toContain('hover:rotate-[1deg]');
+  });
+
+  it('should resolve different poses to correct URLs', () => {
+    fixture.componentRef.setInput('pose', 'cooking');
+    fixture.detectChanges();
+    const imgEl = fixture.debugElement.query(By.css('img')).nativeElement as HTMLImageElement;
+    expect(imgEl.src).toContain('/assets/ella-character.png');
   });
 });
