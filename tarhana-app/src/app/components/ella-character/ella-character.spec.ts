@@ -84,6 +84,11 @@ describe('EllaCharacterComponent', () => {
     fixture.componentRef.setInput('pose', 'cooking');
     fixture.detectChanges();
     const imgEl = fixture.debugElement.query(By.css('img')).nativeElement as HTMLImageElement;
-    expect(imgEl.src).toContain('/assets/ella-character.png');
+    expect(imgEl.src).toContain('/assets/pose1.png');
+
+    fixture.componentRef.setInput('pose', 'standing-soup');
+    fixture.detectChanges();
+    const imgEl2 = fixture.debugElement.query(By.css('img')).nativeElement as HTMLImageElement;
+    expect(imgEl2.src).toContain('/assets/fullFigure.png');
   });
 });

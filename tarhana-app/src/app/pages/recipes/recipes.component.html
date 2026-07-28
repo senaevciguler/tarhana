@@ -56,14 +56,29 @@
             </span>
           </div>
         </div>
-        <button
-          id="hero-recipe-btn"
-          (click)="openRecipe(recipes[0])"
-          class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-3 w-fit"
-        >
-          {{ 'RECIPES_FULL_BUTTON' | translate }}
-          <span class="material-icons">arrow_forward</span>
-        </button>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-6 pt-4">
+          <button
+            id="hero-recipe-btn"
+            (click)="openRecipe(recipes[0])"
+            class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-3 w-fit shrink-0"
+          >
+            {{ 'RECIPES_FULL_BUTTON' | translate }}
+            <span class="material-icons">arrow_forward</span>
+          </button>
+
+          <!-- Cooking Ella - Stirring/Preparing the recipe -->
+          <div class="opacity-0 animate-fade-in [animation-delay:300ms] [animation-fill-mode:forwards]">
+            <app-ella-character
+              size="w-24 h-24 lg:w-32 lg:h-32 p-1"
+              alignment="left"
+              animation="idle"
+              [floating]="true"
+              pose="cooking-stirring"
+              [lazy]="true"
+              altText="Ella preparing the soup"
+            ></app-ella-character>
+          </div>
+        </div>
       </div>
     </section>
 
