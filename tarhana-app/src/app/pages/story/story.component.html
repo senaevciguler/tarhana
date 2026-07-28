@@ -126,12 +126,13 @@
         <!-- Right: Friendly face illustration -->
         <div class="lg:col-span-5 flex justify-center w-full">
           <div class="relative w-full max-w-[360px] aspect-square rounded-[2rem] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-700 bg-white dark:bg-stone-800 p-10 flex items-center justify-center">
-            <img
-              src="/assets/ella-character.png"
-              [alt]="'ALT_FOOD_PHOTO' | translate"
-              class="object-contain w-full h-full max-h-[220px]"
-              loading="lazy"
-            />
+            <app-ella-character
+              size="large"
+              alignment="center"
+              [floating]="true"
+              pose="default"
+              altText="Meet Ella"
+            ></app-ella-character>
             <!-- Elegant label overlay border -->
             <div class="absolute inset-4 border border-stone-200/50 dark:border-stone-700 rounded-[1.5rem] pointer-events-none"></div>
           </div>

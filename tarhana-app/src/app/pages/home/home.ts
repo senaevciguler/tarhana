@@ -5,12 +5,11 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { SeoService } from '../../services/seo.service';
 import { LanguageService } from '../../services/language.service';
-import { MascotComponent } from '../../components/mascot/mascot';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterLink, TranslatePipe, MascotComponent],
+  imports: [NavbarComponent, FooterComponent, RouterLink, TranslatePipe],
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
