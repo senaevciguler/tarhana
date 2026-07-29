@@ -29,7 +29,7 @@ interface Recipe {
 })
 export class RecipesComponent implements OnDestroy {
   private seoService = inject(SeoService);
-  private langService = inject(LanguageService);
+  public langService = inject(LanguageService);
 
   recipes: Recipe[] = [
     {
