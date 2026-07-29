@@ -66,9 +66,9 @@
         </div>
       </div>
 
-      <!-- Right Column: Premium Soup Bowl Visual & Ella Mascot perfectly integrated -->
+      <!-- Right Column: Premium Soup Bowl Visual -->
       <div class="lg:col-span-6 relative flex items-center justify-center lg:justify-end animate-slide-up [animation-delay:500ms] opacity-0 [animation-fill-mode:forwards] z-20">
-        <!-- Composition Wrapper keeping Soup and Ella beautifully proportioned and aligned -->
+        <!-- Composition Wrapper keeping Soup beautifully proportioned and aligned -->
         <div class="relative w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] xl:max-w-[520px] aspect-square flex items-center justify-center">
 
           <!-- Large, premium Soup Bowl photo container (the central visual focal point) -->
@@ -82,19 +82,6 @@
             />
           </div>
 
-          <!-- Ella Mascot scaled up and positioned naturally beside/overlapping the bowl -->
-          <div class="absolute -bottom-6 -left-8 sm:-left-12 lg:-left-16 z-20 w-[150px] sm:w-[200px] md:w-[240px] lg:w-[280px]">
-            <app-ella-character
-              size="w-full"
-              alignment="none"
-              animation="fade"
-              [floating]="true"
-              pose="standing-soup"
-              [lazy]="false"
-              altText="Ella holding soup"
-            ></app-ella-character>
-          </div>
-
         </div>
       </div>
 
@@ -104,6 +91,18 @@
   <!-- Scroll Indicator -->
   <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 hidden md:block">
     <span class="material-icons text-stone-400 dark:text-stone-600 text-3xl">expand_more</span>
+  </div>
+
+  <!-- Subtle, elegant floating sticker of Ella in the bottom-right corner -->
+  <div class="absolute bottom-6 right-6 z-30 hidden sm:block opacity-75 hover:opacity-100 transition-opacity">
+    <app-ella-character
+      size="small"
+      alignment="none"
+      animation="float"
+      pose="standing-soup"
+      [hoverEffect]="true"
+      altText="Ella holding soup"
+    ></app-ella-character>
   </div>
 </section>
 
