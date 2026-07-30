@@ -5,7 +5,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { RouterLink } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
 import { LanguageService } from '../../services/language.service';
-import { EllaCharacterComponent } from '../../components/ella-character/ella-character';
+import { EllaTipComponent } from '../../components/ella-tip/ella-tip';
 
 interface Recipe {
   id: number;
@@ -23,7 +23,7 @@ interface Recipe {
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, TranslatePipe, RouterLink, EllaCharacterComponent],
+  imports: [NavbarComponent, FooterComponent, TranslatePipe, RouterLink, EllaTipComponent],
   templateUrl: './recipes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
