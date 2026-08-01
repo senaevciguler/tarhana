@@ -1,4 +1,16 @@
-import { Component, OnDestroy, inject, effect, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  inject,
+  effect,
+  ChangeDetectionStrategy,
+  signal,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  PLATFORM_ID
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar';
 import { FooterComponent } from '../../components/footer/footer';
 import { TranslatePipe } from '../../pipes/translate.pipe';
@@ -27,9 +39,16 @@ interface Recipe {
   templateUrl: './recipes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipesComponent implements OnDestroy {
+export class RecipesComponent implements AfterViewInit, OnDestroy {
   private seoService = inject(SeoService);
   public langService = inject(LanguageService);
+  private platformId = inject(PLATFORM_ID);
+  private observer: IntersectionObserver | null = null;
+
+  @ViewChild('featuredVideo') featuredVideo!: ElementRef<HTMLVideoElement>;
+  @ViewChild('heroRecipeImage') heroRecipeImage!: ElementRef<HTMLDivElement>;
+
+  isVideoVisible = signal(false);
 
   recipes: Recipe[] = [
     {
@@ -84,6 +103,47 @@ export class RecipesComponent implements OnDestroy {
     });
   }
 
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.setupIntersectionObserver();
+    } else {
+      this.isVideoVisible.set(true);
+    }
+  }
+
+  private setupIntersectionObserver() {
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const video = this.featuredVideo?.nativeElement;
+            if (entry.isIntersecting) {
+              this.isVideoVisible.set(true);
+              if (video) {
+                video.play().catch((err) => {
+                  console.debug('Video playback failed or was interrupted:', err);
+                });
+              }
+            } else {
+              if (video) {
+                video.pause();
+              }
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+        }
+      );
+
+      if (this.heroRecipeImage) {
+        this.observer.observe(this.heroRecipeImage.nativeElement);
+      }
+    } else {
+      this.isVideoVisible.set(true);
+    }
+  }
+
   selectedRecipe: Recipe | null = null;
 
   openRecipe(recipe: Recipe) {
@@ -97,6 +157,9 @@ export class RecipesComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
     document.body.style.overflow = 'auto';
   }
 }

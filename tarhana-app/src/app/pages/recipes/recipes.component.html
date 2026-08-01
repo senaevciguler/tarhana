@@ -4,18 +4,27 @@
     <!-- Featured Hero Section -->
     <section class="relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
       <div
+        #heroRecipeImage
         id="hero-recipe-image"
         (click)="openRecipe(recipes[0])"
-        class="lg:col-span-7 overflow-hidden rounded-xl h-[500px] relative group cursor-pointer"
+        class="lg:col-span-7 overflow-hidden rounded-2xl h-[500px] relative group cursor-pointer transition-all duration-1000 motion-reduce:transition-none"
+        [class.opacity-0]="!isVideoVisible()"
+        [class.scale-95]="!isVideoVisible()"
+        [class.opacity-100]="isVideoVisible()"
+        [class.scale-100]="isVideoVisible()"
       >
-        <img
-          [alt]="'ALT_TRAD_SOUP' | translate"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          [src]="recipes[0].image"
-          loading="lazy"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-        <div class="absolute bottom-6 left-6">
+        <video
+          #featuredVideo
+          class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
+          src="/assets/videos/recipe-tarhana-soup.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        ></video>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-6 left-6 pointer-events-none">
           <span
             class="bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest"
             >{{ 'RECIPES_FEATURED_BADGE' | translate }}</span
