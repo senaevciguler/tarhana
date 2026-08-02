@@ -31,6 +31,7 @@ interface Recipe {
   servingsKey: string;
   image: string;
   videoUrl?: string;
+  posterImage?: string;
 }
 
 @Component({
@@ -50,6 +51,9 @@ export class RecipesComponent implements AfterViewInit, OnDestroy {
   @ViewChild('heroRecipeImage') heroRecipeImage!: ElementRef<HTMLDivElement>;
 
   isVideoVisible = signal(false);
+  showPlayButton = signal(true);
+  showControls = signal(false);
+  isPlaying = signal(false);
 
   recipes: Recipe[] = [
     {
@@ -64,6 +68,7 @@ export class RecipesComponent implements AfterViewInit, OnDestroy {
       servingsKey: 'RECIPES_SERVINGS_1',
       image: '/assets/hero-tarhana-soup.png',
       videoUrl: 'https://cdn.shopify.com/videos/c/o/v/aa10862f880b4990a63d5cd5aaa17a12.mp4',
+      posterImage: '/assets/hero-tarhana-soup.png',
     },
     {
       id: 2,
@@ -121,11 +126,6 @@ export class RecipesComponent implements AfterViewInit, OnDestroy {
             const video = this.featuredVideo?.nativeElement;
             if (entry.isIntersecting) {
               this.isVideoVisible.set(true);
-              if (video) {
-                video.play().catch((err) => {
-                  console.debug('Video playback failed or was interrupted:', err);
-                });
-              }
             } else {
               if (video) {
                 video.pause();
@@ -146,11 +146,56 @@ export class RecipesComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  startPlayback(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    const video = this.featuredVideo?.nativeElement;
+    if (video) {
+      video.play().catch((err) => {
+        console.debug('Playback failed:', err);
+      });
+    }
+  }
+
+  onVideoContainerClick(event: MouseEvent) {
+    const video = this.featuredVideo?.nativeElement;
+    if (video && video.paused) {
+      this.startPlayback(event);
+    }
+  }
+
+  onVideoPlay() {
+    this.isPlaying.set(true);
+    this.showPlayButton.set(false);
+    this.showControls.set(true);
+  }
+
+  onVideoPause() {
+    this.isPlaying.set(false);
+  }
+
+  onVideoEnded() {
+    const video = this.featuredVideo?.nativeElement;
+    if (video) {
+      video.currentTime = 0;
+      video.load();
+    }
+    this.isPlaying.set(false);
+    this.showControls.set(false);
+    this.showPlayButton.set(true);
+  }
+
   selectedRecipe: Recipe | null = null;
 
   openRecipe(recipe: Recipe) {
     this.selectedRecipe = recipe;
     document.body.style.overflow = 'hidden';
+
+    const video = this.featuredVideo?.nativeElement;
+    if (video) {
+      video.pause();
+    }
   }
 
   closeRecipe() {
