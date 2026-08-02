@@ -30,6 +30,7 @@ interface Recipe {
   difficultyKey: string;
   servingsKey: string;
   image: string;
+  videoUrl?: string;
 }
 
 @Component({
@@ -62,6 +63,7 @@ export class RecipesComponent implements AfterViewInit, OnDestroy {
       difficultyKey: 'RECIPES_EASY',
       servingsKey: 'RECIPES_SERVINGS_1',
       image: '/assets/hero-tarhana-soup.png',
+      videoUrl: 'https://cdn.shopify.com/videos/c/o/v/aa10862f880b4990a63d5cd5aaa17a12.mp4',
     },
     {
       id: 2,
