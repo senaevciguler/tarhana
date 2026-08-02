@@ -59,7 +59,7 @@ export class RecipesComponent implements OnDestroy {
       timeKey: 'RECIPES_TIME_30',
       difficultyKey: 'RECIPES_EASY',
       servingsKey: 'RECIPES_SERVINGS_4',
-      image: '/assets/tarhana-bread.png',
+      image: '/assets/tarhana-chips.png',
     },
     {
       id: 3,
@@ -71,7 +71,7 @@ export class RecipesComponent implements OnDestroy {
       timeKey: 'RECIPES_TIME_30',
       difficultyKey: 'RECIPES_EASY',
       servingsKey: 'RECIPES_SERVINGS_CHIPS',
-      image: '/assets/tarhana-chips.png',
+      image: '/assets/tarhana-bread.png',
     },
   ];
 
