@@ -78,20 +78,22 @@
         aria-controls="mobile-menu"
         [attr.aria-label]="langService.language() === 'SV' ? 'Meny' : 'Menu'"
       >
-        <div class="relative w-6 h-5 flex flex-col justify-between items-center">
+        <div class="relative w-6 h-5">
           <span
-            class="w-6 h-0.5 bg-current transition-all duration-300 origin-left"
+            class="absolute left-0 right-0 h-0.5 bg-current transition-all duration-300 transform"
             [class.rotate-45]="isMenuOpen()"
-            [class.translate-y-[-1px]]="isMenuOpen()"
+            [class.top-2]="isMenuOpen()"
+            [class.top-0]="!isMenuOpen()"
           ></span>
           <span
-            class="w-6 h-0.5 bg-current transition-all duration-300"
+            class="absolute left-0 right-0 h-0.5 bg-current transition-all duration-300 top-2"
             [class.opacity-0]="isMenuOpen()"
           ></span>
           <span
-            class="w-6 h-0.5 bg-current transition-all duration-300 origin-left"
+            class="absolute left-0 right-0 h-0.5 bg-current transition-all duration-300 transform"
             [class.-rotate-45]="isMenuOpen()"
-            [class.translate-y-[1px]]="isMenuOpen()"
+            [class.top-2]="isMenuOpen()"
+            [class.top-4]="!isMenuOpen()"
           ></span>
         </div>
       </button>
@@ -101,7 +103,7 @@
   <!-- Mobile Menu Overlay -->
   <div
     id="mobile-menu"
-    class="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-background-light dark:bg-background-dark z-40 flex flex-col justify-between px-6 py-8 border-t border-primary/10 transition-all duration-300 ease-in-out md:hidden"
+    class="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-background-light dark:bg-background-dark z-40 flex flex-col justify-between px-6 py-8 border-t border-primary/10 transition-all duration-300 ease-in-out md:hidden overflow-y-auto"
     [class.translate-x-0]="isMenuOpen()"
     [class.translate-x-full]="!isMenuOpen()"
     [class.opacity-100]="isMenuOpen()"
