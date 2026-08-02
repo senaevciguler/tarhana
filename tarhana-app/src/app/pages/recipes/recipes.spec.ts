@@ -56,4 +56,57 @@ describe('RecipesComponent', () => {
     expect(component.selectedRecipe).toBeNull();
     expect(document.body.style.overflow).toBe('auto');
   });
+
+  it('should have correct initial video control states', () => {
+    expect(component.showPlayButton()).toBeTrue();
+    expect(component.showControls()).toBeFalse();
+    expect(component.isPlaying()).toBeFalse();
+  });
+
+  it('should update state signals on video play', () => {
+    component.onVideoPlay();
+    expect(component.isPlaying()).toBeTrue();
+    expect(component.showPlayButton()).toBeFalse();
+    expect(component.showControls()).toBeTrue();
+  });
+
+  it('should update isPlaying on video pause', () => {
+    component.onVideoPlay();
+    component.onVideoPause();
+    expect(component.isPlaying()).toBeFalse();
+    expect(component.showPlayButton()).toBeFalse(); // remains false
+    expect(component.showControls()).toBeTrue(); // remains true
+  });
+
+  it('should reset state signals on video ended', () => {
+    // Mock the HTMLVideoElement
+    const mockVideo = {
+      currentTime: 10,
+      load: jasmine.createSpy('load')
+    };
+    component.featuredVideo = {
+      nativeElement: mockVideo as any
+    };
+
+    component.onVideoPlay();
+    component.onVideoEnded();
+
+    expect(component.isPlaying()).toBeFalse();
+    expect(component.showControls()).toBeFalse();
+    expect(component.showPlayButton()).toBeTrue();
+    expect(mockVideo.currentTime).toBe(0);
+    expect(mockVideo.load).toHaveBeenCalled();
+  });
+
+  it('should pause the video when opening recipe modal', () => {
+    const mockVideo = {
+      pause: jasmine.createSpy('pause')
+    };
+    component.featuredVideo = {
+      nativeElement: mockVideo as any
+    };
+
+    component.openRecipe(component.recipes[0]);
+    expect(mockVideo.pause).toHaveBeenCalled();
+  });
 });
