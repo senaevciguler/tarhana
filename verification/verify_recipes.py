@@ -41,7 +41,7 @@ def run_cuj(page):
 
     # Verify that only 3 recipe cards exist
     print("Counting recipe cards...")
-    cards = page.locator(".recipe-card")
+    cards = page.locator(".recipe-card, #hero-recipe-image")
     card_count = cards.count()
     print(f"Number of recipe cards found: {card_count}")
 

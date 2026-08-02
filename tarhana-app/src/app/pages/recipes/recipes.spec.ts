@@ -27,10 +27,10 @@ describe('RecipesComponent', () => {
     expect(component.recipes.length).toBe(3);
   });
 
-  it('should have videoUrl defined for the first recipe and undefined for others', () => {
-    expect(component.recipes[0].videoUrl).toBe('https://cdn.shopify.com/videos/c/o/v/aa10862f880b4990a63d5cd5aaa17a12.mp4');
-    expect(component.recipes[1].videoUrl).toBeUndefined();
-    expect(component.recipes[2].videoUrl).toBeUndefined();
+  it('should have videos defined for the first recipe and undefined for others', () => {
+    expect(component.recipes[0].videos?.en).toBe('https://cdn.shopify.com/videos/c/o/v/aa10862f880b4990a63d5cd5aaa17a12.mp4');
+    expect(component.recipes[1].videos).toBeUndefined();
+    expect(component.recipes[2].videos).toBeUndefined();
   });
 
   it('should have gridRecipes filtered down to 2 recipes', () => {
@@ -57,56 +57,11 @@ describe('RecipesComponent', () => {
     expect(document.body.style.overflow).toBe('auto');
   });
 
-  it('should have correct initial video control states', () => {
-    expect(component.showPlayButton()).toBeTrue();
-    expect(component.showControls()).toBeFalse();
-    expect(component.isPlaying()).toBeFalse();
-  });
-
-  it('should update state signals on video play', () => {
-    component.onVideoPlay();
-    expect(component.isPlaying()).toBeTrue();
-    expect(component.showPlayButton()).toBeFalse();
-    expect(component.showControls()).toBeTrue();
-  });
-
-  it('should update isPlaying on video pause', () => {
-    component.onVideoPlay();
-    component.onVideoPause();
-    expect(component.isPlaying()).toBeFalse();
-    expect(component.showPlayButton()).toBeFalse(); // remains false
-    expect(component.showControls()).toBeTrue(); // remains true
-  });
-
-  it('should reset state signals on video ended', () => {
-    // Mock the HTMLVideoElement
-    const mockVideo = {
-      currentTime: 10,
-      load: jasmine.createSpy('load')
-    };
-    component.featuredVideo = {
-      nativeElement: mockVideo as any
-    };
-
-    component.onVideoPlay();
-    component.onVideoEnded();
-
-    expect(component.isPlaying()).toBeFalse();
-    expect(component.showControls()).toBeFalse();
-    expect(component.showPlayButton()).toBeTrue();
-    expect(mockVideo.currentTime).toBe(0);
-    expect(mockVideo.load).toHaveBeenCalled();
-  });
-
   it('should pause the video when opening recipe modal', () => {
-    const mockVideo = {
-      pause: jasmine.createSpy('pause')
-    };
-    component.featuredVideo = {
-      nativeElement: mockVideo as any
-    };
+    const mockMediaComponent = jasmine.createSpyObj('RecipeMediaComponent', ['pause']);
+    component.featuredMedia = mockMediaComponent;
 
     component.openRecipe(component.recipes[0]);
-    expect(mockVideo.pause).toHaveBeenCalled();
+    expect(mockMediaComponent.pause).toHaveBeenCalled();
   });
 });

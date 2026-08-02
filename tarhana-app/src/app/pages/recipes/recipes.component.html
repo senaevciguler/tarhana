@@ -3,78 +3,13 @@
   <main class="max-w-7xl mx-auto px-6 py-12">
     <!-- Featured Hero Section -->
     <section class="relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
-      @if (recipes[0].videoUrl) {
-        <!-- Playable Hero Video Container -->
-        <div
-          #heroRecipeImage
-          id="hero-recipe-image"
-          (click)="onVideoContainerClick($event)"
-          class="lg:col-span-7 overflow-hidden rounded-2xl h-[500px] relative group cursor-pointer transition-all duration-1000 motion-reduce:transition-none bg-stone-900"
-          [class.opacity-0]="!isVideoVisible()"
-          [class.scale-95]="!isVideoVisible()"
-          [class.opacity-100]="isVideoVisible()"
-          [class.scale-100]="isVideoVisible()"
-        >
-          <video
-            #featuredVideo
-            class="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
-            [src]="recipes[0].videoUrl"
-            [poster]="recipes[0].posterImage"
-            [controls]="showControls()"
-            (play)="onVideoPlay()"
-            (pause)="onVideoPause()"
-            (ended)="onVideoEnded()"
-            playsinline
-            preload="metadata"
-          ></video>
-
-          @if (showPlayButton()) {
-            <!-- Large Centered Play Button Overlay -->
-            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/25 transition-colors pointer-events-none">
-              <button
-                type="button"
-                class="w-20 h-20 rounded-full bg-white/95 text-stone-900 shadow-2xl flex items-center justify-center transform hover:scale-110 active:scale-95 transition-all duration-300 pointer-events-auto"
-                (click)="startPlayback($event)"
-                aria-label="Play video"
-              >
-                <span class="material-icons text-5xl translate-x-0.5">play_arrow</span>
-              </button>
-            </div>
-          }
-
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
-          <div class="absolute bottom-6 left-6 pointer-events-none">
-            <span class="bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-              {{ 'RECIPES_FEATURED_BADGE' | translate }}
-            </span>
-          </div>
-        </div>
-      } @else {
-        <!-- Static Fallback Hero Image Container -->
-        <div
-          #heroRecipeImage
-          id="hero-recipe-image"
-          (click)="openRecipe(recipes[0])"
-          class="lg:col-span-7 overflow-hidden rounded-2xl h-[500px] relative group cursor-pointer transition-all duration-1000 motion-reduce:transition-none"
-          [class.opacity-0]="!isVideoVisible()"
-          [class.scale-95]="!isVideoVisible()"
-          [class.opacity-100]="isVideoVisible()"
-          [class.scale-100]="isVideoVisible()"
-        >
-          <img
-            [src]="recipes[0].image"
-            [alt]="recipes[0].titleKey | translate"
-            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none"
-            loading="lazy"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
-          <div class="absolute bottom-6 left-6 pointer-events-none">
-            <span class="bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
-              {{ 'RECIPES_FEATURED_BADGE' | translate }}
-            </span>
-          </div>
-        </div>
-      }
+      <!-- Playable/Static Hero Media Component -->
+      <app-recipe-media
+        #featuredMedia
+        id="hero-recipe-image"
+        [recipe]="recipes[0]"
+        class="lg:col-span-7 overflow-hidden rounded-2xl h-[500px] block relative"
+      ></app-recipe-media>
       <div class="lg:col-span-5 space-y-6 relative">
 
         <div
