@@ -117,6 +117,10 @@ describe('RecipeMediaComponent', () => {
     component.recipe = mockRecipeWithVideo;
     fixture.detectChanges();
 
+    // Ensure we start with EN so setting SV will actually trigger a language change
+    langService.setLanguage('EN');
+    fixture.detectChanges();
+
     // Set playing states manually to simulate video playing
     component.showPlayButton.set(false);
     component.showControls.set(true);
